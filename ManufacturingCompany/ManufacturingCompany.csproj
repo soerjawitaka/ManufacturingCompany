@@ -221,6 +221,7 @@
     <Content Include="App_Data\aspnet-ManufacturingCompany-20171006085739_log.ldf">
       <DependentUpon>aspnet-ManufacturingCompany-20171006085739.mdf</DependentUpon>
     </Content>
+    <Content Include="App_Data\states.xml" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
