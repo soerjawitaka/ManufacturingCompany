@@ -201,6 +201,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710061504292_InitialCreate.cs" />
+    <Compile Include="Migrations\201710061504292_InitialCreate.Designer.cs">
+      <DependentUpon>201710061504292_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710061647362_UserModel.cs" />
+    <Compile Include="Migrations\201710061647362_UserModel.Designer.cs">
+      <DependentUpon>201710061647362_UserModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -208,6 +217,10 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\aspnet-ManufacturingCompany-20171006085739.mdf" />
+    <Content Include="App_Data\aspnet-ManufacturingCompany-20171006085739_log.ldf">
+      <DependentUpon>aspnet-ManufacturingCompany-20171006085739.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -267,7 +280,12 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <EmbeddedResource Include="Migrations\201710061504292_InitialCreate.resx">
+      <DependentUpon>201710061504292_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710061647362_UserModel.resx">
+      <DependentUpon>201710061647362_UserModel.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
