@@ -49,9 +49,8 @@ namespace ManufacturingCompany.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Email")]
-        [EmailAddress]
-        public string Email { get; set; }
+        [Display(Name = "Username or Email")]
+        public string UserName { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
@@ -64,6 +63,9 @@ namespace ManufacturingCompany.Models
 
     public class RegisterViewModel
     {
+        [Display(Name = "RoleName")]
+        public string RoleName { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
@@ -71,7 +73,7 @@ namespace ManufacturingCompany.Models
 
         [Required]
         [Display(Name ="Username")]
-        public string Username { get; set; }
+        public string UserName { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]

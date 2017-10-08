@@ -26,6 +26,11 @@ namespace ManufacturingCompany.Models
         }
     }
 
+    public class ApplicationRole : IdentityRole
+    {
+        // inherits IdentityRole
+    }
+
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
@@ -37,5 +42,7 @@ namespace ManufacturingCompany.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<ManufacturingCompany.Models.ApplicationRole> IdentityRoles { get; set; }
     }
 }
