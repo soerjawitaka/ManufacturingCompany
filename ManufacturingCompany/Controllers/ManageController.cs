@@ -245,6 +245,14 @@ namespace ManufacturingCompany.Controllers
         }
 
         //
+        // GET: /Manage/ChangeProfile
+        public ActionResult ChangeProfile()
+        {
+            ViewBag.StateList = new SelectList(XmlHelper.GetStates(Server, Url), "Value", "Text");
+            return View();
+        }
+
+        //
         // GET: /Manage/SetPassword
         public ActionResult SetPassword()
         {

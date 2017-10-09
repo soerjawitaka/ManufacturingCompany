@@ -295,6 +295,7 @@
     <Content Include="Views\ApplicationRoles\Edit.cshtml" />
     <Content Include="Views\ApplicationRoles\Index.cshtml" />
     <Content Include="Views\Account\RegisterRole.cshtml" />
+    <Content Include="Views\Manage\ChangeProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201710061504292_InitialCreate.resx">
