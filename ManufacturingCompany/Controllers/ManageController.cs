@@ -249,7 +249,7 @@ namespace ManufacturingCompany.Controllers
         public ActionResult ChangeProfile()
         {
             ViewBag.StateList = new SelectList(XmlHelper.GetStates(Server, Url), "Value", "Text");
-            return View();
+            return View((ApplicationUser)(new ApplicationDbContext().Users.Find(User.Identity.GetUserId())));
         }
 
         //
