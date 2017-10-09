@@ -148,6 +148,7 @@ namespace ManufacturingCompany.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            ViewBag.StateList = new SelectList(XmlHelper.GetStates(Server, Url), "Value", "Text");
             return View();
         }
 
