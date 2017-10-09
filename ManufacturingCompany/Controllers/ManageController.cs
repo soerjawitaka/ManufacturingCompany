@@ -7,6 +7,9 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using ManufacturingCompany.Models;
+using System.Data.Entity.Infrastructure;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System.Data.Entity;
 
 namespace ManufacturingCompany.Controllers
 {
@@ -250,6 +253,38 @@ namespace ManufacturingCompany.Controllers
         {
             ViewBag.StateList = new SelectList(XmlHelper.GetStates(Server, Url), "Value", "Text");
             return View((ApplicationUser)(new ApplicationDbContext().Users.Find(User.Identity.GetUserId())));
+        }
+
+        //
+        // POST: /Manage/ChangeProfile
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ChangeProfile([Bind(Include = "UserName, Email, FirstName, LastName, Address, City, State, ZipCode, PhoneNumber")]ApplicationUser user)
+        {
+            ViewBag.StateList = new SelectList(XmlHelper.GetStates(Server, Url), "Value", "Text");
+            if (!ModelState.IsValid)
+            {
+                return View(user);
+            }
+            //new ApplicationDbContext().Entry(user).State = EntityState.Modified;
+            ApplicationDbContext db = new ApplicationDbContext();
+            var updatedUser = (ApplicationUser)UserManager.FindById(user.Id);
+            updatedUser.UserName = user.UserName;
+            updatedUser.Email = user.Email;
+            updatedUser.FirstName = user.FirstName;
+            updatedUser.LastName = user.LastName;
+            updatedUser.Address = user.Address;
+            updatedUser.City = user.City;
+            updatedUser.State = user.State;
+            updatedUser.ZipCode = user.ZipCode;
+            updatedUser.PhoneNumber = user.PhoneNumber;
+            
+            var result = UserManager.Update(updatedUser);
+            if (!result.Succeeded)
+            {
+                return View(user);
+            }
+            return RedirectToAction("Index");
         }
 
         //
