@@ -229,6 +229,25 @@
       <DependentUpon>aspnet-ManufacturingCompany-20171006085739.mdf</DependentUpon>
     </Content>
     <Content Include="App_Data\states.xml" />
+    <Content Include="App_Data\tblCustomer.sql" />
+    <Content Include="App_Data\tblCustomer_Contact.sql" />
+    <Content Include="App_Data\tblDelivery_Lineitem.sql" />
+    <Content Include="App_Data\tblDelivery_Schedule.sql" />
+    <Content Include="App_Data\tblEquipment.sql" />
+    <Content Include="App_Data\tblEquipment_Maintenance.sql" />
+    <Content Include="App_Data\tblInvoice_Delivery_Assignment.sql" />
+    <Content Include="App_Data\tblInvoice_Lineitem.sql" />
+    <Content Include="App_Data\tblInvoice.sql" />
+    <Content Include="App_Data\tblMaterial.sql" />
+    <Content Include="App_Data\tblMaterial_stock.sql" />
+    <Content Include="App_Data\tblPayment.sql" />
+    <Content Include="App_Data\tblPayroll.sql" />
+    <Content Include="App_Data\tblProduct.sql" />
+    <Content Include="App_Data\tblProduct_Category.sql" />
+    <Content Include="App_Data\tblProduct_Inventory.sql" />
+    <Content Include="App_Data\tblProduct_Material_Assignment.sql" />
+    <Content Include="App_Data\tblPurchase.sql" />
+    <Content Include="App_Data\tblTimesheet.sql" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
