@@ -4,32 +4,58 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="9dbf3b65f72546f3b86785fd5624f27b" Name="Diagram1" ZoomLevel="29">
-        <EntityTypeShape EntityType="BusinessModel.AspNetRole" Width="1.5" PointX="5.75" PointY="7.375" IsExpanded="true" />
+      <Diagram DiagramId="55ea23ebbec04e70b8a9088d7da20960" Name="Diagram1" ZoomLevel="62">
+        <EntityTypeShape EntityType="BusinessModel.AspNetRole" Width="1.5" PointX="0.75" PointY="21.25" IsExpanded="true" />
         <EntityTypeShape EntityType="BusinessModel.AspNetUser" Width="1.5" PointX="0.75" PointY="11.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="BusinessModel.Customer" Width="1.5" PointX="3" PointY="29.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="BusinessModel.Customer_Contact" Width="1.5" PointX="5.25" PointY="30.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="BusinessModel.Delivery_Lineitem" Width="1.5" PointX="5.25" PointY="10" IsExpanded="true" />
-        <EntityTypeShape EntityType="BusinessModel.Delivery_Schedule" Width="1.5" PointX="3" PointY="9.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BusinessModel.Equipment" Width="1.5" PointX="3.75" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="BusinessModel.Equipment_Maintenance" Width="1.5" PointX="6" PointY="17" IsExpanded="true" />
-        <EntityTypeShape EntityType="BusinessModel.Invoice" Width="1.5" PointX="5.25" PointY="13.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="BusinessModel.Invoice_Lineitem" Width="1.5" PointX="8.5" PointY="16.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="BusinessModel.Material" Width="1.5" PointX="1.5" PointY="20.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="BusinessModel.Material_Stock" Width="1.5" PointX="1.5" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BusinessModel.Payment" Width="1.5" PointX="7.5" PointY="20.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="BusinessModel.Payroll" Width="1.5" PointX="3" PointY="16.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessModel.Customer" Width="1.5" PointX="4.25" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessModel.Customer_Contact" Width="1.875" PointX="6.5" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessModel.Delivery_Lineitem" Width="1.5" PointX="11.625" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessModel.Delivery_Schedule" Width="1.5" PointX="9.375" PointY="16.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessModel.Equipment" Width="1.5" PointX="5.625" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessModel.Equipment_Maintenance" Width="2.375" PointX="7.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessModel.Invoice" Width="1.5" PointX="3" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessModel.Invoice_Lineitem" Width="1.875" PointX="5.625" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessModel.Material" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessModel.Material_Stock" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessModel.Payment" Width="1.5" PointX="5.625" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessModel.Payroll" Width="1.5" PointX="3.125" PointY="7.875" IsExpanded="true" />
         <EntityTypeShape EntityType="BusinessModel.Product" Width="1.5" PointX="0.75" PointY="4.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="BusinessModel.Product_Category" Width="1.5" PointX="1.5" PointY="26.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="BusinessModel.Product_Inventory" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BusinessModel.Purchase" Width="1.5" PointX="8" PointY="13" IsExpanded="true" />
-        <EntityTypeShape EntityType="BusinessModel.Timesheet" Width="1.5" PointX="3" PointY="23.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessModel.Product_Category" Width="1.5" PointX="3.625" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessModel.Product_Inventory" Width="1.5" PointX="7.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessModel.Purchase" Width="1.5" PointX="0.75" PointY="18" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessModel.Timesheet" Width="1.5" PointX="0.75" PointY="8.5" IsExpanded="true" />
         <AssociationConnector Association="BusinessModel.fk_purchase_aspnetroles" ManuallyRouted="false" />
-        <AssociationConnector Association="BusinessModel.fk_delivery_schedule_driver_aspnetusers" ManuallyRouted="false" />
-        <AssociationConnector Association="BusinessModel.fk_delivery_schedule_warehouse_aspnetusers" ManuallyRouted="false" />
-        <AssociationConnector Association="BusinessModel.fk_equipment_maintenance_aspnetusers" ManuallyRouted="false" />
+        <AssociationConnector Association="BusinessModel.fk_delivery_schedule_driver_aspnetusers" ManuallyRouted="true" >
+          <ConnectorPoint PointX="2.25" PointY="15.924177457971709" />
+          <ConnectorPoint PointX="3.4076493541125208" PointY="15.924177457971709" />
+          <ConnectorPoint PointX="3.4076493541125208" PointY="19.124492187499996" />
+          <ConnectorPoint PointX="9.54976046766958" PointY="19.124492187499996" />
+          <ConnectorPoint PointX="9.54976046766958" PointY="18.8744921875" />
+        </AssociationConnector>
+        <AssociationConnector Association="BusinessModel.fk_delivery_schedule_warehouse_aspnetusers" ManuallyRouted="true" >
+          <ConnectorPoint PointX="2.25" PointY="16.28029561675659" />
+          <ConnectorPoint PointX="2.9073384072897963" PointY="16.28029561675659" />
+          <ConnectorPoint PointX="2.9073384072897963" PointY="19.315490798522763" />
+          <ConnectorPoint PointX="9.9690881600614674" PointY="19.315490798522763" />
+          <ConnectorPoint PointX="9.9690881600614674" PointY="18.8744921875" />
+        </AssociationConnector>
+        <AssociationConnector Association="BusinessModel.fk_equipment_maintenance_aspnetusers" ManuallyRouted="true" >
+          <ConnectorPoint PointX="2.0627176678781565" PointY="17.268616536458332" />
+          <ConnectorPoint PointX="2.0627176678781565" PointY="17.643616536458332" />
+          <ConnectorPoint PointX="2.6875" PointY="17.643616536458332" />
+          <ConnectorPoint PointX="2.6875" PointY="20.441231361872688" />
+          <ConnectorPoint PointX="13.505908550093331" PointY="20.441231361872688" />
+          <ConnectorPoint PointX="13.505908550093331" PointY="2.9825291914441223" />
+          <ConnectorPoint PointX="10.125" PointY="2.9825291914441223" />
+        </AssociationConnector>
         <AssociationConnector Association="BusinessModel.fk_invoice_aspnetusers" ManuallyRouted="false" />
-        <AssociationConnector Association="BusinessModel.fk_payroll_aspnetusers" ManuallyRouted="false" />
+        <AssociationConnector Association="BusinessModel.fk_payroll_aspnetusers" ManuallyRouted="true" >
+          <ConnectorPoint PointX="2.25" PointY="11.836207170624004" />
+          <ConnectorPoint PointX="2.6013682282934942" PointY="11.836207170624004" />
+          <ConnectorPoint PointX="2.6013682282934942" PointY="11.081156996183969" />
+          <ConnectorPoint PointX="3.875" PointY="11.081156996183969" />
+          <ConnectorPoint PointX="3.875" PointY="10.816793619791667" />
+        </AssociationConnector>
         <AssociationConnector Association="BusinessModel.fk_purchase_aspnetusers" ManuallyRouted="false" />
         <AssociationConnector Association="BusinessModel.fk_timesheet_aspnetusers" ManuallyRouted="false" />
         <AssociationConnector Association="BusinessModel.fk_customer_contact_customer" ManuallyRouted="false" />
