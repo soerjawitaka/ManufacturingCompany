@@ -106,6 +106,9 @@
           <Property Name="completion_eta" Type="datetime" />
           <Property Name="maintenance_cost" Type="money" />
           <Property Name="employee_id" Type="nvarchar" MaxLength="128" />
+          <Property Name="maintenance_short_description" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="maintenance_long_description" Type="text" />
+          <Property Name="maintenance_note" Type="text" />
         </EntityType>
         <EntityType Name="Invoice">
           <Key>
@@ -785,6 +788,9 @@
           <Property Name="completion_eta" Type="DateTime" Precision="3" />
           <Property Name="maintenance_cost" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="employee_id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="maintenance_short_description" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="maintenance_long_description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="maintenance_note" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="AspNetUser" Relationship="Self.fk_equipment_maintenance_aspnetusers" FromRole="Equipment_Maintenance" ToRole="AspNetUsers" />
           <NavigationProperty Name="Equipment" Relationship="Self.fk_equipment_maintenance_equipment" FromRole="Equipment_Maintenance" ToRole="Equipment" />
         </EntityType>
@@ -1413,6 +1419,9 @@
                 <ScalarProperty Name="completion_eta" ColumnName="completion_eta" />
                 <ScalarProperty Name="maintenance_cost" ColumnName="maintenance_cost" />
                 <ScalarProperty Name="employee_id" ColumnName="employee_id" />
+                <ScalarProperty Name="maintenance_short_description" ColumnName="maintenance_short_description" />
+                <ScalarProperty Name="maintenance_long_description" ColumnName="maintenance_long_description" />
+                <ScalarProperty Name="maintenance_note" ColumnName="maintenance_note" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

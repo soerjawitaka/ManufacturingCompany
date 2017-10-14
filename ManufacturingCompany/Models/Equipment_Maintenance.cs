@@ -20,6 +20,9 @@ namespace ManufacturingCompany.Models
         public Nullable<System.DateTime> completion_eta { get; set; }
         public Nullable<decimal> maintenance_cost { get; set; }
         public string employee_id { get; set; }
+        public string maintenance_short_description { get; set; }
+        public string maintenance_long_description { get; set; }
+        public string maintenance_note { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
         public virtual Equipment Equipment { get; set; }
