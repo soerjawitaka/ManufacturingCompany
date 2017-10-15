@@ -252,23 +252,22 @@ namespace ManufacturingCompany.Controllers
         public ActionResult ChangeProfile()
         {
             ViewBag.StateList = new SelectList(XmlHelper.GetStates(Server, Url), "Value", "Text");
-            return View((ApplicationUser)(new ApplicationDbContext().Users.Find(User.Identity.GetUserId())));
+            return View((ApplicationUser)(UserManager.FindById(User.Identity.GetUserId())));
         }
 
         //
         // POST: /Manage/ChangeProfile
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ChangeProfile([Bind(Include = "UserName, Email, FirstName, LastName, Address, City, State, ZipCode, PhoneNumber")]ApplicationUser user)
+        public ActionResult ChangeProfile([Bind(Include = "UserName, Email, FirstName, LastName, Address, City, State, ZipCode, PhoneNumber")]ApplicationUser user)
         {
             ViewBag.StateList = new SelectList(XmlHelper.GetStates(Server, Url), "Value", "Text");
             if (!ModelState.IsValid)
             {
                 return View(user);
             }
-            //new ApplicationDbContext().Entry(user).State = EntityState.Modified;
             ApplicationDbContext db = new ApplicationDbContext();
-            var updatedUser = (ApplicationUser)UserManager.FindById(user.Id);
+            var updatedUser = db.Users.Find(User.Identity.GetUserId());
             updatedUser.UserName = user.UserName;
             updatedUser.Email = user.Email;
             updatedUser.FirstName = user.FirstName;
@@ -278,9 +277,10 @@ namespace ManufacturingCompany.Controllers
             updatedUser.State = user.State;
             updatedUser.ZipCode = user.ZipCode;
             updatedUser.PhoneNumber = user.PhoneNumber;
-            
-            var result = UserManager.Update(updatedUser);
-            if (!result.Succeeded)
+
+            db.Entry(updatedUser).State = EntityState.Modified;
+            int result = db.SaveChanges();
+            if (result == 0)
             {
                 return View(user);
             }

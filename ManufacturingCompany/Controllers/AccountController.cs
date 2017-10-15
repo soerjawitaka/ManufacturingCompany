@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using ManufacturingCompany.Models;
+using System.Web.Security;
 
 namespace ManufacturingCompany.Controllers
 {
@@ -88,6 +89,7 @@ namespace ManufacturingCompany.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
