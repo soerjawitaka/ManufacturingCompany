@@ -17,7 +17,8 @@ namespace ManufacturingCompany.Controllers.AdminController
         // GET: ApplicationRoles
         public ActionResult Index()
         {
-            return View(db.IdentityRoles.ToList());
+            List<ApplicationRole> roles = db.IdentityRoles.ToList();
+            return View(roles);
         }
 
         // GET: ApplicationRoles/Details/5
