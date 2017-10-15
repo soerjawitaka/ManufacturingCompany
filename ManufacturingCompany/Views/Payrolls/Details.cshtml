@@ -1,0 +1,83 @@
+﻿@model ManufacturingCompany.Models.Payroll
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Payroll</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.period_begin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.period_begin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.period_end)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.period_end)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.total_hours)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.total_hours)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.subtotal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.subtotal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.federal_tax_witholding)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.federal_tax_witholding)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.state_tax_witholding)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.state_tax_witholding)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.grand_total)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.grand_total)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AspNetUser.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AspNetUser.Email)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

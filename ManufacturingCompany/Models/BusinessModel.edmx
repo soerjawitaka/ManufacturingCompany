@@ -42,7 +42,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="customer_copany_name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="customer_company_name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="customer_address1" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="customer_address2" Type="varchar" MaxLength="100" />
           <Property Name="customer_city" Type="varchar" MaxLength="100" Nullable="false" />
@@ -713,7 +713,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="customer_copany_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="customer_company_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="customer_address1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="customer_address2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="customer_city" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
@@ -1350,7 +1350,7 @@
             <EntityTypeMapping TypeName="BusinessModel.Customer">
               <MappingFragment StoreEntitySet="Customer">
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="customer_copany_name" ColumnName="customer_copany_name" />
+                <ScalarProperty Name="customer_company_name" ColumnName="customer_company_name" />
                 <ScalarProperty Name="customer_address1" ColumnName="customer_address1" />
                 <ScalarProperty Name="customer_address2" ColumnName="customer_address2" />
                 <ScalarProperty Name="customer_city" ColumnName="customer_city" />

@@ -12,9 +12,11 @@ namespace ManufacturingCompany.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Invoice_Lineitem : Lineitem
+    public partial class Invoice_Lineitem
     {
         public int Id { get; set; }
+        public int product_inventory_id { get; set; }
+        public int lineitem_unit_quantity { get; set; }
         public int invoice_id { get; set; }
     
         public virtual Invoice Invoice { get; set; }

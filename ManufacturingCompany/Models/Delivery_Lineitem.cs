@@ -12,9 +12,11 @@ namespace ManufacturingCompany.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Delivery_Lineitem : Lineitem
+    public partial class Delivery_Lineitem
     {
         public int Id { get; set; }
+        public int product_inventory_id { get; set; }
+        public int lineitem_unit_quantity { get; set; }
         public int delivery_schedule_id { get; set; }
     
         public virtual Delivery_Schedule Delivery_Schedule { get; set; }

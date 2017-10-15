@@ -22,7 +22,7 @@ namespace ManufacturingCompany.Models
         }
     
         public int Id { get; set; }
-        public string customer_copany_name { get; set; }
+        public string customer_company_name { get; set; }
         public string customer_address1 { get; set; }
         public string customer_address2 { get; set; }
         public string customer_city { get; set; }
