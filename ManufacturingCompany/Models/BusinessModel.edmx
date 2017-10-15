@@ -237,8 +237,9 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="employee_id" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="punch_in_time" Type="datetime" Nullable="false" />
-          <Property Name="punch_out_time" Type="datetime" />
+          <Property Name="punch_in_time" Type="time" Precision="7" Nullable="false" />
+          <Property Name="punch_out_time" Type="time" Precision="7" />
+          <Property Name="timesheet_date" Type="datetime" Nullable="false" />
         </EntityType>
         <Association Name="fk_customer_contact_customer">
           <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
@@ -929,8 +930,9 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="employee_id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="punch_in_time" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="punch_out_time" Type="DateTime" Precision="3" />
+          <Property Name="punch_in_time" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="punch_out_time" Type="Time" Precision="7" />
+          <Property Name="timesheet_date" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="AspNetUser" Relationship="Self.fk_timesheet_aspnetusers" FromRole="Timesheet" ToRole="AspNetUsers" />
         </EntityType>
         <Association Name="fk_purchase_aspnetroles">
@@ -1547,6 +1549,7 @@
                 <ScalarProperty Name="employee_id" ColumnName="employee_id" />
                 <ScalarProperty Name="punch_in_time" ColumnName="punch_in_time" />
                 <ScalarProperty Name="punch_out_time" ColumnName="punch_out_time" />
+                <ScalarProperty Name="timesheet_date" ColumnName="timesheet_date" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

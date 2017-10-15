@@ -16,8 +16,9 @@ namespace ManufacturingCompany.Models
     {
         public int Id { get; set; }
         public string employee_id { get; set; }
-        public System.DateTime punch_in_time { get; set; }
-        public Nullable<System.DateTime> punch_out_time { get; set; }
+        public System.TimeSpan punch_in_time { get; set; }
+        public Nullable<System.TimeSpan> punch_out_time { get; set; }
+        public System.DateTime timesheet_date { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
     }

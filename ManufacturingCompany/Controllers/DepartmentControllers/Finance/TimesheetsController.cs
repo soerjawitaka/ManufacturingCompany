@@ -48,7 +48,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,employee_id,punch_in_time,punch_out_time")] Timesheet timesheet)
+        public ActionResult Create([Bind(Include = "Id,employee_id,punch_in_time,punch_out_time,timesheet_date")] Timesheet timesheet)
         {
             if (ModelState.IsValid)
             {
@@ -82,7 +82,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,employee_id,punch_in_time,punch_out_time")] Timesheet timesheet)
+        public ActionResult Edit([Bind(Include = "Id,employee_id,punch_in_time,punch_out_time,timesheet_date")] Timesheet timesheet)
         {
             if (ModelState.IsValid)
             {

@@ -19,6 +19,9 @@
             @Html.DisplayNameFor(model => model.punch_out_time)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.timesheet_date)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.AspNetUser.Email)
         </th>
         <th></th>
@@ -31,6 +34,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.punch_out_time)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.timesheet_date)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.AspNetUser.Email)
