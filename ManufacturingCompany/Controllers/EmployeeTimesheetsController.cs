@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ManufacturingCompany.Models;
+using Microsoft.AspNet.Identity;
 
 namespace ManufacturingCompany.Controllers
 {
@@ -18,28 +19,14 @@ namespace ManufacturingCompany.Controllers
         public ActionResult Index()
         {
             var timesheets = db.Timesheets.Include(t => t.AspNetUser);
-            return View(timesheets.ToList());
-        }
-
-        // GET: EmployeeTimesheets/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Timesheet timesheet = db.Timesheets.Find(id);
-            if (timesheet == null)
-            {
-                return HttpNotFound();
-            }
-            return View(timesheet);
+            var userID = User.Identity.GetUserId();
+            return View(timesheets.Where(t => t.employee_id == userID).ToList());
         }
 
         // GET: EmployeeTimesheets/Create
         public ActionResult Create()
         {
-            ViewBag.employee_id = new SelectList(db.AspNetUsers, "Id", "Email");
+            ViewBag.Username = User.Identity.GetUserName();
             return View();
         }
 
@@ -48,8 +35,9 @@ namespace ManufacturingCompany.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,employee_id,punch_in_time,punch_out_time,timesheet_date")] Timesheet timesheet)
+        public ActionResult Create([Bind(Include = "punch_in_time,punch_out_time,timesheet_date")] Timesheet timesheet)
         {
+            timesheet.employee_id = User.Identity.GetUserId();
             if (ModelState.IsValid)
             {
                 db.Timesheets.Add(timesheet);
@@ -84,6 +72,7 @@ namespace ManufacturingCompany.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,employee_id,punch_in_time,punch_out_time,timesheet_date")] Timesheet timesheet)
         {
+            timesheet.employee_id = User.Identity.GetUserId();
             if (ModelState.IsValid)
             {
                 db.Entry(timesheet).State = EntityState.Modified;

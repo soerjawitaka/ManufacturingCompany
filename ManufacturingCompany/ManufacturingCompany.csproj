@@ -449,7 +449,6 @@
     <Content Include="Views\Timesheets\Index.cshtml" />
     <Content Include="Views\EmployeeTimesheets\Create.cshtml" />
     <Content Include="Views\EmployeeTimesheets\Delete.cshtml" />
-    <Content Include="Views\EmployeeTimesheets\Details.cshtml" />
     <Content Include="Views\EmployeeTimesheets\Edit.cshtml" />
     <Content Include="Views\EmployeeTimesheets\Index.cshtml" />
   </ItemGroup>
