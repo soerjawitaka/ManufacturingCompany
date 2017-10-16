@@ -26,7 +26,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.punch_in_time, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.punch_in_time, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextBoxFor(model => model.punch_in_time, new { @class = "form-control", @type = "time" })
                 @Html.ValidationMessageFor(model => model.punch_in_time, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -34,7 +34,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.punch_out_time, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.punch_out_time, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextBoxFor(model => model.punch_out_time, new { @class = "form-control", @type = "time" })
                 @Html.ValidationMessageFor(model => model.punch_out_time, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -42,7 +42,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.timesheet_date, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.timesheet_date, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextBoxFor(model => model.timesheet_date, new { @class = "form-control", @type = "date" })
                 @Html.ValidationMessageFor(model => model.timesheet_date, "", new { @class = "text-danger" })
             </div>
         </div>

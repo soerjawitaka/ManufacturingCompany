@@ -21,25 +21,10 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
             return View(timesheets.ToList());
         }
 
-        // GET: Timesheets/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Timesheet timesheet = db.Timesheets.Find(id);
-            if (timesheet == null)
-            {
-                return HttpNotFound();
-            }
-            return View(timesheet);
-        }
-
         // GET: Timesheets/Create
         public ActionResult Create()
         {
-            ViewBag.employee_id = new SelectList(db.AspNetUsers, "Id", "Email");
+            ViewBag.employee_id = new SelectList(db.AspNetUsers, "Id", "UserName");
             return View();
         }
 
