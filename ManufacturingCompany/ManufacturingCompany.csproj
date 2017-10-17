@@ -214,6 +214,7 @@
     <Compile Include="Controllers\EmployeeTimesheetsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\SelectUserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -452,6 +453,7 @@
     <Content Include="Views\EmployeeTimesheets\Edit.cshtml" />
     <Content Include="Views\EmployeeTimesheets\Index.cshtml" />
     <Content Include="Views\Timesheets\SelectUser.cshtml" />
+    <Content Include="Views\SelectUser\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201710061504292_InitialCreate.resx">
