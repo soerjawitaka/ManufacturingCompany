@@ -21,6 +21,12 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
             return View(timesheets.ToList());
         }
 
+        // GET: Timesheets/SelectUser
+        public ActionResult SelectUser()
+        {
+            return View();
+        }
+
         // GET: Timesheets/Create
         public ActionResult Create()
         {

@@ -451,6 +451,7 @@
     <Content Include="Views\EmployeeTimesheets\Delete.cshtml" />
     <Content Include="Views\EmployeeTimesheets\Edit.cshtml" />
     <Content Include="Views\EmployeeTimesheets\Index.cshtml" />
+    <Content Include="Views\Timesheets\SelectUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201710061504292_InitialCreate.resx">
