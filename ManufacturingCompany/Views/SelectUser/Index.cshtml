@@ -102,14 +102,14 @@
                     @Html.DisplayFor(modelItem => item.ZipCode)
                 </td>
                 <td>
-                    @using (Html.BeginForm("ConfirmUser", "SelectUser", FormMethod.Post))
+                    @*@using (Html.BeginForm("ConfirmUser", "SelectUser", FormMethod.Post))
                     {
                         @Html.AntiForgeryToken()
                         @Html.Hidden("userID", item.Id);
                         @Html.Hidden("controllerName", (string)ViewBag.ControllerName)
                         <input type="submit" value="Select" class="btn btn-success" />
-                    }
-                    @*@Html.ActionLink("Select", "ConfirmUser", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-success" })*@
+                    }*@
+                    @Html.ActionLink("Create " + (string)ViewBag.ControllerName, "Create", (string)ViewBag.ControllerName, new { userID = item.Id }, htmlAttributes: new { @class = "btn btn-success" })
                 </td>
             </tr>
         }

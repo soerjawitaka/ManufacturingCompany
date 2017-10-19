@@ -86,10 +86,12 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
         }
 
         // GET: Timesheets/Create
-        public ActionResult Create()
+        public ActionResult Create(string userID)
         {
-            ViewBag.employee_id = new SelectList(db.AspNetUsers, "Id", "UserName");
-            return View();
+            var timesheet = new Timesheet();
+            timesheet.employee_id = userID;
+            ViewBag.employee_username = db.AspNetUsers.Find(userID).UserName;
+            return View(timesheet);
         }
 
         // POST: Timesheets/Create
