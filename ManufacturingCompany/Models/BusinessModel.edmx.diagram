@@ -4,9 +4,9 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="19b505c8efc741339496191f340e1952" Name="Diagram1">
+      <Diagram DiagramId="f2d76f666d944509ab135bab40653f8d" Name="Diagram1">
         <EntityTypeShape EntityType="BusinessModel.AspNetRole" Width="1.5" PointX="3.75" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BusinessModel.AspNetUser" Width="1.875" PointX="0.75" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessModel.AspNetUser" Width="1.5" PointX="0.75" PointY="11.625" IsExpanded="true" />
         <EntityTypeShape EntityType="BusinessModel.Customer" Width="1.5" PointX="6" PointY="5" IsExpanded="true" />
         <EntityTypeShape EntityType="BusinessModel.Customer_Contact" Width="1.5" PointX="8.25" PointY="5.25" IsExpanded="true" />
         <EntityTypeShape EntityType="BusinessModel.Delivery_Lineitem" Width="1.5" PointX="5.25" PointY="13.5" IsExpanded="true" />

@@ -312,10 +312,6 @@
     </Compile>
     <Compile Include="Models\XmlHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Saved Models\Delivery_Lineitem.cs" />
-    <Compile Include="Saved Models\Invoice_Lineitem.cs" />
-    <Compile Include="Saved Models\Payroll.cs" />
-    <Compile Include="Saved Models\Timesheet.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
