@@ -238,6 +238,21 @@
     <Compile Include="Models\AspNetUser.cs">
       <DependentUpon>BusinessModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\AssignmentModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AssignmentModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AssignmentModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AssignmentModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AssignmentModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AssignmentModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\BusinessModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -295,6 +310,12 @@
     <Compile Include="Models\Payroll.cs">
       <DependentUpon>BusinessModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Payroll_Paycheck_Assignment.cs">
+      <DependentUpon>AssignmentModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Payroll_Timesheet_Assignment.cs">
+      <DependentUpon>AssignmentModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Product.cs">
       <DependentUpon>BusinessModel.tt</DependentUpon>
     </Compile>
@@ -303,6 +324,9 @@
     </Compile>
     <Compile Include="Models\Product_Inventory.cs">
       <DependentUpon>BusinessModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Product_Material_Assignment.cs">
+      <DependentUpon>AssignmentModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Purchase.cs">
       <DependentUpon>BusinessModel.tt</DependentUpon>
@@ -356,6 +380,16 @@
     <Content Include="Images\noImage.png" />
     <Content Include="Images\noProfileImage.jpg" />
     <Content Include="Images\noProfileImage2.jpg" />
+    <Content Include="Models\AssignmentModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AssignmentModel.edmx</DependentUpon>
+      <LastGenOutput>AssignmentModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\AssignmentModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AssignmentModel.edmx</DependentUpon>
+      <LastGenOutput>AssignmentModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Models\BusinessModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>BusinessModel.edmx</DependentUpon>
@@ -370,6 +404,13 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <EntityDeploy Include="Models\AssignmentModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>AssignmentModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\AssignmentModel.edmx.diagram">
+      <DependentUpon>AssignmentModel.edmx</DependentUpon>
     </Content>
     <EntityDeploy Include="Models\BusinessModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>

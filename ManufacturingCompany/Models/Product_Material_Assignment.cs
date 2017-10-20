@@ -12,14 +12,9 @@ namespace ManufacturingCompany.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Material_Stock
+    public partial class Product_Material_Assignment
     {
-        public int Id { get; set; }
-        public int material_id { get; set; }
-        public string material_unit_measure { get; set; }
-        public int material_unit_quantity { get; set; }
-        public decimal material_unit_cost { get; set; }
-    
-        public virtual Material Material { get; set; }
+        public int product_id { get; set; }
+        public int material_stock_id { get; set; }
     }
 }
