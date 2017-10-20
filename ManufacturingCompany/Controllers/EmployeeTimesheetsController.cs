@@ -20,7 +20,7 @@ namespace ManufacturingCompany.Controllers
         {
             var timesheets = db.Timesheets.Include(t => t.AspNetUser);
             var userID = User.Identity.GetUserId();
-            return View(timesheets.Where(t => t.employee_id == userID).ToList());
+            return View(timesheets.Where(t => t.employee_id == userID && t.is_in_payroll == false).ToList());
         }
 
         // GET: EmployeeTimesheets/Create

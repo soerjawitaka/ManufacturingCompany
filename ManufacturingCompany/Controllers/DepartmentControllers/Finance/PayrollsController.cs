@@ -37,10 +37,12 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
         }
 
         // GET: Payrolls/Create
-        public ActionResult Create()
+        public ActionResult Create(string userID)
         {
-            ViewBag.employee_id = new SelectList(db.AspNetUsers, "Id", "Email");
-            return View();
+            var payroll = new Payroll();
+            payroll.employee_id = userID;
+            ViewBag.employee_username = db.AspNetUsers.Find(userID).UserName;
+            return View(payroll);
         }
 
         // POST: Payrolls/Create

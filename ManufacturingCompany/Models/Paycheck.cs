@@ -12,8 +12,14 @@ namespace ManufacturingCompany.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Employee_Salary
+    public partial class Paycheck
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Paycheck()
+        {
+            this.Payrolls = new HashSet<Payroll>();
+        }
+    
         public int Id { get; set; }
         public int payroll_id { get; set; }
         public string payment_type { get; set; }
@@ -22,5 +28,7 @@ namespace ManufacturingCompany.Models
         public decimal payment_amount { get; set; }
     
         public virtual Payroll Payroll { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Payroll> Payrolls { get; set; }
     }
 }
