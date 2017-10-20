@@ -14,6 +14,12 @@ namespace ManufacturingCompany.Models
     
     public partial class Payroll
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Payroll()
+        {
+            this.Employee_Salary = new HashSet<Employee_Salary>();
+        }
+    
         public int Id { get; set; }
         public string employee_id { get; set; }
         public System.DateTime period_begin { get; set; }
@@ -25,5 +31,7 @@ namespace ManufacturingCompany.Models
         public decimal grand_total { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Employee_Salary> Employee_Salary { get; set; }
     }
 }

@@ -84,6 +84,17 @@
           <Property Name="delivery_date" Type="datetime" Nullable="false" />
           <Property Name="delivery_cost" Type="money" />
         </EntityType>
+        <EntityType Name="Employee_Salary">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="payroll_id" Type="int" Nullable="false" />
+          <Property Name="payment_type" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="check_number" Type="nchar" MaxLength="10" />
+          <Property Name="direct_deposit_number" Type="nchar" MaxLength="50" />
+          <Property Name="payment_amount" Type="money" Nullable="false" />
+        </EntityType>
         <EntityType Name="Equipment">
           <Key>
             <PropertyRef Name="Id" />
@@ -240,6 +251,7 @@
           <Property Name="punch_in_time" Type="time" Precision="7" Nullable="false" />
           <Property Name="punch_out_time" Type="time" Precision="7" />
           <Property Name="timesheet_date" Type="datetime" Nullable="false" />
+          <Property Name="is_in_payroll" Type="bit" Nullable="false" />
         </EntityType>
         <Association Name="fk_customer_contact_customer">
           <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
@@ -298,6 +310,18 @@
             </Principal>
             <Dependent Role="Delivery_Schedule">
               <PropertyRef Name="warehouse_employee_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_employee_salary_payroll">
+          <End Role="Payroll" Type="Self.Payroll" Multiplicity="1" />
+          <End Role="Employee_Salary" Type="Self.Employee_Salary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Payroll">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employee_Salary">
+              <PropertyRef Name="payroll_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -548,6 +572,7 @@
           <EntitySet Name="Customer_Contact" EntityType="Self.Customer_Contact" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Delivery_Lineitem" EntityType="Self.Delivery_Lineitem" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Delivery_Schedule" EntityType="Self.Delivery_Schedule" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee_Salary" EntityType="Self.Employee_Salary" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Equipment" EntityType="Self.Equipment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Equipment_Maintenance" EntityType="Self.Equipment_Maintenance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Invoice" EntityType="Self.Invoice" Schema="dbo" store:Type="Tables" />
@@ -582,6 +607,10 @@
           <AssociationSet Name="fk_delivery_schedule_warehouse_aspnetusers" Association="Self.fk_delivery_schedule_warehouse_aspnetusers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Delivery_Schedule" EntitySet="Delivery_Schedule" />
+          </AssociationSet>
+          <AssociationSet Name="fk_employee_salary_payroll" Association="Self.fk_employee_salary_payroll">
+            <End Role="Payroll" EntitySet="Payroll" />
+            <End Role="Employee_Salary" EntitySet="Employee_Salary" />
           </AssociationSet>
           <AssociationSet Name="fk_equipment_maintenance_aspnetusers" Association="Self.fk_equipment_maintenance_aspnetusers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -765,6 +794,18 @@
           <NavigationProperty Name="Delivery_Lineitem" Relationship="Self.fk_delivery_lineitem_delivery_schedule" FromRole="Delivery_Schedule" ToRole="Delivery_Lineitem" />
           <NavigationProperty Name="Invoices" Relationship="Self.Invoice_Deliver_Assignment" FromRole="Delivery_Schedule" ToRole="Invoice" />
         </EntityType>
+        <EntityType Name="Employee_Salary">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="payroll_id" Type="Int32" Nullable="false" />
+          <Property Name="payment_type" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="check_number" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="direct_deposit_number" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="payment_amount" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <NavigationProperty Name="Payroll" Relationship="Self.fk_employee_salary_payroll" FromRole="Employee_Salary" ToRole="Payroll" />
+        </EntityType>
         <EntityType Name="Equipment">
           <Key>
             <PropertyRef Name="Id" />
@@ -869,6 +910,7 @@
           <Property Name="state_tax_witholding" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="grand_total" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <NavigationProperty Name="AspNetUser" Relationship="Self.fk_payroll_aspnetusers" FromRole="Payroll" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Employee_Salary" Relationship="Self.fk_employee_salary_payroll" FromRole="Payroll" ToRole="Employee_Salary" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -933,6 +975,7 @@
           <Property Name="punch_in_time" Type="Time" Nullable="false" Precision="7" />
           <Property Name="punch_out_time" Type="Time" Precision="7" />
           <Property Name="timesheet_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="is_in_payroll" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="AspNetUser" Relationship="Self.fk_timesheet_aspnetusers" FromRole="Timesheet" ToRole="AspNetUsers" />
         </EntityType>
         <Association Name="fk_purchase_aspnetroles">
@@ -1079,6 +1122,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_employee_salary_payroll">
+          <End Role="Payroll" Type="Self.Payroll" Multiplicity="1" />
+          <End Role="Employee_Salary" Type="Self.Employee_Salary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Payroll">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employee_Salary">
+              <PropertyRef Name="payroll_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_equipment_maintenance_equipment">
           <End Role="Equipment" Type="Self.Equipment" Multiplicity="1" />
           <End Role="Equipment_Maintenance" Type="Self.Equipment_Maintenance" Multiplicity="*" />
@@ -1202,6 +1257,7 @@
           <EntitySet Name="Customer_Contact" EntityType="Self.Customer_Contact" />
           <EntitySet Name="Delivery_Lineitem" EntityType="Self.Delivery_Lineitem" />
           <EntitySet Name="Delivery_Schedule" EntityType="Self.Delivery_Schedule" />
+          <EntitySet Name="Employee_Salary" EntityType="Self.Employee_Salary" />
           <EntitySet Name="Equipments" EntityType="Self.Equipment" />
           <EntitySet Name="Equipment_Maintenance" EntityType="Self.Equipment_Maintenance" />
           <EntitySet Name="Invoices" EntityType="Self.Invoice" />
@@ -1262,6 +1318,10 @@
           <AssociationSet Name="fk_delivery_lineitem_product_inventory" Association="Self.fk_delivery_lineitem_product_inventory">
             <End Role="Product_Inventory" EntitySet="Product_Inventory" />
             <End Role="Delivery_Lineitem" EntitySet="Delivery_Lineitem" />
+          </AssociationSet>
+          <AssociationSet Name="fk_employee_salary_payroll" Association="Self.fk_employee_salary_payroll">
+            <End Role="Payroll" EntitySet="Payrolls" />
+            <End Role="Employee_Salary" EntitySet="Employee_Salary" />
           </AssociationSet>
           <AssociationSet Name="fk_equipment_maintenance_equipment" Association="Self.fk_equipment_maintenance_equipment">
             <End Role="Equipment" EntitySet="Equipments" />
@@ -1396,6 +1456,18 @@
                 <ScalarProperty Name="driver_employee_id" ColumnName="driver_employee_id" />
                 <ScalarProperty Name="delivery_date" ColumnName="delivery_date" />
                 <ScalarProperty Name="delivery_cost" ColumnName="delivery_cost" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employee_Salary">
+            <EntityTypeMapping TypeName="BusinessModel.Employee_Salary">
+              <MappingFragment StoreEntitySet="Employee_Salary">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="payroll_id" ColumnName="payroll_id" />
+                <ScalarProperty Name="payment_type" ColumnName="payment_type" />
+                <ScalarProperty Name="check_number" ColumnName="check_number" />
+                <ScalarProperty Name="direct_deposit_number" ColumnName="direct_deposit_number" />
+                <ScalarProperty Name="payment_amount" ColumnName="payment_amount" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1550,6 +1622,7 @@
                 <ScalarProperty Name="punch_in_time" ColumnName="punch_in_time" />
                 <ScalarProperty Name="punch_out_time" ColumnName="punch_out_time" />
                 <ScalarProperty Name="timesheet_date" ColumnName="timesheet_date" />
+                <ScalarProperty Name="is_in_payroll" ColumnName="is_in_payroll" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

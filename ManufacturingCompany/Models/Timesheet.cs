@@ -6,7 +6,6 @@
 //     Manual changes to this file will be overwritten if the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-
 using System.ComponentModel.DataAnnotations;
 
 namespace ManufacturingCompany.Models
@@ -17,20 +16,20 @@ namespace ManufacturingCompany.Models
     public partial class Timesheet
     {
         public int Id { get; set; }
-
         public string employee_id { get; set; }
-
-        [Display(Name = "Punch in")]
-        [DisplayFormat(DataFormatString = "{0:hh\\:mm}", ApplyFormatInEditMode = true)]
+        [Required]
+        [Display(Name ="Punch In")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:hh\\:mm}")]
         public System.TimeSpan punch_in_time { get; set; }
-
-        [Display(Name = "Punch out")]
-        [DisplayFormat(DataFormatString = "{0:hh\\:mm}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Punch Out")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:hh\\:mm}")]
         public Nullable<System.TimeSpan> punch_out_time { get; set; }
-
-        [Display(Name = "Date")]
+        [Required]
+        [Display(Name = "Timesheet Date")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
         public System.DateTime timesheet_date { get; set; }
+        [Display(Name = "Is Paid")]
+        public bool is_in_payroll { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
     }

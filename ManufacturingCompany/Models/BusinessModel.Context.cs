@@ -31,6 +31,7 @@ namespace ManufacturingCompany.Models
         public virtual DbSet<Customer_Contact> Customer_Contact { get; set; }
         public virtual DbSet<Delivery_Lineitem> Delivery_Lineitem { get; set; }
         public virtual DbSet<Delivery_Schedule> Delivery_Schedule { get; set; }
+        public virtual DbSet<Employee_Salary> Employee_Salary { get; set; }
         public virtual DbSet<Equipment> Equipments { get; set; }
         public virtual DbSet<Equipment_Maintenance> Equipment_Maintenance { get; set; }
         public virtual DbSet<Invoice> Invoices { get; set; }

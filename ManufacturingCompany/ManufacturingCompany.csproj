@@ -265,6 +265,9 @@
     <Compile Include="Models\Delivery_Schedule.cs">
       <DependentUpon>BusinessModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Employee_Salary.cs">
+      <DependentUpon>BusinessModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Equipment.cs">
       <DependentUpon>BusinessModel.tt</DependentUpon>
     </Compile>
@@ -321,6 +324,7 @@
     <Content Include="App_Data\tblCustomer_Contact.sql" />
     <Content Include="App_Data\tblDelivery_Lineitem.sql" />
     <Content Include="App_Data\tblDelivery_Schedule.sql" />
+    <Content Include="App_Data\tblEmployee_Salary.sql" />
     <Content Include="App_Data\tblEquipment.sql" />
     <Content Include="App_Data\tblEquipment_Maintenance.sql" />
     <Content Include="App_Data\tblInvoice_Delivery_Assignment.sql" />
