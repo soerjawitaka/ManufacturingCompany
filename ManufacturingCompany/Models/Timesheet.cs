@@ -43,5 +43,17 @@ namespace ManufacturingCompany.Models
         public virtual AspNetUser AspNetUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Payroll> Payrolls { get; set; }
+
+        // public methods
+        public decimal GetTotalHours()
+        {
+            return Convert.ToDecimal(((TimeSpan)punch_out_time).Ticks) - Convert.ToDecimal(punch_in_time.Ticks);
+        }
+
+        public decimal GetTimesheetTotal()
+        {
+            return 0;
+            // code the rest*****************************************************************************
+        }
     }
 }
