@@ -109,7 +109,9 @@
                         @Html.Hidden("controllerName", (string)ViewBag.ControllerName)
                         <input type="submit" value="Select" class="btn btn-success" />
                     }*@
-                    @Html.ActionLink("Create " + (string)ViewBag.ControllerName, "Create", (string)ViewBag.ControllerName, new { userID = item.Id }, htmlAttributes: new { @class = "btn btn-success" })
+                    @Html.ActionLink((string)ViewBag.ActionName + " " + (string)ViewBag.ControllerName, (string)ViewBag.ActionName, (string)ViewBag.ControllerName, new { userID = item.Id }, htmlAttributes: new { @class = "btn btn-success" })
+                    
+                    
                 </td>
             </tr>
         }

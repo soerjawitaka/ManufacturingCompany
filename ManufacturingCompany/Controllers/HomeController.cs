@@ -10,21 +10,26 @@ namespace ManufacturingCompany.Controllers
     {
         public ActionResult Index()
         {
-            return View();
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            if (User.IsInRole("Finance"))
+            {
+                return RedirectToAction("Index", "Finance");
+            }
+            else if (User.IsInRole("Production"))
+            {
+                return RedirectToAction("Index", "Production");
+            }
+            else if (User.IsInRole("Distribution"))
+            {
+                return RedirectToAction("Index", "Distribution");
+            }
+            else if (User.IsInRole("Administration"))
+            {
+                return RedirectToAction("Index", "Administration");
+            }
+            else
+            {
+                return View();
+            }            
         }
     }
 }

@@ -12,7 +12,7 @@ namespace ManufacturingCompany.Controllers
         private BusinessEntities db = new BusinessEntities();
 
         // GET: SelectUser
-        public ActionResult Index(string controllerName)
+        public ActionResult Index(string actionName, string controllerName)
         {
             List<string> searchBy = new List<string>();
             searchBy.Add("Email");
@@ -21,6 +21,7 @@ namespace ManufacturingCompany.Controllers
             searchBy.Add("Last Name");
             ViewBag.ErrorString = "";
             ViewBag.SearchBy = new SelectList(searchBy);
+            ViewBag.ActionName = actionName;
             ViewBag.ControllerName = controllerName;
             return View();
         }
@@ -28,7 +29,7 @@ namespace ManufacturingCompany.Controllers
         // POST: SelectUser/Index
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index(string SearchBy, string inputForUserSearch, string controllerName)
+        public ActionResult Index(string SearchBy, string inputForUserSearch, string actionName, string controllerName)
         {
             List<string> searchBy = new List<string>();
             searchBy.Add("Email");
@@ -36,6 +37,7 @@ namespace ManufacturingCompany.Controllers
             searchBy.Add("First Name");
             searchBy.Add("Last Name");
             ViewBag.SearchBy = new SelectList(searchBy);
+            ViewBag.ActionName = actionName;
             ViewBag.ControllerName = controllerName;
 
             if (inputForUserSearch != "")

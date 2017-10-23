@@ -205,7 +205,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\AdminController\ApplicationRolesController.cs" />
     <Compile Include="Controllers\DepartmentControllers\FinanceController.cs" />
     <Compile Include="Controllers\DepartmentControllers\Finance\InvoicesController.cs" />
     <Compile Include="Controllers\DepartmentControllers\Finance\PaymentsController.cs" />
@@ -229,6 +228,14 @@
     <Compile Include="Migrations\201710082147002_Roles.cs" />
     <Compile Include="Migrations\201710082147002_Roles.Designer.cs">
       <DependentUpon>201710082147002_Roles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710220528014_RoleManagement.cs" />
+    <Compile Include="Migrations\201710220528014_RoleManagement.Designer.cs">
+      <DependentUpon>201710220528014_RoleManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710230026004_ManageEmployeeModel.cs" />
+    <Compile Include="Migrations\201710230026004_ManageEmployeeModel.Designer.cs">
+      <DependentUpon>201710230026004_ManageEmployeeModel.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -377,9 +384,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Images\noImage.png" />
-    <Content Include="Images\noProfileImage.jpg" />
-    <Content Include="Images\noProfileImage2.jpg" />
+    <Content Include="Images\ProductImages\noImage.png" />
+    <Content Include="Images\UserImages\noProfileImage.jpg" />
+    <Content Include="Images\UserImages\noProfileImage2.jpg" />
     <Content Include="Models\AssignmentModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>AssignmentModel.edmx</DependentUpon>
@@ -467,12 +474,6 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\ApplicationRoles\Create.cshtml" />
-    <Content Include="Views\ApplicationRoles\Delete.cshtml" />
-    <Content Include="Views\ApplicationRoles\Details.cshtml" />
-    <Content Include="Views\ApplicationRoles\Edit.cshtml" />
-    <Content Include="Views\ApplicationRoles\Index.cshtml" />
-    <Content Include="Views\Account\RegisterRole.cshtml" />
     <Content Include="Views\Manage\ChangeProfile.cshtml" />
     <Content Include="Views\Finance\Index.cshtml" />
     <Content Include="Views\Invoices\Create.cshtml" />
@@ -501,6 +502,12 @@
     <Content Include="Views\EmployeeTimesheets\Index.cshtml" />
     <Content Include="Views\Timesheets\SelectUser.cshtml" />
     <Content Include="Views\SelectUser\Index.cshtml" />
+    <Content Include="Views\Shared\_ManagerMenu.cshtml" />
+    <Content Include="Views\Manage\Roles.cshtml" />
+    <Content Include="Views\Manage\CreateRole.cshtml" />
+    <Content Include="Views\Manage\RegisterUserRole.cshtml" />
+    <Content Include="Views\Manage\EditRole.cshtml" />
+    <Content Include="Views\Manage\ManageEmployee.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201710061504292_InitialCreate.resx">
@@ -511,6 +518,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710082147002_Roles.resx">
       <DependentUpon>201710082147002_Roles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710220528014_RoleManagement.resx">
+      <DependentUpon>201710220528014_RoleManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710230026004_ManageEmployeeModel.resx">
+      <DependentUpon>201710230026004_ManageEmployeeModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

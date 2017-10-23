@@ -18,21 +18,23 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Your Company Name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Roles", "Index", "ApplicationRoles")</li>
-                    <li>@Html.ActionLink("Finance", "Index", "Finance")</li>
                     <li>@Html.ActionLink("Timesheet", "Index", "EmployeeTimesheets")</li>
-                    <li>@Html.ActionLink("Select User", "Index", "SelectUser")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
+    </div>
+    <div class="container navbar">
+        @if (User.IsInRole("SuperUser"))
+        {
+            @Html.Partial("_ManagerMenu")
+        }
+        
     </div>
     <div class="container body-content">
         @RenderBody()

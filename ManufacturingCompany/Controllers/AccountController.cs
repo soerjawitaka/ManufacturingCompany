@@ -184,7 +184,7 @@ namespace ManufacturingCompany.Controllers
             return View(model);
         }
 
-
+//*************************************************************************************************************
         // GET: /Account/RegisterRole
         [AllowAnonymous]
         [HttpGet]
@@ -196,7 +196,7 @@ namespace ManufacturingCompany.Controllers
         }
 
         // POST: /Account/RegisterRole - POST Method
-        [AllowAnonymous]
+        [Authorize(Roles ="SuperUser, Manager")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> RegisterRole(RegisterViewModel model, ApplicationUser user)

@@ -90,7 +90,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\ApplicationRolesControllerTest.cs" />
     <Compile Include="Models\Delivery_Lineitem_Test.cs" />
     <Compile Include="Models\Invoice_Lineitem_Test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

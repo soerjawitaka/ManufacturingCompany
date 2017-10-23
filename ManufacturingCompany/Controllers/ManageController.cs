@@ -10,6 +10,7 @@ using ManufacturingCompany.Models;
 using System.Data.Entity.Infrastructure;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Data.Entity;
+using System.Collections.Generic;
 
 namespace ManufacturingCompany.Controllers
 {
@@ -18,15 +19,18 @@ namespace ManufacturingCompany.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private BusinessEntities businessDB = new BusinessEntities();
+        private ApplicationRoleManager _roleManager;
 
         public ManageController()
         {
         }
 
-        public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, ApplicationRoleManager roleManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            RoleManager = roleManager;
         }
 
         public ApplicationSignInManager SignInManager
@@ -53,6 +57,18 @@ namespace ManufacturingCompany.Controllers
             }
         }
 
+        public ApplicationRoleManager RoleManager
+        {
+            get
+            {
+                return _roleManager ?? HttpContext.GetOwinContext().Get<ApplicationRoleManager>();
+            }
+            private set
+            {
+                _roleManager = value;
+            }
+        }
+
         //
         // GET: /Manage/Index
         public async Task<ActionResult> Index(ManageMessageId? message)
@@ -73,7 +89,8 @@ namespace ManufacturingCompany.Controllers
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
                 Logins = await UserManager.GetLoginsAsync(userId),
-                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
+                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId),
+                LoggedInUser = businessDB.AspNetUsers.Find(userId)
             };
             return View(model);
         }
@@ -364,6 +381,133 @@ namespace ManufacturingCompany.Controllers
             var result = await UserManager.AddLoginAsync(User.Identity.GetUserId(), loginInfo.Login);
             return result.Succeeded ? RedirectToAction("ManageLogins") : RedirectToAction("ManageLogins", new { Message = ManageMessageId.Error });
         }
+
+        #region RoleManager
+        // Role manager****************************************************************************
+        public ActionResult Roles()
+        {
+            var roles = RoleManager.Roles.ToList();
+            return View(roles.Select(r => new RoleViewModel() { Id = r.Id, Name = r.Name }));
+        }
+
+        public ActionResult CreateRole()
+        {
+            ViewBag.ErrorMessage = "";
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateRole([Bind(Include = "Name")] RoleViewModel model)
+        {
+            // validation for if role exist
+            if (RoleManager.RoleExists(model.Name))
+            {
+                ViewBag.ErrorMessage = "Role name already exist";
+                return View();
+            }
+
+            var newRole = new IdentityRole(model.Name);
+            var result = RoleManager.Create(newRole);
+
+            if (result.Succeeded)
+            {
+                return RedirectToAction("Roles");
+            }
+            return View(model);
+        }
+
+        public ActionResult EditRole(string id)
+        {
+            var roleViewModel = new RoleViewModel();
+            var roleModel = RoleManager.Roles.Where(r => r.Id == id).SingleOrDefault();
+            roleViewModel.Id = roleModel.Id;
+            roleViewModel.Name = roleModel.Name;
+            ViewBag.ErrorMessage = "";
+            return View(roleViewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditRole([Bind(Include = "Id, Name")]RoleViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = RoleManager.Update(new IdentityRole() { Id = model.Id, Name = model.Name });
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Roles");
+                }
+            }
+
+            ViewBag.ErrorMessage = "Unable to edit Role. Please try again.";
+            return View(model);
+        }
+        #endregion
+
+        #region EmployeeManager
+        [Authorize(Roles = "SuperUser, Manager")]
+        public ActionResult ManageEmployee(string userID)
+        {
+            var employeeRoles = UserManager.GetRoles(userID);
+            var allRoles = RoleManager.Roles.ToList();
+            List<string> availableRoles = new List<string>();
+            List<string> allRolesText = new List<string>();
+            foreach (var i in allRoles) { availableRoles.Add(i.Name); allRolesText.Add(i.Name); }
+            // filter for available roles
+            foreach (var er in employeeRoles)
+            {
+                foreach(var ar in allRolesText)
+                {
+                    if (er.Equals(ar))
+                    {
+                        availableRoles.Remove(ar);
+                    }
+                }
+            }
+            var model = new ManageEmployeeModel();
+            model.Employee = UserManager.FindById(userID);
+            model.EmployeeRoles = (List<string>)employeeRoles;
+            model.AvailableRoles = availableRoles;
+            ViewBag.StateList = new SelectList(XmlHelper.GetStates(Server, Url), "Value", "Text");
+            ViewBag.ErrorMessage = "";
+            return View(model);
+        }
+
+        [Authorize(Roles = "SuperUser, Manager")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ManageEmployee(ManageEmployeeModel model)
+        {
+            // updating profile
+            var resultUser = await UserManager.UpdateAsync(model.Employee);
+            if (resultUser.Succeeded)
+            {
+                // assigning user to role here
+                var resultRole = await this.UserManager.AddToRoleAsync(model.UserID, model.RoleToBeAssigned);
+                if (!resultRole.Succeeded)
+                {
+                    ViewBag.ErrorMessage = "Cannot assign Role";
+                }
+            }
+            else
+            {
+                ViewBag.ErrorMessage = "Cannot update employee's profile";
+            }
+
+            return View(model);
+        }
+
+        [Authorize(Roles = "SuperUser, Manager")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult RemoveRoleAssignment(string userID, string role)
+        {
+            var result = UserManager.RemoveFromRole(userID, role);
+            return RedirectToAction("ManageEmployee", new { userID = userID });
+        }
+
+        #endregion
 
         protected override void Dispose(bool disposing)
         {

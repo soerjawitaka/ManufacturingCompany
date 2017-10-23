@@ -12,6 +12,7 @@ namespace ManufacturingCompany.Models
         public string PhoneNumber { get; set; }
         public bool TwoFactor { get; set; }
         public bool BrowserRemembered { get; set; }
+        public AspNetUser LoggedInUser { get; set; }
     }
 
     public class ManageLoginsViewModel
@@ -82,5 +83,22 @@ namespace ManufacturingCompany.Models
     {
         public string SelectedProvider { get; set; }
         public ICollection<System.Web.Mvc.SelectListItem> Providers { get; set; }
+    }
+
+    public class RoleViewModel
+    {
+        public string Id { get; set; }
+        public string Name { get; set; }
+
+    }
+
+    public class ManageEmployeeModel
+    {
+        [Key]
+        public string UserID { get; set; }
+        public ApplicationUser Employee { get; set; }
+        public List<string> EmployeeRoles { get; set; }
+        public List<string> AvailableRoles { get; set; }
+        public string RoleToBeAssigned { get; set; }
     }
 }

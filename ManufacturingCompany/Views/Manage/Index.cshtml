@@ -7,6 +7,65 @@
 
 <p class="text-success">@ViewBag.StatusMessage</p>
 <div>
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.LoggedInUser.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LoggedInUser.UserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LoggedInUser.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LoggedInUser.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LoggedInUser.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LoggedInUser.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LoggedInUser.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LoggedInUser.Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LoggedInUser.City)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LoggedInUser.City)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LoggedInUser.State)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LoggedInUser.State)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LoggedInUser.ZipCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LoggedInUser.ZipCode)
+        </dd>
+    </dl>
+
     <h4>Change your account settings</h4>
     <hr />
     @Html.ActionLink("Change your password", "ChangePassword", null, htmlAttributes: new { @class = "btn btn-default" })
