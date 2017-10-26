@@ -12,13 +12,11 @@ namespace ManufacturingCompany.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Purchase
+    public partial class RegisterUserRoleModel
     {
-        public int purchase_id { get; set; }
-        public string purchase_item_name { get; set; }
-        public string purchase_item_description { get; set; }
-        public decimal purchase_item_unit_cost { get; set; }
-        public string employee_id { get; set; }
+        public string UserID { get; set; }
+        public string RoleName { get; set; }
+        public string UserObject_Id { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
     }

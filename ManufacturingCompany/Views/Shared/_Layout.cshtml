@@ -23,17 +23,20 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     @*<li>@Html.ActionLink("Home", "Index", "Home")</li>*@
-                    <li>@Html.ActionLink("Timesheet", "Index", "EmployeeTimesheets")</li>
+                    @if (User.IsInRole("Manager") || User.IsInRole("Supervisor") || User.IsInRole("Employee"))
+                    {
+                        <li>@Html.ActionLink("Timesheet", "Index", "EmployeeTimesheets")</li>
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
     <div class="container navbar">
-        @if (User.IsInRole("SuperUser"))
-        {
+        @*@if (User.IsInRole("SuperUser") || User.IsInRole("Manager"))
+        {*@
             @Html.Partial("_ManagerMenu")
-        }
+        @*}*@
         
     </div>
     <div class="container body-content">

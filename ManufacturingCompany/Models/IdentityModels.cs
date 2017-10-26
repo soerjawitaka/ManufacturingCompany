@@ -9,6 +9,12 @@ namespace ManufacturingCompany.Models
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
+        public enum WageMode
+        {
+            Hourly,
+            Salary
+        }
+
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Address { get; set; }
@@ -16,6 +22,8 @@ namespace ManufacturingCompany.Models
         public string State { get; set; }
         public string ZipCode { get; set; }
         public string ImageFileName { get; set; }
+        public WageMode ModeOfWage { get; set; }
+        public decimal WageAmount { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

@@ -12,19 +12,9 @@ namespace ManufacturingCompany.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class AspNetRole
+    public partial class RoleViewModel
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public AspNetRole()
-        {
-            this.Purchases = new HashSet<Purchase>();
-        }
-    
         public string Id { get; set; }
         public string Name { get; set; }
-        public string Discriminator { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Purchase> Purchases { get; set; }
     }
 }

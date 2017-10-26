@@ -20,6 +20,7 @@ namespace ManufacturingCompany.Models
             this.Equipments = new HashSet<Equipment>();
             this.Materials = new HashSet<Material>();
             this.Product_Inventory = new HashSet<Product_Inventory>();
+            this.Material_Stock = new HashSet<Material_Stock>();
         }
     
         public int Id { get; set; }
@@ -39,5 +40,7 @@ namespace ManufacturingCompany.Models
         public virtual Product_Category Product_Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product_Inventory> Product_Inventory { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Material_Stock> Material_Stock { get; set; }
     }
 }

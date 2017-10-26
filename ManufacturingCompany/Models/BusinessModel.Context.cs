@@ -25,7 +25,6 @@ namespace ManufacturingCompany.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Customer_Contact> Customer_Contact { get; set; }
@@ -44,6 +43,8 @@ namespace ManufacturingCompany.Models
         public virtual DbSet<Product_Category> Product_Category { get; set; }
         public virtual DbSet<Product_Inventory> Product_Inventory { get; set; }
         public virtual DbSet<Purchase> Purchases { get; set; }
+        public virtual DbSet<RegisterUserRoleModel> RegisterUserRoleModels { get; set; }
+        public virtual DbSet<RoleViewModel> RoleViewModels { get; set; }
         public virtual DbSet<Timesheet> Timesheets { get; set; }
     }
 }

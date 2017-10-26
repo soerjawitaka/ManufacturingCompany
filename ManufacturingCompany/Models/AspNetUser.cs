@@ -11,13 +11,13 @@ namespace ManufacturingCompany.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     
     public partial class AspNetUser
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public AspNetUser()
         {
+            this.RegisterUserRoleModels = new HashSet<RegisterUserRoleModel>();
             this.Delivery_Schedule = new HashSet<Delivery_Schedule>();
             this.Delivery_Schedule1 = new HashSet<Delivery_Schedule>();
             this.Equipment_Maintenance = new HashSet<Equipment_Maintenance>();
@@ -32,33 +32,25 @@ namespace ManufacturingCompany.Models
         public bool EmailConfirmed { get; set; }
         public string PasswordHash { get; set; }
         public string SecurityStamp { get; set; }
-
-        [Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; }
         public bool PhoneNumberConfirmed { get; set; }
         public bool TwoFactorEnabled { get; set; }
         public Nullable<System.DateTime> LockoutEndDateUtc { get; set; }
         public bool LockoutEnabled { get; set; }
         public int AccessFailedCount { get; set; }
-
-        [Display(Name = "Username")]
         public string UserName { get; set; }
-
-        [Display(Name = "First Name")]
         public string FirstName { get; set; }
-
-        [Display(Name = "Last Name")]
         public string LastName { get; set; }
         public string Address { get; set; }
         public string City { get; set; }
         public string State { get; set; }
-
-        [Display(Name = "Zip Code")]
         public string ZipCode { get; set; }
-
-        [Display(Name = "")]
         public string ImageFileName { get; set; }
+        public int ModeOfWage { get; set; }
+        public Nullable<decimal> WageAmount { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RegisterUserRoleModel> RegisterUserRoleModels { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Delivery_Schedule> Delivery_Schedule { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
