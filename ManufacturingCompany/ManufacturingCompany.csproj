@@ -282,6 +282,7 @@
     <Compile Include="Models\Customer_Contact.cs">
       <DependentUpon>BusinessModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Custom\EmployeeRoleViewModel.cs" />
     <Compile Include="Models\Delivery_Lineitem.cs">
       <DependentUpon>BusinessModel.tt</DependentUpon>
     </Compile>
@@ -318,7 +319,7 @@
     <Compile Include="Models\Payroll.cs">
       <DependentUpon>BusinessModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Payroll_Partial_Metadata.cs" />
+    <Compile Include="Models\Partial_Metadata\Payroll_Partial_Metadata.cs" />
     <Compile Include="Models\Payroll_Paycheck_Assignment.cs">
       <DependentUpon>AssignmentModel.tt</DependentUpon>
     </Compile>
@@ -349,8 +350,8 @@
     <Compile Include="Models\Timesheet.cs">
       <DependentUpon>BusinessModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Timesheet_Partial_Metadata.cs" />
-    <Compile Include="Models\XmlHelper.cs" />
+    <Compile Include="Models\Partial_Metadata\Timesheet_Partial_Metadata.cs" />
+    <Compile Include="Models\Helper\XmlHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
