@@ -1,4 +1,4 @@
-﻿@model ManufacturingCompany.Models.ManageEmployeeModel
+﻿@model ManufacturingCompany.Models.ApplicationUser
 
 @{
     ViewBag.Title = "ManageEmployee";
@@ -7,110 +7,84 @@
 
 <h2>Manage Employee</h2>
 
+<div>
 
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.UserID)
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
 
-        <div class="form-group">
-            @Html.LabelFor(m => m.Employee.Email, new { @class = "col-md-2 control-label" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(m => m.Employee.Email, new { @class = "form-control" })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.Employee.UserName, new { @class = "col-md-2 control-label" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(m => m.Employee.UserName, new { @class = "form-control" })
-            </div>
-        </div>
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
 
-        <hr />
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
 
-        <div class="form-group">
-            @Html.LabelFor(m => m.Employee.FirstName, new { @class = "col-md-2 control-label" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(m => m.Employee.FirstName, new { @class = "form-control" })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.Employee.LastName, new { @class = "col-md-2 control-label" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(m => m.Employee.LastName, new { @class = "form-control" })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.Employee.Address, new { @class = "col-md-2 control-label" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(m => m.Employee.Address, new { @class = "form-control" })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.Employee.City, new { @class = "col-md-2 control-label" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(m => m.Employee.City, new { @class = "form-control" })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.Employee.State, new { @class = "col-md-2 control-label" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(m => m.Employee.State, (SelectList)ViewBag.StateList, null, new { @class = "form-control" })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.Employee.ZipCode, new { @class = "col-md-2 control-label" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(m => m.Employee.ZipCode, new { @class = "form-control" })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.Employee.PhoneNumber, new { @class = "col-md-2 control-label" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(m => m.Employee.PhoneNumber, new { @class = "form-control" })
-            </div>
-        </div>
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.RoleToBeAssigned, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.RoleToBeAssigned, new SelectList(Model.AvailableRoles), new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.RoleToBeAssigned, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-}
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
 
-<table class="table">
-    <tr>
-        <th>Roles</th>
-        <th>&nbsp;</th>
-    </tr>
-    @foreach (var i in Model.EmployeeRoles)
-    {
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.City)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.City)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.State)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.State)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ZipCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ZipCode)
+        </dd>
+    </dl>
+</div>
+
+    <table class="table">
         <tr>
-            <td>@i</td>
-            <td>
-                @using (Html.BeginForm("RemoveRoleAssignment", "Manage", FormMethod.Post))
-                {
-                    @Html.AntiForgeryToken()
-                    @Html.Hidden("userID", Model.UserID)
-                    @Html.Hidden("role", i)
-                    <input type="submit" value="Delete" class="btn btn-danger" />
-                }
-                @*@Html.ActionLink("Delete Role", "RemoveRoleAssignment", new { role = Model.UserID })*@
-            </td>
+            <th>Roles</th>
         </tr>
-    }
-</table>
+        @foreach (var i in (List<string>)ViewBag.EmployeeRoles)
+        {
+            <tr>
+                <td>@i</td>
+            </tr>
+        }
+    </table>
+
+    <h4>Change @Model.UserName account settings</h4>
+    <hr />
+    @Html.ActionLink("Modify Profile", "ChangeEmployeeProfile", new { userID = Model.Id }, htmlAttributes: new { @class = "btn btn-default" })
+
+    <br />
+    <br />
+
+    @Html.ActionLink("Modify Roles", "ChangeEmployeeRoles", new { userID = Model.Id }, htmlAttributes: new { @class = "btn btn-default" })

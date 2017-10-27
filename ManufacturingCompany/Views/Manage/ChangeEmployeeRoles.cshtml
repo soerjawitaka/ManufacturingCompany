@@ -1,0 +1,66 @@
+﻿@model ManufacturingCompany.Models.Custom.EmployeeRoleViewModel
+
+@{
+    ViewBag.Title = "ChangeEmployeeRoles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Username - Roles</h2>
+
+
+<table class="table">
+    <tr>
+        <th>Roles</th>
+        <th>&nbsp;</th>
+    </tr>
+    @foreach (var i in (List<string>)ViewBag.EmployeeRoles)
+            {
+        <tr>
+            <td>@i</td>
+            <td>@Html.ActionLink("Remove", "RemoveUserRole", new { userID = Model.UserID, role = @i })</td>
+        </tr>
+    }
+</table>
+<hr />
+
+@if ((string)ViewBag.ErrorMessage != "")
+{
+    @Html.Display((string)ViewBag.ErrorMessage, new { @class = "text-danger" })
+}
+
+<hr />
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>EmployeeRoleViewModel</h4>
+        <hr />
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.UserID)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Role, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Role, new SelectList(ViewBag.AvailableRoles), null, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Role, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

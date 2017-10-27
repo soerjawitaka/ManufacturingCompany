@@ -241,6 +241,10 @@
     <Compile Include="Migrations\201710260511347_EmployeeWage.Designer.cs">
       <DependentUpon>201710260511347_EmployeeWage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710272057457_EmployeeRole.cs" />
+    <Compile Include="Migrations\201710272057457_EmployeeRole.Designer.cs">
+      <DependentUpon>201710272057457_EmployeeRole.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AspNetUser.cs">
@@ -518,6 +522,8 @@
     <Content Include="Views\Manage\RegisterUserRole.cshtml" />
     <Content Include="Views\Manage\EditRole.cshtml" />
     <Content Include="Views\Manage\ManageEmployee.cshtml" />
+    <Content Include="Views\Manage\ChangeEmployeeProfile.cshtml" />
+    <Content Include="Views\Manage\ChangeEmployeeRoles.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201710061504292_InitialCreate.resx">
@@ -537,6 +543,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710260511347_EmployeeWage.resx">
       <DependentUpon>201710260511347_EmployeeWage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710272057457_EmployeeRole.resx">
+      <DependentUpon>201710272057457_EmployeeRole.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

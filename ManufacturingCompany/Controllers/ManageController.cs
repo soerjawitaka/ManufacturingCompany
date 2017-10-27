@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using ManufacturingCompany.Models;
+using ManufacturingCompany.Models.Custom;
 using System.Data.Entity.Infrastructure;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Data.Entity;
@@ -305,6 +306,46 @@ namespace ManufacturingCompany.Controllers
         }
 
         //
+        // GET: /Manage/ChangeProfile
+        public ActionResult ChangeEmployeeProfile(string userID)
+        {
+            ViewBag.StateList = new SelectList(XmlHelper.GetStates(Server, Url), "Value", "Text");
+            return View((ApplicationUser)(UserManager.FindById(userID)));
+        }
+
+        //
+        // POST: /Manage/ChangeProfile
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ChangeEmployeeProfile([Bind(Include = "Id, UserName, Email, FirstName, LastName, Address, City, State, ZipCode, PhoneNumber")]ApplicationUser user)
+        {
+            ViewBag.StateList = new SelectList(XmlHelper.GetStates(Server, Url), "Value", "Text");
+            if (!ModelState.IsValid)
+            {
+                return View(user);
+            }
+            ApplicationDbContext db = new ApplicationDbContext();
+            var updatedUser = db.Users.Find(user.Id);
+            updatedUser.UserName = user.UserName;
+            updatedUser.Email = user.Email;
+            updatedUser.FirstName = user.FirstName;
+            updatedUser.LastName = user.LastName;
+            updatedUser.Address = user.Address;
+            updatedUser.City = user.City;
+            updatedUser.State = user.State;
+            updatedUser.ZipCode = user.ZipCode;
+            updatedUser.PhoneNumber = user.PhoneNumber;
+
+            db.Entry(updatedUser).State = EntityState.Modified;
+            int result = db.SaveChanges();
+            if (result == 0)
+            {
+                return View(user);
+            }
+            return RedirectToAction("ManageEmployee", new { userID = updatedUser.Id });
+        }
+
+        //
         // GET: /Manage/SetPassword
         public ActionResult SetPassword()
         {
@@ -449,15 +490,17 @@ namespace ManufacturingCompany.Controllers
         [Authorize(Roles = "SuperUser, Manager")]
         public ActionResult ManageEmployee(string userID)
         {
+            var employee = UserManager.FindById(userID);
             var employeeRoles = UserManager.GetRoles(userID);
             var allRoles = RoleManager.Roles.ToList();
+
             List<string> availableRoles = new List<string>();
             List<string> allRolesText = new List<string>();
             foreach (var i in allRoles) { availableRoles.Add(i.Name); allRolesText.Add(i.Name); }
             // filter for available roles
             foreach (var er in employeeRoles)
             {
-                foreach(var ar in allRolesText)
+                foreach (var ar in allRolesText)
                 {
                     if (er.Equals(ar))
                     {
@@ -465,13 +508,13 @@ namespace ManufacturingCompany.Controllers
                     }
                 }
             }
-            var model = new ManageEmployeeModel();
-            model.Employee = UserManager.FindById(userID);
-            model.EmployeeRoles = (List<string>)employeeRoles;
-            model.AvailableRoles = availableRoles;
+            //var model = new ManageEmployeeModel();
+            //model.Employee = UserManager.FindById(userID);
+
+            ViewBag.EmployeeRoles = (List<string>)employeeRoles;
             ViewBag.StateList = new SelectList(XmlHelper.GetStates(Server, Url), "Value", "Text");
             ViewBag.ErrorMessage = "";
-            return View(model);
+            return View(employee);
         }
 
         [Authorize(Roles = "SuperUser, Manager")]
@@ -498,13 +541,64 @@ namespace ManufacturingCompany.Controllers
             return View(model);
         }
 
+        // GET: /Manage/ChangeEmployeeRoles
+        [Authorize(Roles = "SuperUser, Manager")]
+        public ActionResult ChangeEmployeeRoles(string userID)
+        {
+            ViewBag.Username = UserManager.FindById(userID).UserName;
+            ViewBag.ErrorMessage = "";
+
+            var employeeRoles = UserManager.GetRoles(userID);
+            var allRoles = RoleManager.Roles.ToList();
+            List<string> availableRoles = new List<string>();
+            List<string> allRolesText = new List<string>();
+            foreach (var i in allRoles) { availableRoles.Add(i.Name); allRolesText.Add(i.Name); }
+            // filter for available roles
+            foreach (var er in employeeRoles)
+            {
+                foreach (var ar in allRolesText)
+                {
+                    if (er.Equals(ar))
+                    {
+                        availableRoles.Remove(ar);
+                    }
+                }
+            }
+            ViewBag.EmployeeRoles = (List<string>)employeeRoles;
+            ViewBag.AvailableRoles = availableRoles;
+            var roles = new EmployeeRoleViewModel() { UserID = userID };
+            return View(roles);
+        }
+
         [Authorize(Roles = "SuperUser, Manager")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult RemoveRoleAssignment(string userID, string role)
+        public ActionResult ChangeEmployeeRoles(EmployeeRoleViewModel model)
+        {
+            var result = UserManager.AddToRole(model.UserID, model.Role);
+            if (result.Succeeded)
+            {
+                return RedirectToAction("ManageEmployee", new { userID = model.UserID });
+            }
+            else
+            {
+                ViewBag.ErrorMessage = "Unable to assign role. Please try again.";
+                return View(model);
+            }
+        }
+
+        public ActionResult RemoveUserRole(string userID, string role)
         {
             var result = UserManager.RemoveFromRole(userID, role);
-            return RedirectToAction("ManageEmployee", new { userID = userID });
+            if (result.Succeeded)
+            {
+                return RedirectToAction("ManageEmployee", new { userID = userID });
+            }
+            else
+            {
+                ViewBag.ErrorMessage = "Unable to remove role. Please try again.";
+                return RedirectToAction("ChangeEmployeeRoles", new { userID = userID });
+            }
         }
 
         #endregion
