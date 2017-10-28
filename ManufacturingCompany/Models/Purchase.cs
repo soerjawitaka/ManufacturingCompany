@@ -20,6 +20,7 @@ namespace ManufacturingCompany.Models
         public decimal purchase_item_unit_cost { get; set; }
         public string department_id { get; set; }
         public string employee_id { get; set; }
+        public System.DateTime purchase_date { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
     }

@@ -207,6 +207,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DepartmentControllers\FinanceController.cs" />
     <Compile Include="Controllers\DepartmentControllers\Finance\InvoicesController.cs" />
+    <Compile Include="Controllers\DepartmentControllers\Finance\PaychecksController.cs" />
     <Compile Include="Controllers\DepartmentControllers\Finance\PaymentsController.cs" />
     <Compile Include="Controllers\DepartmentControllers\Finance\PayrollsController.cs" />
     <Compile Include="Controllers\DepartmentControllers\Finance\TimesheetsController.cs" />
@@ -321,7 +322,9 @@
     <Compile Include="Models\Lineitem.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Partial_Metadata\AspNetUser_Partial_Metadata.cs" />
+    <Compile Include="Models\Partial_Metadata\Paycheck_Partial_Metadata.cs" />
     <Compile Include="Models\Partial_Metadata\Payroll_Partial_Metadata.cs" />
+    <Compile Include="Models\Partial_Metadata\Purchase_Partial_Metadata.cs" />
     <Compile Include="Models\Paycheck.cs">
       <DependentUpon>BusinessModel.tt</DependentUpon>
     </Compile>
@@ -524,6 +527,11 @@
     <Content Include="Views\Manage\ManageEmployee.cshtml" />
     <Content Include="Views\Manage\ChangeEmployeeProfile.cshtml" />
     <Content Include="Views\Manage\ChangeEmployeeRoles.cshtml" />
+    <Content Include="Views\Paychecks\Create.cshtml" />
+    <Content Include="Views\Paychecks\Delete.cshtml" />
+    <Content Include="Views\Paychecks\Details.cshtml" />
+    <Content Include="Views\Paychecks\Edit.cshtml" />
+    <Content Include="Views\Paychecks\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201710061504292_InitialCreate.resx">

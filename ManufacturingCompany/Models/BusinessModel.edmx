@@ -251,6 +251,7 @@
           <Property Name="purchase_item_unit_cost" Type="money" Nullable="false" />
           <Property Name="department_id" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="employee_id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="purchase_date" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="RoleViewModels">
           <Key>
@@ -1000,6 +1001,7 @@
           <Property Name="purchase_item_unit_cost" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="department_id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="employee_id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="purchase_date" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="AspNetUser" Relationship="Self.fk_purchase_aspnetusers" FromRole="Purchase" ToRole="AspNetUsers" />
         </EntityType>
         <EntityType Name="RoleViewModel">
@@ -1650,6 +1652,7 @@
                 <ScalarProperty Name="purchase_item_unit_cost" ColumnName="purchase_item_unit_cost" />
                 <ScalarProperty Name="department_id" ColumnName="department_id" />
                 <ScalarProperty Name="employee_id" ColumnName="employee_id" />
+                <ScalarProperty Name="purchase_date" ColumnName="purchase_date" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
