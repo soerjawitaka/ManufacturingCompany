@@ -19,7 +19,44 @@ namespace ManufacturingCompany.Models
 
         private void SetTimesheets()
         {
+            this.assignedTimesheet = db.Timesheets.Where(t => t.timesheet_date >= this.period_begin && t.timesheet_date <= this.period_end && t.is_in_payroll == false).ToList();
+        }
+
+        public int InitializeTimesheets()
+        {
             this.assignedTimesheet = db.Timesheets.Where(t => t.timesheet_date >= this.period_begin && t.timesheet_date <= this.period_end).ToList();
+            foreach (var i in this.assignedTimesheet)
+            {
+                var timesheet = db.Timesheets.Find(i.Id);
+                timesheet.is_in_payroll = false;
+                db.Entry(timesheet).State = System.Data.Entity.EntityState.Modified;                
+            }
+            return db.SaveChanges();
+        }
+
+        public int ChangeTimesheetsStatus()
+        {
+            this.assignedTimesheet = db.Timesheets.Where(t => t.timesheet_date >= this.period_begin && t.timesheet_date <= this.period_end).ToList();
+            foreach (var i in this.assignedTimesheet)
+            {
+                var timesheet = db.Timesheets.Find(i.Id);
+                timesheet.is_in_payroll = true;
+                db.Entry(timesheet).State = System.Data.Entity.EntityState.Modified;
+            }
+            return db.SaveChanges();
+        }
+
+        public bool ThereAreAvailableTimesheets()
+        {
+            var availableTimesheets = db.Timesheets.Where(t => t.timesheet_date >= this.period_begin && t.timesheet_date <= this.period_end && t.is_in_payroll == false).ToList();
+            if (availableTimesheets.Count > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         private void SetTotalHours()

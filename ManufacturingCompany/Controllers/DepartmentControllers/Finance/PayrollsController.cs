@@ -54,25 +54,33 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,employee_id,period_begin,period_end,total_hours,subtotal,federal_tax_witholding,state_tax_witholding,grand_total")] Payroll payroll)
         {
+            string errorMessage = "";
             if (ModelState.IsValid)
             {
-                payroll.CalculatePayroll(); // calculate the rest of the fields
-                db.Payrolls.Add(payroll);
-                var result = db.SaveChanges();
-                if (result > 0)
+                if (payroll.ThereAreAvailableTimesheets())
                 {
-                    foreach (var i in payroll.assignedTimesheet)
+                    payroll.CalculatePayroll(); // calculate the rest of the fields
+                    db.Payrolls.Add(payroll);
+                    var result = db.SaveChanges();
+                    if (result > 0)
                     {
-                        var timesheet = db.Timesheets.Find(i.Id);
-                        timesheet.is_in_payroll = true;
-                        db.Entry(timesheet).State = EntityState.Modified;                        
+                        if (payroll.ChangeTimesheetsStatus() > 0) // change timesheet status and check result
+                        {
+                            return RedirectToAction("Index");
+                        }
+                        else
+                        {
+                            db.Payrolls.Remove(payroll);
+                            db.SaveChanges();
+                            errorMessage = "Unable to create this payroll. Timesheet updates failed.";
+                        }
                     }
-                    db.SaveChanges();
+                    errorMessage = "Unable to save this payroll.";
                 }
-                return RedirectToAction("Index");
+                errorMessage = "There are no available timesheets for this period.";
             }
-
-            ViewBag.employee_id = new SelectList(db.AspNetUsers, "Id", "Email", payroll.employee_id);
+            ViewBag.ErrorMessage = errorMessage;
+            ViewBag.employee_username = db.AspNetUsers.Find(payroll.employee_id).UserName;
             return View(payroll);
         }
 
@@ -88,7 +96,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
             {
                 return HttpNotFound();
             }
-            ViewBag.employee_id = new SelectList(db.AspNetUsers, "Id", "Email", payroll.employee_id);
+            ViewBag.EmployeeUsername = db.AspNetUsers.Find(payroll.employee_id).UserName;
             return View(payroll);
         }
 
@@ -97,15 +105,37 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,employee_id,period_begin,period_end,total_hours,subtotal,federal_tax_witholding,state_tax_witholding,grand_total")] Payroll payroll)
+        public ActionResult Edit([Bind(Include = "Id,employee_id,period_begin,period_end")] Payroll payroll)
         {
+            string errorMessage = "";
+            var oldPayroll = db.Payrolls.Find(payroll.Id);
+            oldPayroll.CalculatePayroll();
+
             if (ModelState.IsValid)
             {
-                db.Entry(payroll).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                oldPayroll.InitializeTimesheets();
+                var newPayroll = db.Payrolls.Find(payroll.Id);
+                newPayroll.period_begin = payroll.period_begin;
+                newPayroll.period_end = payroll.period_end;
+                newPayroll.total_hours = 0;
+                newPayroll.subtotal = 0m;
+                newPayroll.CalculatePayroll();
+                db.Entry(newPayroll).State = EntityState.Modified;
+                var result = db.SaveChanges();
+
+                if (result > 0)
+                {
+                    newPayroll.ChangeTimesheetsStatus();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    oldPayroll.ChangeTimesheetsStatus();
+                    errorMessage = "Unable to modify this payroll. Please try again.";
+                }
             }
-            ViewBag.employee_id = new SelectList(db.AspNetUsers, "Id", "Email", payroll.employee_id);
+
+            ViewBag.ErrorMessage = errorMessage;
             return View(payroll);
         }
 
@@ -130,6 +160,8 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
         public ActionResult DeleteConfirmed(int id)
         {
             Payroll payroll = db.Payrolls.Find(id);
+            payroll.CalculatePayroll();
+            payroll.InitializeTimesheets();
             db.Payrolls.Remove(payroll);
             db.SaveChanges();
             return RedirectToAction("Index");
