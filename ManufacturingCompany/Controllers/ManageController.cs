@@ -7,7 +7,6 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using ManufacturingCompany.Models;
-using ManufacturingCompany.Models.Custom;
 using System.Data.Entity.Infrastructure;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Data.Entity;
@@ -317,7 +316,7 @@ namespace ManufacturingCompany.Controllers
         // POST: /Manage/ChangeProfile
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ChangeEmployeeProfile([Bind(Include = "Id, UserName, Email, FirstName, LastName, Address, City, State, ZipCode, PhoneNumber")]ApplicationUser user)
+        public ActionResult ChangeEmployeeProfile([Bind(Include = "Id, UserName, Email, FirstName, LastName, Address, City, State, ZipCode, PhoneNumber, ModeOfWage, WageAmount")]ApplicationUser user)
         {
             ViewBag.StateList = new SelectList(XmlHelper.GetStates(Server, Url), "Value", "Text");
             if (!ModelState.IsValid)
@@ -335,6 +334,8 @@ namespace ManufacturingCompany.Controllers
             updatedUser.State = user.State;
             updatedUser.ZipCode = user.ZipCode;
             updatedUser.PhoneNumber = user.PhoneNumber;
+            updatedUser.ModeOfWage = user.ModeOfWage;
+            updatedUser.WageAmount = user.WageAmount;
 
             db.Entry(updatedUser).State = EntityState.Modified;
             int result = db.SaveChanges();

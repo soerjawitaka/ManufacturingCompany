@@ -314,6 +314,7 @@
     <Compile Include="Models\Material_Stock.cs">
       <DependentUpon>BusinessModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Partial_Metadata\AspNetUser_Partial_Metadata.cs" />
     <Compile Include="Models\Paycheck.cs">
       <DependentUpon>BusinessModel.tt</DependentUpon>
     </Compile>

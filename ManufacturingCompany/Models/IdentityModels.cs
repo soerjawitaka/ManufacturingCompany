@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.ComponentModel.DataAnnotations;
 
 namespace ManufacturingCompany.Models
 {
@@ -15,14 +16,26 @@ namespace ManufacturingCompany.Models
             Salary
         }
 
+        [Display(Name ="First Name")]
         public string FirstName { get; set; }
+
+        [Display(Name = "Last Name")]
         public string LastName { get; set; }
         public string Address { get; set; }
         public string City { get; set; }
         public string State { get; set; }
+
+        [Display(Name = "Zip Code")]
         public string ZipCode { get; set; }
+
+        [Display(Name = "")]
         public string ImageFileName { get; set; }
+
+        [Display(Name = "Wage Type")]
         public WageMode ModeOfWage { get; set; }
+
+        [Display(Name = "Wage Amount")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:c}")]
         public decimal WageAmount { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
@@ -57,6 +70,6 @@ namespace ManufacturingCompany.Models
 
         public System.Data.Entity.DbSet<ManufacturingCompany.Models.ManageEmployeeModel> ManageEmployeeModels { get; set; }
 
-        public System.Data.Entity.DbSet<ManufacturingCompany.Models.Custom.EmployeeRoleViewModel> EmployeeRoleViewModels { get; set; }
+        public System.Data.Entity.DbSet<ManufacturingCompany.Models.EmployeeRoleViewModel> EmployeeRoleViewModels { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model ManufacturingCompany.Models.Custom.EmployeeRoleViewModel
+﻿@model ManufacturingCompany.Models.EmployeeRoleViewModel
 
 @{
     ViewBag.Title = "ChangeEmployeeRoles";
@@ -58,7 +58,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "ManageEmployee", "Manage", new { userID = Model.UserID }, null)
 </div>
 
 @section Scripts {
