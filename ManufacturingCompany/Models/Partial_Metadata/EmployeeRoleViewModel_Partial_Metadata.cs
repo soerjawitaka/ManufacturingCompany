@@ -6,7 +6,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ManufacturingCompany.Models
 {
-    public class EmployeeRoleViewModel
+    [MetadataType(typeof(EmployeeRoleViewModel_Partial_Metadata))]
+    public partial class EmployeeRoleViewModel { }
+
+    public class EmployeeRoleViewModel_Partial_Metadata
     {
         [Key]
         public string UserID { get; set; }

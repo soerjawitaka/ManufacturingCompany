@@ -12,9 +12,9 @@ namespace ManufacturingCompany.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Payroll_Paycheck_Assignment
+    public partial class Invoice_Deliver_Assignment
     {
-        public int payroll_id { get; set; }
-        public int paycheck_id { get; set; }
+        public int invoice_id { get; set; }
+        public int delivery_schedule_id { get; set; }
     }
 }

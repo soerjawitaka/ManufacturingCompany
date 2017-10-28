@@ -17,7 +17,6 @@ namespace ManufacturingCompany.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public AspNetUser()
         {
-            this.RegisterUserRoleModels = new HashSet<RegisterUserRoleModel>();
             this.Delivery_Schedule = new HashSet<Delivery_Schedule>();
             this.Delivery_Schedule1 = new HashSet<Delivery_Schedule>();
             this.Equipment_Maintenance = new HashSet<Equipment_Maintenance>();
@@ -47,10 +46,8 @@ namespace ManufacturingCompany.Models
         public string ZipCode { get; set; }
         public string ImageFileName { get; set; }
         public int ModeOfWage { get; set; }
-        public Nullable<decimal> WageAmount { get; set; }
+        public decimal WageAmount { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RegisterUserRoleModel> RegisterUserRoleModels { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Delivery_Schedule> Delivery_Schedule { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

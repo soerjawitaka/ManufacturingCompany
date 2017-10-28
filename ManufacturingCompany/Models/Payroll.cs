@@ -25,7 +25,7 @@ namespace ManufacturingCompany.Models
         public string employee_id { get; set; }
         public System.DateTime period_begin { get; set; }
         public System.DateTime period_end { get; set; }
-        public Nullable<decimal> total_hours { get; set; }
+        public double total_hours { get; set; }
         public decimal subtotal { get; set; }
         public decimal federal_tax_witholding { get; set; }
         public decimal state_tax_witholding { get; set; }

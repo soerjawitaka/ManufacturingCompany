@@ -18,6 +18,7 @@ namespace ManufacturingCompany.Models
         public string purchase_item_name { get; set; }
         public string purchase_item_description { get; set; }
         public decimal purchase_item_unit_cost { get; set; }
+        public string department_id { get; set; }
         public string employee_id { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }

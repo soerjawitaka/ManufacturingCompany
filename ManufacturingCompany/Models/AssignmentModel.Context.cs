@@ -25,7 +25,7 @@ namespace ManufacturingCompany.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Payroll_Paycheck_Assignment> Payroll_Paycheck_Assignment { get; set; }
+        public virtual DbSet<Invoice_Deliver_Assignment> Invoice_Deliver_Assignment { get; set; }
         public virtual DbSet<Payroll_Timesheet_Assignment> Payroll_Timesheet_Assignment { get; set; }
         public virtual DbSet<Product_Material_Assignment> Product_Material_Assignment { get; set; }
     }

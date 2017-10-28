@@ -30,6 +30,7 @@ namespace ManufacturingCompany.Models
         public virtual DbSet<Customer_Contact> Customer_Contact { get; set; }
         public virtual DbSet<Delivery_Lineitem> Delivery_Lineitem { get; set; }
         public virtual DbSet<Delivery_Schedule> Delivery_Schedule { get; set; }
+        public virtual DbSet<EmployeeRoleViewModel> EmployeeRoleViewModels { get; set; }
         public virtual DbSet<Equipment> Equipments { get; set; }
         public virtual DbSet<Equipment_Maintenance> Equipment_Maintenance { get; set; }
         public virtual DbSet<Invoice> Invoices { get; set; }
@@ -43,7 +44,6 @@ namespace ManufacturingCompany.Models
         public virtual DbSet<Product_Category> Product_Category { get; set; }
         public virtual DbSet<Product_Inventory> Product_Inventory { get; set; }
         public virtual DbSet<Purchase> Purchases { get; set; }
-        public virtual DbSet<RegisterUserRoleModel> RegisterUserRoleModels { get; set; }
         public virtual DbSet<RoleViewModel> RoleViewModels { get; set; }
         public virtual DbSet<Timesheet> Timesheets { get; set; }
     }

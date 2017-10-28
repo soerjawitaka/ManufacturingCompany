@@ -286,11 +286,13 @@
     <Compile Include="Models\Customer_Contact.cs">
       <DependentUpon>BusinessModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Custom\EmployeeRoleViewModel.cs" />
     <Compile Include="Models\Delivery_Lineitem.cs">
       <DependentUpon>BusinessModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Delivery_Schedule.cs">
+      <DependentUpon>BusinessModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EmployeeRoleViewModel.cs">
       <DependentUpon>BusinessModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Equipment.cs">
@@ -299,22 +301,27 @@
     <Compile Include="Models\Equipment_Maintenance.cs">
       <DependentUpon>BusinessModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Invoice.cs">
       <DependentUpon>BusinessModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Invoice_Deliver_Assignment.cs">
+      <DependentUpon>AssignmentModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Invoice_Lineitem.cs">
       <DependentUpon>BusinessModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Lineitem.cs" />
-    <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Material.cs">
       <DependentUpon>BusinessModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Material_Stock.cs">
       <DependentUpon>BusinessModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Partial_Metadata\EmployeeRoleViewModel_Partial_Metadata.cs" />
+    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Lineitem.cs" />
+    <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Partial_Metadata\AspNetUser_Partial_Metadata.cs" />
+    <Compile Include="Models\Partial_Metadata\Payroll_Partial_Metadata.cs" />
     <Compile Include="Models\Paycheck.cs">
       <DependentUpon>BusinessModel.tt</DependentUpon>
     </Compile>
@@ -324,13 +331,11 @@
     <Compile Include="Models\Payroll.cs">
       <DependentUpon>BusinessModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Partial_Metadata\Payroll_Partial_Metadata.cs" />
-    <Compile Include="Models\Payroll_Paycheck_Assignment.cs">
-      <DependentUpon>AssignmentModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Payroll_Timesheet_Assignment.cs">
       <DependentUpon>AssignmentModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Partial_Metadata\Timesheet_Partial_Metadata.cs" />
+    <Compile Include="Models\Helper\XmlHelper.cs" />
     <Compile Include="Models\Product.cs">
       <DependentUpon>BusinessModel.tt</DependentUpon>
     </Compile>
@@ -346,17 +351,12 @@
     <Compile Include="Models\Purchase.cs">
       <DependentUpon>BusinessModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\RegisterUserRoleModel.cs">
-      <DependentUpon>BusinessModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\RoleViewModel.cs">
       <DependentUpon>BusinessModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Timesheet.cs">
       <DependentUpon>BusinessModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Partial_Metadata\Timesheet_Partial_Metadata.cs" />
-    <Compile Include="Models\Helper\XmlHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -380,7 +380,6 @@
     <Content Include="App_Data\tblPaycheck.sql" />
     <Content Include="App_Data\tblPayment.sql" />
     <Content Include="App_Data\tblPayroll.sql" />
-    <Content Include="App_Data\tblPayroll_Paycheck_Assignment.sql" />
     <Content Include="App_Data\tblPayroll_Timesheet_Assignment.sql" />
     <Content Include="App_Data\tblProduct.sql" />
     <Content Include="App_Data\tblProduct_Category.sql" />

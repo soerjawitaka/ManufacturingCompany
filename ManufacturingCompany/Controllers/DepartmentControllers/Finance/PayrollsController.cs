@@ -17,7 +17,9 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
         // GET: Payrolls
         public ActionResult Index()
         {
-            var payrolls = db.Payrolls.Include(p => p.AspNetUser);
+            var payrolls = from pr in db.Payrolls
+                           where !((from pc in db.Paychecks select pc.payroll_id).Contains(pr.Id))
+                           select pr;
             return View(payrolls.ToList());
         }
 
@@ -54,8 +56,19 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
         {
             if (ModelState.IsValid)
             {
+                payroll.CalculatePayroll(); // calculate the rest of the fields
                 db.Payrolls.Add(payroll);
-                db.SaveChanges();
+                var result = db.SaveChanges();
+                if (result > 0)
+                {
+                    foreach (var i in payroll.assignedTimesheet)
+                    {
+                        var timesheet = db.Timesheets.Find(i.Id);
+                        timesheet.is_in_payroll = true;
+                        db.Entry(timesheet).State = EntityState.Modified;                        
+                    }
+                    db.SaveChanges();
+                }
                 return RedirectToAction("Index");
             }
 

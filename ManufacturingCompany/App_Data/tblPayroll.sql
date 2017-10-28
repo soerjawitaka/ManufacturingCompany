@@ -3,7 +3,7 @@
     [employee_id]            NVARCHAR (128) NOT NULL,
     [period_begin]           DATETIME       NOT NULL,
     [period_end]             DATETIME       NOT NULL,
-    [total_hours]            DECIMAL (3, 2) NULL,
+    [total_hours]            FLOAT NULL,
     [subtotal]               MONEY          NOT NULL,
     [federal_tax_witholding] MONEY          NOT NULL,
     [state_tax_witholding]   MONEY          NOT NULL,

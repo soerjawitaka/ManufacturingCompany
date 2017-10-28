@@ -11,7 +11,7 @@ namespace ManufacturingCompany.Models
     {
         public decimal GetTotalHours()
         {
-            return Convert.ToDecimal(((TimeSpan)punch_out_time).Ticks) - Convert.ToDecimal(punch_in_time.Ticks);
+            return (Convert.ToDecimal(((TimeSpan)punch_out_time - punch_in_time).TotalHours));
         }
     }
 

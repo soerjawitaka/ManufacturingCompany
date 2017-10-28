@@ -9,27 +9,50 @@ namespace ManufacturingCompany.Models
     [MetadataType(typeof(Payroll_Partial_Metadata))]
     public partial class Payroll
     {
+        BusinessEntities db = new BusinessEntities();
+        public List<Timesheet> assignedTimesheet { get; private set; }
+        private const decimal fedTax = .07m;
+        private const decimal stTax = .014m;
+        private const int biweekly = 26;
+        private const int monthly = 12;
+        private const int twiceAmonth = 24;
+
+        private void SetTimesheets()
+        {
+            this.assignedTimesheet = db.Timesheets.Where(t => t.timesheet_date >= this.period_begin && t.timesheet_date <= this.period_end).ToList();
+        }
+
         private void SetTotalHours()
         {
-            foreach (var i in this.Timesheets)
+            if (db.AspNetUsers.Find(this.employee_id).ModeOfWage == ((int)ApplicationUser.WageMode.Hourly))
             {
-                this.total_hours += i.GetTotalHours();
-            }
+                foreach (var i in this.assignedTimesheet)
+                {
+                    this.total_hours += Convert.ToDouble(i.GetTotalHours());
+                }
+            }            
         }
 
         private void SetSubtotal()
         {
-            //this.subtotal = this.total_hours * this.AspNetUser.
+            if (db.AspNetUsers.Find(this.employee_id).ModeOfWage == ((int)ApplicationUser.WageMode.Hourly))
+            {
+                this.subtotal = Convert.ToDecimal(this.total_hours) * db.AspNetUsers.Find(this.employee_id).WageAmount;
+            }
+            else
+            {
+                this.subtotal = db.AspNetUsers.Find(this.employee_id).WageAmount / biweekly;
+            }
         }
 
         private void SetFederalTax()
         {
-            //this.federal_tax_witholding = this.subtotal * 
+            this.federal_tax_witholding = this.subtotal * fedTax;
         }
 
         private void SetStateTax()
         {
-            //this.state_tax_witholding = this.subtotal *
+            this.state_tax_witholding = this.subtotal * stTax;
         }
 
         private void SetGrandTotal()
@@ -39,6 +62,7 @@ namespace ManufacturingCompany.Models
 
         public void CalculatePayroll()
         {
+            SetTimesheets();
             SetTotalHours();
             SetSubtotal();
             SetFederalTax();

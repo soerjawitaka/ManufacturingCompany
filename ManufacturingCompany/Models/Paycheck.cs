@@ -14,19 +14,14 @@ namespace ManufacturingCompany.Models
     
     public partial class Paycheck
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Paycheck()
-        {
-            this.Payrolls = new HashSet<Payroll>();
-        }
-    
         public int Id { get; set; }
+        public System.DateTime paycheck_date { get; set; }
+        public int payroll_id { get; set; }
         public string payment_type { get; set; }
         public string check_number { get; set; }
         public string direct_deposit_number { get; set; }
         public decimal payment_amount { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Payroll> Payrolls { get; set; }
+        public virtual Payroll Payroll { get; set; }
     }
 }

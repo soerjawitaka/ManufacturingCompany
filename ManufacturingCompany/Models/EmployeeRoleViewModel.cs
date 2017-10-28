@@ -12,12 +12,9 @@ namespace ManufacturingCompany.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class RegisterUserRoleModel
+    public partial class EmployeeRoleViewModel
     {
         public string UserID { get; set; }
-        public string RoleName { get; set; }
-        public string UserObject_Id { get; set; }
-    
-        public virtual AspNetUser AspNetUser { get; set; }
+        public string Role { get; set; }
     }
 }
