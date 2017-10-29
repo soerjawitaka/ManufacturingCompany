@@ -215,6 +215,7 @@
     <Compile Include="Controllers\EmployeeTimesheetsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\SelectPayrollController.cs" />
     <Compile Include="Controllers\SelectUserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -537,6 +538,7 @@
     <Content Include="Views\Paychecks\Details.cshtml" />
     <Content Include="Views\Paychecks\Edit.cshtml" />
     <Content Include="Views\Paychecks\Index.cshtml" />
+    <Content Include="Views\SelectPayroll\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201710061504292_InitialCreate.resx">

@@ -8,12 +8,12 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Index", "SelectUser", new { actionName = "Index", controllerName = "SelectPayroll" }, htmlAttributes: new { @class = "btn btn-default" })
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.ModeOfPaycheck)
+            @Html.DisplayNameFor(model => model.Payroll.AspNetUser.UserName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.paycheck_date)
@@ -22,13 +22,7 @@
             @Html.DisplayNameFor(model => model.payroll_id)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.payment_type)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.check_number)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.direct_deposit_number)
+            @Html.DisplayNameFor(model => model.ModeOfPaycheck)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.payment_amount)
@@ -39,7 +33,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.ModeOfPaycheck)
+            @Html.DisplayFor(modelItem => item.Payroll.AspNetUser.UserName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.paycheck_date)
@@ -48,13 +42,7 @@
             @Html.DisplayFor(modelItem => item.payroll_id)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.payment_type)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.check_number)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.direct_deposit_number)
+            @Html.DisplayFor(modelItem => item.ModeOfPaycheck)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.payment_amount)

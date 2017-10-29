@@ -1,4 +1,4 @@
-﻿@model ManufacturingCompany.Models.Paycheck
+﻿@model ManufacturingCompany.Classes.PaycheckViewModel
 
 @{
     ViewBag.Title = "Edit";
@@ -27,26 +27,25 @@
         </div>
 
         <div class="form-group">
+            @Html.LabelFor(model => model.payroll_id, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.payroll_id, new { htmlAttributes = new { @class = "form-control", @disabled = "true" } })
+            </div>
+        </div>
+
+        <div class="form-group">
             @Html.LabelFor(model => model.paycheck_date, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.paycheck_date, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.paycheck_date, new { htmlAttributes = new { @class = "form-control", @type = "date", @Value = Model.paycheck_date } })
                 @Html.ValidationMessageFor(model => model.paycheck_date, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.payroll_id, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.ModeOfPaycheck, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.payroll_id, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.payroll_id, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.payment_type, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.payment_type, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.payment_type, "", new { @class = "text-danger" })
+                @Html.EnumDropDownListFor(model => model.ModeOfPaycheck, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ModeOfPaycheck, "", new { @class = "text-danger" })
             </div>
         </div>
 

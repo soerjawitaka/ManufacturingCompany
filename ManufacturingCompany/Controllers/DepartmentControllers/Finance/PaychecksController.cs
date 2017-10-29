@@ -14,13 +14,18 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
     public class PaychecksController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        private BusinessEntities dbBusiness = new BusinessEntities();
 
         // GET: Paychecks
         public ActionResult Index()
         {
-            var paychecks = db.Paychecks;
+            var paychecks = dbBusiness.Paychecks;
             List<PaycheckViewModel> paycheckModels = new List<PaycheckViewModel>();
-            foreach (var i in paychecks) { paycheckModels.Add(i as PaycheckViewModel); }
+            foreach (var i in paychecks)
+            {
+                var iModel = PaycheckViewModel.ToModel(i);
+                paycheckModels.Add(iModel);
+            }
             return View(paycheckModels);
         }
 
@@ -31,7 +36,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Paycheck paycheck = db.Paychecks.Find(id);
+            PaycheckViewModel paycheck = PaycheckViewModel.ToModel(dbBusiness.Paychecks.Find(id));
             if (paycheck == null)
             {
                 return HttpNotFound();
@@ -40,9 +45,15 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
         }
 
         // GET: Paychecks/Create
-        public ActionResult Create()
+        public ActionResult Create(int payrollid)
         {
-            return View();
+            var paycheck = new PaycheckViewModel();
+            paycheck.payroll_id = payrollid;
+            var payroll = dbBusiness.Payrolls.Find(payrollid);
+            payroll.CalculatePayroll();
+            paycheck.Payroll = payroll;
+            paycheck.payment_amount = payroll.grand_total;
+            return View(paycheck);
         }
 
         // POST: Paychecks/Create
@@ -50,12 +61,14 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,ModeOfPaycheck,paycheck_date,payroll_id,payment_type,check_number,direct_deposit_number,payment_amount")] Paycheck paycheck)
+        public ActionResult Create([Bind(Include = "Id,ModeOfPaycheck,paycheck_date,payroll_id,payment_type,check_number,direct_deposit_number,payment_amount")] PaycheckViewModel paycheck)
         {
-            if (ModelState.IsValid)
+            var newPaycheck = PaycheckViewModel.ToBase(paycheck);
+            dbBusiness.Paychecks.Add(newPaycheck);
+            var result = dbBusiness.SaveChanges();
+
+            if (result > 0)
             {
-                db.Paychecks.Add(paycheck);
-                db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -69,7 +82,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Paycheck paycheck = db.Paychecks.Find(id);
+            PaycheckViewModel paycheck = PaycheckViewModel.ToModel(dbBusiness.Paychecks.Find(id));
             if (paycheck == null)
             {
                 return HttpNotFound();
@@ -82,14 +95,16 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,ModeOfPaycheck,paycheck_date,payroll_id,payment_type,check_number,direct_deposit_number,payment_amount")] Paycheck paycheck)
+        public ActionResult Edit([Bind(Include = "Id,ModeOfPaycheck,paycheck_date,payroll_id,payment_type,check_number,direct_deposit_number,payment_amount")] PaycheckViewModel paycheck)
         {
-            if (ModelState.IsValid)
+            Paycheck modPaycheck = PaycheckViewModel.ToBase(paycheck);
+            dbBusiness.Entry(modPaycheck).State = EntityState.Modified;
+            var result = dbBusiness.SaveChanges();
+            if (result > 0)
             {
-                db.Entry(paycheck).State = EntityState.Modified;
-                db.SaveChanges();
                 return RedirectToAction("Index");
             }
+
             return View(paycheck);
         }
 
@@ -100,7 +115,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Paycheck paycheck = db.Paychecks.Find(id);
+            PaycheckViewModel paycheck = PaycheckViewModel.ToModel(dbBusiness.Paychecks.Find(id));
             if (paycheck == null)
             {
                 return HttpNotFound();
@@ -113,9 +128,9 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Paycheck paycheck = db.Paychecks.Find(id);
-            db.Paychecks.Remove(paycheck);
-            db.SaveChanges();
+            Paycheck paycheck = dbBusiness.Paychecks.Find(id);
+            dbBusiness.Paychecks.Remove(paycheck);
+            dbBusiness.SaveChanges();
             return RedirectToAction("Index");
         }
 

@@ -26,12 +26,10 @@ namespace ManufacturingCompany.Models
         [Required]
         [Display(Name = "Payment Type")]
         public string payment_type { get; set; }
-
-        [Required]
+        
         [Display(Name = "Check Number")]
         public string check_number { get; set; }
-
-        [Required]
+        
         [Display(Name = "Deposit Number")]
         public string direct_deposit_number { get; set; }
 

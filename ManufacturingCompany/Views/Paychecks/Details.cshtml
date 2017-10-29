@@ -1,4 +1,4 @@
-﻿@model ManufacturingCompany.Models.Paycheck
+﻿@model ManufacturingCompany.Classes.PaycheckViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -12,11 +12,11 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.ModeOfPaycheck)
+            @Html.DisplayNameFor(model => model.Payroll.AspNetUser.UserName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ModeOfPaycheck)
+            @Html.DisplayFor(model => model.Payroll.AspNetUser.UserName)
         </dd>
 
         <dt>
@@ -36,28 +36,34 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.payment_type)
+            @Html.DisplayNameFor(model => model.ModeOfPaycheck)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.payment_type)
+            @Html.DisplayFor(model => model.ModeOfPaycheck)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.check_number)
-        </dt>
+        @if (Model.ModeOfPaycheck == ManufacturingCompany.Classes.PaycheckViewModel.PaycheckMode.Check)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.check_number)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.check_number)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.check_number)
+            </dd>
+        }        
 
-        <dt>
-            @Html.DisplayNameFor(model => model.direct_deposit_number)
-        </dt>
+        @if (Model.ModeOfPaycheck == ManufacturingCompany.Classes.PaycheckViewModel.PaycheckMode.Deposit)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.direct_deposit_number)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.direct_deposit_number)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.direct_deposit_number)
+            </dd>
+        }
 
         <dt>
             @Html.DisplayNameFor(model => model.payment_amount)

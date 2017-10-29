@@ -1,4 +1,4 @@
-﻿@model ManufacturingCompany.Models.Paycheck
+﻿@model ManufacturingCompany.Classes.PaycheckViewModel
 
 @{
     ViewBag.Title = "Delete";
@@ -44,21 +44,27 @@
             @Html.DisplayFor(model => model.payment_type)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.check_number)
-        </dt>
+        @if (Model.ModeOfPaycheck == ManufacturingCompany.Classes.PaycheckViewModel.PaycheckMode.Check)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.check_number)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.check_number)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.check_number)
+            </dd>
+        }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.direct_deposit_number)
-        </dt>
+        @if (Model.ModeOfPaycheck == ManufacturingCompany.Classes.PaycheckViewModel.PaycheckMode.Deposit)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.direct_deposit_number)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.direct_deposit_number)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.direct_deposit_number)
+            </dd>
+        }
 
         <dt>
             @Html.DisplayNameFor(model => model.payment_amount)
