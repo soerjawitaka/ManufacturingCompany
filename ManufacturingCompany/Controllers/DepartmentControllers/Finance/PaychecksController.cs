@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ManufacturingCompany.Models;
+using ManufacturingCompany.Classes;
 
 namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
 {
@@ -17,7 +18,10 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
         // GET: Paychecks
         public ActionResult Index()
         {
-            return View(db.Paychecks.ToList());
+            var paychecks = db.Paychecks;
+            List<PaycheckViewModel> paycheckModels = new List<PaycheckViewModel>();
+            foreach (var i in paychecks) { paycheckModels.Add(i as PaycheckViewModel); }
+            return View(paycheckModels);
         }
 
         // GET: Paychecks/Details/5

@@ -204,6 +204,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Classes\PaycheckViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DepartmentControllers\FinanceController.cs" />
     <Compile Include="Controllers\DepartmentControllers\Finance\InvoicesController.cs" />
@@ -245,6 +246,10 @@
     <Compile Include="Migrations\201710272057457_EmployeeRole.cs" />
     <Compile Include="Migrations\201710272057457_EmployeeRole.Designer.cs">
       <DependentUpon>201710272057457_EmployeeRole.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710290401200_PaycheckModel.cs" />
+    <Compile Include="Migrations\201710290401200_PaycheckModel.Designer.cs">
+      <DependentUpon>201710290401200_PaycheckModel.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -554,6 +559,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710272057457_EmployeeRole.resx">
       <DependentUpon>201710272057457_EmployeeRole.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710290401200_PaycheckModel.resx">
+      <DependentUpon>201710290401200_PaycheckModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

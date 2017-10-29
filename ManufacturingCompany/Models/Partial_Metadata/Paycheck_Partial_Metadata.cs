@@ -7,27 +7,7 @@ using System.ComponentModel.DataAnnotations;
 namespace ManufacturingCompany.Models
 {
     [MetadataType(typeof(Paycheck_Partial_Metadata))]
-    public partial class Paycheck
-    {
-        public enum PaycheckMode
-        {
-            Check,
-            Deposit           
-        }
-        public PaycheckMode ModeOfPaycheck
-        {
-            get
-            {
-                this.ModeOfPaycheck = (PaycheckMode)Enum.Parse(typeof(PaycheckMode) , payment_type);
-                return this.ModeOfPaycheck;
-            }
-            set
-            {
-                this.ModeOfPaycheck = value;
-                this.payment_type = this.ModeOfPaycheck.ToString();
-            }
-        }
-    }
+    public partial class Paycheck { }
 
     public class Paycheck_Partial_Metadata
     {
