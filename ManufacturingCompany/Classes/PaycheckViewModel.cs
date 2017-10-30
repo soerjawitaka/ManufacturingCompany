@@ -18,21 +18,6 @@ namespace ManufacturingCompany.Classes
         [Required]
         [Display(Name = "Payment Type")]
         public PaycheckMode ModeOfPaycheck { get; set; }
-        //{
-        //    get
-        //    {
-        //        if (base.payment_type != null || base.payment_type != "")
-        //        {
-        //            ModeOfPaycheck = (PaycheckMode)Enum.Parse(typeof(PaycheckMode), base.payment_type);
-        //        }
-        //        return ModeOfPaycheck;
-        //    }
-        //    set
-        //    {
-        //        //ModeOfPaycheck = value;
-        //        base.payment_type = value.ToString();
-        //    }
-        //}
 
         public void SetPaymentType()
         {
@@ -49,11 +34,10 @@ namespace ManufacturingCompany.Classes
             PaycheckViewModel newPaycheck = new PaycheckViewModel();
             newPaycheck.Id = p.Id;
             newPaycheck.paycheck_date = p.paycheck_date;
-            newPaycheck.payroll_id = p.payroll_id;
+            newPaycheck.SetPayroll(p.payroll_id);
             newPaycheck.payment_type = p.payment_type;
             newPaycheck.check_number = p.check_number;
             newPaycheck.direct_deposit_number = p.direct_deposit_number;
-            newPaycheck.payment_amount = p.payment_amount;
             newPaycheck.Payroll = new BusinessEntities().Payrolls.Find(p.payroll_id);
 
             newPaycheck.SetTypeEnum();
@@ -74,6 +58,16 @@ namespace ManufacturingCompany.Classes
             newPaycheck.payment_amount = model.payment_amount;
             
             return newPaycheck;
-        } 
+        }
+        
+        public void SetPayroll(int payrollID)
+        {
+            var payroll = new BusinessEntities().Payrolls.Find(payrollID);
+            payroll.CalculatePayroll();
+            this.Payroll = payroll;
+            this.payment_amount = payroll.grand_total;
+            this.payroll_id = payrollID;
+            this.payment_amount = payroll.grand_total;
+        }
     }
 }

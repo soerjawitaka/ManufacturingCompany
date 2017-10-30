@@ -63,7 +63,14 @@
             @Html.DisplayFor(modelItem => item.grand_total)
         </td>
         <td>
-            @Html.ActionLink("Select", "Create", "Paychecks", new { payrollid = item.Id }, htmlAttributes: new { @class = "btn btn-success" })
+            @if (ViewBag.ActionName == null || (string)ViewBag.ActionName == "")
+            {
+                @Html.ActionLink("Select", "Create", "Paychecks", new { payrollid = item.Id }, htmlAttributes: new { @class = "btn btn-success" })
+            }
+            else
+            {
+                @Html.ActionLink("Select", (string)ViewBag.ActionName, "Paychecks", new { id = (int)ViewBag.PaycheckID, payrollid = item.Id }, htmlAttributes: new { @class = "btn btn-success" })
+            }
         </td>
     </tr>
 }

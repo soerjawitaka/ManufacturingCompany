@@ -17,10 +17,10 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
         // GET: Payrolls
         public ActionResult Index()
         {
-            var payrolls = from pr in db.Payrolls
+            var payrolls = (from pr in db.Payrolls
                            where !((from pc in db.Paychecks select pc.payroll_id).Contains(pr.Id))
-                           select pr;
-            return View(payrolls.ToList());
+                           select pr).OrderByDescending(p => p.period_end).ToList();
+            return View(payrolls);
         }
 
         // GET: Payrolls/Details/5

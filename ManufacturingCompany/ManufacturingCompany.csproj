@@ -212,6 +212,8 @@
     <Compile Include="Controllers\DepartmentControllers\Finance\PaymentsController.cs" />
     <Compile Include="Controllers\DepartmentControllers\Finance\PayrollsController.cs" />
     <Compile Include="Controllers\DepartmentControllers\Finance\TimesheetsController.cs" />
+    <Compile Include="Controllers\DepartmentControllers\ProductionController.cs" />
+    <Compile Include="Controllers\DepartmentControllers\Production\ProductsController.cs" />
     <Compile Include="Controllers\EmployeeTimesheetsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -539,6 +541,13 @@
     <Content Include="Views\Paychecks\Edit.cshtml" />
     <Content Include="Views\Paychecks\Index.cshtml" />
     <Content Include="Views\SelectPayroll\Index.cshtml" />
+    <Content Include="Views\Paychecks\EditPayroll.cshtml" />
+    <Content Include="Views\Products\Create.cshtml" />
+    <Content Include="Views\Products\Delete.cshtml" />
+    <Content Include="Views\Products\Details.cshtml" />
+    <Content Include="Views\Products\Edit.cshtml" />
+    <Content Include="Views\Products\Index.cshtml" />
+    <Content Include="Views\Production\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201710061504292_InitialCreate.resx">

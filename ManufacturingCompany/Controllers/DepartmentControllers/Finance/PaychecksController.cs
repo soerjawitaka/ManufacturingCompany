@@ -48,11 +48,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
         public ActionResult Create(int payrollid)
         {
             var paycheck = new PaycheckViewModel();
-            paycheck.payroll_id = payrollid;
-            var payroll = dbBusiness.Payrolls.Find(payrollid);
-            payroll.CalculatePayroll();
-            paycheck.Payroll = payroll;
-            paycheck.payment_amount = payroll.grand_total;
+            paycheck.SetPayroll(payrollid);
             return View(paycheck);
         }
 
@@ -90,6 +86,18 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
             return View(paycheck);
         }
 
+        // GET: Paychecks/Edit/EditPayroll
+        public ActionResult EditPayroll(int id, int payrollid)
+        {            
+            PaycheckViewModel paycheck = PaycheckViewModel.ToModel(dbBusiness.Paychecks.Find(id));
+            if (paycheck == null)
+            {
+                return HttpNotFound();
+            }
+            paycheck.SetPayroll(payrollid);
+            return View(paycheck);
+        }
+
         // POST: Paychecks/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -97,8 +105,21 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,ModeOfPaycheck,paycheck_date,payroll_id,payment_type,check_number,direct_deposit_number,payment_amount")] PaycheckViewModel paycheck)
         {
-            Paycheck modPaycheck = PaycheckViewModel.ToBase(paycheck);
-            dbBusiness.Entry(modPaycheck).State = EntityState.Modified;
+            //Paycheck modPaycheck = PaycheckViewModel.ToBase(paycheck);
+            paycheck.SetPayroll(paycheck.payroll_id);
+            Paycheck oldPaycheck = PaycheckViewModel.ToBase(paycheck);
+
+            // assign fields
+            var newPaycheck = dbBusiness.Paychecks.Find(oldPaycheck.Id);
+            newPaycheck.paycheck_date = oldPaycheck.paycheck_date;
+            newPaycheck.payroll_id = oldPaycheck.payroll_id;
+            //newPaycheck.Payroll = dbBusiness.Payrolls.Find(paycheck.payroll_id);
+            newPaycheck.payment_type = oldPaycheck.payment_type;
+            newPaycheck.check_number = oldPaycheck.check_number;
+            newPaycheck.direct_deposit_number = oldPaycheck.direct_deposit_number;
+            newPaycheck.payment_amount = oldPaycheck.payment_amount;
+
+            dbBusiness.Entry(newPaycheck).State = EntityState.Modified;
             var result = dbBusiness.SaveChanges();
             if (result > 0)
             {
