@@ -18,7 +18,6 @@ namespace ManufacturingCompany.Models
         public Delivery_Schedule()
         {
             this.Delivery_Lineitem = new HashSet<Delivery_Lineitem>();
-            this.Invoices = new HashSet<Invoice>();
         }
     
         public int Id { get; set; }
@@ -31,7 +30,5 @@ namespace ManufacturingCompany.Models
         public virtual AspNetUser AspNetUser1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Delivery_Lineitem> Delivery_Lineitem { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Invoice> Invoices { get; set; }
     }
 }

@@ -84,14 +84,4 @@ namespace ManufacturingCompany.Models
         public string SelectedProvider { get; set; }
         public ICollection<System.Web.Mvc.SelectListItem> Providers { get; set; }
     }
-
-    public class ManageEmployeeModel
-    {
-        [Key]
-        public string UserID { get; set; }
-        public ApplicationUser Employee { get; set; }
-        public List<string> EmployeeRoles { get; set; }
-        public List<string> AvailableRoles { get; set; }
-        public string RoleToBeAssigned { get; set; }
-    }
 }

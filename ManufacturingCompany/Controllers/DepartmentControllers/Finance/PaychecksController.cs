@@ -19,7 +19,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
         // GET: Paychecks
         public ActionResult Index()
         {
-            var paychecks = dbBusiness.Paychecks;
+            var paychecks = dbBusiness.Paychecks.OrderByDescending(p => p.paycheck_date);
             List<PaycheckViewModel> paycheckModels = new List<PaycheckViewModel>();
             foreach (var i in paychecks)
             {

@@ -63,9 +63,7 @@ namespace ManufacturingCompany.Classes
         public void SetPayroll(int payrollID)
         {
             var payroll = new BusinessEntities().Payrolls.Find(payrollID);
-            payroll.CalculatePayroll();
             this.Payroll = payroll;
-            this.payment_amount = payroll.grand_total;
             this.payroll_id = payrollID;
             this.payment_amount = payroll.grand_total;
         }

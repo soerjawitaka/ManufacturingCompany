@@ -204,8 +204,13 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Classes\EmployeeRoleViewModel.cs" />
+    <Compile Include="Classes\ManageEmployeeModel.cs" />
     <Compile Include="Classes\PaycheckViewModel.cs" />
+    <Compile Include="Classes\RoleViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\DepartmentControllers\CustomersController.cs" />
+    <Compile Include="Controllers\DepartmentControllers\Customer_ContactController.cs" />
     <Compile Include="Controllers\DepartmentControllers\FinanceController.cs" />
     <Compile Include="Controllers\DepartmentControllers\Finance\InvoicesController.cs" />
     <Compile Include="Controllers\DepartmentControllers\Finance\PaychecksController.cs" />
@@ -213,11 +218,13 @@
     <Compile Include="Controllers\DepartmentControllers\Finance\PayrollsController.cs" />
     <Compile Include="Controllers\DepartmentControllers\Finance\TimesheetsController.cs" />
     <Compile Include="Controllers\DepartmentControllers\ProductionController.cs" />
+    <Compile Include="Controllers\DepartmentControllers\Production\ProductCategoryController.cs" />
     <Compile Include="Controllers\DepartmentControllers\Production\ProductsController.cs" />
     <Compile Include="Controllers\EmployeeTimesheetsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SelectPayrollController.cs" />
+    <Compile Include="Controllers\SelectProductController.cs" />
     <Compile Include="Controllers\SelectUserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -226,33 +233,13 @@
     <Compile Include="Migrations\201710061504292_InitialCreate.Designer.cs">
       <DependentUpon>201710061504292_InitialCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201710061647362_UserModel.cs" />
-    <Compile Include="Migrations\201710061647362_UserModel.Designer.cs">
-      <DependentUpon>201710061647362_UserModel.cs</DependentUpon>
+    <Compile Include="Migrations\201710301555261_UserAndRoleManagement.cs" />
+    <Compile Include="Migrations\201710301555261_UserAndRoleManagement.Designer.cs">
+      <DependentUpon>201710301555261_UserAndRoleManagement.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201710082147002_Roles.cs" />
-    <Compile Include="Migrations\201710082147002_Roles.Designer.cs">
-      <DependentUpon>201710082147002_Roles.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710220528014_RoleManagement.cs" />
-    <Compile Include="Migrations\201710220528014_RoleManagement.Designer.cs">
-      <DependentUpon>201710220528014_RoleManagement.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710230026004_ManageEmployeeModel.cs" />
-    <Compile Include="Migrations\201710230026004_ManageEmployeeModel.Designer.cs">
-      <DependentUpon>201710230026004_ManageEmployeeModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710260511347_EmployeeWage.cs" />
-    <Compile Include="Migrations\201710260511347_EmployeeWage.Designer.cs">
-      <DependentUpon>201710260511347_EmployeeWage.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710272057457_EmployeeRole.cs" />
-    <Compile Include="Migrations\201710272057457_EmployeeRole.Designer.cs">
-      <DependentUpon>201710272057457_EmployeeRole.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710290401200_PaycheckModel.cs" />
-    <Compile Include="Migrations\201710290401200_PaycheckModel.Designer.cs">
-      <DependentUpon>201710290401200_PaycheckModel.cs</DependentUpon>
+    <Compile Include="Migrations\201710302314151_UserAndRoleManager.cs" />
+    <Compile Include="Migrations\201710302314151_UserAndRoleManager.Designer.cs">
+      <DependentUpon>201710302314151_UserAndRoleManager.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -301,9 +288,6 @@
     <Compile Include="Models\Delivery_Schedule.cs">
       <DependentUpon>BusinessModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\EmployeeRoleViewModel.cs">
-      <DependentUpon>BusinessModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Equipment.cs">
       <DependentUpon>BusinessModel.tt</DependentUpon>
     </Compile>
@@ -325,13 +309,15 @@
     <Compile Include="Models\Material_Stock.cs">
       <DependentUpon>BusinessModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Partial_Metadata\EmployeeRoleViewModel_Partial_Metadata.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Lineitem.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Partial_Metadata\AspNetUser_Partial_Metadata.cs" />
+    <Compile Include="Models\Partial_Metadata\Customer_Contact_Partial_Metadata.cs" />
+    <Compile Include="Models\Partial_Metadata\Customer_Partial_Metadata.cs" />
     <Compile Include="Models\Partial_Metadata\Paycheck_Partial_Metadata.cs" />
     <Compile Include="Models\Partial_Metadata\Payroll_Partial_Metadata.cs" />
+    <Compile Include="Models\Partial_Metadata\Product_Partial_Metadata.cs" />
     <Compile Include="Models\Partial_Metadata\Purchase_Partial_Metadata.cs" />
     <Compile Include="Models\Paycheck.cs">
       <DependentUpon>BusinessModel.tt</DependentUpon>
@@ -360,9 +346,6 @@
       <DependentUpon>AssignmentModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Purchase.cs">
-      <DependentUpon>BusinessModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\RoleViewModel.cs">
       <DependentUpon>BusinessModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Timesheet.cs">
@@ -548,31 +531,35 @@
     <Content Include="Views\Products\Edit.cshtml" />
     <Content Include="Views\Products\Index.cshtml" />
     <Content Include="Views\Production\Index.cshtml" />
+    <Content Include="Views\ProductCategory\Create.cshtml" />
+    <Content Include="Views\ProductCategory\Delete.cshtml" />
+    <Content Include="Views\ProductCategory\Details.cshtml" />
+    <Content Include="Views\ProductCategory\Edit.cshtml" />
+    <Content Include="Views\ProductCategory\Index.cshtml" />
+    <Content Include="Views\SelectProduct\Index.cshtml" />
+    <Content Include="Views\Customers\Create.cshtml" />
+    <Content Include="Views\Customers\Delete.cshtml" />
+    <Content Include="Views\Customers\Details.cshtml" />
+    <Content Include="Views\Customers\Edit.cshtml" />
+    <Content Include="Views\Customers\Index.cshtml" />
+    <Content Include="Views\Customer_Contact\Create.cshtml" />
+    <Content Include="Views\Customer_Contact\Delete.cshtml" />
+    <Content Include="Views\Customer_Contact\Details.cshtml" />
+    <Content Include="Views\Customer_Contact\Edit.cshtml" />
+    <Content Include="Views\Customer_Contact\Index.cshtml" />
+    <Content Include="Views\Customers\CreateContact.cshtml" />
+    <Content Include="Views\Customers\EditContact.cshtml" />
+    <Content Include="Views\Customers\DeleteContact.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201710061504292_InitialCreate.resx">
       <DependentUpon>201710061504292_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710061647362_UserModel.resx">
-      <DependentUpon>201710061647362_UserModel.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201710301555261_UserAndRoleManagement.resx">
+      <DependentUpon>201710301555261_UserAndRoleManagement.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710082147002_Roles.resx">
-      <DependentUpon>201710082147002_Roles.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710220528014_RoleManagement.resx">
-      <DependentUpon>201710220528014_RoleManagement.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710230026004_ManageEmployeeModel.resx">
-      <DependentUpon>201710230026004_ManageEmployeeModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710260511347_EmployeeWage.resx">
-      <DependentUpon>201710260511347_EmployeeWage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710272057457_EmployeeRole.resx">
-      <DependentUpon>201710272057457_EmployeeRole.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710290401200_PaycheckModel.resx">
-      <DependentUpon>201710290401200_PaycheckModel.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201710302314151_UserAndRoleManager.resx">
+      <DependentUpon>201710302314151_UserAndRoleManager.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

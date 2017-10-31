@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using ManufacturingCompany.Models;
+using ManufacturingCompany.Classes;
 using System.Data.Entity.Infrastructure;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Data.Entity;
@@ -525,7 +526,7 @@ namespace ManufacturingCompany.Controllers
         {
             // updating profile
             var resultUser = await UserManager.UpdateAsync(model.Employee);
-            if (resultUser.Succeeded)
+            if (model != null)
             {
                 // assigning user to role here
                 var resultRole = await this.UserManager.AddToRoleAsync(model.UserID, model.RoleToBeAssigned);

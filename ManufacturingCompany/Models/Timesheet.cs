@@ -14,12 +14,6 @@ namespace ManufacturingCompany.Models
     
     public partial class Timesheet
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Timesheet()
-        {
-            this.Payrolls = new HashSet<Payroll>();
-        }
-    
         public int Id { get; set; }
         public string employee_id { get; set; }
         public System.TimeSpan punch_in_time { get; set; }
@@ -28,7 +22,5 @@ namespace ManufacturingCompany.Models
         public bool is_in_payroll { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Payroll> Payrolls { get; set; }
     }
 }

@@ -19,7 +19,6 @@ namespace ManufacturingCompany.Models
         {
             this.Invoice_Lineitem = new HashSet<Invoice_Lineitem>();
             this.Payments = new HashSet<Payment>();
-            this.Delivery_Schedule = new HashSet<Delivery_Schedule>();
         }
     
         public int Id { get; set; }
@@ -33,7 +32,5 @@ namespace ManufacturingCompany.Models
         public virtual ICollection<Invoice_Lineitem> Invoice_Lineitem { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Payment> Payments { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Delivery_Schedule> Delivery_Schedule { get; set; }
     }
 }

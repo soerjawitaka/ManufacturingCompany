@@ -99,6 +99,7 @@ namespace ManufacturingCompany.Models
 
         public void CalculatePayroll()
         {
+            this.total_hours = 0.0D;
             SetTimesheets();
             SetTotalHours();
             SetSubtotal();

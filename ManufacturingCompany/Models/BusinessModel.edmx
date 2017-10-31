@@ -78,13 +78,6 @@
           <Property Name="delivery_date" Type="datetime" Nullable="false" />
           <Property Name="delivery_cost" Type="money" />
         </EntityType>
-        <EntityType Name="EmployeeRoleViewModels">
-          <Key>
-            <PropertyRef Name="UserID" />
-          </Key>
-          <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="Role" Type="nvarchar(max)" Nullable="false" />
-        </EntityType>
         <EntityType Name="Equipment">
           <Key>
             <PropertyRef Name="Id" />
@@ -119,14 +112,6 @@
           <Property Name="invoice_date" Type="datetime" Nullable="false" />
           <Property Name="employee_id" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="customer_id" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Invoice_Deliver_Assignment">
-          <Key>
-            <PropertyRef Name="invoice_id" />
-            <PropertyRef Name="delivery_schedule_id" />
-          </Key>
-          <Property Name="invoice_id" Type="int" Nullable="false" />
-          <Property Name="delivery_schedule_id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Invoice_Lineitem">
           <Key>
@@ -193,14 +178,6 @@
           <Property Name="state_tax_witholding" Type="money" Nullable="false" />
           <Property Name="grand_total" Type="money" Nullable="false" />
         </EntityType>
-        <EntityType Name="Payroll_Timesheet_Assignment">
-          <Key>
-            <PropertyRef Name="payroll_id" />
-            <PropertyRef Name="timesheet_id" />
-          </Key>
-          <Property Name="payroll_id" Type="int" Nullable="false" />
-          <Property Name="timesheet_id" Type="int" Nullable="false" />
-        </EntityType>
         <EntityType Name="Product">
           <Key>
             <PropertyRef Name="Id" />
@@ -212,7 +189,6 @@
           <Property Name="product_note" Type="text" />
           <Property Name="product_unit_cost" Type="money" Nullable="false" />
           <Property Name="product_unit_price" Type="money" Nullable="false" />
-          <Property Name="product_material_id" Type="int" Nullable="false" />
           <Property Name="product_category_id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Product_Category">
@@ -233,14 +209,6 @@
           <Property Name="per_package_cost" Type="money" Nullable="false" />
           <Property Name="per_package_price" Type="money" Nullable="false" />
         </EntityType>
-        <EntityType Name="Product_Material_Assignment">
-          <Key>
-            <PropertyRef Name="product_id" />
-            <PropertyRef Name="material_stock_id" />
-          </Key>
-          <Property Name="product_id" Type="int" Nullable="false" />
-          <Property Name="material_stock_id" Type="int" Nullable="false" />
-        </EntityType>
         <EntityType Name="Purchase">
           <Key>
             <PropertyRef Name="purchase_id" />
@@ -252,13 +220,6 @@
           <Property Name="department_id" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="employee_id" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="purchase_date" Type="datetime" Nullable="false" />
-        </EntityType>
-        <EntityType Name="RoleViewModels">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="Name" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Timesheet">
           <Key>
@@ -367,30 +328,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_id_assignment_delivery_schedule">
-          <End Role="Delivery_Schedule" Type="Self.Delivery_Schedule" Multiplicity="1" />
-          <End Role="Invoice_Deliver_Assignment" Type="Self.Invoice_Deliver_Assignment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Delivery_Schedule">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Invoice_Deliver_Assignment">
-              <PropertyRef Name="delivery_schedule_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_id_assignment_invoice">
-          <End Role="Invoice" Type="Self.Invoice" Multiplicity="1" />
-          <End Role="Invoice_Deliver_Assignment" Type="Self.Invoice_Deliver_Assignment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Invoice">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Invoice_Deliver_Assignment">
-              <PropertyRef Name="invoice_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="fk_invoice_aspnetusers">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
           <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
@@ -499,30 +436,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_pm_assignment_material_stock">
-          <End Role="Material_Stock" Type="Self.Material_Stock" Multiplicity="1" />
-          <End Role="Product_Material_Assignment" Type="Self.Product_Material_Assignment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Material_Stock">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Product_Material_Assignment">
-              <PropertyRef Name="material_stock_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_pm_assignment_product">
-          <End Role="Product" Type="Self.Product" Multiplicity="1" />
-          <End Role="Product_Material_Assignment" Type="Self.Product_Material_Assignment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Product_Material_Assignment">
-              <PropertyRef Name="product_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="fk_product_category">
           <End Role="Product_Category" Type="Self.Product_Category" Multiplicity="1" />
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
@@ -544,30 +457,6 @@
             </Principal>
             <Dependent Role="Product_Inventory">
               <PropertyRef Name="product_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_pt_assignment_payroll">
-          <End Role="Payroll" Type="Self.Payroll" Multiplicity="1" />
-          <End Role="Payroll_Timesheet_Assignment" Type="Self.Payroll_Timesheet_Assignment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Payroll">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Payroll_Timesheet_Assignment">
-              <PropertyRef Name="payroll_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_pt_assignment_timesheet">
-          <End Role="Timesheet" Type="Self.Timesheet" Multiplicity="1" />
-          <End Role="Payroll_Timesheet_Assignment" Type="Self.Payroll_Timesheet_Assignment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Timesheet">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Payroll_Timesheet_Assignment">
-              <PropertyRef Name="timesheet_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -601,24 +490,19 @@
           <EntitySet Name="Customer_Contact" EntityType="Self.Customer_Contact" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Delivery_Lineitem" EntityType="Self.Delivery_Lineitem" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Delivery_Schedule" EntityType="Self.Delivery_Schedule" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="EmployeeRoleViewModels" EntityType="Self.EmployeeRoleViewModels" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Equipment" EntityType="Self.Equipment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Equipment_Maintenance" EntityType="Self.Equipment_Maintenance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Invoice" EntityType="Self.Invoice" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Invoice_Deliver_Assignment" EntityType="Self.Invoice_Deliver_Assignment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Invoice_Lineitem" EntityType="Self.Invoice_Lineitem" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Material" EntityType="Self.Material" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Material_Stock" EntityType="Self.Material_Stock" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Paycheck" EntityType="Self.Paycheck" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Payment" EntityType="Self.Payment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Payroll" EntityType="Self.Payroll" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Payroll_Timesheet_Assignment" EntityType="Self.Payroll_Timesheet_Assignment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product_Category" EntityType="Self.Product_Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product_Inventory" EntityType="Self.Product_Inventory" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Product_Material_Assignment" EntityType="Self.Product_Material_Assignment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Purchase" EntityType="Self.Purchase" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="RoleViewModels" EntityType="Self.RoleViewModels" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Timesheet" EntityType="Self.Timesheet" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="fk_customer_contact_customer" Association="Self.fk_customer_contact_customer">
             <End Role="Customer" EntitySet="Customer" />
@@ -651,14 +535,6 @@
           <AssociationSet Name="fk_equipment_product" Association="Self.fk_equipment_product">
             <End Role="Product" EntitySet="Product" />
             <End Role="Equipment" EntitySet="Equipment" />
-          </AssociationSet>
-          <AssociationSet Name="fk_id_assignment_delivery_schedule" Association="Self.fk_id_assignment_delivery_schedule">
-            <End Role="Delivery_Schedule" EntitySet="Delivery_Schedule" />
-            <End Role="Invoice_Deliver_Assignment" EntitySet="Invoice_Deliver_Assignment" />
-          </AssociationSet>
-          <AssociationSet Name="fk_id_assignment_invoice" Association="Self.fk_id_assignment_invoice">
-            <End Role="Invoice" EntitySet="Invoice" />
-            <End Role="Invoice_Deliver_Assignment" EntitySet="Invoice_Deliver_Assignment" />
           </AssociationSet>
           <AssociationSet Name="fk_invoice_aspnetusers" Association="Self.fk_invoice_aspnetusers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -696,14 +572,6 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Payroll" EntitySet="Payroll" />
           </AssociationSet>
-          <AssociationSet Name="fk_pm_assignment_material_stock" Association="Self.fk_pm_assignment_material_stock">
-            <End Role="Material_Stock" EntitySet="Material_Stock" />
-            <End Role="Product_Material_Assignment" EntitySet="Product_Material_Assignment" />
-          </AssociationSet>
-          <AssociationSet Name="fk_pm_assignment_product" Association="Self.fk_pm_assignment_product">
-            <End Role="Product" EntitySet="Product" />
-            <End Role="Product_Material_Assignment" EntitySet="Product_Material_Assignment" />
-          </AssociationSet>
           <AssociationSet Name="fk_product_category" Association="Self.fk_product_category">
             <End Role="Product_Category" EntitySet="Product_Category" />
             <End Role="Product" EntitySet="Product" />
@@ -711,14 +579,6 @@
           <AssociationSet Name="fk_product_inventory_product" Association="Self.fk_product_inventory_product">
             <End Role="Product" EntitySet="Product" />
             <End Role="Product_Inventory" EntitySet="Product_Inventory" />
-          </AssociationSet>
-          <AssociationSet Name="fk_pt_assignment_payroll" Association="Self.fk_pt_assignment_payroll">
-            <End Role="Payroll" EntitySet="Payroll" />
-            <End Role="Payroll_Timesheet_Assignment" EntitySet="Payroll_Timesheet_Assignment" />
-          </AssociationSet>
-          <AssociationSet Name="fk_pt_assignment_timesheet" Association="Self.fk_pt_assignment_timesheet">
-            <End Role="Timesheet" EntitySet="Timesheet" />
-            <End Role="Payroll_Timesheet_Assignment" EntitySet="Payroll_Timesheet_Assignment" />
           </AssociationSet>
           <AssociationSet Name="fk_purchase_aspnetusers" Association="Self.fk_purchase_aspnetusers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -821,14 +681,6 @@
           <NavigationProperty Name="AspNetUser" Relationship="Self.fk_delivery_schedule_driver_aspnetusers" FromRole="Delivery_Schedule" ToRole="AspNetUsers" />
           <NavigationProperty Name="AspNetUser1" Relationship="Self.fk_delivery_schedule_warehouse_aspnetusers" FromRole="Delivery_Schedule" ToRole="AspNetUsers" />
           <NavigationProperty Name="Delivery_Lineitem" Relationship="Self.fk_delivery_lineitem_delivery_schedule" FromRole="Delivery_Schedule" ToRole="Delivery_Lineitem" />
-          <NavigationProperty Name="Invoices" Relationship="Self.Invoice_Deliver_Assignment" FromRole="Delivery_Schedule" ToRole="Invoice" />
-        </EntityType>
-        <EntityType Name="EmployeeRoleViewModel">
-          <Key>
-            <PropertyRef Name="UserID" />
-          </Key>
-          <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Role" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
         <EntityType Name="Equipment">
           <Key>
@@ -872,7 +724,6 @@
           <NavigationProperty Name="Customer" Relationship="Self.fk_invoice_customer" FromRole="Invoice" ToRole="Customer" />
           <NavigationProperty Name="Invoice_Lineitem" Relationship="Self.fk_invoice_lineitem_invoice" FromRole="Invoice" ToRole="Invoice_Lineitem" />
           <NavigationProperty Name="Payments" Relationship="Self.fk_payment_invoice" FromRole="Invoice" ToRole="Payment" />
-          <NavigationProperty Name="Delivery_Schedule" Relationship="Self.Invoice_Deliver_Assignment" FromRole="Invoice" ToRole="Delivery_Schedule" />
         </EntityType>
         <EntityType Name="Invoice_Lineitem">
           <Key>
@@ -907,7 +758,6 @@
           <Property Name="material_unit_quantity" Type="Int32" Nullable="false" />
           <Property Name="material_unit_cost" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <NavigationProperty Name="Material" Relationship="Self.fk_material_stock_material" FromRole="Material_Stock" ToRole="Material" />
-          <NavigationProperty Name="Products" Relationship="Self.Product_Material_Assignment" FromRole="Material_Stock" ToRole="Product" />
         </EntityType>
         <EntityType Name="Paycheck">
           <Key>
@@ -948,7 +798,6 @@
           <Property Name="grand_total" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <NavigationProperty Name="AspNetUser" Relationship="Self.fk_payroll_aspnetusers" FromRole="Payroll" ToRole="AspNetUsers" />
           <NavigationProperty Name="Paychecks" Relationship="Self.fk_paycheck_payroll" FromRole="Payroll" ToRole="Paycheck" />
-          <NavigationProperty Name="Timesheets" Relationship="Self.Payroll_Timesheet_Assignment" FromRole="Payroll" ToRole="Timesheet" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -961,13 +810,11 @@
           <Property Name="product_note" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="product_unit_cost" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="product_unit_price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
-          <Property Name="product_material_id" Type="Int32" Nullable="false" />
           <Property Name="product_category_id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Equipments" Relationship="Self.fk_equipment_product" FromRole="Product" ToRole="Equipment" />
           <NavigationProperty Name="Materials" Relationship="Self.fk_material_product" FromRole="Product" ToRole="Material" />
           <NavigationProperty Name="Product_Category" Relationship="Self.fk_product_category" FromRole="Product" ToRole="Product_Category" />
           <NavigationProperty Name="Product_Inventory" Relationship="Self.fk_product_inventory_product" FromRole="Product" ToRole="Product_Inventory" />
-          <NavigationProperty Name="Material_Stock" Relationship="Self.Product_Material_Assignment" FromRole="Product" ToRole="Material_Stock" />
         </EntityType>
         <EntityType Name="Product_Category">
           <Key>
@@ -1004,13 +851,6 @@
           <Property Name="purchase_date" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="AspNetUser" Relationship="Self.fk_purchase_aspnetusers" FromRole="Purchase" ToRole="AspNetUsers" />
         </EntityType>
-        <EntityType Name="RoleViewModel">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="Timesheet">
           <Key>
             <PropertyRef Name="Id" />
@@ -1022,7 +862,6 @@
           <Property Name="timesheet_date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="is_in_payroll" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="AspNetUser" Relationship="Self.fk_timesheet_aspnetusers" FromRole="Timesheet" ToRole="AspNetUsers" />
-          <NavigationProperty Name="Payrolls" Relationship="Self.Payroll_Timesheet_Assignment" FromRole="Timesheet" ToRole="Payroll" />
         </EntityType>
         <Association Name="fk_delivery_schedule_driver_aspnetusers">
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
@@ -1276,25 +1115,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="Invoice_Deliver_Assignment">
-          <End Role="Delivery_Schedule" Type="Self.Delivery_Schedule" Multiplicity="*" />
-          <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
-        </Association>
-        <Association Name="Payroll_Timesheet_Assignment">
-          <End Role="Payroll" Type="Self.Payroll" Multiplicity="*" />
-          <End Role="Timesheet" Type="Self.Timesheet" Multiplicity="*" />
-        </Association>
-        <Association Name="Product_Material_Assignment">
-          <End Role="Material_Stock" Type="Self.Material_Stock" Multiplicity="*" />
-          <End Role="Product" Type="Self.Product" Multiplicity="*" />
-        </Association>
         <EntityContainer Name="BusinessEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
           <EntitySet Name="Customers" EntityType="Self.Customer" />
           <EntitySet Name="Customer_Contact" EntityType="Self.Customer_Contact" />
           <EntitySet Name="Delivery_Lineitem" EntityType="Self.Delivery_Lineitem" />
           <EntitySet Name="Delivery_Schedule" EntityType="Self.Delivery_Schedule" />
-          <EntitySet Name="EmployeeRoleViewModels" EntityType="Self.EmployeeRoleViewModel" />
           <EntitySet Name="Equipments" EntityType="Self.Equipment" />
           <EntitySet Name="Equipment_Maintenance" EntityType="Self.Equipment_Maintenance" />
           <EntitySet Name="Invoices" EntityType="Self.Invoice" />
@@ -1308,7 +1134,6 @@
           <EntitySet Name="Product_Category" EntityType="Self.Product_Category" />
           <EntitySet Name="Product_Inventory" EntityType="Self.Product_Inventory" />
           <EntitySet Name="Purchases" EntityType="Self.Purchase" />
-          <EntitySet Name="RoleViewModels" EntityType="Self.RoleViewModel" />
           <EntitySet Name="Timesheets" EntityType="Self.Timesheet" />
           <AssociationSet Name="fk_delivery_schedule_driver_aspnetusers" Association="Self.fk_delivery_schedule_driver_aspnetusers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -1394,18 +1219,6 @@
             <End Role="Product" EntitySet="Products" />
             <End Role="Product_Inventory" EntitySet="Product_Inventory" />
           </AssociationSet>
-          <AssociationSet Name="Invoice_Deliver_Assignment" Association="Self.Invoice_Deliver_Assignment">
-            <End Role="Delivery_Schedule" EntitySet="Delivery_Schedule" />
-            <End Role="Invoice" EntitySet="Invoices" />
-          </AssociationSet>
-          <AssociationSet Name="Payroll_Timesheet_Assignment" Association="Self.Payroll_Timesheet_Assignment">
-            <End Role="Payroll" EntitySet="Payrolls" />
-            <End Role="Timesheet" EntitySet="Timesheets" />
-          </AssociationSet>
-          <AssociationSet Name="Product_Material_Assignment" Association="Self.Product_Material_Assignment">
-            <End Role="Material_Stock" EntitySet="Material_Stock" />
-            <End Role="Product" EntitySet="Products" />
-          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -1488,14 +1301,6 @@
                 <ScalarProperty Name="driver_employee_id" ColumnName="driver_employee_id" />
                 <ScalarProperty Name="delivery_date" ColumnName="delivery_date" />
                 <ScalarProperty Name="delivery_cost" ColumnName="delivery_cost" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="EmployeeRoleViewModels">
-            <EntityTypeMapping TypeName="BusinessModel.EmployeeRoleViewModel">
-              <MappingFragment StoreEntitySet="EmployeeRoleViewModels">
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="Role" ColumnName="Role" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1618,7 +1423,6 @@
                 <ScalarProperty Name="product_note" ColumnName="product_note" />
                 <ScalarProperty Name="product_unit_cost" ColumnName="product_unit_cost" />
                 <ScalarProperty Name="product_unit_price" ColumnName="product_unit_price" />
-                <ScalarProperty Name="product_material_id" ColumnName="product_material_id" />
                 <ScalarProperty Name="product_category_id" ColumnName="product_category_id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1656,14 +1460,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="RoleViewModels">
-            <EntityTypeMapping TypeName="BusinessModel.RoleViewModel">
-              <MappingFragment StoreEntitySet="RoleViewModels">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Timesheets">
             <EntityTypeMapping TypeName="BusinessModel.Timesheet">
               <MappingFragment StoreEntitySet="Timesheet">
@@ -1676,30 +1472,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="Invoice_Deliver_Assignment" TypeName="BusinessModel.Invoice_Deliver_Assignment" StoreEntitySet="Invoice_Deliver_Assignment">
-            <EndProperty Name="Delivery_Schedule">
-              <ScalarProperty Name="Id" ColumnName="delivery_schedule_id" />
-            </EndProperty>
-            <EndProperty Name="Invoice">
-              <ScalarProperty Name="Id" ColumnName="invoice_id" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="Payroll_Timesheet_Assignment" TypeName="BusinessModel.Payroll_Timesheet_Assignment" StoreEntitySet="Payroll_Timesheet_Assignment">
-            <EndProperty Name="Payroll">
-              <ScalarProperty Name="Id" ColumnName="payroll_id" />
-            </EndProperty>
-            <EndProperty Name="Timesheet">
-              <ScalarProperty Name="Id" ColumnName="timesheet_id" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="Product_Material_Assignment" TypeName="BusinessModel.Product_Material_Assignment" StoreEntitySet="Product_Material_Assignment">
-            <EndProperty Name="Material_Stock">
-              <ScalarProperty Name="Id" ColumnName="material_stock_id" />
-            </EndProperty>
-            <EndProperty Name="Product">
-              <ScalarProperty Name="Id" ColumnName="product_id" />
-            </EndProperty>
-          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
