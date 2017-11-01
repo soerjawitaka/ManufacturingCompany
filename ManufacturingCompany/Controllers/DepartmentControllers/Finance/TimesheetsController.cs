@@ -44,7 +44,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
                 return RedirectToAction("Index");
             }
 
-            ViewBag.employee_id = new SelectList(db.AspNetUsers, "Id", "Email", timesheet.employee_id);
+            ViewBag.employee_username = db.AspNetUsers.Find(timesheet.employee_id).UserName;
             return View(timesheet);
         }
 

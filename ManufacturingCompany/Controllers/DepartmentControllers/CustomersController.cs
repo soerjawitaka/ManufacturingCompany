@@ -38,19 +38,23 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers
 
         #region CustomerContact
         // GET: Customers/CreateContact
-        public ActionResult CreateContact()
+        public ActionResult CreateContact(int id)
         {
-            return View();
+            var contact = new Customer_Contact() { customer_id = id };
+            contact.Customer = db.Customers.Find(id);
+            return View(contact);
         }
 
         // POST: Customers/CreateContact
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult CreateContact([Bind(Include = "Id,customer_id,first_name,last_name,work_phone,mobile_phone,fax,contact_email")] Customer_Contact customer_Contact)
         {
             if (ModelState.IsValid)
             {
                 db.Customer_Contact.Add(customer_Contact);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", new { id = customer_Contact.customer_id });
             }
 
             ViewBag.customer_id = new SelectList(db.Customers, "Id", "customer_company_name", customer_Contact.customer_id);
@@ -84,7 +88,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers
             {
                 db.Entry(customer_Contact).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", new { id = customer_Contact.customer_id });
             }
             ViewBag.customer_id = new SelectList(db.Customers, "Id", "customer_company_name", customer_Contact.customer_id);
             return View(customer_Contact);
@@ -113,7 +117,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers
             Customer_Contact customer_Contact = db.Customer_Contact.Find(id);
             db.Customer_Contact.Remove(customer_Contact);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Details", new { id = customer_Contact.customer_id });
         }
 
         #endregion

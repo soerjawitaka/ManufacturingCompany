@@ -19,7 +19,7 @@ namespace ManufacturingCompany.Models
         [Display(Name = "Company Address")]
         public string customer_address1 { get; set; }
         
-        [Display(Name = "")]
+        [Display(Name = " ")]
         public string customer_address2 { get; set; }
 
         [Required]

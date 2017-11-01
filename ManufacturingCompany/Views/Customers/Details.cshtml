@@ -86,11 +86,23 @@
     </dl>
 </div>
 
+
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, htmlAttributes: new { @class = "btn btn-warning" }) 
+    @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "btn btn-default" })
+</p>
+
+<hr />
+
 <div class="container">
     <h3>Contacts</h3>
 </div>
 
-@Html.ActionLink("Create Contact", "CreateContact", null, htmlAttributes: new { @class = "btn btn-default" })
+@Html.ActionLink("Create Contact", "CreateContact", "Customers", new { id = Model.Id }, htmlAttributes: new { @class = "btn btn-default" })
+
+<br />
+<br />
 
 <table class="table">
     <tr>
@@ -115,7 +127,7 @@
         <th></th>
     </tr>
 
-    @foreach (var item in (List<ManufacturingCompany.Models.Customer_Contact>)ViewBag.CustomerContacts)
+    @foreach (var item in Model.Customer_Contact)
     {
         <tr>
             <td>
@@ -137,15 +149,10 @@
                 @Html.DisplayFor(modelItem => item.contact_email)
             </td>
             <td>
-                @Html.ActionLink("Edit", "EditContact", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "DeleteContact", new { id = item.Id })
+                @Html.ActionLink("Edit", "EditContact", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-warning" }) 
+                @Html.ActionLink("Delete", "DeleteContact", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-danger" })
             </td>
         </tr>
     }
 
 </table>
-
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

@@ -66,8 +66,8 @@
             @Html.DisplayFor(modelItem => item.grand_total)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }, htmlAttributes: new { @class = "btn btn-warning" }) 
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id }, htmlAttributes: new { @class = "btn btn-danger" })
         </td>
     </tr>
 }
