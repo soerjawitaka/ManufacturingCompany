@@ -25,9 +25,12 @@
                     @*<li>@Html.ActionLink("Home", "Index", "Home")</li>*@
                     @*@if (User.IsInRole("Manager") || User.IsInRole("Supervisor") || User.IsInRole("Employee"))
                     {*@
+                    @if (Request.IsAuthenticated)
+                    {
                         <li>@Html.ActionLink("Timesheet", "Index", "EmployeeTimesheets")</li>
-                    @*}*@
-                    <li>@Html.ActionLink("Customers", "Index", "Customers")</li>
+                        <li>@Html.ActionLink("Customers", "Index", "Customers")</li>
+                    }
+                    
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

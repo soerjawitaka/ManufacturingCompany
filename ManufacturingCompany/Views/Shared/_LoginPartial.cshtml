@@ -7,9 +7,17 @@
 
     <ul class="nav navbar-nav navbar-right">
 
-            <li>@Html.ActionLink("Roles", "Roles", "Manage")</li>
+        @if (User.IsInRole("SuperUser") || User.IsInRole("Manager"))
+        {
+            if (User.IsInRole("SuperUser"))
+            {
+                <li>@Html.ActionLink("Roles", "Roles", "Manage")</li>
+            }
 
-        <li>@Html.ActionLink("Manage Employee", "Index", "SelectUser", new { actionName = "ManageEmployee", controllerName = "Manage" }, htmlAttributes: new { id = "manageEmployeeLink" })</li>
+            <li>@Html.ActionLink("Manage Employee", "Index", "SelectUser", new { actionName = "ManageEmployee", controllerName = "Manage" }, htmlAttributes: new { id = "manageEmployeeLink" })</li>
+
+        }
+        
         <li>
             @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
         </li>

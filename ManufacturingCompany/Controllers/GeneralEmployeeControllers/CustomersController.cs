@@ -125,6 +125,8 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers
         // GET: Customers/Create
         public ActionResult Create()
         {
+            ViewBag.StateList = new SelectList(XmlHelper.GetStates(Server, Url), "Value", "Text");
+            ViewBag.CountryList = new SelectList(XmlHelper.GetCountries(Server, Url), "Value", "Text");
             return View();
         }
 
@@ -142,6 +144,8 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.StateList = new SelectList(XmlHelper.GetStates(Server, Url), "Value", "Text");
+            ViewBag.CountryList = new SelectList(XmlHelper.GetCountries(Server, Url), "Value", "Text");
             return View(customer);
         }
 
@@ -157,6 +161,9 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers
             {
                 return HttpNotFound();
             }
+
+            ViewBag.StateList = new SelectList(XmlHelper.GetStates(Server, Url), "Value", "Text");
+            ViewBag.CountryList = new SelectList(XmlHelper.GetCountries(Server, Url), "Value", "Text");
             return View(customer);
         }
 
@@ -173,6 +180,9 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+
+            ViewBag.StateList = new SelectList(XmlHelper.GetStates(Server, Url), "Value", "Text");
+            ViewBag.CountryList = new SelectList(XmlHelper.GetCountries(Server, Url), "Value", "Text");
             return View(customer);
         }
 

@@ -209,8 +209,8 @@
     <Compile Include="Classes\PaycheckViewModel.cs" />
     <Compile Include="Classes\RoleViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\DepartmentControllers\CustomersController.cs" />
-    <Compile Include="Controllers\DepartmentControllers\Customer_ContactController.cs" />
+    <Compile Include="Controllers\GeneralEmployeeControllers\CustomersController.cs" />
+    <Compile Include="Controllers\GeneralEmployeeControllers\Customer_ContactController.cs" />
     <Compile Include="Controllers\DepartmentControllers\FinanceController.cs" />
     <Compile Include="Controllers\DepartmentControllers\Finance\InvoicesController.cs" />
     <Compile Include="Controllers\DepartmentControllers\Finance\PaychecksController.cs" />
@@ -220,12 +220,12 @@
     <Compile Include="Controllers\DepartmentControllers\ProductionController.cs" />
     <Compile Include="Controllers\DepartmentControllers\Production\ProductCategoryController.cs" />
     <Compile Include="Controllers\DepartmentControllers\Production\ProductsController.cs" />
-    <Compile Include="Controllers\EmployeeTimesheetsController.cs" />
+    <Compile Include="Controllers\GeneralEmployeeControllers\EmployeeTimesheetsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\SelectPayrollController.cs" />
-    <Compile Include="Controllers\SelectProductController.cs" />
-    <Compile Include="Controllers\SelectUserController.cs" />
+    <Compile Include="Controllers\QueryControllers\SelectPayrollController.cs" />
+    <Compile Include="Controllers\QueryControllers\SelectProductController.cs" />
+    <Compile Include="Controllers\QueryControllers\SelectUserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -240,6 +240,10 @@
     <Compile Include="Migrations\201710302314151_UserAndRoleManager.cs" />
     <Compile Include="Migrations\201710302314151_UserAndRoleManager.Designer.cs">
       <DependentUpon>201710302314151_UserAndRoleManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711021716501_ProductCategory.cs" />
+    <Compile Include="Migrations\201711021716501_ProductCategory.Designer.cs">
+      <DependentUpon>201711021716501_ProductCategory.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -317,6 +321,7 @@
     <Compile Include="Models\Partial_Metadata\Customer_Partial_Metadata.cs" />
     <Compile Include="Models\Partial_Metadata\Paycheck_Partial_Metadata.cs" />
     <Compile Include="Models\Partial_Metadata\Payroll_Partial_Metadata.cs" />
+    <Compile Include="Models\Partial_Metadata\ProductCategory_Partial_Metadata.cs" />
     <Compile Include="Models\Partial_Metadata\Product_Partial_Metadata.cs" />
     <Compile Include="Models\Partial_Metadata\Purchase_Partial_Metadata.cs" />
     <Compile Include="Models\Paycheck.cs">
@@ -359,6 +364,7 @@
     <Content Include="App_Data\aspnet-ManufacturingCompany-20171006085739_log.ldf">
       <DependentUpon>aspnet-ManufacturingCompany-20171006085739.mdf</DependentUpon>
     </Content>
+    <Content Include="App_Data\countries.xml" />
     <Content Include="App_Data\states.xml" />
     <Content Include="App_Data\tblCustomer.sql" />
     <Content Include="App_Data\tblCustomer_Contact.sql" />
@@ -560,6 +566,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710302314151_UserAndRoleManager.resx">
       <DependentUpon>201710302314151_UserAndRoleManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711021716501_ProductCategory.resx">
+      <DependentUpon>201711021716501_ProductCategory.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

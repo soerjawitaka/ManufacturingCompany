@@ -30,5 +30,26 @@ namespace ManufacturingCompany.Models
             }
             return listItems;
         }
+
+        public static List<SelectListItem> GetCountries(HttpServerUtilityBase server, UrlHelper url)
+        {
+            var model = XDocument.Load(server.MapPath(url.Content("~/App_Data/countries.xml")));
+            IEnumerable<XElement> result = from c in model.Elements("countries").Elements("country") select c;
+            var listItems = new List<SelectListItem>();
+            listItems.Add(new SelectListItem
+            {
+                Text = "--- Please select a Country ---",
+                Value = "",
+            });
+            foreach (var xElement in result)
+            {
+                listItems.Add(new SelectListItem
+                {
+                    Text = xElement.Value,
+                    Value = xElement.Value
+                });
+            }
+            return listItems;
+        }
     }
 }
