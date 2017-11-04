@@ -4,26 +4,35 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Finance</h2>
+<h2 class="card text-white bg-primary">Finance</h2>
 
-<div class="col-md-2"></div>
-<div class="col-md-8" style="text-align:center">
-    @Html.ActionLink("Invoices", "Index", "Invoices", null, htmlAttributes: new { @class = "btn btn-default", @style = "width:100%"})
-    <br />
-    <br />
-    @Html.ActionLink("Payments", "Index", "Payments", null, htmlAttributes: new { @class = "btn btn-default", @style = "width:100%" })
-    <br />
-    <br />
-    @Html.ActionLink("Timesheets", "Index", "Timesheets", null, htmlAttributes: new { @class = "btn btn-default", @style = "width:100%" })
-    <br />
-    <br />
-    @Html.ActionLink("Payrolls", "Index", "Payrolls", null, htmlAttributes: new { @class = "btn btn-default", @style = "width:100%" })
-    <br />
-    <br />
-    @Html.ActionLink("Paychecks", "Index", "Paychecks", null, htmlAttributes: new { @class = "btn btn-default", @style = "width:100%" })
-    <br />
-    <br />
+<div class="row">
+    <div class="col-md-4">
+        <div class="card border-success">
+            <h2>Timesheets</h2>
+            <p>@Html.ActionLink("Manage >>", "Index", "Timesheets", null, htmlAttributes: new { @class = "btn btn-outline-success", @style = "width:100%" })</p>
+        </div>
+        <div class="card border-success">
+            <h2>Invoices</h2>
+            <p>@Html.ActionLink("Manage >>", "Index", "Invoices", null, htmlAttributes: new { @class = "btn btn-outline-success", @style = "width:100%" })</p>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card border-success">
+            <h2>Payrolls</h2>
+            <p>@Html.ActionLink("Manage >>", "Index", "Payrolls", null, htmlAttributes: new { @class = "btn btn-outline-success", @style = "width:100%" })</p>
+        </div>
+        <div class="card border-success">
+            <h2>Payments</h2>
+            <p>@Html.ActionLink("Manage >>", "Index", "Payments", null, htmlAttributes: new { @class = "btn btn-outline-success", @style = "width:100%" })</p>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card border-success">
+            <h2>Paychecks</h2>
+            <p>@Html.ActionLink("Manage >>", "Index", "Paychecks", null, htmlAttributes: new { @class = "btn btn-outline-success", @style = "width:100%" })</p>
+        </div>
+    </div>
 </div>
-<div class="col-md-2"></div>
 
 <div style="clear:both">&nbsp;<br /></div>

@@ -677,6 +677,39 @@ pre {
     .container {
         max-width: 720px;
     }
+    .dl-horizontal dt {
+        float: left;
+        width: 160px;
+        overflow: hidden;
+        clear: left;
+        text-align: right;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .dl-horizontal dd {
+        margin-left: 180px;
+    }
+
+    .dl-horizontal dd:before,
+    .dl-horizontal dd:after {
+        display: table;
+        content: " ";
+    }
+
+    .dl-horizontal dd:after {
+        clear: both;
+    }
+
+    .dl-horizontal dd:before,
+    .dl-horizontal dd:after {
+        display: table;
+        content: " ";
+    }
+
+    .dl-horizontal dd:after {
+        clear: both;
+    }
 }
 
 @media (min-width: 992px) {
@@ -4784,6 +4817,8 @@ tbody.collapse.show {
     background-clip: border-box;
     border: 1px solid rgba(0, 0, 0, 0.125);
     border-radius: 0.25rem;
+    padding: 20px;
+    margin: 20px;
 }
 
     .card > hr {
@@ -5284,6 +5319,11 @@ tbody.collapse.show {
     margin-bottom: 2rem;
     background-color: #303030;
     border-radius: 0.3rem;
+}
+.jumbotron-bckimg {
+    background-image: url("../Images/midnight.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 @media (min-width: 576px) {

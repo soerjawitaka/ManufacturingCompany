@@ -405,6 +405,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\midnight.jpg" />
     <Content Include="Images\ProductImages\noImage.png" />
     <Content Include="Images\UserImages\noProfileImage.jpg" />
     <Content Include="Images\UserImages\noProfileImage2.jpg" />
@@ -526,7 +527,6 @@
     <Content Include="Views\Shared\_ManagerMenu.cshtml" />
     <Content Include="Views\Manage\Roles.cshtml" />
     <Content Include="Views\Manage\CreateRole.cshtml" />
-    <Content Include="Views\Manage\RegisterUserRole.cshtml" />
     <Content Include="Views\Manage\EditRole.cshtml" />
     <Content Include="Views\Manage\ManageEmployee.cshtml" />
     <Content Include="Views\Manage\ChangeEmployeeProfile.cshtml" />

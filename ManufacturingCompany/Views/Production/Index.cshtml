@@ -4,26 +4,23 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Production</h2>
+<h2 class="card text-white bg-primary">Production</h2>
 
-<div class="col-md-2"></div>
-<div class="col-md-8" style="text-align:center">
-    @Html.ActionLink("Products", "Index", "Products", null, htmlAttributes: new { @class = "btn btn-default", @style = "width:100%" })
-    <br />
-    <br />
-    @Html.ActionLink("Product Categories", "Index", "ProductCategory", null, htmlAttributes: new { @class = "btn btn-default", @style = "width:100%" })
-    <br />
-    <br />
-    @*@Html.ActionLink("Timesheets", "Index", "Timesheets", null, htmlAttributes: new { @class = "btn btn-default", @style = "width:100%" })
-    <br />
-    <br />
-    @Html.ActionLink("Payrolls", "Index", "Payrolls", null, htmlAttributes: new { @class = "btn btn-default", @style = "width:100%" })
-    <br />
-    <br />
-    @Html.ActionLink("Paychecks", "Index", "Paychecks", null, htmlAttributes: new { @class = "btn btn-default", @style = "width:100%" })
-    <br />
-    <br />*@
+<div class="row">
+    <div class="col-md-4">
+        <div class="card border-success">
+            <h2>Products</h2>
+            <p>@Html.ActionLink("Manage >>", "Index", "Products", null, htmlAttributes: new { @class = "btn btn-outline-success", @style = "width:100%" })</p>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card border-success">
+            <h2>Product Category</h2>
+            <p>@Html.ActionLink("Manage >>", "Index", "ProductCategory", null, htmlAttributes: new { @class = "btn btn-outline-success", @style = "width:100%" })</p>
+        </div>
+    </div>
+    <div class="col-md-4">
+    </div>
 </div>
-<div class="col-md-2"></div>
 
 <div style="clear:both">&nbsp;<br /></div>

@@ -11,20 +11,20 @@
 {
     @Html.AntiForgeryToken()
     <div class="container">
-        <div class="col-md-2" style="margin-bottom:10px;">
+        <div class="col-md-2" style="margin-bottom:10px; display:inline-block;">
             @Html.Label("Search By : ", htmlAttributes: new { @class = "form-control", @style = "border:none;" })
         </div>
 
-        <div class="col-md-3" style="margin-bottom:10px;">
+        <div class="col-md-3" style="margin-bottom:10px; display:inline-block;">
             @Html.DropDownList("SearchBy", (SelectList)ViewBag.SearchBy, htmlAttributes: new { @class = "form-control" })
         </div>
 
-        <div class="col-md-4" style="margin-bottom:10px;">
+        <div class="col-md-3" style="margin-bottom:10px; display:inline-block;">
             @Html.TextBox("inputForUserSearch", "", new { @class = "form-control" })
         </div>
 
-        <div class="col-md-3" style="margin-bottom:10px;">
-            <input type="submit" value="Search" class="btn btn-success" />
+        <div class="col-md-3" style="margin-bottom:10px; display:inline-block;">
+            <input type="submit" value="Search" class="btn btn-success" style="display:inline-block;"/>
         </div>
     </div>
 }
