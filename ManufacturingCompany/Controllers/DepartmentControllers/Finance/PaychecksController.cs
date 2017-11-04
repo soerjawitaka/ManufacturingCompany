@@ -47,7 +47,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
         // GET: Paychecks/Create
         public ActionResult Create(int payrollid)
         {
-            var paycheck = new PaycheckViewModel();
+            var paycheck = new PaycheckModeModel();
             paycheck.SetPayroll(payrollid);
             return View(paycheck);
         }
@@ -57,9 +57,9 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,ModeOfPaycheck,paycheck_date,payroll_id,payment_type,check_number,direct_deposit_number,payment_amount")] PaycheckViewModel paycheck)
+        public ActionResult Create([Bind(Include = "Id,ModeOfPaycheck,paycheck_date,payroll_id,payment_type,check_number,direct_deposit_number,payment_amount")] PaycheckModeModel paycheck)
         {
-            var newPaycheck = PaycheckViewModel.ToBase(paycheck);
+            var newPaycheck = PaycheckModeModel.ToBase(paycheck);
             dbBusiness.Paychecks.Add(newPaycheck);
             var result = dbBusiness.SaveChanges();
 
@@ -78,7 +78,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PaycheckViewModel paycheck = PaycheckViewModel.ToModel(dbBusiness.Paychecks.Find(id));
+            PaycheckModeModel paycheck = PaycheckModeModel.ToModel(dbBusiness.Paychecks.Find(id));
             if (paycheck == null)
             {
                 return HttpNotFound();
@@ -89,7 +89,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
         // GET: Paychecks/Edit/EditPayroll
         public ActionResult EditPayroll(int id, int payrollid)
         {            
-            PaycheckViewModel paycheck = PaycheckViewModel.ToModel(dbBusiness.Paychecks.Find(id));
+            PaycheckModeModel paycheck = PaycheckModeModel.ToModel(dbBusiness.Paychecks.Find(id));
             if (paycheck == null)
             {
                 return HttpNotFound();
@@ -103,11 +103,11 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,ModeOfPaycheck,paycheck_date,payroll_id,payment_type,check_number,direct_deposit_number,payment_amount")] PaycheckViewModel paycheck)
+        public ActionResult Edit([Bind(Include = "Id,ModeOfPaycheck,paycheck_date,payroll_id,payment_type,check_number,direct_deposit_number,payment_amount")] PaycheckModeModel paycheck)
         {
             //Paycheck modPaycheck = PaycheckViewModel.ToBase(paycheck);
             paycheck.SetPayroll(paycheck.payroll_id);
-            Paycheck oldPaycheck = PaycheckViewModel.ToBase(paycheck);
+            Paycheck oldPaycheck = PaycheckModeModel.ToBase(paycheck);
 
             // assign fields
             var newPaycheck = dbBusiness.Paychecks.Find(oldPaycheck.Id);

@@ -7,12 +7,31 @@ using ManufacturingCompany.Models;
 
 namespace ManufacturingCompany.Classes
 {
-    [MetadataType(typeof(PaycheckViewModel_Metadata))]
-    public class PaycheckViewModel : PaycheckModeModel
+    public class PaycheckModeModel : Paycheck
     {
-        public new static PaycheckViewModel ToModel(Paycheck p)
+        public enum PaycheckMode
         {
-            PaycheckViewModel newPaycheck = new PaycheckViewModel();
+            Check,
+            Deposit
+        }
+
+        [Required]
+        [Display(Name = "Payment Type")]
+        public PaycheckMode ModeOfPaycheck { get; set; }
+
+        public void SetPaymentType()
+        {
+            this.payment_type = this.ModeOfPaycheck.ToString();
+        }
+
+        public void SetTypeEnum()
+        {
+            this.ModeOfPaycheck = (PaycheckMode)Enum.Parse(typeof(PaycheckMode), this.payment_type);
+        }
+
+        public static PaycheckModeModel ToModel(Paycheck p)
+        {
+            PaycheckModeModel newPaycheck = new PaycheckModeModel();
             newPaycheck.Id = p.Id;
             newPaycheck.paycheck_date = p.paycheck_date;
             newPaycheck.SetPayroll(p.payroll_id);
@@ -25,7 +44,7 @@ namespace ManufacturingCompany.Classes
             return newPaycheck;
         }
 
-        public new static Paycheck ToBase(PaycheckViewModel model)
+        public static Paycheck ToBase(PaycheckModeModel model)
         {
             model.SetPaymentType();
 
@@ -37,15 +56,22 @@ namespace ManufacturingCompany.Classes
             newPaycheck.check_number = model.check_number;
             newPaycheck.direct_deposit_number = model.direct_deposit_number;
             newPaycheck.payment_amount = model.payment_amount;
-
+            
             return newPaycheck;
         }
-
+        
+        public void SetPayroll(int payrollID)
+        {
+            var payroll = new BusinessEntities().Payrolls.Find(payrollID);
+            this.Payroll = payroll;
+            this.payroll_id = payrollID;
+            this.payment_amount = payroll.grand_total;
+        }
     }
 
-    public class PaycheckViewModel_Metadata
-    {
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:c}")]
-        public decimal payment_amount { get; set; }
-    }
+    //public class PaycheckViewMode_Metada
+    //{
+    //    [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:c}")]
+    //    public decimal payment_amount { get; set; }
+    //}
 }

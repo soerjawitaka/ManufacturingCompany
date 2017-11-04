@@ -10,30 +10,24 @@
     <link href="~/Content/jquery-ui.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Your Company Name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    @*<li>@Html.ActionLink("Home", "Index", "Home")</li>*@
-                    @*@if (User.IsInRole("Manager") || User.IsInRole("Supervisor") || User.IsInRole("Employee"))
-                    {*@
-                    @if (Request.IsAuthenticated)
-                    {
-                        <li>@Html.ActionLink("Timesheet", "Index", "EmployeeTimesheets")</li>
-                        <li>@Html.ActionLink("Customers", "Index", "Customers")</li>
-                    }
+    <div class="navbar navbar-fixed-top navbar-expand-lg navbar-dark bg-primary">
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+         @Html.ActionLink("Your Company Name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+        <div class="collapse navbar-collapse" id="navbarColor01">
+            <ul class="nav navbar-nav mr-auto">
+                @*<li>@Html.ActionLink("Home", "Index", "Home")</li>*@
+                @*@if (User.IsInRole("Manager") || User.IsInRole("Supervisor") || User.IsInRole("Employee"))
+                {*@
+                @if (Request.IsAuthenticated)
+                {
+                    <li class="nav-item">@Html.ActionLink("Timesheet", "Index", "EmployeeTimesheets", null, htmlAttributes: new { @class = "nav-link btn btn-secondary", @style = "margin-left:5px;" })</li>
+                    <li class="nav-item">@Html.ActionLink("Customers", "Index", "Customers", null, htmlAttributes: new { @class = "nav-link btn btn-secondary", @style = "margin-left:5px;" })</li>
+                }
                     
-                </ul>
-                @Html.Partial("_LoginPartial")
-            </div>
+            </ul>
+            @Html.Partial("_LoginPartial")
         </div>
     </div>
     <div class="container navbar">

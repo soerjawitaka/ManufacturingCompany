@@ -1,6 +1,8 @@
-﻿<ul class="nav navbar-nav navbar-left">
-    <li>@Html.ActionLink("Finance", "Index", "Finance")</li>
-    <li>@Html.ActionLink("Production", "Index", "Production")</li>
-    <li>@Html.ActionLink("Distribution", "Index", "Finance")</li>
-    <li>@Html.ActionLink("Administration", "Index", "Finance")</li>
-</ul>
+﻿<div style="margin-top:20px;">
+    <ul class="nav nav-pills">
+        <li class="nav-item">@Html.ActionLink("Finance", "Index", "Finance", routeValues: null, htmlAttributes: new { @class = "nav-link btn btn-outline-primary" })</li>
+        <li class="nav-item">@Html.ActionLink("Production", "Index", "Production", routeValues: null, htmlAttributes: new { @class = "nav-link btn btn-outline-primary" })</li>
+        <li class="nav-item">@Html.ActionLink("Distribution", "Index", "Finance", routeValues: null, htmlAttributes: new { @class = "nav-link btn btn-outline-primary" })</li>
+        <li class="nav-item">@Html.ActionLink("Administration", "Index", "Finance", routeValues: null, htmlAttributes: new { @class = "nav-link btn btn-outline-primary" })</li>
+    </ul>
+</div>

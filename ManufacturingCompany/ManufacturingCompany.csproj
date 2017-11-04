@@ -206,7 +206,9 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Classes\EmployeeRoleViewModel.cs" />
     <Compile Include="Classes\ManageEmployeeModel.cs" />
+    <Compile Include="Classes\PaycheckModeModel.cs" />
     <Compile Include="Classes\PaycheckViewModel.cs" />
+    <Compile Include="Classes\ProductViewModel.cs" />
     <Compile Include="Classes\RoleViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\GeneralEmployeeControllers\CustomersController.cs" />
@@ -244,6 +246,10 @@
     <Compile Include="Migrations\201711021716501_ProductCategory.cs" />
     <Compile Include="Migrations\201711021716501_ProductCategory.Designer.cs">
       <DependentUpon>201711021716501_ProductCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711032006551_Product.cs" />
+    <Compile Include="Migrations\201711032006551_Product.Designer.cs">
+      <DependentUpon>201711032006551_Product.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -387,6 +393,7 @@
     <Content Include="App_Data\tblProduct_Material_Assignment.sql" />
     <Content Include="App_Data\tblPurchase.sql" />
     <Content Include="App_Data\tblTimesheet.sql" />
+    <Content Include="Content\bootstrap-df.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\jquery-ui.css" />
@@ -569,6 +576,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711021716501_ProductCategory.resx">
       <DependentUpon>201711021716501_ProductCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711032006551_Product.resx">
+      <DependentUpon>201711032006551_Product.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

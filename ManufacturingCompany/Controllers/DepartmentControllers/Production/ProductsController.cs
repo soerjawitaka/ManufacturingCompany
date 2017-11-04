@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ManufacturingCompany.Models;
+using ManufacturingCompany.Classes;
 
 namespace ManufacturingCompany.Controllers.DepartmentControllers.Production
 {
@@ -18,7 +19,12 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Production
         public ActionResult Index()
         {
             var products = db.Products.Include(p => p.Product_Category);
-            return View(products.ToList());
+            List<ProductViewModel> pModels = new List<ProductViewModel>();
+            foreach(var p in products)
+            {
+                pModels.Add(ProductViewModel.ToModel(p));
+            }
+            return View(pModels);
         }
 
         // GET: Products/Details/5
@@ -28,7 +34,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Production
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
+            ProductViewModel product = ProductViewModel.ToModel(db.Products.Find(id));
             if (product == null)
             {
                 return HttpNotFound();
@@ -101,7 +107,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Production
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
+            ProductViewModel product = ProductViewModel.ToModel(db.Products.Find(id));
             if (product == null)
             {
                 return HttpNotFound();
