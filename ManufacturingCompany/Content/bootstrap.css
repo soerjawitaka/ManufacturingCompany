@@ -519,7 +519,7 @@ hr {
     margin-top: 1rem;
     margin-bottom: 1rem;
     border: 0;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-top: 1px solid #375a7f;
 }
 
 small,
@@ -5369,7 +5369,7 @@ tbody.collapse.show {
 }
 
     .alert-primary hr {
-        border-top-color: #b7c4d1;
+        border-top-color: #375a7f;
     }
 
     .alert-primary .alert-link {
@@ -5383,7 +5383,7 @@ tbody.collapse.show {
 }
 
     .alert-secondary hr {
-        border-top-color: #bebebe;
+        border-top-color: #375a7f;
     }
 
     .alert-secondary .alert-link {
@@ -5397,7 +5397,7 @@ tbody.collapse.show {
 }
 
     .alert-success hr {
-        border-top-color: #a4e7d6;
+        border-top-color: #375a7f;
     }
 
     .alert-success .alert-link {
@@ -5411,7 +5411,7 @@ tbody.collapse.show {
 }
 
     .alert-info hr {
-        border-top-color: #b0d7f1;
+        border-top-color: #375a7f;
     }
 
     .alert-info .alert-link {
@@ -5425,7 +5425,7 @@ tbody.collapse.show {
 }
 
     .alert-warning hr {
-        border-top-color: #fbd9a5;
+        border-top-color: #375a7f;
     }
 
     .alert-warning .alert-link {
@@ -5439,7 +5439,7 @@ tbody.collapse.show {
 }
 
     .alert-danger hr {
-        border-top-color: #f5b8b1;
+        border-top-color: #375a7f;
     }
 
     .alert-danger .alert-link {
@@ -5453,7 +5453,7 @@ tbody.collapse.show {
 }
 
     .alert-light hr {
-        border-top-color: #b8b8b8;
+        border-top-color: #375a7f;
     }
 
     .alert-light .alert-link {
@@ -5467,7 +5467,7 @@ tbody.collapse.show {
 }
 
     .alert-dark hr {
-        border-top-color: #b8b8b8;
+        border-top-color: #375a7f;
     }
 
     .alert-dark .alert-link {

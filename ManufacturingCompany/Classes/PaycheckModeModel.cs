@@ -68,10 +68,4 @@ namespace ManufacturingCompany.Classes
             this.payment_amount = payroll.grand_total;
         }
     }
-
-    //public class PaycheckViewMode_Metada
-    //{
-    //    [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:c}")]
-    //    public decimal payment_amount { get; set; }
-    //}
 }
