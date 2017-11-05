@@ -427,18 +427,21 @@ namespace ManufacturingCompany.Controllers
 
         #region RoleManager
         // Role manager****************************************************************************
+        [Authorize(Roles = "SuperUser, Manager")]
         public ActionResult Roles()
         {
-            var roles = RoleManager.Roles.ToList();
+            var roles = RoleManager.Roles.Where(r => r.Name != "SuperUser").ToList();
             return View(roles.Select(r => new RoleViewModel() { Id = r.Id, Name = r.Name }));
         }
 
+        [Authorize(Roles = "SuperUser, Manager")]
         public ActionResult CreateRole()
         {
             ViewBag.ErrorMessage = "";
             return View();
         }
 
+        [Authorize(Roles = "SuperUser, Manager")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult CreateRole([Bind(Include = "Name")] RoleViewModel model)
@@ -460,6 +463,7 @@ namespace ManufacturingCompany.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "SuperUser, Manager")]
         public ActionResult EditRole(string id)
         {
             var roleViewModel = new RoleViewModel();
@@ -470,6 +474,7 @@ namespace ManufacturingCompany.Controllers
             return View(roleViewModel);
         }
 
+        [Authorize(Roles = "SuperUser, Manager")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult EditRole([Bind(Include = "Id, Name")]RoleViewModel model)
@@ -494,7 +499,7 @@ namespace ManufacturingCompany.Controllers
         {
             var employee = UserManager.FindById(userID);
             var employeeRoles = UserManager.GetRoles(userID);
-            var allRoles = RoleManager.Roles.ToList();
+            var allRoles = RoleManager.Roles.Where(r => r.Name != "SuperUser").ToList();
 
             List<string> availableRoles = new List<string>();
             List<string> allRolesText = new List<string>();
@@ -526,16 +531,7 @@ namespace ManufacturingCompany.Controllers
         {
             // updating profile
             var resultUser = await UserManager.UpdateAsync(model.Employee);
-            if (model != null)
-            {
-                // assigning user to role here
-                var resultRole = await this.UserManager.AddToRoleAsync(model.UserID, model.RoleToBeAssigned);
-                if (!resultRole.Succeeded)
-                {
-                    ViewBag.ErrorMessage = "Cannot assign Role";
-                }
-            }
-            else
+            if (!resultUser.Succeeded)
             {
                 ViewBag.ErrorMessage = "Cannot update employee's profile";
             }
@@ -551,7 +547,7 @@ namespace ManufacturingCompany.Controllers
             ViewBag.ErrorMessage = "";
 
             var employeeRoles = UserManager.GetRoles(userID);
-            var allRoles = RoleManager.Roles.ToList();
+            var allRoles = RoleManager.Roles.Where(r => r.Name != "SuperUser").ToList();
             List<string> availableRoles = new List<string>();
             List<string> allRolesText = new List<string>();
             foreach (var i in allRoles) { availableRoles.Add(i.Name); allRolesText.Add(i.Name); }
@@ -589,6 +585,7 @@ namespace ManufacturingCompany.Controllers
             }
         }
 
+        [Authorize(Roles = "SuperUser, Manager")]
         public ActionResult RemoveUserRole(string userID, string role)
         {
             var result = UserManager.RemoveFromRole(userID, role);

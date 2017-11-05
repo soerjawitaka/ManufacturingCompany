@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity;
 
 namespace ManufacturingCompany.Controllers
 {
+    [Authorize]
     public class EmployeeTimesheetsController : Controller
     {
         private BusinessEntities db = new BusinessEntities();

@@ -1,7 +1,9 @@
 ﻿using ManufacturingCompany.Models;
+using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -10,6 +12,32 @@ namespace ManufacturingCompany.Controllers
     public class SelectUserController : Controller
     {
         private BusinessEntities db = new BusinessEntities();
+        private ApplicationRoleManager _roleManager;
+        private ApplicationUserManager _userManager;
+
+        public ApplicationRoleManager RoleManager
+        {
+            get
+            {
+                return _roleManager ?? HttpContext.GetOwinContext().Get<ApplicationRoleManager>();
+            }
+            private set
+            {
+                _roleManager = value;
+            }
+        }
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
 
         // GET: SelectUser
         public ActionResult Index(string actionName, string controllerName)
@@ -29,7 +57,7 @@ namespace ManufacturingCompany.Controllers
         // POST: SelectUser/Index
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index(string SearchBy, string inputForUserSearch, string actionName, string controllerName)
+        public async Task<ActionResult> Index(string SearchBy, string inputForUserSearch, string actionName, string controllerName)
         {
             List<string> searchBy = new List<string>();
             searchBy.Add("Email");
@@ -63,6 +91,15 @@ namespace ManufacturingCompany.Controllers
                 }
                 if (users.Count > 0)
                 {
+                    var duplicates = new List<AspNetUser>();
+                    foreach (var u in users) { duplicates.Add(u); }
+                    foreach (var i in duplicates)
+                    {
+                        if (await UserManager.IsInRoleAsync(i.Id, "SuperUser"))
+                        {
+                            users.Remove(i);
+                        }
+                    }
                     ViewBag.ErrorString = "";
                     return View(users);
                 }

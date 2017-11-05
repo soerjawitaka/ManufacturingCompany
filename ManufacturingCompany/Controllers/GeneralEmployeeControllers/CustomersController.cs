@@ -10,6 +10,7 @@ using ManufacturingCompany.Models;
 
 namespace ManufacturingCompany.Controllers.DepartmentControllers
 {
+    [Authorize]
     public class CustomersController : Controller
     {
         private BusinessEntities db = new BusinessEntities();
@@ -33,6 +34,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers
                 return HttpNotFound();
             }
             ViewBag.CustomerContacts = db.Customer_Contact.Where(cc => cc.customer_id == id).ToList();
+            ViewBag.ActionTitle = "Detailed ";
             return View(customer);
         }
 
@@ -42,6 +44,8 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers
         {
             var contact = new Customer_Contact() { customer_id = id };
             contact.Customer = db.Customers.Find(id);
+            ViewBag.ActionTitle = "Create ";
+            ViewBag.CustomerName = db.Customers.Find(id).customer_company_name;
             return View(contact);
         }
 
@@ -58,6 +62,8 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers
             }
 
             ViewBag.customer_id = new SelectList(db.Customers, "Id", "customer_company_name", customer_Contact.customer_id);
+            ViewBag.ActionTitle = "Create ";
+            ViewBag.CustomerName = db.Customers.Find(customer_Contact.customer_id).customer_company_name;
             return View(customer_Contact);
         }
 
@@ -74,6 +80,8 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers
                 return HttpNotFound();
             }
             ViewBag.customer_id = new SelectList(db.Customers, "Id", "customer_company_name", customer_Contact.customer_id);
+            ViewBag.ActionTitle = "Edit ";
+            ViewBag.CustomerName = db.Customers.Find(customer_Contact.customer_id).customer_company_name;
             return View(customer_Contact);
         }
 
@@ -91,6 +99,8 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers
                 return RedirectToAction("Details", new { id = customer_Contact.customer_id });
             }
             ViewBag.customer_id = new SelectList(db.Customers, "Id", "customer_company_name", customer_Contact.customer_id);
+            ViewBag.ActionTitle = "Edit ";
+            ViewBag.CustomerName = db.Customers.Find(customer_Contact.customer_id).customer_company_name;
             return View(customer_Contact);
         }
 
@@ -106,6 +116,8 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers
             {
                 return HttpNotFound();
             }
+            ViewBag.ActionTitle = "Delete ";
+            ViewBag.CustomerName = db.Customers.Find(customer_Contact.customer_id).customer_company_name;
             return View(customer_Contact);
         }
 
@@ -127,6 +139,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers
         {
             ViewBag.StateList = new SelectList(XmlHelper.GetStates(Server, Url), "Value", "Text");
             ViewBag.CountryList = new SelectList(XmlHelper.GetCountries(Server, Url), "Value", "Text");
+            ViewBag.ActionTitle = "Create ";
             return View();
         }
 
@@ -146,6 +159,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers
 
             ViewBag.StateList = new SelectList(XmlHelper.GetStates(Server, Url), "Value", "Text");
             ViewBag.CountryList = new SelectList(XmlHelper.GetCountries(Server, Url), "Value", "Text");
+            ViewBag.ActionTitle = "Create ";
             return View(customer);
         }
 
@@ -164,6 +178,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers
 
             ViewBag.StateList = new SelectList(XmlHelper.GetStates(Server, Url), "Value", "Text");
             ViewBag.CountryList = new SelectList(XmlHelper.GetCountries(Server, Url), "Value", "Text");
+            ViewBag.ActionTitle = "Edit ";
             return View(customer);
         }
 
@@ -183,6 +198,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers
 
             ViewBag.StateList = new SelectList(XmlHelper.GetStates(Server, Url), "Value", "Text");
             ViewBag.CountryList = new SelectList(XmlHelper.GetCountries(Server, Url), "Value", "Text");
+            ViewBag.ActionTitle = "Edit ";
             return View(customer);
         }
 
@@ -198,6 +214,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers
             {
                 return HttpNotFound();
             }
+            ViewBag.ActionTitle = "Delete ";
             return View(customer);
         }
 

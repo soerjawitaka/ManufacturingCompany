@@ -212,7 +212,6 @@
     <Compile Include="Classes\RoleViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\GeneralEmployeeControllers\CustomersController.cs" />
-    <Compile Include="Controllers\GeneralEmployeeControllers\Customer_ContactController.cs" />
     <Compile Include="Controllers\DepartmentControllers\FinanceController.cs" />
     <Compile Include="Controllers\DepartmentControllers\Finance\InvoicesController.cs" />
     <Compile Include="Controllers\DepartmentControllers\Finance\PaychecksController.cs" />
@@ -555,11 +554,6 @@
     <Content Include="Views\Customers\Details.cshtml" />
     <Content Include="Views\Customers\Edit.cshtml" />
     <Content Include="Views\Customers\Index.cshtml" />
-    <Content Include="Views\Customer_Contact\Create.cshtml" />
-    <Content Include="Views\Customer_Contact\Delete.cshtml" />
-    <Content Include="Views\Customer_Contact\Details.cshtml" />
-    <Content Include="Views\Customer_Contact\Edit.cshtml" />
-    <Content Include="Views\Customer_Contact\Index.cshtml" />
     <Content Include="Views\Customers\CreateContact.cshtml" />
     <Content Include="Views\Customers\EditContact.cshtml" />
     <Content Include="Views\Customers\DeleteContact.cshtml" />
@@ -573,6 +567,8 @@
     <Content Include="Views\Payrolls\_Payroll.cshtml" />
     <Content Include="Views\Timesheets\_Timesheet.cshtml" />
     <Content Include="Views\EmployeeTimesheets\_EmployeeTimesheet.cshtml" />
+    <Content Include="Views\Customers\_Customer.cshtml" />
+    <Content Include="Views\Customers\_CustomerContact.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201710061504292_InitialCreate.resx">
