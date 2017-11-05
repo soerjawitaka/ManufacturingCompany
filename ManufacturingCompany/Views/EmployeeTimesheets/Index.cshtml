@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Timesheet</h2>
+@Html.Partial("_EmployeeTimesheet")
 
 <p>
     @Html.ActionLink("Create New", "Create", "EmployeeTimesheets", null, htmlAttributes: new { @class = "btn btn-default" })

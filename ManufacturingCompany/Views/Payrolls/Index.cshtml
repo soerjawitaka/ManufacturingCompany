@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+@Html.Partial("_Payroll")
 
 <p>
     @Html.ActionLink("Create New", "Index", "SelectUser", new { actionName = "Create", controllerName = "Payrolls" }, htmlAttributes: new { @class = "btn btn-default" })

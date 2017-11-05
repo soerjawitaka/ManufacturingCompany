@@ -14,6 +14,11 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
     {
         private BusinessEntities db = new BusinessEntities();
 
+        public TimesheetsController()
+        {
+            ViewBag.ViewHeaderPartial = "_Finance";
+        }
+
         // GET: Timesheets
         public ActionResult Index()
         {
@@ -27,6 +32,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
             var timesheet = new Timesheet();
             timesheet.employee_id = userID;
             ViewBag.employee_username = db.AspNetUsers.Find(userID).UserName;
+            ViewBag.ActionTitle = "Create ";
             return View(timesheet);
         }
 
@@ -45,6 +51,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
             }
 
             ViewBag.employee_username = db.AspNetUsers.Find(timesheet.employee_id).UserName;
+            ViewBag.ActionTitle = "Create ";
             return View(timesheet);
         }
 
@@ -61,6 +68,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
                 return HttpNotFound();
             }
             ViewBag.employee_id = new SelectList(db.AspNetUsers, "Id", "Email", timesheet.employee_id);
+            ViewBag.ActionTitle = "Edit ";
             return View(timesheet);
         }
 
@@ -78,6 +86,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
                 return RedirectToAction("Index");
             }
             ViewBag.employee_id = new SelectList(db.AspNetUsers, "Id", "Email", timesheet.employee_id);
+            ViewBag.ActionTitle = "Edit ";
             return View(timesheet);
         }
 
@@ -93,6 +102,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
             {
                 return HttpNotFound();
             }
+            ViewBag.ActionTitle = "Delete ";
             return View(timesheet);
         }
 

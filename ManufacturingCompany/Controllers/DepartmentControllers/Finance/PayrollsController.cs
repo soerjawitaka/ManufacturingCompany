@@ -14,6 +14,11 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
     {
         private BusinessEntities db = new BusinessEntities();
 
+        public PayrollsController()
+        {
+            ViewBag.ViewHeaderPartial = "_Finance";
+        }
+
         // GET: Payrolls
         public ActionResult Index()
         {
@@ -35,6 +40,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
             {
                 return HttpNotFound();
             }
+            ViewBag.ActionTitle = "Detailed ";
             return View(payroll);
         }
 
@@ -44,6 +50,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
             var payroll = new Payroll();
             payroll.employee_id = userID;
             ViewBag.employee_username = db.AspNetUsers.Find(userID).UserName;
+            ViewBag.ActionTitle = "Create ";
             return View(payroll);
         }
 
@@ -81,6 +88,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
             }
             ViewBag.ErrorMessage = errorMessage;
             ViewBag.employee_username = db.AspNetUsers.Find(payroll.employee_id).UserName;
+            ViewBag.ActionTitle = "Create ";
             return View(payroll);
         }
 
@@ -97,6 +105,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
                 return HttpNotFound();
             }
             ViewBag.EmployeeUsername = db.AspNetUsers.Find(payroll.employee_id).UserName;
+            ViewBag.ActionTitle = "Edit ";
             return View(payroll);
         }
 
@@ -136,6 +145,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
             }
 
             ViewBag.ErrorMessage = errorMessage;
+            ViewBag.ActionTitle = "Edit ";
             return View(payroll);
         }
 
@@ -151,6 +161,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
             {
                 return HttpNotFound();
             }
+            ViewBag.ActionTitle = "Delete ";
             return View(payroll);
         }
 

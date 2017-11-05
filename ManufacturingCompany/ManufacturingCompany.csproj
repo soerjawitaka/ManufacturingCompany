@@ -563,6 +563,16 @@
     <Content Include="Views\Customers\CreateContact.cshtml" />
     <Content Include="Views\Customers\EditContact.cshtml" />
     <Content Include="Views\Customers\DeleteContact.cshtml" />
+    <Content Include="Views\Shared\_Finance.cshtml" />
+    <Content Include="Views\Shared\_Production.cshtml" />
+    <Content Include="Views\Shared\_Distribution.cshtml" />
+    <Content Include="Views\Shared\_Administration.cshtml" />
+    <Content Include="Views\Invoices\_Invoice.cshtml" />
+    <Content Include="Views\Paychecks\_Paycheck.cshtml" />
+    <Content Include="Views\Payments\_Payment.cshtml" />
+    <Content Include="Views\Payrolls\_Payroll.cshtml" />
+    <Content Include="Views\Timesheets\_Timesheet.cshtml" />
+    <Content Include="Views\EmployeeTimesheets\_EmployeeTimesheet.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201710061504292_InitialCreate.resx">

@@ -14,6 +14,11 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
     {
         private BusinessEntities db = new BusinessEntities();
 
+        public InvoicesController()
+        {
+            ViewBag.ViewHeaderPartial = "_Finance";
+        }
+
         // GET: Invoices
         public ActionResult Index()
         {
@@ -33,6 +38,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
             {
                 return HttpNotFound();
             }
+            ViewBag.ActionTitle = "Detailed ";
             return View(invoice);
         }
 
@@ -41,6 +47,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
         {
             ViewBag.employee_id = new SelectList(db.AspNetUsers, "Id", "Email");
             ViewBag.customer_id = new SelectList(db.Customers, "Id", "customer_company_name");
+            ViewBag.ActionTitle = "Create ";
             return View();
         }
 
@@ -60,6 +67,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
 
             ViewBag.employee_id = new SelectList(db.AspNetUsers, "Id", "Email", invoice.employee_id);
             ViewBag.customer_id = new SelectList(db.Customers, "Id", "customer_company_name", invoice.customer_id);
+            ViewBag.ActionTitle = "Create ";
             return View(invoice);
         }
 
@@ -77,6 +85,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
             }
             ViewBag.employee_id = new SelectList(db.AspNetUsers, "Id", "Email", invoice.employee_id);
             ViewBag.customer_id = new SelectList(db.Customers, "Id", "customer_company_name", invoice.customer_id);
+            ViewBag.ActionTitle = "Edit ";
             return View(invoice);
         }
 
@@ -95,6 +104,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
             }
             ViewBag.employee_id = new SelectList(db.AspNetUsers, "Id", "Email", invoice.employee_id);
             ViewBag.customer_id = new SelectList(db.Customers, "Id", "customer_company_name", invoice.customer_id);
+            ViewBag.ActionTitle = "Edit ";
             return View(invoice);
         }
 
@@ -110,6 +120,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
             {
                 return HttpNotFound();
             }
+            ViewBag.ActionTitle = "Delete ";
             return View(invoice);
         }
 

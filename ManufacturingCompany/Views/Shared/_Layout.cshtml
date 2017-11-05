@@ -10,26 +10,29 @@
     <link href="~/Content/jquery-ui.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-    <div class="navbar navbar-fixed-top navbar-expand-lg navbar-dark bg-primary">
-        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-         @Html.ActionLink("Your Company Name and/or Logo", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-        <div class="collapse navbar-collapse" id="navbarColor01">
-            <ul class="nav navbar-nav mr-auto">
-                @*<li>@Html.ActionLink("Home", "Index", "Home")</li>*@
-                @*@if (User.IsInRole("Manager") || User.IsInRole("Supervisor") || User.IsInRole("Employee"))
-                {*@
-                @if (Request.IsAuthenticated)
-                {
-                    <li class="nav-item">@Html.ActionLink("Timesheet", "Index", "EmployeeTimesheets", null, htmlAttributes: new { @class = "nav-link btn btn-secondary", @style = "margin-left:5px;" })</li>
-                    <li class="nav-item">@Html.ActionLink("Customers", "Index", "Customers", null, htmlAttributes: new { @class = "nav-link btn btn-secondary", @style = "margin-left:5px;" })</li>
-                }
-                    
-            </ul>
-            @Html.Partial("_LoginPartial")
+    <header>
+        <div class="navbar navbar-fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            @Html.ActionLink("Your Company Name and/or Logo", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            <div class="collapse navbar-collapse" id="navbarColor01">
+                <ul class="nav navbar-nav mr-auto">
+                    @*<li>@Html.ActionLink("Home", "Index", "Home")</li>*@
+                    @*@if (User.IsInRole("Manager") || User.IsInRole("Supervisor") || User.IsInRole("Employee"))
+                        {*@
+                    @if (Request.IsAuthenticated)
+                    {
+                        <li class="nav-item">@Html.ActionLink("Timesheet", "Index", "EmployeeTimesheets", null, htmlAttributes: new { @class = "nav-link btn btn-secondary", @style = "margin-left:5px;" })</li>
+                        <li class="nav-item">@Html.ActionLink("Customers", "Index", "Customers", null, htmlAttributes: new { @class = "nav-link btn btn-secondary", @style = "margin-left:5px;" })</li>
+                    }
+
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
         </div>
-    </div>
+    </header>
+
     <div class="container navbar">
         @*@if (User.IsInRole("SuperUser") || User.IsInRole("Manager"))
         {*@
@@ -37,9 +40,16 @@
         @*}*@
         
     </div>
-    <div class="container body-content">
-        @RenderBody()
-    </div>
+
+    <main>
+        <div class="container body-content">
+            @if (ViewBag.ViewHeaderPartial != null)
+            {
+                <div>@Html.Partial((string)ViewBag.ViewHeaderPartial)</div>
+            }
+            @RenderBody()
+        </div>
+    </main>
 
     <hr />
 

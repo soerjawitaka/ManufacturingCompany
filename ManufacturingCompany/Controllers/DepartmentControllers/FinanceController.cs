@@ -8,6 +8,10 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers
 {
     public class FinanceController : Controller
     {
+        public FinanceController()
+        {
+            ViewBag.ViewHeaderPartial = "_Finance";
+        }
         // GET: Finance
         public ActionResult Index()
         {

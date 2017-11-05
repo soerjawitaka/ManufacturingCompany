@@ -27,6 +27,7 @@ namespace ManufacturingCompany.Controllers
         public ActionResult Create()
         {
             ViewBag.Username = User.Identity.GetUserName();
+            ViewBag.ActionTitle = "Create ";
             return View();
         }
 
@@ -46,6 +47,7 @@ namespace ManufacturingCompany.Controllers
             }
 
             ViewBag.employee_id = new SelectList(db.AspNetUsers, "Id", "Email", timesheet.employee_id);
+            ViewBag.ActionTitle = "Create ";
             return View(timesheet);
         }
 
@@ -62,6 +64,7 @@ namespace ManufacturingCompany.Controllers
                 return HttpNotFound();
             }
             ViewBag.employee_id = new SelectList(db.AspNetUsers, "Id", "Email", timesheet.employee_id);
+            ViewBag.ActionTitle = "Edit ";
             return View(timesheet);
         }
 
@@ -80,6 +83,7 @@ namespace ManufacturingCompany.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.employee_id = new SelectList(db.AspNetUsers, "Id", "Email", timesheet.employee_id);
+            ViewBag.ActionTitle = "Edit ";
             return View(timesheet);
         }
 
@@ -95,6 +99,7 @@ namespace ManufacturingCompany.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.ActionTitle = "Delete ";
             return View(timesheet);
         }
 

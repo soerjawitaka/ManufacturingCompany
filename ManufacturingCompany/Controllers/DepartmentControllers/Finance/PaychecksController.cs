@@ -16,6 +16,11 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
         private ApplicationDbContext db = new ApplicationDbContext();
         private BusinessEntities dbBusiness = new BusinessEntities();
 
+        public PaychecksController()
+        {
+            ViewBag.ViewHeaderPartial = "_Finance";
+        }
+
         // GET: Paychecks
         public ActionResult Index()
         {
@@ -41,6 +46,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
             {
                 return HttpNotFound();
             }
+            ViewBag.ActionTitle = "Detailed ";
             return View(paycheck);
         }
 
@@ -49,6 +55,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
         {
             var paycheck = new PaycheckModeModel();
             paycheck.SetPayroll(payrollid);
+            ViewBag.ActionTitle = "Create ";
             return View(paycheck);
         }
 
@@ -68,6 +75,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
                 return RedirectToAction("Index");
             }
 
+            ViewBag.ActionTitle = "Create ";
             return View(paycheck);
         }
 
@@ -83,6 +91,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
             {
                 return HttpNotFound();
             }
+            ViewBag.ActionTitle = "Edit ";
             return View(paycheck);
         }
 
@@ -95,6 +104,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
                 return HttpNotFound();
             }
             paycheck.SetPayroll(payrollid);
+            ViewBag.ActionTitle = "Edit Payroll for ";
             return View(paycheck);
         }
 
@@ -126,6 +136,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
                 return RedirectToAction("Index");
             }
 
+            ViewBag.ActionTitle = "Edit ";
             return View(paycheck);
         }
 
@@ -141,6 +152,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
             {
                 return HttpNotFound();
             }
+            ViewBag.ActionTitle = "Delete ";
             return View(paycheck);
         }
 

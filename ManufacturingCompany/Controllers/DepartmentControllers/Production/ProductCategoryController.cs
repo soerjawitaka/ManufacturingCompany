@@ -14,6 +14,11 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Production
     {
         private BusinessEntities db = new BusinessEntities();
 
+        public ProductCategoryController()
+        {
+            ViewBag.ViewHeaderPartial = "_Production";
+        }
+
         // GET: ProductCategory
         public ActionResult Index()
         {

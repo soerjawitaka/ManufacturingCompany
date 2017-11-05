@@ -8,6 +8,11 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers
 {
     public class ProductionController : Controller
     {
+        public ProductionController()
+        {
+            ViewBag.ViewHeaderPartial = "_Production";
+        }
+
         // GET: Production
         public ActionResult Index()
         {

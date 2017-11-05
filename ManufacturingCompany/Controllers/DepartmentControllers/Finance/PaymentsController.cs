@@ -14,6 +14,11 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
     {
         private BusinessEntities db = new BusinessEntities();
 
+        public PaymentsController()
+        {
+            ViewBag.ViewHeaderPartial = "_Finance";
+        }
+
         // GET: Payments
         public ActionResult Index()
         {
@@ -33,6 +38,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
             {
                 return HttpNotFound();
             }
+            ViewBag.ActionTitle = "Detailed ";
             return View(payment);
         }
 
@@ -40,6 +46,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
         public ActionResult Create()
         {
             ViewBag.invoice_id = new SelectList(db.Invoices, "Id", "employee_id");
+            ViewBag.ActionTitle = "Create ";
             return View();
         }
 
@@ -58,6 +65,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
             }
 
             ViewBag.invoice_id = new SelectList(db.Invoices, "Id", "employee_id", payment.invoice_id);
+            ViewBag.ActionTitle = "Create ";
             return View(payment);
         }
 
@@ -74,6 +82,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
                 return HttpNotFound();
             }
             ViewBag.invoice_id = new SelectList(db.Invoices, "Id", "employee_id", payment.invoice_id);
+            ViewBag.ActionTitle = "Edit ";
             return View(payment);
         }
 
@@ -91,6 +100,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
                 return RedirectToAction("Index");
             }
             ViewBag.invoice_id = new SelectList(db.Invoices, "Id", "employee_id", payment.invoice_id);
+            ViewBag.ActionTitle = "Edit ";
             return View(payment);
         }
 
@@ -106,6 +116,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
             {
                 return HttpNotFound();
             }
+            ViewBag.ActionTitle = "Delete ";
             return View(payment);
         }
 
