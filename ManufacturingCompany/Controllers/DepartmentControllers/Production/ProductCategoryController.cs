@@ -28,6 +28,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Production
         // GET: ProductCategory/Create
         public ActionResult Create()
         {
+            ViewBag.ActionTitle = "Create ";
             return View();
         }
 
@@ -44,7 +45,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Production
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
+            ViewBag.ActionTitle = "Create ";
             return View(product_Category);
         }
 
@@ -60,6 +61,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Production
             {
                 return HttpNotFound();
             }
+            ViewBag.ActionTitle = "Edit ";
             return View(product_Category);
         }
 
@@ -76,6 +78,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Production
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.ActionTitle = "Edit ";
             return View(product_Category);
         }
 
@@ -91,6 +94,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Production
             {
                 return HttpNotFound();
             }
+            ViewBag.ActionTitle = "Delete ";
             return View(product_Category);
         }
 

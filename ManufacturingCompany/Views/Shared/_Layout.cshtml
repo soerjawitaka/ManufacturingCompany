@@ -20,8 +20,6 @@
             <div class="collapse navbar-collapse" id="navbarColor01">
                 <ul class="nav navbar-nav mr-auto">
                     <li class="nav-item">@Html.ActionLink("Home", "Index", "Home", null, htmlAttributes: new { @class = "nav-link btn btn-secondary", @style = "margin-left:20px;" })</li>
-                    @*@if (User.IsInRole("Manager") || User.IsInRole("Supervisor") || User.IsInRole("Employee"))
-                        {*@
                     @if (Request.IsAuthenticated)
                     {
                         <li class="nav-item">@Html.ActionLink("Timesheet", "Index", "EmployeeTimesheets", null, htmlAttributes: new { @class = "nav-link btn btn-secondary", @style = "margin-left:5px;" })</li>
@@ -35,10 +33,10 @@
     </header>
 
     <div class="container navbar">
-        @if (User.IsInRole("SuperUser") || User.IsInRole("Manager"))
-        {
+        @*@if (User.IsInRole("SuperUser") || User.IsInRole("Manager"))
+        {*@
             @Html.Partial("_ManagerMenu")
-        }
+        @*}*@
         
     </div>
 

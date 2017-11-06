@@ -309,6 +309,7 @@ namespace ManufacturingCompany.Controllers
         // GET: /Manage/ChangeProfile
         public ActionResult ChangeEmployeeProfile(string userID)
         {
+            ViewBag.Username = UserManager.FindById(userID).UserName;
             ViewBag.StateList = new SelectList(XmlHelper.GetStates(Server, Url), "Value", "Text");
             return View((ApplicationUser)(UserManager.FindById(userID)));
         }
@@ -342,6 +343,7 @@ namespace ManufacturingCompany.Controllers
             int result = db.SaveChanges();
             if (result == 0)
             {
+                ViewBag.Username = UserManager.FindById(user.Id).UserName;
                 return View(user);
             }
             return RedirectToAction("ManageEmployee", new { userID = updatedUser.Id });

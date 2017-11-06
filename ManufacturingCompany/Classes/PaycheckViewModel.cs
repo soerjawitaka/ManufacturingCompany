@@ -25,7 +25,7 @@ namespace ManufacturingCompany.Classes
             return newPaycheck;
         }
 
-        public new static Paycheck ToBase(PaycheckViewModel model)
+        public static Paycheck ToBase(PaycheckViewModel model)
         {
             model.SetPaymentType();
 
@@ -43,8 +43,10 @@ namespace ManufacturingCompany.Classes
 
     }
 
-    public class PaycheckViewModel_Metadata
+    public class PaycheckViewModel_Metadata : Paycheck_Partial_Metadata
     {
+        [Required]
+        [Display(Name = "Paycheck Amount")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:c}")]
         public decimal payment_amount { get; set; }
     }

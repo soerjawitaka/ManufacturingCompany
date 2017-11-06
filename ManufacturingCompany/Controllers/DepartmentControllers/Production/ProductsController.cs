@@ -44,6 +44,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Production
             {
                 return HttpNotFound();
             }
+            ViewBag.ActionTitle = "Detailed ";
             return View(product);
         }
 
@@ -51,6 +52,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Production
         public ActionResult Create()
         {
             ViewBag.product_category_id = new SelectList(db.Product_Category, "Id", "category_name");
+            ViewBag.ActionTitle = "Create ";
             return View();
         }
 
@@ -69,6 +71,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Production
             }
 
             ViewBag.product_category_id = new SelectList(db.Product_Category, "Id", "category_name", product.product_category_id);
+            ViewBag.ActionTitle = "Create ";
             return View(product);
         }
 
@@ -85,6 +88,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Production
                 return HttpNotFound();
             }
             ViewBag.product_category_id = new SelectList(db.Product_Category, "Id", "category_name", product.product_category_id);
+            ViewBag.ActionTitle = "Edit ";
             return View(product);
         }
 
@@ -102,6 +106,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Production
                 return RedirectToAction("Index");
             }
             ViewBag.product_category_id = new SelectList(db.Product_Category, "Id", "category_name", product.product_category_id);
+            ViewBag.ActionTitle = "Edit ";
             return View(product);
         }
 
@@ -117,6 +122,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Production
             {
                 return HttpNotFound();
             }
+            ViewBag.ActionTitle = "Delete ";
             return View(product);
         }
 

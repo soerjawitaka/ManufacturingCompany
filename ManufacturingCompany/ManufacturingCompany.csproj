@@ -569,6 +569,8 @@
     <Content Include="Views\EmployeeTimesheets\_EmployeeTimesheet.cshtml" />
     <Content Include="Views\Customers\_Customer.cshtml" />
     <Content Include="Views\Customers\_CustomerContact.cshtml" />
+    <Content Include="Views\ProductCategory\_ProductCategory.cshtml" />
+    <Content Include="Views\Products\_Product.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201710061504292_InitialCreate.resx">
