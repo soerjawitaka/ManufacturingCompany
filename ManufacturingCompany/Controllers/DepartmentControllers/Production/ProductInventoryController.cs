@@ -7,126 +7,126 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ManufacturingCompany.Models;
-using ManufacturingCompany.Classes;
 
 namespace ManufacturingCompany.Controllers.DepartmentControllers.Production
 {
-    public class ProductsController : Controller
+    public class ProductInventoryController : Controller
     {
         private BusinessEntities db = new BusinessEntities();
 
-        public ProductsController()
+        public ProductInventoryController()
         {
             ViewBag.ViewHeaderPartial = "_Production";
         }
 
-        // GET: Products
+        // GET: ProductInventory
         public ActionResult Index()
         {
-            return View(db.Products.Include(p => p.Product_Category).ToList());
+            var product_Inventory = db.Product_Inventory.Include(p => p.Product);
+            return View(product_Inventory.ToList());
         }
 
-        // GET: Products/Details/5
+        // GET: ProductInventory/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
-            if (product == null)
+            Product_Inventory product_Inventory = db.Product_Inventory.Find(id);
+            if (product_Inventory == null)
             {
                 return HttpNotFound();
             }
             ViewBag.ActionTitle = "Detailed ";
-            return View(product);
+            return View(product_Inventory);
         }
 
-        // GET: Products/Create
+        // GET: ProductInventory/Create
         public ActionResult Create()
         {
-            ViewBag.product_category_id = new SelectList(db.Product_Category, "Id", "category_name");
+            ViewBag.product_id = new SelectList(db.Products, "Id", "product_name");
             ViewBag.ActionTitle = "Create ";
             return View();
         }
 
-        // POST: Products/Create
+        // POST: ProductInventory/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,product_name,product_short_description,product_long_description,product_note,product_unit_cost,product_unit_price,product_material_id,product_category_id")] Product product)
+        public ActionResult Create([Bind(Include = "Id,product_id,unit_quantity,unit_per_package,per_package_cost,per_package_price")] Product_Inventory product_Inventory)
         {
             if (ModelState.IsValid)
             {
-                db.Products.Add(product);
+                db.Product_Inventory.Add(product_Inventory);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.product_category_id = new SelectList(db.Product_Category, "Id", "category_name", product.product_category_id);
+            ViewBag.product_id = new SelectList(db.Products, "Id", "product_name", product_Inventory.product_id);
             ViewBag.ActionTitle = "Create ";
-            return View(product);
+            return View(product_Inventory);
         }
 
-        // GET: Products/Edit/5
+        // GET: ProductInventory/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
-            if (product == null)
+            Product_Inventory product_Inventory = db.Product_Inventory.Find(id);
+            if (product_Inventory == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.product_category_id = new SelectList(db.Product_Category, "Id", "category_name", product.product_category_id);
+            ViewBag.product_id = new SelectList(db.Products, "Id", "product_name", product_Inventory.product_id);
             ViewBag.ActionTitle = "Edit ";
-            return View(product);
+            return View(product_Inventory);
         }
 
-        // POST: Products/Edit/5
+        // POST: ProductInventory/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,product_name,product_short_description,product_long_description,product_note,product_unit_cost,product_unit_price,product_material_id,product_category_id")] Product product)
+        public ActionResult Edit([Bind(Include = "Id,product_id,unit_quantity,unit_per_package,per_package_cost,per_package_price")] Product_Inventory product_Inventory)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(product).State = EntityState.Modified;
+                db.Entry(product_Inventory).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.product_category_id = new SelectList(db.Product_Category, "Id", "category_name", product.product_category_id);
+            ViewBag.product_id = new SelectList(db.Products, "Id", "product_name", product_Inventory.product_id);
             ViewBag.ActionTitle = "Edit ";
-            return View(product);
+            return View(product_Inventory);
         }
 
-        // GET: Products/Delete/5
+        // GET: ProductInventory/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
-            if (product == null)
+            Product_Inventory product_Inventory = db.Product_Inventory.Find(id);
+            if (product_Inventory == null)
             {
                 return HttpNotFound();
             }
             ViewBag.ActionTitle = "Delete ";
-            return View(product);
+            return View(product_Inventory);
         }
 
-        // POST: Products/Delete/5
+        // POST: ProductInventory/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Product product = db.Products.Find(id);
-            db.Products.Remove(product);
+            Product_Inventory product_Inventory = db.Product_Inventory.Find(id);
+            db.Product_Inventory.Remove(product_Inventory);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -7,126 +7,115 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ManufacturingCompany.Models;
-using ManufacturingCompany.Classes;
 
 namespace ManufacturingCompany.Controllers.DepartmentControllers.Production
 {
-    public class ProductsController : Controller
+    public class MaterialStockController : Controller
     {
         private BusinessEntities db = new BusinessEntities();
 
-        public ProductsController()
-        {
-            ViewBag.ViewHeaderPartial = "_Production";
-        }
-
-        // GET: Products
+        // GET: MaterialStock
         public ActionResult Index()
         {
-            return View(db.Products.Include(p => p.Product_Category).ToList());
+            var material_Stock = db.Material_Stock.Include(m => m.Material);
+            return View(material_Stock.ToList());
         }
 
-        // GET: Products/Details/5
+        // GET: MaterialStock/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
-            if (product == null)
+            Material_Stock material_Stock = db.Material_Stock.Find(id);
+            if (material_Stock == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.ActionTitle = "Detailed ";
-            return View(product);
+            return View(material_Stock);
         }
 
-        // GET: Products/Create
+        // GET: MaterialStock/Create
         public ActionResult Create()
         {
-            ViewBag.product_category_id = new SelectList(db.Product_Category, "Id", "category_name");
-            ViewBag.ActionTitle = "Create ";
+            ViewBag.material_id = new SelectList(db.Materials, "Id", "material_name");
             return View();
         }
 
-        // POST: Products/Create
+        // POST: MaterialStock/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,product_name,product_short_description,product_long_description,product_note,product_unit_cost,product_unit_price,product_material_id,product_category_id")] Product product)
+        public ActionResult Create([Bind(Include = "Id,material_id,material_unit_measure,material_unit_quantity,material_unit_cost")] Material_Stock material_Stock)
         {
             if (ModelState.IsValid)
             {
-                db.Products.Add(product);
+                db.Material_Stock.Add(material_Stock);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.product_category_id = new SelectList(db.Product_Category, "Id", "category_name", product.product_category_id);
-            ViewBag.ActionTitle = "Create ";
-            return View(product);
+            ViewBag.material_id = new SelectList(db.Materials, "Id", "material_name", material_Stock.material_id);
+            return View(material_Stock);
         }
 
-        // GET: Products/Edit/5
+        // GET: MaterialStock/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
-            if (product == null)
+            Material_Stock material_Stock = db.Material_Stock.Find(id);
+            if (material_Stock == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.product_category_id = new SelectList(db.Product_Category, "Id", "category_name", product.product_category_id);
-            ViewBag.ActionTitle = "Edit ";
-            return View(product);
+            ViewBag.material_id = new SelectList(db.Materials, "Id", "material_name", material_Stock.material_id);
+            return View(material_Stock);
         }
 
-        // POST: Products/Edit/5
+        // POST: MaterialStock/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,product_name,product_short_description,product_long_description,product_note,product_unit_cost,product_unit_price,product_material_id,product_category_id")] Product product)
+        public ActionResult Edit([Bind(Include = "Id,material_id,material_unit_measure,material_unit_quantity,material_unit_cost")] Material_Stock material_Stock)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(product).State = EntityState.Modified;
+                db.Entry(material_Stock).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.product_category_id = new SelectList(db.Product_Category, "Id", "category_name", product.product_category_id);
-            ViewBag.ActionTitle = "Edit ";
-            return View(product);
+            ViewBag.material_id = new SelectList(db.Materials, "Id", "material_name", material_Stock.material_id);
+            return View(material_Stock);
         }
 
-        // GET: Products/Delete/5
+        // GET: MaterialStock/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
-            if (product == null)
+            Material_Stock material_Stock = db.Material_Stock.Find(id);
+            if (material_Stock == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.ActionTitle = "Delete ";
-            return View(product);
+            return View(material_Stock);
         }
 
-        // POST: Products/Delete/5
+        // POST: MaterialStock/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Product product = db.Products.Find(id);
-            db.Products.Remove(product);
+            Material_Stock material_Stock = db.Material_Stock.Find(id);
+            db.Material_Stock.Remove(material_Stock);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

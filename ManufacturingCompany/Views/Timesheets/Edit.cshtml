@@ -18,6 +18,13 @@
         @Html.HiddenFor(model => model.employee_id)
 
         <div class="form-group">
+            @Html.LabelFor(model => model.AspNetUser.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.AspNetUser.UserName, new { @class = "form-control", @disabled = "true" })
+            </div>
+        </div>
+
+        <div class="form-group">
             @Html.LabelFor(model => model.punch_in_time, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.TextBoxFor(model => model.punch_in_time, new { @class = "form-control", @type = "time" })

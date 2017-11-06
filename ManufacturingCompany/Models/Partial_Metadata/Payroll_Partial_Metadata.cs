@@ -19,12 +19,12 @@ namespace ManufacturingCompany.Models
 
         private void SetTimesheets()
         {
-            this.assignedTimesheet = db.Timesheets.Where(t => t.timesheet_date >= this.period_begin && t.timesheet_date <= this.period_end && t.is_in_payroll == false).ToList();
+            this.assignedTimesheet = db.Timesheets.Where(t => t.timesheet_date >= this.period_begin && t.timesheet_date <= this.period_end && t.is_in_payroll == false && t.employee_id == this.employee_id).ToList();
         }
 
         public int InitializeTimesheets()
         {
-            this.assignedTimesheet = db.Timesheets.Where(t => t.timesheet_date >= this.period_begin && t.timesheet_date <= this.period_end).ToList();
+            this.assignedTimesheet = db.Timesheets.Where(t => t.timesheet_date >= this.period_begin && t.timesheet_date <= this.period_end && t.employee_id == this.employee_id).ToList();
             foreach (var i in this.assignedTimesheet)
             {
                 var timesheet = db.Timesheets.Find(i.Id);
@@ -36,7 +36,7 @@ namespace ManufacturingCompany.Models
 
         public int ChangeTimesheetsStatus()
         {
-            this.assignedTimesheet = db.Timesheets.Where(t => t.timesheet_date >= this.period_begin && t.timesheet_date <= this.period_end).ToList();
+            this.assignedTimesheet = db.Timesheets.Where(t => t.timesheet_date >= this.period_begin && t.timesheet_date <= this.period_end && t.employee_id == this.employee_id).ToList();
             foreach (var i in this.assignedTimesheet)
             {
                 var timesheet = db.Timesheets.Find(i.Id);
@@ -48,7 +48,7 @@ namespace ManufacturingCompany.Models
 
         public bool ThereAreAvailableTimesheets()
         {
-            var availableTimesheets = db.Timesheets.Where(t => t.timesheet_date >= this.period_begin && t.timesheet_date <= this.period_end && t.is_in_payroll == false).ToList();
+            var availableTimesheets = db.Timesheets.Where(t => t.timesheet_date >= this.period_begin && t.timesheet_date <= this.period_end && t.is_in_payroll == false && t.employee_id == this.employee_id).ToList();
             if (availableTimesheets.Count > 0)
             {
                 return true;

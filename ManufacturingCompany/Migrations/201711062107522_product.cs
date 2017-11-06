@@ -3,7 +3,7 @@ namespace ManufacturingCompany.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Product : DbMigration
+    public partial class product : DbMigration
     {
         public override void Up()
         {
@@ -19,7 +19,6 @@ namespace ManufacturingCompany.Migrations
             DropIndex("dbo.Product", new[] { "Product_Category_Id" });
             DropIndex("dbo.Equipment_Maintenance", new[] { "Equipment_Id" });
             DropIndex("dbo.Material_Stock", new[] { "Material_Id" });
-            AddColumn("dbo.Product", "Discriminator", c => c.String(nullable: false, maxLength: 128));
             AlterColumn("dbo.Paycheck", "Payroll_Id", c => c.Int());
             AlterColumn("dbo.Paycheck", "payroll_id", c => c.Int(nullable: false));
             AlterColumn("dbo.Delivery_Lineitem", "Delivery_Schedule_Id", c => c.Int());
@@ -56,10 +55,12 @@ namespace ManufacturingCompany.Migrations
             CreateIndex("dbo.Product", "Product_Category_Id");
             CreateIndex("dbo.Equipment_Maintenance", "Equipment_Id");
             CreateIndex("dbo.Material_Stock", "Material_Id");
+            DropColumn("dbo.Product", "Discriminator");
         }
         
         public override void Down()
         {
+            AddColumn("dbo.Product", "Discriminator", c => c.String(nullable: false, maxLength: 128));
             DropIndex("dbo.Material_Stock", new[] { "Material_Id" });
             DropIndex("dbo.Equipment_Maintenance", new[] { "Equipment_Id" });
             DropIndex("dbo.Product", new[] { "Product_Category_Id" });
@@ -96,7 +97,6 @@ namespace ManufacturingCompany.Migrations
             AlterColumn("dbo.Delivery_Lineitem", "Delivery_Schedule_Id", c => c.Int(nullable: false));
             AlterColumn("dbo.Paycheck", "payroll_id", c => c.Int());
             AlterColumn("dbo.Paycheck", "Payroll_Id", c => c.Int(nullable: false));
-            DropColumn("dbo.Product", "Discriminator");
             CreateIndex("dbo.Material_Stock", "Material_Id");
             CreateIndex("dbo.Equipment_Maintenance", "Equipment_Id");
             CreateIndex("dbo.Product", "Product_Category_Id");

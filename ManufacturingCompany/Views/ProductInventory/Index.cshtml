@@ -1,0 +1,58 @@
+﻿@model IEnumerable<ManufacturingCompany.Models.Product_Inventory>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.Partial("_ProductInventory")
+
+<p>
+    @Html.ActionLink("Create New", "Index", "SelectProduct", new { actionName = "Create", controllerName = "ProductInventory" }, htmlAttributes: new { @class = "btn btn-default" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Product.product_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.unit_quantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.unit_per_package)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.per_package_cost)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.per_package_price)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Product.product_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.unit_quantity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.unit_per_package)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.per_package_cost)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.per_package_price)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }, htmlAttributes: new { @class = "btn btn-warning" }) 
+            @Html.ActionLink("Details", "Details", new { id=item.Id }, htmlAttributes: new { @class = "btn btn-default" }) 
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id }, htmlAttributes: new { @class = "btn btn-danger" })
+        </td>
+    </tr>
+}
+
+</table>

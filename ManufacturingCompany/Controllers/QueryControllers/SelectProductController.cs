@@ -24,7 +24,7 @@ namespace ManufacturingCompany.Controllers
             ViewBag.SearchBy = new SelectList(searchBy);
             ViewBag.ActionName = actionName;
             ViewBag.ControllerName = controllerName;
-            return View();
+            return View(db.Products.ToList());
         }
 
         // POST: SelectProduct/Index
