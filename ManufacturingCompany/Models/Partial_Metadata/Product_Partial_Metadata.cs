@@ -27,6 +27,10 @@ namespace ManufacturingCompany.Models
         public string product_note { get; set; }
 
         [Required]
+        [Display(Name = "Unit Measure")]
+        public string product_unit_measure { get; set; }
+
+        [Required]
         [Display(Name = "Unit Cost")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:c}")]
         public decimal product_unit_cost { get; set; }

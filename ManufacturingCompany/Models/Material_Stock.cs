@@ -14,6 +14,12 @@ namespace ManufacturingCompany.Models
     
     public partial class Material_Stock
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Material_Stock()
+        {
+            this.Products = new HashSet<Product>();
+        }
+    
         public int Id { get; set; }
         public int material_id { get; set; }
         public string material_unit_measure { get; set; }
@@ -21,5 +27,7 @@ namespace ManufacturingCompany.Models
         public decimal material_unit_cost { get; set; }
     
         public virtual Material Material { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Product> Products { get; set; }
     }
 }

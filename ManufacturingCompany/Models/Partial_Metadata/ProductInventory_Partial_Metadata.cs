@@ -10,9 +10,20 @@ namespace ManufacturingCompany.Models
     [MetadataType(typeof(ProductInventory_Partial_Metadata))]
     public partial class Product_Inventory
     {
-        public void SetCostPerPackage()
+        public void CalculatePackage()
         {
+            var db = new BusinessEntities();
+            if (this.Product == null)
+            {
+                this.Product = db.Products.Find(this.product_id);
+                db.Dispose();
+            }
             this.per_package_cost = this.Product.product_unit_cost * this.unit_per_package;
+            this.per_package_price = this.Product.product_unit_price * this.unit_per_package;
+            if (this.packaging_cost != null)
+            {
+                this.per_package_price += Convert.ToDecimal(this.packaging_cost);
+            }
         }
     }
 
@@ -30,6 +41,10 @@ namespace ManufacturingCompany.Models
         [Display(Name = "Cost per Package")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:c}")]
         public decimal per_package_cost { get; set; }
+
+        [Display(Name = "Packaging Cost")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:c}")]
+        public Nullable<decimal> packaging_cost { get; set; }
 
         [Required]
         [Display(Name = "Price per Package")]

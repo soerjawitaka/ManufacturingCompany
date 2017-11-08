@@ -313,18 +313,18 @@
     <Compile Include="Models\Invoice_Deliver_Assignment.cs">
       <DependentUpon>AssignmentModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Invoice_Lineitem.cs">
       <DependentUpon>BusinessModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Lineitem.cs" />
+    <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Material.cs">
       <DependentUpon>BusinessModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Material_Stock.cs">
       <DependentUpon>BusinessModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\Lineitem.cs" />
-    <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Partial_Metadata\AspNetUser_Partial_Metadata.cs" />
     <Compile Include="Models\Partial_Metadata\Customer_Contact_Partial_Metadata.cs" />
     <Compile Include="Models\Partial_Metadata\Customer_Partial_Metadata.cs" />

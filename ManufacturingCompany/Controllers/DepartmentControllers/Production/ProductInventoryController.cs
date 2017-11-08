@@ -43,11 +43,11 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Production
         }
 
         // GET: ProductInventory/Create
-        public ActionResult Create()
+        public ActionResult Create(int? productID)
         {
-            ViewBag.product_id = new SelectList(db.Products, "Id", "product_name");
+            var inventory = new Product_Inventory() { product_id = Convert.ToInt32(productID), Product = db.Products.Find(productID) };
             ViewBag.ActionTitle = "Create ";
-            return View();
+            return View(inventory);
         }
 
         // POST: ProductInventory/Create
@@ -55,10 +55,11 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Production
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,product_id,unit_quantity,unit_per_package,per_package_cost,per_package_price")] Product_Inventory product_Inventory)
+        public ActionResult Create([Bind(Include = "Id,product_id,unit_quantity,unit_per_package,packaging_cost")] Product_Inventory product_Inventory)
         {
             if (ModelState.IsValid)
             {
+                product_Inventory.CalculatePackage();
                 db.Product_Inventory.Add(product_Inventory);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -91,10 +92,11 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Production
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,product_id,unit_quantity,unit_per_package,per_package_cost,per_package_price")] Product_Inventory product_Inventory)
+        public ActionResult Edit([Bind(Include = "Id,product_id,unit_quantity,unit_per_package,per_package_cost,packaging_cost,per_package_price")] Product_Inventory product_Inventory)
         {
             if (ModelState.IsValid)
             {
+                product_Inventory.CalculatePackage();
                 db.Entry(product_Inventory).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

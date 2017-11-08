@@ -18,6 +18,7 @@ namespace ManufacturingCompany.Models
         public Payroll()
         {
             this.Paychecks = new HashSet<Paycheck>();
+            this.Timesheets = new HashSet<Timesheet>();
         }
     
         public int Id { get; set; }
@@ -33,5 +34,7 @@ namespace ManufacturingCompany.Models
         public virtual AspNetUser AspNetUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Paycheck> Paychecks { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Timesheet> Timesheets { get; set; }
     }
 }

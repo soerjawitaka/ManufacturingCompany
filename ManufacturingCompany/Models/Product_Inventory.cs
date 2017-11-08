@@ -26,6 +26,7 @@ namespace ManufacturingCompany.Models
         public int unit_quantity { get; set; }
         public int unit_per_package { get; set; }
         public decimal per_package_cost { get; set; }
+        public Nullable<decimal> packaging_cost { get; set; }
         public decimal per_package_price { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

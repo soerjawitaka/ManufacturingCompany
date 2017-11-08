@@ -27,6 +27,7 @@ namespace ManufacturingCompany.Models
         public string equipment_note { get; set; }
         public decimal equipment_cost { get; set; }
         public Nullable<int> product_id { get; set; }
+        public bool in_maintenance { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Equipment_Maintenance> Equipment_Maintenance { get; set; }

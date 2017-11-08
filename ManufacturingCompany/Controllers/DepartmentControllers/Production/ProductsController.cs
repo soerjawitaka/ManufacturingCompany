@@ -55,7 +55,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Production
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,product_name,product_short_description,product_long_description,product_note,product_unit_cost,product_unit_price,product_material_id,product_category_id")] Product product)
+        public ActionResult Create([Bind(Include = "Id,product_name,product_short_description,product_long_description,product_note,product_unit_measure,product_unit_cost,product_unit_price,product_material_id,product_category_id")] Product product)
         {
             if (ModelState.IsValid)
             {
@@ -91,7 +91,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Production
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,product_name,product_short_description,product_long_description,product_note,product_unit_cost,product_unit_price,product_material_id,product_category_id")] Product product)
+        public ActionResult Edit([Bind(Include = "Id,product_name,product_short_description,product_long_description,product_note,product_unit_measure,product_unit_cost,product_unit_price,product_material_id,product_category_id")] Product product)
         {
             if (ModelState.IsValid)
             {
