@@ -15,7 +15,7 @@ namespace ManufacturingCompany.Controllers
         private BusinessEntities db = new BusinessEntities();
 
         // GET: SelectProduct
-        public ActionResult Index(string actionName, string controllerName)
+        public ActionResult Index(string actionName, string controllerName, int? optionalID)
         {
             List<string> searchBy = new List<string>();
             searchBy.Add("Name");
@@ -24,13 +24,14 @@ namespace ManufacturingCompany.Controllers
             ViewBag.SearchBy = new SelectList(searchBy);
             ViewBag.ActionName = actionName;
             ViewBag.ControllerName = controllerName;
+            ViewBag.OptionalID = optionalID;
             return View(db.Products.ToList());
         }
 
         // POST: SelectProduct/Index
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index(string SearchBy, string inputForUserSearch, string actionName, string controllerName)
+        public ActionResult Index(string SearchBy, string inputForUserSearch, string actionName, string controllerName, int? optionalID)
         {
             List<string> searchBy = new List<string>();
             searchBy.Add("Name");
@@ -38,6 +39,7 @@ namespace ManufacturingCompany.Controllers
             ViewBag.SearchBy = new SelectList(searchBy);
             ViewBag.ActionName = actionName;
             ViewBag.ControllerName = controllerName;
+            ViewBag.OptionalID = optionalID;
 
             if (inputForUserSearch != "")
             {

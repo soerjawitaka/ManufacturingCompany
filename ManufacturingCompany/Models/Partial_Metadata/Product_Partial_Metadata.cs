@@ -32,12 +32,12 @@ namespace ManufacturingCompany.Models
 
         [Required]
         [Display(Name = "Unit Cost")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:c}")]
+        [DisplayFormat(ApplyFormatInEditMode = false, DataFormatString = "{0:c}")]
         public decimal product_unit_cost { get; set; }
 
         [Required]
         [Display(Name = "Unit Price")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:c}")]
+        [DisplayFormat(ApplyFormatInEditMode = false, DataFormatString = "{0:c}")]
         public decimal product_unit_price { get; set; }
     }
 }

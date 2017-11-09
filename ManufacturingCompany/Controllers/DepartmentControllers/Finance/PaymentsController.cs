@@ -17,6 +17,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
         public PaymentsController()
         {
             ViewBag.ViewHeaderPartial = "_Finance";
+            ViewBag.ItemTitle = "Payment";
         }
 
         // GET: Payments

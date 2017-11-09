@@ -91,7 +91,14 @@
                 @Html.DisplayFor(modelItem => item.Product_Category.category_name)
             </td>
             <td>
-                @Html.ActionLink("Select", (string)ViewBag.ActionName, (string)ViewBag.ControllerName, new { productID = item.Id }, htmlAttributes: new { @class = "btn btn-success" })
+                @if (ViewBag.OptionalID != null)
+                {
+                    @Html.ActionLink("Select", (string)ViewBag.ActionName, (string)ViewBag.ControllerName, new { productID = item.Id, id = (int)ViewBag.OptionalID }, htmlAttributes: new { @class = "btn btn-success" })
+                }
+                else
+                {
+                    @Html.ActionLink("Select", (string)ViewBag.ActionName, (string)ViewBag.ControllerName, new { productID = item.Id }, htmlAttributes: new { @class = "btn btn-success" })
+                }
             </td>
         </tr>
     }

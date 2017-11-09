@@ -16,7 +16,7 @@ namespace ManufacturingCompany.Models
 
         [Required]
         [Display(Name = "Paycheck Date")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
+        [DisplayFormat(ApplyFormatInEditMode = false, DataFormatString = "{0:MM/dd/yyyy}")]
         public System.DateTime paycheck_date { get; set; }
 
         [Required]

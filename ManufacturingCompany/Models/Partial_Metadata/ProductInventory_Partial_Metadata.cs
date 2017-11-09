@@ -31,6 +31,7 @@ namespace ManufacturingCompany.Models
     {
         [Required]
         [Display(Name = "Unit Quantity")]
+        [DisplayFormat(ApplyFormatInEditMode = false, DataFormatString = "{0:#,#}")]
         public int unit_quantity { get; set; }
 
         [Required]
@@ -39,16 +40,16 @@ namespace ManufacturingCompany.Models
 
         [Required]
         [Display(Name = "Cost per Package")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:c}")]
+        [DisplayFormat(ApplyFormatInEditMode = false, DataFormatString = "{0:c}")]
         public decimal per_package_cost { get; set; }
 
         [Display(Name = "Packaging Cost")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:c}")]
+        [DisplayFormat(ApplyFormatInEditMode = false, DataFormatString = "{0:c}")]
         public Nullable<decimal> packaging_cost { get; set; }
 
         [Required]
         [Display(Name = "Price per Package")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:c}")]
+        [DisplayFormat(ApplyFormatInEditMode = false, DataFormatString = "{0:c}")]
         public decimal per_package_price { get; set; }
     }
 }

@@ -47,7 +47,7 @@ namespace ManufacturingCompany.Classes
     {
         [Required]
         [Display(Name = "Paycheck Amount")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:c}")]
+        [DisplayFormat(ApplyFormatInEditMode = false, DataFormatString = "{0:c}")]
         public decimal payment_amount { get; set; }
     }
 }

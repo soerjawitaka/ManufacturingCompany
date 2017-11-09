@@ -45,6 +45,26 @@
             @if (ViewBag.ViewHeaderPartial != null)
             {
                 <div>@Html.Partial((string)ViewBag.ViewHeaderPartial)</div>
+
+                <div class="container text-center">
+                    @if (ViewBag.ActionTitle != null && ViewBag.ItemTitle != null)
+                    {
+                        if ((string)ViewBag.ActionTitle == "Delete ")
+                        {
+                            <h3 class="btn btn-lg text-light bg-danger">@ViewBag.ActionTitle @ViewBag.ItemTitle</h3>
+                        }
+                        else
+                        {
+                            <h3 class="btn btn-lg text-dark bg-success">@ViewBag.ActionTitle @ViewBag.ItemTitle</h3>
+                        }
+                    }
+                    else if (ViewBag.ItemTitle != null)
+                    {
+                        <h3 class="btn btn-lg text-dark bg-success">@ViewBag.ItemTitle</h3>
+                    }
+                </div>
+
+                <br />
             }
             @RenderBody()
         </div>

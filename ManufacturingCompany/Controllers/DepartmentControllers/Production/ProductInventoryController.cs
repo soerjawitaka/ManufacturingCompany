@@ -17,6 +17,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Production
         public ProductInventoryController()
         {
             ViewBag.ViewHeaderPartial = "_Production";
+            ViewBag.ItemTitle = "Product Inventory";
         }
 
         // GET: ProductInventory

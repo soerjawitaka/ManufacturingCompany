@@ -19,6 +19,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
         public PaychecksController()
         {
             ViewBag.ViewHeaderPartial = "_Finance";
+            ViewBag.ItemTitle = "Paycheck";
         }
 
         // GET: Paychecks

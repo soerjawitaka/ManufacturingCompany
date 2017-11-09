@@ -328,6 +328,7 @@
     <Compile Include="Models\Partial_Metadata\AspNetUser_Partial_Metadata.cs" />
     <Compile Include="Models\Partial_Metadata\Customer_Contact_Partial_Metadata.cs" />
     <Compile Include="Models\Partial_Metadata\Customer_Partial_Metadata.cs" />
+    <Compile Include="Models\Partial_Metadata\Material_Partial_Metadata.cs" />
     <Compile Include="Models\Partial_Metadata\Paycheck_Partial_Metadata.cs" />
     <Compile Include="Models\Partial_Metadata\Payroll_Partial_Metadata.cs" />
     <Compile Include="Models\Partial_Metadata\ProductCategory_Partial_Metadata.cs" />
@@ -452,6 +453,7 @@
     <Content Include="Models\BusinessModel.edmx.diagram">
       <DependentUpon>BusinessModel.edmx</DependentUpon>
     </Content>
+    <Content Include="App_Data\aspnet-ManufacturingCompany-20171006085739.zip" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

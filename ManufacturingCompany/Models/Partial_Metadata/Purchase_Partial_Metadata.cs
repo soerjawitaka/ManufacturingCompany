@@ -24,7 +24,7 @@ namespace ManufacturingCompany.Models
 
         [Required]
         [Display(Name = "Cost")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:c}")]
+        [DisplayFormat(ApplyFormatInEditMode = false, DataFormatString = "{0:c}")]
         public decimal purchase_item_unit_cost { get; set; }
 
         [Required]
@@ -33,7 +33,7 @@ namespace ManufacturingCompany.Models
 
         [Required]
         [Display(Name = "Purchase Date")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
+        [DisplayFormat(ApplyFormatInEditMode = false, DataFormatString = "{0:MM/dd/yyyy}")]
         public System.DateTime purchase_date { get; set; }
     }
 }

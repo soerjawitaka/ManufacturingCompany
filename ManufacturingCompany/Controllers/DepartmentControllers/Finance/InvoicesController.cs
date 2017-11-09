@@ -17,6 +17,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
         public InvoicesController()
         {
             ViewBag.ViewHeaderPartial = "_Finance";
+            ViewBag.ItemTitle = "Invoice";
         }
 
         // GET: Invoices

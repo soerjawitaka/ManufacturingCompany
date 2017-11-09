@@ -35,7 +35,7 @@ namespace ManufacturingCompany.Models
         public WageMode ModeOfWage { get; set; }
 
         [Display(Name = "Wage Amount")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:c}")]
+        [DisplayFormat(ApplyFormatInEditMode = false, DataFormatString = "{0:c}")]
         public decimal WageAmount { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)

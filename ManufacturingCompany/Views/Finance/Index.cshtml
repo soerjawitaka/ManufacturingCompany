@@ -5,32 +5,33 @@
 }
 
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-6">
         <div class="card border-success">
             <h2>Timesheets</h2>
             <p>@Html.ActionLink("Manage >>", "Index", "Timesheets", null, htmlAttributes: new { @class = "btn btn-outline-success", @style = "width:100%" })</p>
         </div>
         <div class="card border-success">
-            <h2>Invoices</h2>
-            <p>@Html.ActionLink("Manage >>", "Index", "Invoices", null, htmlAttributes: new { @class = "btn btn-outline-success", @style = "width:100%" })</p>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card border-success">
             <h2>Payrolls</h2>
             <p>@Html.ActionLink("Manage >>", "Index", "Payrolls", null, htmlAttributes: new { @class = "btn btn-outline-success", @style = "width:100%" })</p>
+        </div>
+        <div class="card border-success">
+            <h2>Paychecks</h2>
+            <p>@Html.ActionLink("Manage >>", "Index", "Paychecks", null, htmlAttributes: new { @class = "btn btn-outline-success", @style = "width:100%" })</p>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card border-success">
+            <h2>Invoices</h2>
+            <p>@Html.ActionLink("Manage >>", "Index", "Invoices", null, htmlAttributes: new { @class = "btn btn-outline-success", @style = "width:100%" })</p>
         </div>
         <div class="card border-success">
             <h2>Payments</h2>
             <p>@Html.ActionLink("Manage >>", "Index", "Payments", null, htmlAttributes: new { @class = "btn btn-outline-success", @style = "width:100%" })</p>
         </div>
     </div>
-    <div class="col-md-4">
-        <div class="card border-success">
-            <h2>Paychecks</h2>
-            <p>@Html.ActionLink("Manage >>", "Index", "Paychecks", null, htmlAttributes: new { @class = "btn btn-outline-success", @style = "width:100%" })</p>
-        </div>
-    </div>
+    @*<div class="col-md-4">
+        
+    </div>*@
 </div>
 
 <div style="clear:both">&nbsp;<br /></div>

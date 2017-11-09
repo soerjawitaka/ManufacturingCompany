@@ -14,6 +14,12 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Production
     {
         private BusinessEntities db = new BusinessEntities();
 
+        public MaterialsController()
+        {
+            ViewBag.ViewHeaderPartial = "_Production";
+            ViewBag.ItemTitle = "Material";
+        }
+
         // GET: Materials
         public ActionResult Index()
         {
@@ -33,13 +39,18 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Production
             {
                 return HttpNotFound();
             }
+            ViewBag.ActionTitle = "Detailed ";
             return View(material);
         }
 
         // GET: Materials/Create
-        public ActionResult Create()
+        public ActionResult Create(int? productID)
         {
-            ViewBag.product_id = new SelectList(db.Products, "Id", "product_name");
+            if (productID != null)
+            {
+                return View(new Material() { product_id = productID });
+            }
+            ViewBag.ActionTitle = "Create ";
             return View();
         }
 
@@ -58,11 +69,12 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Production
             }
 
             ViewBag.product_id = new SelectList(db.Products, "Id", "product_name", material.product_id);
+            ViewBag.ActionTitle = "Create ";
             return View(material);
         }
 
         // GET: Materials/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int? id, int? productID)
         {
             if (id == null)
             {
@@ -73,7 +85,12 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Production
             {
                 return HttpNotFound();
             }
-            ViewBag.product_id = new SelectList(db.Products, "Id", "product_name", material.product_id);
+            if (productID != null)
+            {
+                material.product_id = productID;
+            }
+
+            ViewBag.ActionTitle = "Edit ";
             return View(material);
         }
 
@@ -91,6 +108,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Production
                 return RedirectToAction("Index");
             }
             ViewBag.product_id = new SelectList(db.Products, "Id", "product_name", material.product_id);
+            ViewBag.ActionTitle = "Edit ";
             return View(material);
         }
 
@@ -106,6 +124,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Production
             {
                 return HttpNotFound();
             }
+            ViewBag.ActionTitle = "Delete ";
             return View(material);
         }
 

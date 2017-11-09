@@ -17,6 +17,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Production
         public ProductCategoryController()
         {
             ViewBag.ViewHeaderPartial = "_Production";
+            ViewBag.ItemTitle = "Product Category";
         }
 
         // GET: ProductCategory

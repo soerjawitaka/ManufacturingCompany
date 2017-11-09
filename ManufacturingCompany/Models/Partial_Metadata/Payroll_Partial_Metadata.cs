@@ -113,31 +113,31 @@ namespace ManufacturingCompany.Models
     {
         [Required]
         [Display(Name = "Period Begin")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
+        [DisplayFormat(ApplyFormatInEditMode = false, DataFormatString = "{0:MM/dd/yyyy}")]
         public System.DateTime period_begin { get; set; }
 
         [Required]
         [Display(Name = "Period End")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
+        [DisplayFormat(ApplyFormatInEditMode = false, DataFormatString = "{0:MM/dd/yyyy}")]
         public System.DateTime period_end { get; set; }
 
         [Display(Name = "Total Hours")]
         public decimal total_hours { get; set; }
 
         [Display(Name = "Subtotal")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:c}")]
+        [DisplayFormat(ApplyFormatInEditMode = false, DataFormatString = "{0:c}")]
         public decimal subtotal { get; set; }
 
         [Display(Name = "Federal Tax")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:c}")]
+        [DisplayFormat(ApplyFormatInEditMode = false, DataFormatString = "{0:c}")]
         public decimal federal_tax_witholding { get; set; }
 
         [Display(Name = "State Tax")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:c}")]
+        [DisplayFormat(ApplyFormatInEditMode = false, DataFormatString = "{0:c}")]
         public decimal state_tax_witholding { get; set; }
 
         [Display(Name = "Total")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:c}")]
+        [DisplayFormat(ApplyFormatInEditMode = false, DataFormatString = "{0:c}")]
         public decimal grand_total { get; set; }
     }
 }

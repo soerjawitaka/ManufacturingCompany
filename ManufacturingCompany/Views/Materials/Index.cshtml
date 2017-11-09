@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -42,9 +42,9 @@
             @Html.DisplayFor(modelItem => item.Product.product_name)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }, htmlAttributes: new { @class = "btn btn-warning" }) 
+            @Html.ActionLink("Details", "Details", new { id=item.Id }, htmlAttributes: new { @class = "btn btn-default" }) 
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id }, htmlAttributes: new { @class = "btn btn-danger" })
         </td>
     </tr>
 }

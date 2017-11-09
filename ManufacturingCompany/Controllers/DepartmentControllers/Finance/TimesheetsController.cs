@@ -18,6 +18,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
         public TimesheetsController()
         {
             ViewBag.ViewHeaderPartial = "_Finance";
+            ViewBag.ItemTitle = "Timesheet";
             List<string> searchBy = new List<string>();
             searchBy.Add("Email");
             searchBy.Add("Username");
