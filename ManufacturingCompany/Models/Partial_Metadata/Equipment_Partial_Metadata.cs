@@ -12,7 +12,7 @@ namespace ManufacturingCompany.Models
     public class Equipment_Partial_Metadata
     {
         [Required]
-        [Display(Name = "Name")]
+        [Display(Name = "Equipment Name")]
         public string equipment_name { get; set; }
 
         [Required]
@@ -23,16 +23,13 @@ namespace ManufacturingCompany.Models
         [Display(Name = "Long Description")]
         public string equipment_long_description { get; set; }
 
-        [Required]
         [Display(Name = "Note")]
         public string equipment_note { get; set; }
 
-        [Required]
         [Display(Name = "Cost")]
         [DisplayFormat(ApplyFormatInEditMode = false, DataFormatString = "{0:c}")]
         public decimal equipment_cost { get; set; }
 
-        [Required]
         [Display(Name = "Product Number")]
         public Nullable<int> product_id { get; set; }
 

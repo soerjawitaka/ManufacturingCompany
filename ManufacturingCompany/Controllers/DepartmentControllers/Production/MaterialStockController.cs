@@ -14,6 +14,12 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Production
     {
         private BusinessEntities db = new BusinessEntities();
 
+        public MaterialStockController()
+        {
+            ViewBag.ViewHeaderPartial = "_Production";
+            ViewBag.ItemTitle = "Material Stock";
+        }
+
         // GET: MaterialStock
         public ActionResult Index()
         {

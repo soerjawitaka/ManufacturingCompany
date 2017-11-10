@@ -14,6 +14,12 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Production
     {
         private BusinessEntities db = new BusinessEntities();
 
+        public EquipmentsController()
+        {
+            ViewBag.ViewHeaderPartial = "_Production";
+            ViewBag.ItemTitle = "Equipment";
+        }
+
         // GET: Equipments
         public ActionResult Index()
         {
@@ -37,9 +43,13 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Production
         }
 
         // GET: Equipments/Create
-        public ActionResult Create()
+        public ActionResult Create(int? productID)
         {
-            ViewBag.product_id = new SelectList(db.Products, "Id", "product_name");
+            if (productID != null)
+            {
+                var eq = new Equipment() { product_id = productID, Product = db.Products.Find(productID) };
+                return View(eq);
+            }
             return View();
         }
 
@@ -62,7 +72,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Production
         }
 
         // GET: Equipments/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int? id, int? productID, string action)
         {
             if (id == null)
             {
@@ -73,7 +83,17 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Production
             {
                 return HttpNotFound();
             }
-            ViewBag.product_id = new SelectList(db.Products, "Id", "product_name", equipment.product_id);
+            if (productID != null)
+            {
+                equipment.product_id = Convert.ToInt16(productID);
+                equipment.Product = db.Products.Find(productID);
+            }
+            if (action == "removeProduct")
+            {
+                equipment.product_id = null;
+                equipment.Product = null;
+            }
+            
             return View(equipment);
         }
 
@@ -118,6 +138,16 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Production
             db.Equipments.Remove(equipment);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        // GET: Equipments/RemoveProduct
+        public ActionResult RemoveProduct(string actionName, int? optionalID)
+        {
+            if (actionName == "Create")
+            {
+                return RedirectToAction(actionName);
+            }
+            return RedirectToAction(actionName, new { id = optionalID, action = "removeProduct" });
         }
 
         protected override void Dispose(bool disposing)

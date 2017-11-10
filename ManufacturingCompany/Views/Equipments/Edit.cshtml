@@ -16,6 +16,7 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.product_id)
 
         <div class="form-group">
             @Html.LabelFor(model => model.equipment_name, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -58,21 +59,31 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.product_id, "product_id", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Product.product_name, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("product_id", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.product_id, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Product.product_name, new { htmlAttributes = new { @class = "form-control", @disabled = "true", @style = "display:inline-block;" } })
+                @*<br />*@
+                @Html.ActionLink("Assign Product", "Index", "SelectProduct", new { actionName = "Edit", controllerName = "Equipments", optionalID = Model.Id }, htmlAttributes: new { @class = "btn btn-primary", @style = "margin-left:20px;" })
+                @Html.ActionLink("Remove Product", "RemoveProduct", "Equipments", new { actionName = "Edit", controllerName = "Equipments", optionalID = Model.Id }, htmlAttributes: new { @class = "btn btn-primary", @style = "margin-left:20px;" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.in_maintenance, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.in_maintenance, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.in_maintenance, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn btn-success" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "btn btn-default" })
 </div>

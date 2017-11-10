@@ -59,9 +59,17 @@
             @Html.DisplayFor(model => model.Product.product_name)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.in_maintenance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.in_maintenance)
+        </dd>
+
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, htmlAttributes: new { @class = "btn btn-warning" }) 
+    @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "btn btn-default" })
 </p>
