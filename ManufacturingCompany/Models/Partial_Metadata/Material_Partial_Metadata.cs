@@ -21,5 +21,8 @@ namespace ManufacturingCompany.Models
 
         [Display(Name = "Notes")]
         public string material_note { get; set; }
+
+        [Display(Name = "Product Number")]
+        public Nullable<int> product_id { get; set; }
     }
 }

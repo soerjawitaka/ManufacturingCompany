@@ -37,9 +37,15 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Production
         }
 
         // GET: MaterialStock/Create
-        public ActionResult Create()
+        public ActionResult Create(int? materialID)
         {
-            ViewBag.material_id = new SelectList(db.Materials, "Id", "material_name");
+            if (materialID != null)
+            {
+                var material = db.Materials.Find(materialID);
+                var newStock = new Material_Stock() { material_id = Convert.ToInt32(materialID), Material = material };
+                return View(newStock);
+            }
+            
             return View();
         }
 
@@ -62,7 +68,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Production
         }
 
         // GET: MaterialStock/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int? id, int? materialID)
         {
             if (id == null)
             {
@@ -72,6 +78,11 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Production
             if (material_Stock == null)
             {
                 return HttpNotFound();
+            }
+            if (materialID != null)
+            {
+                material_Stock.material_id = Convert.ToInt32(materialID);
+                material_Stock.Material = db.Materials.Find(materialID);
             }
             ViewBag.material_id = new SelectList(db.Materials, "Id", "material_name", material_Stock.material_id);
             return View(material_Stock);

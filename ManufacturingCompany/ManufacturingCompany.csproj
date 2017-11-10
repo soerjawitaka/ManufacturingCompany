@@ -228,6 +228,7 @@
     <Compile Include="Controllers\GeneralEmployeeControllers\EmployeeTimesheetsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\QueryControllers\SelectMaterialController.cs" />
     <Compile Include="Controllers\QueryControllers\SelectPayrollController.cs" />
     <Compile Include="Controllers\QueryControllers\SelectProductController.cs" />
     <Compile Include="Controllers\QueryControllers\SelectUserController.cs" />
@@ -328,7 +329,10 @@
     <Compile Include="Models\Partial_Metadata\AspNetUser_Partial_Metadata.cs" />
     <Compile Include="Models\Partial_Metadata\Customer_Contact_Partial_Metadata.cs" />
     <Compile Include="Models\Partial_Metadata\Customer_Partial_Metadata.cs" />
+    <Compile Include="Models\Partial_Metadata\Equipment_Maintenance_Partial_Metadata.cs" />
+    <Compile Include="Models\Partial_Metadata\Equipment_Partial_Metadata.cs" />
     <Compile Include="Models\Partial_Metadata\Material_Partial_Metadata.cs" />
+    <Compile Include="Models\Partial_Metadata\Material_Stock_Partial_Metadata.cs" />
     <Compile Include="Models\Partial_Metadata\Paycheck_Partial_Metadata.cs" />
     <Compile Include="Models\Partial_Metadata\Payroll_Partial_Metadata.cs" />
     <Compile Include="Models\Partial_Metadata\ProductCategory_Partial_Metadata.cs" />
@@ -604,6 +608,7 @@
     <Content Include="Views\EquipmentMaintenance\Edit.cshtml" />
     <Content Include="Views\EquipmentMaintenance\Index.cshtml" />
     <Content Include="Views\ProductInventory\_ProductInventory.cshtml" />
+    <Content Include="Views\SelectMaterial\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201710061504292_InitialCreate.resx">
