@@ -450,6 +450,7 @@
     <Content Include="Models\AssignmentModel.edmx.diagram">
       <DependentUpon>AssignmentModel.edmx</DependentUpon>
     </Content>
+    <Content Include="App_Data\aspnet-ManufacturingCompany-20171006085739.zip" />
     <EntityDeploy Include="Models\BusinessModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>BusinessModel.Designer.cs</LastGenOutput>
@@ -457,7 +458,6 @@
     <Content Include="Models\BusinessModel.edmx.diagram">
       <DependentUpon>BusinessModel.edmx</DependentUpon>
     </Content>
-    <Content Include="App_Data\aspnet-ManufacturingCompany-20171006085739.zip" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

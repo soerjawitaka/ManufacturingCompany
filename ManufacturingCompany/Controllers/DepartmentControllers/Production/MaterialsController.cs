@@ -48,7 +48,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Production
         {
             if (productID != null)
             {
-                return View(new Material() { product_id = productID });
+                return View(new Material() { product_id = productID, Product = db.Products.Find(productID) });
             }
             ViewBag.ActionTitle = "Create ";
             return View();
@@ -74,7 +74,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Production
         }
 
         // GET: Materials/Edit/5
-        public ActionResult Edit(int? id, int? productID)
+        public ActionResult Edit(int? id, int? productID, string removeFrom)
         {
             if (id == null)
             {
@@ -88,8 +88,13 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Production
             if (productID != null)
             {
                 material.product_id = productID;
+                material.Product = db.Products.Find(productID);
             }
-
+            if (removeFrom != null)
+            {
+                material.product_id = null;
+                material.Product = null;
+            }
             ViewBag.ActionTitle = "Edit ";
             return View(material);
         }
@@ -137,6 +142,16 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Production
             db.Materials.Remove(material);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        // GET: Materials/RemoveProduct
+        public ActionResult RemoveProduct(string removeFrom, int? optionalID)
+        {
+            if (optionalID != null)
+            {
+                return RedirectToAction(removeFrom, new { id = optionalID, removeFrom = removeFrom });
+            }
+            return RedirectToAction(removeFrom);
         }
 
         protected override void Dispose(bool disposing)

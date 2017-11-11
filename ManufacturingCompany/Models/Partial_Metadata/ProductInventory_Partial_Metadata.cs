@@ -24,6 +24,7 @@ namespace ManufacturingCompany.Models
             {
                 this.per_package_price += Convert.ToDecimal(this.packaging_cost);
             }
+            this.Product = null;
         }
     }
 
