@@ -1,0 +1,78 @@
+﻿@model ManufacturingCompany.Classes.PaycheckViewModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Payroll.AspNetUser.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Payroll.AspNetUser.UserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.paycheck_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.paycheck_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.payroll_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.payroll_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ModeOfPaycheck)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModeOfPaycheck)
+        </dd>
+
+        @if (Model.ModeOfPaycheck == ManufacturingCompany.Classes.PaycheckViewModel.PaycheckMode.Check)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.check_number)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.check_number)
+            </dd>
+        }        
+
+        @if (Model.ModeOfPaycheck == ManufacturingCompany.Classes.PaycheckViewModel.PaycheckMode.Deposit)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.direct_deposit_number)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.direct_deposit_number)
+            </dd>
+        }
+
+        <dt>
+            @Html.DisplayNameFor(model => model.payment_amount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.payment_amount)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, htmlAttributes: new { @class = "btn btn-warning" }) 
+    @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "btn btn-default" })
+</p>

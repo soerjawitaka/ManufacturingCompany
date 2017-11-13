@@ -1,0 +1,83 @@
+﻿@model ManufacturingCompany.Models.Equipment_Maintenance
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div>
+    <h4>Equipment_Maintenance</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.maintenance_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.maintenance_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.completion_eta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.completion_eta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.maintenance_cost)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.maintenance_cost)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.maintenance_short_description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.maintenance_short_description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.maintenance_long_description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.maintenance_long_description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.maintenance_note)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.maintenance_note)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AspNetUser.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AspNetUser.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Equipment.equipment_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Equipment.equipment_name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

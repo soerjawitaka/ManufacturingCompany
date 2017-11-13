@@ -1,0 +1,19 @@
+﻿<div class="container text-center">
+    @if (ViewBag.ActionTitle != null)
+    {
+        if ((string)ViewBag.ActionTitle == "Delete ")
+        {
+            <h3 class="btn btn-lg text-light bg-danger">@ViewBag.ActionTitle Paycheck</h3>
+        }
+        else
+        {
+            <h3 class="btn btn-lg text-dark bg-success">@ViewBag.ActionTitle Paycheck</h3>
+        }
+    }
+    else
+    {
+        <h3 class="btn btn-lg text-dark bg-success">Paychecks</h3>
+    }
+</div>
+
+<br />

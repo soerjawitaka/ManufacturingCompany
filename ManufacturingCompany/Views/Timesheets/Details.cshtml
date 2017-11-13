@@ -1,0 +1,51 @@
+﻿@model ManufacturingCompany.Models.Timesheet
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div>
+    
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.punch_in_time)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.punch_in_time)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.punch_out_time)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.punch_out_time)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.timesheet_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.timesheet_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AspNetUser.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AspNetUser.Email)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

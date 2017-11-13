@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewBag.Title = "Production";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card border-success">
+            <h2>Product Inventory</h2>
+            <p>@Html.ActionLink("Manage >>", "Index", "ProductInventory", null, htmlAttributes: new { @class = "btn btn-outline-success", @style = "width:100%" })</p>
+        </div>
+        <div class="card border-success">
+            <h2>Products</h2>
+            <p>@Html.ActionLink("Manage >>", "Index", "Products", null, htmlAttributes: new { @class = "btn btn-outline-success", @style = "width:100%" })</p>
+        </div>
+        <div class="card border-success">
+            <h2>Product Categories</h2>
+            <p>@Html.ActionLink("Manage >>", "Index", "ProductCategory", null, htmlAttributes: new { @class = "btn btn-outline-success", @style = "width:100%" })</p>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card border-success">
+            <h2>Materials</h2>
+            <p>@Html.ActionLink("Manage >>", "Index", "Materials", null, htmlAttributes: new { @class = "btn btn-outline-success", @style = "width:100%" })</p>
+        </div>
+        <div class="card border-success">
+            <h2>Material Stock</h2>
+            <p>@Html.ActionLink("Manage >>", "Index", "MaterialStock", null, htmlAttributes: new { @class = "btn btn-outline-success", @style = "width:100%" })</p>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card border-success">
+            <h2>Equipments</h2>
+            <p>@Html.ActionLink("Manage >>", "Index", "Equipments", null, htmlAttributes: new { @class = "btn btn-outline-success", @style = "width:100%" })</p>
+        </div>
+        <div class="card border-success">
+            <h2>Equipment Maintenances</h2>
+            <p>@Html.ActionLink("Manage >>", "Index", "EquipmentMaintenance", null, htmlAttributes: new { @class = "btn btn-outline-success", @style = "width:100%" })</p>
+        </div>
+    </div>
+</div>
+
+<div style="clear:both">&nbsp;<br /></div>

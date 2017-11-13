@@ -1,0 +1,85 @@
+﻿@model IEnumerable<ManufacturingCompany.Models.Material>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="container">
+        <div class="col-md-2" style="margin-bottom:10px; display:inline-block;">
+            @Html.Label("Search By : ", htmlAttributes: new { @class = "form-control", @style = "border:none;" })
+        </div>
+
+        <div class="col-md-3" style="margin-bottom:10px; display:inline-block;">
+            @Html.DropDownList("SearchBy", (SelectList)ViewBag.SearchBy, htmlAttributes: new { @class = "form-control" })
+        </div>
+
+        <div class="col-md-3" style="margin-bottom:10px; display:inline-block;">
+            @Html.TextBox("inputForUserSearch", "", new { @class = "form-control" })
+        </div>
+
+        <div class="col-md-3" style="margin-bottom:10px; display:inline-block;">
+            <input type="submit" value="Search" class="btn btn-success" />
+        </div>
+    </div>
+}
+
+<br />
+@if (ViewBag.ErrorString != null || ViewBag.ErrorString != "")
+{
+    <div style="text-align:center;">
+        @Html.Label((string)ViewBag.ErrorString, htmlAttributes: new { @class = "text-danger" })
+    </div>
+}
+<br />
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.material_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.material_description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.material_note)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Product.product_name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.material_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.material_description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.material_note)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Product.product_name)
+        </td>
+        <td>
+            @if (ViewBag.OptionalID != null)
+                {
+                @Html.ActionLink("Select", (string)ViewBag.ActionName, (string)ViewBag.ControllerName, new { materialID = item.Id, id = (int)ViewBag.OptionalID }, htmlAttributes: new { @class = "btn btn-success" })
+            }
+            else
+            {
+                @Html.ActionLink("Select", (string)ViewBag.ActionName, (string)ViewBag.ControllerName, new { materialID = item.Id }, htmlAttributes: new { @class = "btn btn-success" })
+            }
+        </td>
+    </tr>
+}
+
+</table>
