@@ -228,6 +228,7 @@
     <Compile Include="Controllers\GeneralEmployeeControllers\EmployeeTimesheetsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\QueryControllers\SelectEquipmentController.cs" />
     <Compile Include="Controllers\QueryControllers\SelectMaterialController.cs" />
     <Compile Include="Controllers\QueryControllers\SelectPayrollController.cs" />
     <Compile Include="Controllers\QueryControllers\SelectProductController.cs" />
@@ -609,6 +610,7 @@
     <Content Include="Views\EquipmentMaintenance\Index.cshtml" />
     <Content Include="Views\ProductInventory\_ProductInventory.cshtml" />
     <Content Include="Views\SelectMaterial\Index.cshtml" />
+    <Content Include="Views\SelectEquipment\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201710061504292_InitialCreate.resx">

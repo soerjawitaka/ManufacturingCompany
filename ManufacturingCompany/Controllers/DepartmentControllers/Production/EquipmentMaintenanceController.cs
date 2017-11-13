@@ -37,11 +37,29 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Production
         }
 
         // GET: EquipmentMaintenance/Create
-        public ActionResult Create()
+        public ActionResult Create(string userID, int? equipmentID)
         {
-            ViewBag.employee_id = new SelectList(db.AspNetUsers, "Id", "Email");
-            ViewBag.equipment_id = new SelectList(db.Equipments, "Id", "equipment_name");
-            return View();
+            var eqMaintenance = new Equipment_Maintenance();
+            // load info in session
+            if (Session["EquipmentMaintenance"] != null)
+            {
+                eqMaintenance = (Equipment_Maintenance)Session["EquipmentMaintenance"];
+            }
+
+            // if changing employee
+            if (userID != null)
+            {
+                eqMaintenance.employee_id = userID;
+                eqMaintenance.AspNetUser = db.AspNetUsers.Find(userID);
+            }
+            //  if changing equipment
+            if (equipmentID != null)
+            {
+                eqMaintenance.equipment_id = Convert.ToInt32(equipmentID);
+                eqMaintenance.Equipment = db.Equipments.Find(equipmentID);
+            }
+            Session["EquipmentMaintenance"] = eqMaintenance;
+            return View(eqMaintenance);
         }
 
         // POST: EquipmentMaintenance/Create

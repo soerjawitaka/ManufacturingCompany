@@ -45,9 +45,9 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Product.product_name, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Product.product_name, new { htmlAttributes = new { @class = "form-control", @disabled = "true", @style = "display:inline-block;margin-right:20px;" } })
-                @Html.ActionLink("Set Product", "Index", "SelectProduct", new { actionName = "Edit", controllerName = "Materials", optionalID = Model.Id }, htmlAttributes: new { @class = "btn btn-primary" })
-                @Html.ActionLink("Remove Product", "RemoveProduct", new { removeFrom = "Edit", optionalID = Model.Id}, htmlAttributes: new { @class = "btn btn-primary" })
+                @Html.EditorFor(model => model.Product.product_name, new { htmlAttributes = new { @class = "form-control", @disabled = "true", @style = "display:inline-block;" } })
+                @Html.ActionLink("Set Product", "Index", "SelectProduct", new { actionName = "Edit", controllerName = "Materials", optionalID = Model.Id }, htmlAttributes: new { @class = "btn btn-primary", @style = "margin-left:20px;" })
+                @Html.ActionLink("Remove Product", "RemoveProduct", new { removeFrom = "Edit", optionalID = Model.Id}, htmlAttributes: new { @class = "btn btn-primary", @style = "margin-left:20px;" })
             </div>
         </div>
 

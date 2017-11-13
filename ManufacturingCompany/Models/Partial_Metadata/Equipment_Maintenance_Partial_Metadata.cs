@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 
-namespace ManufacturingCompany.Models.Partial_Metadata
+namespace ManufacturingCompany.Models
 {
     [MetadataType(typeof(Equipment_Maintenance_Partial_Metadata))]
     public partial class Equipment_Maintenance { }

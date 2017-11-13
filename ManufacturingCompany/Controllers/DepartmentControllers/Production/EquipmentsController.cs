@@ -58,7 +58,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Production
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,equipment_name,equipment_short_description,equipment_long_description,equipment_note,equipment_cost,product_id")] Equipment equipment)
+        public ActionResult Create([Bind(Include = "Id,equipment_name,equipment_short_description,equipment_long_description,equipment_note,equipment_cost,product_id,in_maintenance")] Equipment equipment)
         {
             if (ModelState.IsValid)
             {
@@ -88,7 +88,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Production
                 equipment.product_id = Convert.ToInt16(productID);
                 equipment.Product = db.Products.Find(productID);
             }
-            if (action == "removeProduct")
+            if (action == "Edit")
             {
                 equipment.product_id = null;
                 equipment.Product = null;
@@ -102,7 +102,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Production
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,equipment_name,equipment_short_description,equipment_long_description,equipment_note,equipment_cost,product_id")] Equipment equipment)
+        public ActionResult Edit([Bind(Include = "Id,equipment_name,equipment_short_description,equipment_long_description,equipment_note,equipment_cost,product_id,in_maintenance")] Equipment equipment)
         {
             if (ModelState.IsValid)
             {
@@ -147,7 +147,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Production
             {
                 return RedirectToAction(actionName);
             }
-            return RedirectToAction(actionName, new { id = optionalID, action = "removeProduct" });
+            return RedirectToAction(actionName, new { id = optionalID });
         }
 
         protected override void Dispose(bool disposing)

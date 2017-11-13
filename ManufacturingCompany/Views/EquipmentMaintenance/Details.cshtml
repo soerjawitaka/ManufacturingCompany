@@ -8,9 +8,26 @@
 
 
 <div>
-    <h4>Equipment_Maintenance</h4>
+    
     <hr />
     <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Equipment.equipment_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Equipment.equipment_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AspNetUser.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AspNetUser.UserName)
+        </dd>
+
         <dt>
             @Html.DisplayNameFor(model => model.maintenance_date)
         </dt>
@@ -25,14 +42,6 @@
 
         <dd>
             @Html.DisplayFor(model => model.completion_eta)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.maintenance_cost)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.maintenance_cost)
         </dd>
 
         <dt>
@@ -60,24 +69,16 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.AspNetUser.Email)
+            @Html.DisplayNameFor(model => model.maintenance_cost)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.AspNetUser.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Equipment.equipment_name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Equipment.equipment_name)
+            @Html.DisplayFor(model => model.maintenance_cost)
         </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, htmlAttributes: new { @class = "btn btn-warning" })
+    @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "btn btn-default" })
 </p>
