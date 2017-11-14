@@ -44,12 +44,20 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
         }
 
         // GET: Invoices/SelectItems
-        public ActionResult SelectItems()
+        public ActionResult SelectItems(int? id, int? Quantity)
         {
             var invoiceItems = new List<Lineitem>();
             // load items from session
             if (Session["InvoiceItems"] != null) { invoiceItems = (List<Lineitem>)Session["InvoiceItems"]; }
 
+            if (id != null)
+            {
+                var li = new Lineitem();
+                li.lineitem_unit_quantity = Convert.ToInt32(Quantity);
+                li.CalculateTotal(Convert.ToInt32(id));
+                li.ProductInventory.Product = db.Products.Find(li.ProductInventory.product_id);
+                invoiceItems.Add(li);
+            }
 
 
             Session["InvoiceItems"] = invoiceItems;
