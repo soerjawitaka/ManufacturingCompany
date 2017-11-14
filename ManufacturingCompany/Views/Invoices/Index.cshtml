@@ -6,7 +6,7 @@
 }
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "SelectItems", null, htmlAttributes: new { @class = "btn btn-default" })
 </p>
 <table class="table">
     <tr>
@@ -14,10 +14,10 @@
             @Html.DisplayNameFor(model => model.invoice_date)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.AspNetUser.Email)
+            @Html.DisplayName("Employee Username")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Customer.customer_company_name)
+            @Html.DisplayName("Customer Name")
         </th>
         <th></th>
     </tr>
@@ -28,15 +28,15 @@
             @Html.DisplayFor(modelItem => item.invoice_date)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.AspNetUser.Email)
+            @Html.DisplayFor(modelItem => item.AspNetUser.UserName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Customer.customer_company_name)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-warning" })
+            @Html.ActionLink("Details", "Details", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-default" })
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-danger" })
         </td>
     </tr>
 }

@@ -7,11 +7,11 @@ using ManufacturingCompany.Models;
 
 namespace ManufacturingCompany.Controllers
 {
-    public class SelectEquipmentController : Controller
+    public class SelectProductInventoryController : Controller
     {
         private BusinessEntities db = new BusinessEntities();
 
-        // GET: SelectProduct
+        // GET: SelectProductInventory
         public ActionResult Index(string actionName, string controllerName, int? optionalID)
         {
             List<string> searchBy = new List<string>();
@@ -22,10 +22,10 @@ namespace ManufacturingCompany.Controllers
             ViewBag.ActionName = actionName;
             ViewBag.ControllerName = controllerName;
             ViewBag.OptionalID = optionalID;
-            return View(db.Equipments.ToList());
+            return View(db.Product_Inventory.ToList());
         }
 
-        // POST: SelectProduct/Index
+        // POST: SelectProductInventory/Index
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Index(string SearchBy, string inputForUserSearch, string actionName, string controllerName, int? optionalID)
@@ -40,27 +40,27 @@ namespace ManufacturingCompany.Controllers
 
             if (inputForUserSearch != "")
             {
-                List<Equipment> equipments;
+                List<Product_Inventory> productInventories;
                 switch (SearchBy)
                 {
                     case "Name":
-                        equipments = db.Equipments.Where(u => u.equipment_name.Contains(inputForUserSearch)).ToList();
+                        productInventories = db.Product_Inventory.Where(u => u.Product.product_name.Contains(inputForUserSearch)).ToList();
                         break;
                     case "Description":
-                        equipments = db.Equipments.Where(u => u.equipment_short_description.Contains(inputForUserSearch) || u.equipment_long_description.Contains(inputForUserSearch)).ToList();
+                        productInventories = db.Product_Inventory.Where(u => u.Product.product_short_description.Contains(inputForUserSearch) || u.Product.product_long_description.Contains(inputForUserSearch)).ToList();
                         break;
                     default:
-                        equipments = new List<Equipment>();
+                        productInventories = new List<Product_Inventory>();
                         break;
                 }
-                if (equipments.Count > 0)
+                if (productInventories.Count > 0)
                 {
                     ViewBag.ErrorString = "";
-                    return View(equipments);
+                    return View(productInventories);
                 }
                 else
                 {
-                    ViewBag.ErrorString = "Equipments Not Found";
+                    ViewBag.ErrorString = "Products Not Found";
                     return View();
                 }
             }

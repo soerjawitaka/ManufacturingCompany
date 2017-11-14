@@ -43,6 +43,21 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
             return View(invoice);
         }
 
+        // GET: Invoices/SelectItems
+        public ActionResult SelectItems()
+        {
+            var invoiceItems = new List<Lineitem>();
+            // load items from session
+            if (Session["InvoiceItems"] != null) { invoiceItems = (List<Lineitem>)Session["InvoiceItems"]; }
+
+
+
+            Session["InvoiceItems"] = invoiceItems;
+
+            ViewBag.ActionTitle = "Select Items for  ";
+            return View(invoiceItems);
+        }
+
         // GET: Invoices/Create
         public ActionResult Create()
         {

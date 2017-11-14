@@ -210,6 +210,7 @@
     <Compile Include="Classes\PaycheckViewModel.cs" />
     <Compile Include="Classes\RoleViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\DepartmentControllers\Finance\Invoice_LineitemController.cs" />
     <Compile Include="Controllers\DepartmentControllers\Production\EquipmentMaintenanceController.cs" />
     <Compile Include="Controllers\DepartmentControllers\Production\EquipmentsController.cs" />
     <Compile Include="Controllers\DepartmentControllers\Production\MaterialsController.cs" />
@@ -232,6 +233,7 @@
     <Compile Include="Controllers\QueryControllers\SelectMaterialController.cs" />
     <Compile Include="Controllers\QueryControllers\SelectPayrollController.cs" />
     <Compile Include="Controllers\QueryControllers\SelectProductController.cs" />
+    <Compile Include="Controllers\QueryControllers\SelectProductInventoryController.cs" />
     <Compile Include="Controllers\QueryControllers\SelectUserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -332,6 +334,7 @@
     <Compile Include="Models\Partial_Metadata\Customer_Partial_Metadata.cs" />
     <Compile Include="Models\Partial_Metadata\Equipment_Maintenance_Partial_Metadata.cs" />
     <Compile Include="Models\Partial_Metadata\Equipment_Partial_Metadata.cs" />
+    <Compile Include="Models\Partial_Metadata\Invoice_Partial_Metadata.cs" />
     <Compile Include="Models\Partial_Metadata\Material_Partial_Metadata.cs" />
     <Compile Include="Models\Partial_Metadata\Material_Stock_Partial_Metadata.cs" />
     <Compile Include="Models\Partial_Metadata\Paycheck_Partial_Metadata.cs" />
@@ -611,6 +614,13 @@
     <Content Include="Views\ProductInventory\_ProductInventory.cshtml" />
     <Content Include="Views\SelectMaterial\Index.cshtml" />
     <Content Include="Views\SelectEquipment\Index.cshtml" />
+    <Content Include="Views\Invoice_Lineitem\Create.cshtml" />
+    <Content Include="Views\Invoice_Lineitem\Delete.cshtml" />
+    <Content Include="Views\Invoice_Lineitem\Details.cshtml" />
+    <Content Include="Views\Invoice_Lineitem\Edit.cshtml" />
+    <Content Include="Views\Invoice_Lineitem\Index.cshtml" />
+    <Content Include="Views\Invoices\SelectItems.cshtml" />
+    <Content Include="Views\SelectProductInventory\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201710061504292_InitialCreate.resx">

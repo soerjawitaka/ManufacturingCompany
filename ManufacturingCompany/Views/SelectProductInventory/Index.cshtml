@@ -1,11 +1,11 @@
-﻿@model IEnumerable<ManufacturingCompany.Models.Equipment>
+﻿@model IEnumerable<ManufacturingCompany.Models.Product_Inventory>
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2 class="card text-white bg-primary">Select an Equipment</h2>
+<h2 class="card text-white bg-primary">Select a product in the inventory</h2>
 
 @using (Html.BeginForm())
 {
@@ -41,25 +41,22 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.equipment_name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.equipment_short_description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.equipment_long_description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.equipment_note)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.equipment_cost)
-        </th>
-        <th class="text-center">
-            @Html.DisplayNameFor(model => model.in_maintenance)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.Product.product_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.unit_quantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.unit_per_package)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.per_package_cost)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.packaging_cost)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.per_package_price)
         </th>
         <th></th>
     </tr>
@@ -67,25 +64,22 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.equipment_name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.equipment_short_description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.equipment_long_description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.equipment_note)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.equipment_cost)
-        </td>
-        <td class="text-center">
-            @Html.DisplayFor(modelItem => item.in_maintenance)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.Product.product_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.unit_quantity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.unit_per_package)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.per_package_cost)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.packaging_cost)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.per_package_price)
         </td>
         <td>
             @if (ViewBag.OptionalID != null)

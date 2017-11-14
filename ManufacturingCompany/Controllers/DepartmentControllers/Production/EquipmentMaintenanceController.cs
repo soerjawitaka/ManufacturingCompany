@@ -73,16 +73,17 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Production
             {
                 db.Equipment_Maintenance.Add(equipment_Maintenance);
                 db.SaveChanges();
+                Session["EquipmentMaintenance"] = null;
                 return RedirectToAction("Index");
             }
 
-            ViewBag.employee_id = new SelectList(db.AspNetUsers, "Id", "Email", equipment_Maintenance.employee_id);
-            ViewBag.equipment_id = new SelectList(db.Equipments, "Id", "equipment_name", equipment_Maintenance.equipment_id);
+            equipment_Maintenance.AspNetUser = db.AspNetUsers.Find(equipment_Maintenance.employee_id);
+            equipment_Maintenance.Equipment = db.Equipments.Find(equipment_Maintenance.equipment_id);
             return View(equipment_Maintenance);
         }
 
         // GET: EquipmentMaintenance/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int? id, string userID, int? equipmentID)
         {
             if (id == null)
             {
@@ -93,8 +94,31 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Production
             {
                 return HttpNotFound();
             }
-            ViewBag.employee_id = new SelectList(db.AspNetUsers, "Id", "Email", equipment_Maintenance.employee_id);
-            ViewBag.equipment_id = new SelectList(db.Equipments, "Id", "equipment_name", equipment_Maintenance.equipment_id);
+            // load info in session
+            if (Session["EquipmentMaintenance"] != null)
+            {
+                equipment_Maintenance = (Equipment_Maintenance)Session["EquipmentMaintenance"];
+
+                // if changing employee
+                if (userID != null)
+                {
+                    equipment_Maintenance.employee_id = userID;
+                    equipment_Maintenance.AspNetUser = db.AspNetUsers.Find(userID);
+                }
+                //  if changing equipment
+                if (equipmentID != null)
+                {
+                    equipment_Maintenance.equipment_id = Convert.ToInt32(equipmentID);
+                    equipment_Maintenance.Equipment = db.Equipments.Find(equipmentID);
+                }
+            }
+            else
+            {
+                equipment_Maintenance.AspNetUser = db.AspNetUsers.Find(equipment_Maintenance.employee_id);
+                equipment_Maintenance.Equipment = db.Equipments.Find(equipment_Maintenance.equipment_id);
+            }
+            
+            Session["EquipmentMaintenance"] = equipment_Maintenance;
             return View(equipment_Maintenance);
         }
 
@@ -109,10 +133,11 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Production
             {
                 db.Entry(equipment_Maintenance).State = EntityState.Modified;
                 db.SaveChanges();
+                Session["EquipmentMaintenance"] = null;
                 return RedirectToAction("Index");
             }
-            ViewBag.employee_id = new SelectList(db.AspNetUsers, "Id", "Email", equipment_Maintenance.employee_id);
-            ViewBag.equipment_id = new SelectList(db.Equipments, "Id", "equipment_name", equipment_Maintenance.equipment_id);
+            equipment_Maintenance.AspNetUser = db.AspNetUsers.Find(equipment_Maintenance.employee_id);
+            equipment_Maintenance.Equipment = db.Equipments.Find(equipment_Maintenance.equipment_id);
             return View(equipment_Maintenance);
         }
 

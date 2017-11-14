@@ -17,9 +17,11 @@ namespace ManufacturingCompany.Models
 
         [Required]
         [Display(Name = "Maintenance Date")]
+        [DisplayFormat(ApplyFormatInEditMode = false, DataFormatString = "{0:MM/dd/yyyy}")]
         public System.DateTime maintenance_date { get; set; }
 
         [Display(Name = "ETA for Completion")]
+        [DisplayFormat(ApplyFormatInEditMode = false, DataFormatString = "{0:MM/dd/yyyy}")]
         public Nullable<System.DateTime> completion_eta { get; set; }
 
         [Display(Name = "Maintenance Cost")]

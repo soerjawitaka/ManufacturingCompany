@@ -1,0 +1,43 @@
+﻿@model ManufacturingCompany.Models.Invoice_Lineitem
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Invoice_Lineitem</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.lineitem_unit_quantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.lineitem_unit_quantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Invoice.employee_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Invoice.employee_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Product_Inventory.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Product_Inventory.Id)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

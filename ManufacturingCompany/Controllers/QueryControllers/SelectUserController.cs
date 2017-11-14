@@ -40,7 +40,7 @@ namespace ManufacturingCompany.Controllers
         }
 
         // GET: SelectUser
-        public ActionResult Index(string actionName, string controllerName)
+        public ActionResult Index(string actionName, string controllerName, int? optionalID)
         {
             List<string> searchBy = new List<string>();
             searchBy.Add("Email");
@@ -51,13 +51,17 @@ namespace ManufacturingCompany.Controllers
             ViewBag.SearchBy = new SelectList(searchBy);
             ViewBag.ActionName = actionName;
             ViewBag.ControllerName = controllerName;
+            if (optionalID != null)
+            {
+                ViewBag.OptionalID = optionalID;
+            }
             return View();
         }
 
         // POST: SelectUser/Index
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Index(string SearchBy, string inputForUserSearch, string actionName, string controllerName)
+        public async Task<ActionResult> Index(string SearchBy, string inputForUserSearch, string actionName, string controllerName, int? optionalID)
         {
             List<string> searchBy = new List<string>();
             searchBy.Add("Email");
@@ -67,6 +71,10 @@ namespace ManufacturingCompany.Controllers
             ViewBag.SearchBy = new SelectList(searchBy);
             ViewBag.ActionName = actionName;
             ViewBag.ControllerName = controllerName;
+            if (optionalID != null)
+            {
+                ViewBag.OptionalID = optionalID;
+            }
 
             if (inputForUserSearch != "")
             {
