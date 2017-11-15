@@ -32,7 +32,7 @@
 <br />
 @if (ViewBag.ErrorString != null || ViewBag.ErrorString != "")
 {
-    <div style="text-align:center;">
+    <div class="text-center">
         @Html.Label((string)ViewBag.ErrorString, htmlAttributes: new { @class = "text-danger" })
     </div>
 }
