@@ -72,11 +72,11 @@
         <td>
             @if (ViewBag.OptionalID != null)
                 {
-                @Html.ActionLink("Select", (string)ViewBag.ActionName, (string)ViewBag.ControllerName, new { materialID = item.Id, id = (int)ViewBag.OptionalID }, htmlAttributes: new { @class = "btn btn-success" })
+                @Html.ActionLink("Select", (string)ViewBag.ActionName, (string)ViewBag.ControllerName, new { materialID = item.Id, id = (int)ViewBag.OptionalID }, htmlAttributes: new { @class = "btn btn-outline-success" })
             }
             else
             {
-                @Html.ActionLink("Select", (string)ViewBag.ActionName, (string)ViewBag.ControllerName, new { materialID = item.Id }, htmlAttributes: new { @class = "btn btn-success" })
+                @Html.ActionLink("Select", (string)ViewBag.ActionName, (string)ViewBag.ControllerName, new { materialID = item.Id }, htmlAttributes: new { @class = "btn btn-outline-success" })
             }
         </td>
     </tr>

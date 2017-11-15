@@ -37,9 +37,9 @@ namespace ManufacturingCompany.Models
             db.Dispose();
         }
 
-        public void CalculateTotal(int id)
+        public void CalculateTotal(int productInventoryID)
         {
-            SetProductInventory(id);
+            SetProductInventory(productInventoryID);
             this.PackageQuantity = this.lineitem_unit_quantity / this.ProductInventory.unit_per_package;
             this.LineitemTotal = this.PackageQuantity * this.ProductInventory.per_package_price;
         }

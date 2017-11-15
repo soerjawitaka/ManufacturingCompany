@@ -65,11 +65,11 @@
         <td>
             @if (ViewBag.ActionName == null || (string)ViewBag.ActionName == "")
             {
-                @Html.ActionLink("Select", "Create", "Paychecks", new { payrollid = item.Id }, htmlAttributes: new { @class = "btn btn-success" })
+                @Html.ActionLink("Select", "Create", "Paychecks", new { payrollid = item.Id }, htmlAttributes: new { @class = "btn btn-outline-success" })
             }
             else
             {
-                @Html.ActionLink("Select", (string)ViewBag.ActionName, "Paychecks", new { id = (int)ViewBag.PaycheckID, payrollid = item.Id }, htmlAttributes: new { @class = "btn btn-success" })
+                @Html.ActionLink("Select", (string)ViewBag.ActionName, "Paychecks", new { id = (int)ViewBag.PaycheckID, payrollid = item.Id }, htmlAttributes: new { @class = "btn btn-outline-success" })
             }
         </td>
     </tr>

@@ -50,14 +50,9 @@
             @Html.DisplayNameFor(model => model.unit_per_package)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.per_package_cost)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.packaging_cost)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.per_package_price)
         </th>
+        <th></th>
         <th></th>
     </tr>
 
@@ -73,30 +68,17 @@
             @Html.DisplayFor(modelItem => item.unit_per_package)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.per_package_cost)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.packaging_cost)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.per_package_price)
         </td>
-        <td>
-            @using (Html.BeginForm((string)ViewBag.ActionName, (string)ViewBag.ControllerName, new { id = item.Id }, FormMethod.Get))
-            {
+        @using (Html.BeginForm((string)ViewBag.ActionName, (string)ViewBag.ControllerName, new { id = item.Id }, FormMethod.Get))
+        {
+            <td>
                 @Html.TextBox("Quantity", item.unit_quantity, htmlAttributes: new { @class = "form-control", @type = "number" })
+            </td>
+            <td>
                 <input type="submit" value="Select" class="btn btn-outline-success" />
-            }
-            
-            @*@if (ViewBag.OptionalID != null)
-                {
-                @Html.ActionLink("Select", (string)ViewBag.ActionName, (string)ViewBag.ControllerName, new { productInventoryID = item.Id, id = (int)ViewBag.OptionalID }, htmlAttributes: new { @class = "btn btn-success" })
-            }
-            else
-            {
-                @Html.ActionLink("Select", (string)ViewBag.ActionName, (string)ViewBag.ControllerName, new { productInventoryID = item.Id }, htmlAttributes: new { @class = "btn btn-success" })
-            }*@
-        </td>
+            </td>
+        }
     </tr>
 }
 

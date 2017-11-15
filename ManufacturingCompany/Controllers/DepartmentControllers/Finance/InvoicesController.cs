@@ -24,6 +24,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
         public ActionResult Index()
         {
             var invoices = db.Invoices.Include(i => i.AspNetUser).Include(i => i.Customer);
+            foreach (var i in invoices) { i.CalculateTotal(); }
             return View(invoices.ToList());
         }
 
@@ -35,6 +36,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Invoice invoice = db.Invoices.Find(id);
+            invoice.CalculateTotal();
             if (invoice == null)
             {
                 return HttpNotFound();
@@ -52,18 +54,58 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
 
             if (id != null)
             {
-                var li = new Lineitem();
-                li.lineitem_unit_quantity = Convert.ToInt32(Quantity);
-                li.CalculateTotal(Convert.ToInt32(id));
-                li.ProductInventory.Product = db.Products.Find(li.ProductInventory.product_id);
-                invoiceItems.Add(li);
+                if (invoiceItems.SingleOrDefault(ii => ii.product_inventory_id == id) == null)
+                {
+                    var li = new Lineitem();
+                    li.lineitem_unit_quantity = Convert.ToInt32(Quantity);
+                    li.CalculateTotal(Convert.ToInt32(id));
+                    li.ProductInventory.Product = db.Products.Find(li.ProductInventory.product_id);
+                    invoiceItems.Add(li);
+                }
+                else
+                {
+                    var li = invoiceItems.SingleOrDefault(ii => ii.product_inventory_id == id);
+                    if (li != null)
+                    {
+                        li.lineitem_unit_quantity += Convert.ToInt32(Quantity);
+                        li.CalculateTotal(Convert.ToInt32(id));
+                        li.ProductInventory.Product = db.Products.Find(li.ProductInventory.product_id);
+                    }
+                }
             }
-
 
             Session["InvoiceItems"] = invoiceItems;
 
             ViewBag.ActionTitle = "Select Items for  ";
             return View(invoiceItems);
+        }
+
+        // GET: Invoices/RemoveItem
+        public ActionResult RemoveItem(int? id)
+        {
+            var invoiceItems = new List<Lineitem>();
+            // load items from session
+            if (Session["InvoiceItems"] != null) { invoiceItems = (List<Lineitem>)Session["InvoiceItems"]; }
+
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            else
+            {
+                var li = invoiceItems.SingleOrDefault(item => item.product_inventory_id == id);
+                if (li != null)
+                {
+                    invoiceItems.Remove(li);
+                }
+                else
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+            }
+
+            Session["InvoiceItems"] = invoiceItems;
+            return RedirectToAction("SelectItems");
         }
 
         // GET: Invoices/Create
@@ -85,7 +127,18 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
             if (ModelState.IsValid)
             {
                 db.Invoices.Add(invoice);
-                db.SaveChanges();
+                var result = db.SaveChanges();
+                if (result > 0)
+                {
+                    var li = (List<Lineitem>)Session["InvoiceItems"];
+                    foreach (var item in li)
+                    {
+                        var invoiceLI = new Invoice_Lineitem() { product_inventory_id = item.product_inventory_id, lineitem_unit_quantity = item.lineitem_unit_quantity};
+                        invoiceLI.invoice_id = db.Invoices.Max(i => i.Id);
+                        db.Invoice_Lineitem.Add(invoiceLI);
+                    }
+                    db.SaveChanges();
+                }
                 return RedirectToAction("Index");
             }
 

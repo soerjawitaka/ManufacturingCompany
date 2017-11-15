@@ -12,12 +12,7 @@ namespace ManufacturingCompany.Models
     {
         public void CalculatePackage()
         {
-            var db = new BusinessEntities();
-            if (this.Product == null)
-            {
-                this.Product = db.Products.Find(this.product_id);
-                db.Dispose();
-            }
+            SetProduct();
             this.per_package_cost = this.Product.product_unit_cost * this.unit_per_package;
             this.per_package_price = this.Product.product_unit_price * this.unit_per_package;
             if (this.packaging_cost != null)
@@ -25,6 +20,16 @@ namespace ManufacturingCompany.Models
                 this.per_package_price += Convert.ToDecimal(this.packaging_cost);
             }
             this.Product = null;
+        }
+
+        public void SetProduct()
+        {
+            var db = new BusinessEntities();
+            if (this.Product == null)
+            {
+                this.Product = db.Products.Find(this.product_id);
+            }
+            db.Dispose();
         }
     }
 
