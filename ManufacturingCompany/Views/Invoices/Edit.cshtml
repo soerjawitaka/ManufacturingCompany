@@ -40,12 +40,19 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn btn-success" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "btn btn-default" })
+</div>
+
+<hr class="navbar-inverse" />
+
+@Ajax.ActionLink("Lineitems", "LineitemsIndex", new { invoiceID = Model.Id }, new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "Lineitems", InsertionMode = InsertionMode.Replace }, htmlAttributes: new { @class = "btn btn-outline-info" } )
+<div id="Lineitems">
+    
 </div>

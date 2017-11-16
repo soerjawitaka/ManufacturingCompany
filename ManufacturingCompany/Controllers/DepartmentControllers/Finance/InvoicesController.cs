@@ -212,6 +212,25 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
             return RedirectToAction("Index");
         }
 
+        #region Lineitems
+
+        // GET: InvoiceLineitems
+        public PartialViewResult LineitemsIndex(int? invoiceID)
+        {
+            var invoice_Lineitem = db.Invoice_Lineitem.Where(ili => ili.invoice_id == invoiceID).Include(i => i.Invoice).Include(i => i.Product_Inventory);
+            return PartialView("_LineitemsIndex", invoice_Lineitem.ToList());
+        }
+
+        // GET: InvoiceLineitems/Create
+        public PartialViewResult LineitemsCreate()
+        {
+            ViewBag.invoice_id = new SelectList(db.Invoices, "Id", "employee_id");
+            ViewBag.product_inventory_id = new SelectList(db.Product_Inventory, "Id", "Id");
+            return PartialView("_LineitemsCreate");
+        }
+
+        #endregion
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
