@@ -1,42 +1,44 @@
 ﻿@model IEnumerable<ManufacturingCompany.Models.Invoice_Lineitem>
 
-<div id="Lineitems">
-    <p>
-        @Ajax.ActionLink("Create New", "Create", new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "Lineitems", InsertionMode = InsertionMode.Replace })
-    </p>
-    <table class="table">
+<br />
+
+<h4>Lineitems</h4>
+
+<p>
+    @Ajax.ActionLink("Create New", "Create", new { invoiceID = (int)ViewBag.InvoiceID }, new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "Lineitems", InsertionMode = InsertionMode.Replace }, htmlAttributes: new { @class = "btn btn-default" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.lineitem_unit_quantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Invoice.employee_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Product_Inventory.Id)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.lineitem_unit_quantity)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Invoice.employee_id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Product_Inventory.Id)
-            </th>
-            <th></th>
+            <td>
+                @Html.DisplayFor(modelItem => item.lineitem_unit_quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Invoice.employee_id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product_Inventory.Id)
+            </td>
+            <td>
+                @Ajax.ActionLink("Edit", "Edit", new { id = item.Id, invoiceID = (int)ViewBag.InvoiceID }, new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "Lineitems", InsertionMode = InsertionMode.Replace }, htmlAttributes: new { @class = "btn btn-warning" })
+                @Ajax.ActionLink("Delete", "Delete", new { id = item.Id, invoiceID = (int)ViewBag.InvoiceID }, new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "Lineitems", InsertionMode = InsertionMode.Replace }, htmlAttributes: new { @class = "btn btn-danger" })
+            </td>
         </tr>
+    }
 
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.lineitem_unit_quantity)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Invoice.employee_id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Product_Inventory.Id)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                </td>
-            </tr>
-        }
+</table>
 
-    </table>
-</div>

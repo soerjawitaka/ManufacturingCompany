@@ -109,12 +109,25 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
         }
 
         // GET: Invoices/Create
-        public ActionResult Create()
+        public ActionResult Create(string userID, int? customerID)
         {
-            ViewBag.employee_id = new SelectList(db.AspNetUsers, "Id", "Email");
-            ViewBag.customer_id = new SelectList(db.Customers, "Id", "customer_company_name");
+            var currentInvoice = new Invoice();
+            if (Session["CurrentInvoice"] != null) { currentInvoice = (Invoice)Session["CurrentInvoice"]; }
+            if (userID != null)
+            {
+                currentInvoice.employee_id = userID;
+                currentInvoice.AspNetUser = db.AspNetUsers.Find(userID);
+            }
+            if (customerID != null)
+            {
+                currentInvoice.customer_id = Convert.ToInt32(customerID);
+                currentInvoice.Customer = db.Customers.Find(customerID);
+            }
+            Session["CurrentInvoice"] = currentInvoice;
+            ViewBag.EmployeeError = "";
+            ViewBag.CustomerError = "";
             ViewBag.ActionTitle = "Create ";
-            return View();
+            return View(currentInvoice);
         }
 
         // POST: Invoices/Create
@@ -124,7 +137,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,invoice_date,employee_id,customer_id")] Invoice invoice)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && invoice.employee_id != null && invoice.customer_id != 0)
             {
                 db.Invoices.Add(invoice);
                 var result = db.SaveChanges();
@@ -142,26 +155,51 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
                 return RedirectToAction("Index");
             }
 
-            ViewBag.employee_id = new SelectList(db.AspNetUsers, "Id", "Email", invoice.employee_id);
-            ViewBag.customer_id = new SelectList(db.Customers, "Id", "customer_company_name", invoice.customer_id);
+            if (invoice.employee_id != null || invoice.employee_id != "") { invoice.AspNetUser = db.AspNetUsers.Find(invoice.employee_id); }
+            if (invoice.customer_id != 0 ) { invoice.Customer = db.Customers.Find(invoice.customer_id); }
+            var employeeError = "";
+            var customerError = "";
+            if (invoice.employee_id == null) { employeeError = "Please select an employee."; }
+            if (invoice.customer_id == 0) { customerError = "Please select a customer."; }
+            ViewBag.EmployeeError = employeeError;
+            ViewBag.CustomerError = customerError;
             ViewBag.ActionTitle = "Create ";
+            Session["CurrentInvoice"] = invoice;
             return View(invoice);
         }
 
         // GET: Invoices/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int? id, string userID, int? customerID)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Invoice invoice = db.Invoices.Find(id);
+            invoice.CalculateTotal();
+            if (userID != null)
+            {
+                invoice.employee_id = userID;
+                invoice.AspNetUser = db.AspNetUsers.Find(userID);
+            }
+            else
+            {
+                invoice.AspNetUser = db.AspNetUsers.Find(invoice.employee_id);
+            }
+            if (customerID != null)
+            {
+                invoice.customer_id = Convert.ToInt32(customerID);
+                invoice.Customer = db.Customers.Find(customerID);
+            }
+            else
+            {
+                invoice.Customer = db.Customers.Find(invoice.customer_id);
+            }
+            invoice.Customer = db.Customers.Find(invoice.customer_id);
             if (invoice == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.employee_id = new SelectList(db.AspNetUsers, "Id", "Email", invoice.employee_id);
-            ViewBag.customer_id = new SelectList(db.Customers, "Id", "customer_company_name", invoice.customer_id);
             ViewBag.ActionTitle = "Edit ";
             return View(invoice);
         }
@@ -179,8 +217,8 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.employee_id = new SelectList(db.AspNetUsers, "Id", "Email", invoice.employee_id);
-            ViewBag.customer_id = new SelectList(db.Customers, "Id", "customer_company_name", invoice.customer_id);
+            invoice.AspNetUser = db.AspNetUsers.Find(invoice.employee_id);
+            invoice.Customer = db.Customers.Find(invoice.customer_id);
             ViewBag.ActionTitle = "Edit ";
             return View(invoice);
         }
@@ -193,6 +231,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Invoice invoice = db.Invoices.Find(id);
+            invoice.CalculateTotal();
             if (invoice == null)
             {
                 return HttpNotFound();
@@ -211,25 +250,6 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
-        #region Lineitems
-
-        // GET: InvoiceLineitems
-        public PartialViewResult LineitemsIndex(int? invoiceID)
-        {
-            var invoice_Lineitem = db.Invoice_Lineitem.Where(ili => ili.invoice_id == invoiceID).Include(i => i.Invoice).Include(i => i.Product_Inventory);
-            return PartialView("_LineitemsIndex", invoice_Lineitem.ToList());
-        }
-
-        // GET: InvoiceLineitems/Create
-        public PartialViewResult LineitemsCreate()
-        {
-            ViewBag.invoice_id = new SelectList(db.Invoices, "Id", "employee_id");
-            ViewBag.product_inventory_id = new SelectList(db.Product_Inventory, "Id", "Id");
-            return PartialView("_LineitemsCreate");
-        }
-
-        #endregion
 
         protected override void Dispose(bool disposing)
         {

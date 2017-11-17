@@ -4,8 +4,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="row">
-    <div class="col-md-6">
+<div class="row jumbotron jumbotron-bckimg">
+    <div class="col-md-6"style="opacity:.8;">
         <div class="card border-success">
             <h2>Timesheets</h2>
             <p>@Html.ActionLink("Manage >>", "Index", "Timesheets", null, htmlAttributes: new { @class = "btn btn-outline-success", @style = "width:100%" })</p>
@@ -19,7 +19,7 @@
             <p>@Html.ActionLink("Manage >>", "Index", "Paychecks", null, htmlAttributes: new { @class = "btn btn-outline-success", @style = "width:100%" })</p>
         </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6"style="opacity:.8;">
         <div class="card border-success">
             <h2>Invoices</h2>
             <p>@Html.ActionLink("Manage >>", "Index", "Invoices", null, htmlAttributes: new { @class = "btn btn-outline-success", @style = "width:100%" })</p>

@@ -17,11 +17,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.AspNetUser.Email)
+            @Html.DisplayNameFor(model => model.AspNetUser.UserName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.AspNetUser.Email)
+            @Html.DisplayFor(model => model.AspNetUser.UserName)
         </dd>
 
         <dt>
@@ -48,7 +48,7 @@
             @Html.DisplayFor(model => model.TaxAmount)
         </dd>
 
-        <dt class="text-info">
+        <dt>
             @Html.DisplayNameFor(model => model.Total)
         </dt>
 
@@ -58,32 +58,33 @@
 
     </dl>
 </div>
-<div>
 
+<div>
+    <h3> Items</h3>
+
+    <table class="table">
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Lineitems.Single().ProductInventory.Product.product_name)</th>
+            <th>@Html.DisplayNameFor(model => model.Lineitems.Single().ProductInventory.Product.product_unit_measure)</th>
+            <th>@Html.DisplayNameFor(model => model.Lineitems.Single().lineitem_unit_quantity)</th>
+            <th class="text-right">@Html.DisplayNameFor(model => model.Lineitems.Single().ProductInventory.per_package_price)</th>
+            <th class="text-right">@Html.DisplayNameFor(model => model.Lineitems.Single().LineitemTotal)</th>
+        </tr>
+        @foreach (var item in Model.Lineitems)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.ProductInventory.Product.product_name)</td>
+                <td>@Html.DisplayFor(modelItem => item.ProductInventory.Product.product_unit_measure)</td>
+                <td>@Html.DisplayFor(modelItem => item.lineitem_unit_quantity)</td>
+                <td class="text-right">@Html.DisplayFor(modelItem => item.ProductInventory.per_package_price)</td>
+                <td class="text-right">@Html.DisplayFor(modelItem => item.LineitemTotal)</td>
+            </tr>
+        }
+    </table>
 </div>
+
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, htmlAttributes: new { @class = "btn btn-warning" }) 
     @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "btn btn-default" })
 </p>
 
-<h3> Items</h3>
-
-<table class="table">
-    <tr>
-        <th>@Html.DisplayNameFor(model => model.Lineitems.Single().ProductInventory.Product.product_name)</th>
-        <th>@Html.DisplayNameFor(model => model.Lineitems.Single().ProductInventory.Product.product_unit_measure)</th>
-        <th>@Html.DisplayNameFor(model => model.Lineitems.Single().lineitem_unit_quantity)</th>
-        <th class="text-right">@Html.DisplayNameFor(model => model.Lineitems.Single().ProductInventory.per_package_price)</th>
-        <th class="text-right">@Html.DisplayNameFor(model => model.Lineitems.Single().LineitemTotal)</th>
-    </tr>
-    @foreach (var item in Model.Lineitems)
-    {
-        <tr>
-            <td>@Html.DisplayFor(modelItem => item.ProductInventory.Product.product_name)</td>
-            <td>@Html.DisplayFor(modelItem => item.ProductInventory.Product.product_unit_measure)</td>
-            <td>@Html.DisplayFor(modelItem => item.lineitem_unit_quantity)</td>
-            <td class="text-right">@Html.DisplayFor(modelItem => item.ProductInventory.per_package_price)</td>
-            <td class="text-right">@Html.DisplayFor(modelItem => item.LineitemTotal)</td>
-        </tr>
-    }
-</table>

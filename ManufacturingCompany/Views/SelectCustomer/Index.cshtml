@@ -1,0 +1,114 @@
+﻿@model IEnumerable<ManufacturingCompany.Models.Customer>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="card text-white bg-primary">Select a customer</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="container">
+        <div class="col-md-5" style="margin-bottom:10px; display:inline-block;">
+            @Html.Label("Search By Company's Name : ", htmlAttributes: new { @class = "form-control", @style = "border:none;" })
+        </div>
+
+        <div class="col-md-3" style="margin-bottom:10px; display:inline-block;">
+            @Html.TextBox("inputForUserSearch", "", new { @class = "form-control" })
+        </div>
+
+        <div class="col-md-3" style="margin-bottom:10px; display:inline-block;">
+            <input type="submit" value="Search" class="btn btn-success" style="display:inline-block;" />
+        </div>
+    </div>
+}
+
+<br />
+@if (ViewBag.ErrorString != null || ViewBag.ErrorString != "")
+{
+    <div class="text-center">
+        @Html.Label((string)ViewBag.ErrorString, htmlAttributes: new { @class = "text-danger" })
+    </div>
+}
+<br />
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.customer_company_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.customer_address1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.customer_address2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.customer_city)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.customer_state)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.customer_zip)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.customer_country)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.customer_phone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.customer_website)
+        </th>
+        <th></th>
+    </tr>
+
+    @if (Model != null)
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.customer_company_name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.customer_address1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.customer_address2)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.customer_city)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.customer_state)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.customer_zip)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.customer_country)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.customer_phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.customer_website)
+                </td>
+                <td>
+                    @if (ViewBag.OptionalID != null)
+                    {
+                        @Html.ActionLink("Select", (string)ViewBag.ActionName, (string)ViewBag.ControllerName, new { customerID = item.Id, id = (int)ViewBag.OptionalID }, htmlAttributes: new { @class = "btn btn-outline-success" })
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Select", (string)ViewBag.ActionName, (string)ViewBag.ControllerName, new { customerID = item.Id }, htmlAttributes: new { @class = "btn btn-outline-success" })
+                    }
+                </td>
+            </tr>
+        }
+    }
+</table>

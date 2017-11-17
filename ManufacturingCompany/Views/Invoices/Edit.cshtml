@@ -13,28 +13,51 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.employee_id)
+        @Html.HiddenFor(model => model.customer_id)
 
         <div class="form-group">
             @Html.LabelFor(model => model.invoice_date, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.invoice_date, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.invoice_date, new { htmlAttributes = new { @class = "form-control", @type = "date", @Value = Model.invoice_date.ToString("yyyy-MM-dd") } })
                 @Html.ValidationMessageFor(model => model.invoice_date, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.employee_id, "employee_id", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.AspNetUser.UserName, "Employee Username", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("employee_id", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.employee_id, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.AspNetUser.UserName, new { htmlAttributes = new { @class = "form-control", @disabled = "true", @style = "display:inline-block;" } })
+                @Html.ActionLink("Edit Employee", "Index", "SelectUser", new { actionName = "Edit", controllerName = "Invoices", optionalID = Model.Id }, htmlAttributes: new { @class = "btn btn-primary", @style = "margin-left:20px;" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.customer_id, "customer_id", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Customer.customer_company_name, "Customer Name", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("customer_id", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.customer_id, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Customer.customer_company_name, new { htmlAttributes = new { @class = "form-control", @disabled = "true", @style = "display:inline-block;" } })
+                @Html.ActionLink("Edit Customer", "Index", "SelectCustomer", new { actionName = "Edit", controllerName = "Invoices", optionalID = Model.Id }, htmlAttributes: new { @class = "btn btn-primary", @style = "margin-left:20px;" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Subtotal, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Subtotal, new { htmlAttributes = new { @class = "form-control", @disabled = "true" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TaxAmount, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TaxAmount, new { htmlAttributes = new { @class = "form-control", @disabled = "true" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Total, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Total, new { htmlAttributes = new { @class = "form-control text-info", @disabled = "true" } })
             </div>
         </div>
 
@@ -52,7 +75,9 @@
 
 <hr class="navbar-inverse" />
 
-@Ajax.ActionLink("Lineitems", "LineitemsIndex", new { invoiceID = Model.Id }, new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "Lineitems", InsertionMode = InsertionMode.Replace }, htmlAttributes: new { @class = "btn btn-outline-info" } )
+@Html.Action("Index", "InvoiceLineitems", new { invoiceID = Model.Id })
+
+@*@Ajax.ActionLink("Lineitems", "Index", "InvoiceLineitems", new { invoiceID = Model.Id }, new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "Lineitems", InsertionMode = InsertionMode.Replace }, htmlAttributes: new { @class = "btn btn-outline-info" } )*@
 <div id="Lineitems">
     
 </div>

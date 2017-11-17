@@ -230,6 +230,7 @@
     <Compile Include="Controllers\GeneralEmployeeControllers\EmployeeTimesheetsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\QueryControllers\SelectCustomerController.cs" />
     <Compile Include="Controllers\QueryControllers\SelectEquipmentController.cs" />
     <Compile Include="Controllers\QueryControllers\SelectMaterialController.cs" />
     <Compile Include="Controllers\QueryControllers\SelectPayrollController.cs" />
@@ -629,8 +630,8 @@
     <Content Include="Views\InvoiceLineitems\Create.cshtml" />
     <Content Include="Views\InvoiceLineitems\Edit.cshtml" />
     <Content Include="Views\InvoiceLineitems\Delete.cshtml" />
-    <Content Include="Views\Invoices\_LineitemsIndex.cshtml" />
-    <Content Include="Views\Invoices\_LineitemsCreate.cshtml" />
+    <Content Include="Views\Shared\_Error.cshtml" />
+    <Content Include="Views\SelectCustomer\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201710061504292_InitialCreate.resx">
