@@ -1,0 +1,87 @@
+﻿@model IEnumerable<ManufacturingCompany.Models.Product_Inventory>
+
+<h4>Select a product in the inventory</h4>
+
+@using (Ajax.BeginForm("Index", new { actionName = (string)ViewBag.ActionName, controllerName = (string)ViewBag.ControllerName }, new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "SelectProductInventory", InsertionMode = InsertionMode.Replace}))
+{
+    @Html.AntiForgeryToken()
+    <div class="container">
+        <div class="col-md-2" style="margin-bottom:10px; display:inline-block;">
+            @Html.Label("Search By : ", htmlAttributes: new { @class = "form-control", @style = "border:none;" })
+        </div>
+
+        <div class="col-md-3" style="margin-bottom:10px; display:inline-block;">
+            @Html.DropDownList("SearchBy", (SelectList)ViewBag.SearchBy, htmlAttributes: new { @class = "form-control" })
+        </div>
+
+        <div class="col-md-3" style="margin-bottom:10px; display:inline-block;">
+            @Html.TextBox("inputForUserSearch", "", new { @class = "form-control" })
+        </div>
+
+        <div class="col-md-3" style="margin-bottom:10px; display:inline-block;">
+            <input type="submit" value="Search" class="btn btn-success" />
+        </div>
+    </div>
+}
+
+<br />
+@if (ViewBag.ErrorString != null || ViewBag.ErrorString != "")
+{
+    <div style="text-align:center;">
+        @Html.Label((string)ViewBag.ErrorString, htmlAttributes: new { @class = "text-danger" })
+    </div>
+}
+<br />
+
+<div class="col-sm-12 col-md-12 well" id="content">
+    <div style="clear:both;">&nbsp;</div>
+    <div class="table-responsive" style="max-height:250px;">
+        <table class="table table-list-search">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Product.product_name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.unit_quantity)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.unit_per_package)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.per_package_price)
+                </th>
+                <th></th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Product.product_name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.unit_quantity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.unit_per_package)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.per_package_price)
+                    </td>
+                    @using (Ajax.BeginForm("Create", "InvoiceLineitems", new { invoiceID = (int)ViewBag.OptionalID, productInventoryID = item.Id }, new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "Lineitems", InsertionMode = InsertionMode.Replace }))
+                    {
+                        <td>
+                            @Html.TextBox("Quantity", item.unit_quantity, htmlAttributes: new { @class = "form-control", @type = "number" })
+                        </td>
+                        <td>
+                            <input type="submit" value="Select" class="btn btn-outline-success" />
+                        </td>
+                    }
+                </tr>
+            }
+
+        </table>
+    </div>
+    <div style="clear:both;">&nbsp;</div>
+</div>

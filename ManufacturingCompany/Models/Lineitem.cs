@@ -34,6 +34,7 @@ namespace ManufacturingCompany.Models
             this.product_inventory_id = productInventoryID;
             this.ProductInventory = db.Product_Inventory.Find(productInventoryID);
             this.ProductInventory.CalculatePackage();
+            this.ProductInventory.SetProduct();
             db.Dispose();
         }
 
