@@ -77,7 +77,6 @@
 
 
 
-@*@Ajax.ActionLink("Lineitems", "Index", "InvoiceLineitems", new { invoiceID = Model.Id }, new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "Lineitems", InsertionMode = InsertionMode.Replace }, htmlAttributes: new { @class = "btn btn-outline-info" } )*@
 <div id="Lineitems">
     @Html.Action("Index", "InvoiceLineitems", new { invoiceID = Model.Id })
 </div>

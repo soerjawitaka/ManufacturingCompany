@@ -23,6 +23,7 @@ namespace ManufacturingCompany.Controllers
                 return PartialView("_Error");
             }
             var invoice_Lineitem = db.Invoice_Lineitem.Where(ili => ili.invoice_id == invoiceID).Include(i => i.Invoice).Include(i => i.Product_Inventory);
+            foreach (var item in invoice_Lineitem) { item.CalculateTotal(item.product_inventory_id); }
             ViewBag.InvoiceID = Convert.ToInt32(invoiceID);
             return PartialView(invoice_Lineitem.ToList());
         }
@@ -43,12 +44,19 @@ namespace ManufacturingCompany.Controllers
         //}
 
         // GET: InvoiceLineitems/Create
-        public PartialViewResult Create(int? invoiceID)
+        public PartialViewResult Create(int? invoiceID, int? productInventoryID)
         {
             ViewBag.invoice_id = new SelectList(db.Invoices, "Id", "employee_id");
-            ViewBag.product_inventory_id = new SelectList(db.Product_Inventory, "Id", "Id");
+            //ViewBag.product_inventory_id = new SelectList(db.Product_Inventory, "Id", "Id");
+
+            var invoiceLineitem = new Invoice_Lineitem();
+            if (Session["InvoiceLineitem"] != null) { invoiceLineitem = (Invoice_Lineitem)Session["ProductInventory"]; }
+
+            if (productInventoryID != null) { invoiceLineitem.CalculateTotal(Convert.ToInt32(productInventoryID)); }
+
+            Session["InvoiceLineitem"] = invoiceLineitem;
             ViewBag.InvoiceID = Convert.ToInt32(invoiceID);
-            return PartialView();
+            return PartialView(invoiceLineitem);
         }
 
         // POST: InvoiceLineitems/Create

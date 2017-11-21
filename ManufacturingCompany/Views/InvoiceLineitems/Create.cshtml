@@ -9,11 +9,14 @@
         <h4>Create a lineitem</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.product_inventory_id)
+        @Html.HiddenFor(model => model.invoice_id)
         <div class="form-group">
-            @Html.LabelFor(model => model.product_inventory_id, "product_inventory_id", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.ProductInventory.Product.product_name, "Product Name", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("product_inventory_id", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.product_inventory_id, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.ProductInventory.Product.product_name, new { htmlAttributes = new { @class = "form-control", @disabled = "true", @style = "display:inline-block;" } })
+                @*@Html.ActionLink("Edit Employee", "Index", "SelectUser", new { actionName = "Edit", controllerName = "Invoices", optionalID = Model.Id }, htmlAttributes: new { @class = "btn btn-primary", @style = "margin-left:20px;" })*@
+                @Ajax.ActionLink("Edit Product", "Index", "PartialSelectProductInventory", new { actionName = "Create", controllerName = "InvoiceLineitems", optionalID = (int)ViewBag.InvoiceID }, new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "SelectProductInventory", InsertionMode = InsertionMode.Replace }, htmlAttributes: new { @class = "btn btn-primary", @style = "margin-left:20px;" })
             </div>
         </div>
 
@@ -41,9 +44,8 @@
     </div>
 }
 
-<div>
-    @Ajax.ActionLink("Back to List", "index", "InvoiceLineitems", new { invoiceID = (int)ViewBag.InvoiceID }, new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "Lineitems", InsertionMode = InsertionMode.ReplaceWith }, htmlAttributes: new { @class = "btn btn-default" })
-</div>
+<div id="SelectProductInventory"></div>
+<div id="SelectInvoice"></div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
