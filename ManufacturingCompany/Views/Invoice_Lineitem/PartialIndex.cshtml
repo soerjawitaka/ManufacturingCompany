@@ -5,7 +5,7 @@
 <h4>Lineitems</h4>
 
 <p>
-    @Ajax.ActionLink("Create New", "Create", new { invoiceID = (int)ViewBag.InvoiceID }, new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "Lineitems", InsertionMode = InsertionMode.Replace }, htmlAttributes: new { @class = "btn btn-default" })
+    @Html.ActionLink("Create New", "Create", "Invoice_Lineitem", new { invoiceID = (int)ViewBag.InvoiceID }, htmlAttributes: new { @class = "btn btn-default" })
 </p>
 <table class="table">
     <tr>
@@ -26,11 +26,12 @@
             <td class="text-right">@Html.DisplayFor(modelItem => item.ProductInventory.per_package_price)</td>
             <td class="text-right text-info">@Html.DisplayFor(modelItem => item.LineitemTotal)</td>
             <td>
-                @Ajax.ActionLink("Edit", "Edit", new { id = item.Id, invoiceID = (int)ViewBag.InvoiceID }, new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "Lineitems", InsertionMode = InsertionMode.Replace }, htmlAttributes: new { @class = "btn btn-warning" })
-                @Ajax.ActionLink("Delete", "Delete", new { id = item.Id, invoiceID = (int)ViewBag.InvoiceID }, new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "Lineitems", InsertionMode = InsertionMode.Replace }, htmlAttributes: new { @class = "btn btn-danger" })
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id, invoiceID = (int)ViewBag.InvoiceID }, htmlAttributes: new { @class = "btn btn-warning" })
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id, invoiceID = (int)ViewBag.InvoiceID }, htmlAttributes: new { @class = "btn btn-danger" })
             </td>
         </tr>
     }
 
 </table>
+
 

@@ -8,7 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using ManufacturingCompany.Models;
 
-namespace ManufacturingCompany.Controllers.DepartmentControllers
+namespace ManufacturingCompany.Controllers
 {
     [Authorize]
     public class CustomersController : Controller

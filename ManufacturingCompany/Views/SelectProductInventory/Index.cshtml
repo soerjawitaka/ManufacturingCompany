@@ -70,15 +70,31 @@
         <td>
             @Html.DisplayFor(modelItem => item.per_package_price)
         </td>
-        @using (Html.BeginForm((string)ViewBag.ActionName, (string)ViewBag.ControllerName, new { id = item.Id }, FormMethod.Get))
+        @if (ViewBag.OptionalID == null)
         {
-            <td>
-                @Html.TextBox("Quantity", item.unit_quantity, htmlAttributes: new { @class = "form-control", @type = "number" })
-            </td>
-            <td>
-                <input type="submit" value="Select" class="btn btn-outline-success" />
-            </td>
+            using (Html.BeginForm((string)ViewBag.ActionName, (string)ViewBag.ControllerName, new { id = item.Id }, FormMethod.Get))
+            {
+                <td>
+                    @Html.TextBox("Quantity", item.unit_quantity, htmlAttributes: new { @class = "form-control", @type = "number" })
+                </td>
+                <td>
+                    <input type="submit" value="Select" class="btn btn-outline-success" />
+                </td>
+            }
         }
+        else
+        {
+            using (Html.BeginForm((string)ViewBag.ActionName, (string)ViewBag.ControllerName, new { id = (int?)ViewBag.OptionalID, optionalID = item.Id }, FormMethod.Get))
+            {
+                <td>
+                    @Html.TextBox("Quantity", item.unit_quantity, htmlAttributes: new { @class = "form-control", @type = "number" })
+                </td>
+                <td>
+                    <input type="submit" value="Select" class="btn btn-outline-success" />
+                </td>
+            }
+        }
+
     </tr>
 }
 
