@@ -42,7 +42,7 @@
 }
 
 <div>
-    @Ajax.ActionLink("Back to List", "index", "InvoiceLineitems", new { invoiceID = (int)ViewBag.InvoiceID }, new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "Lineitems", InsertionMode = InsertionMode.Replace }, htmlAttributes: new { @class = "btn btn-default" })
+    @Ajax.ActionLink("Back to List", "index", "InvoiceLineitems", new { invoiceID = (int)ViewBag.InvoiceID }, new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "Lineitems", InsertionMode = InsertionMode.ReplaceWith }, htmlAttributes: new { @class = "btn btn-default" })
 </div>
 
 @section Scripts {
