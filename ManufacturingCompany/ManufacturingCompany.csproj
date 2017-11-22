@@ -211,6 +211,7 @@
     <Compile Include="Classes\RoleViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DepartmentControllers\Finance\Invoice_LineitemController.cs" />
+    <Compile Include="Controllers\DepartmentControllers\Finance\PaymentsController.cs" />
     <Compile Include="Controllers\DepartmentControllers\Production\EquipmentMaintenanceController.cs" />
     <Compile Include="Controllers\DepartmentControllers\Production\EquipmentsController.cs" />
     <Compile Include="Controllers\DepartmentControllers\Production\MaterialsController.cs" />
@@ -220,7 +221,6 @@
     <Compile Include="Controllers\DepartmentControllers\FinanceController.cs" />
     <Compile Include="Controllers\DepartmentControllers\Finance\InvoicesController.cs" />
     <Compile Include="Controllers\DepartmentControllers\Finance\PaychecksController.cs" />
-    <Compile Include="Controllers\DepartmentControllers\Finance\PaymentsController.cs" />
     <Compile Include="Controllers\DepartmentControllers\Finance\PayrollsController.cs" />
     <Compile Include="Controllers\DepartmentControllers\Finance\TimesheetsController.cs" />
     <Compile Include="Controllers\DepartmentControllers\ProductionController.cs" />
@@ -339,6 +339,7 @@
     <Compile Include="Models\Partial_Metadata\Material_Partial_Metadata.cs" />
     <Compile Include="Models\Partial_Metadata\Material_Stock_Partial_Metadata.cs" />
     <Compile Include="Models\Partial_Metadata\Paycheck_Partial_Metadata.cs" />
+    <Compile Include="Models\Partial_Metadata\Payment_Partial_Metadata.cs" />
     <Compile Include="Models\Partial_Metadata\Payroll_Partial_Metadata.cs" />
     <Compile Include="Models\Partial_Metadata\ProductCategory_Partial_Metadata.cs" />
     <Compile Include="Models\Partial_Metadata\ProductInventory_Partial_Metadata.cs" />
@@ -520,11 +521,6 @@
     <Content Include="Views\Invoices\Details.cshtml" />
     <Content Include="Views\Invoices\Edit.cshtml" />
     <Content Include="Views\Invoices\Index.cshtml" />
-    <Content Include="Views\Payments\Create.cshtml" />
-    <Content Include="Views\Payments\Delete.cshtml" />
-    <Content Include="Views\Payments\Details.cshtml" />
-    <Content Include="Views\Payments\Edit.cshtml" />
-    <Content Include="Views\Payments\Index.cshtml" />
     <Content Include="Views\Payrolls\Create.cshtml" />
     <Content Include="Views\Payrolls\Delete.cshtml" />
     <Content Include="Views\Payrolls\Details.cshtml" />
@@ -581,7 +577,6 @@
     <Content Include="Views\Shared\_Administration.cshtml" />
     <Content Include="Views\Invoices\_Invoice.cshtml" />
     <Content Include="Views\Paychecks\_Paycheck.cshtml" />
-    <Content Include="Views\Payments\_Payment.cshtml" />
     <Content Include="Views\Payrolls\_Payroll.cshtml" />
     <Content Include="Views\Timesheets\_Timesheet.cshtml" />
     <Content Include="Views\EmployeeTimesheets\_EmployeeTimesheet.cshtml" />
@@ -629,6 +624,12 @@
     <Content Include="Views\Manage\PartialChangePassword.cshtml" />
     <Content Include="Views\Invoice_Lineitem\PartialIndex.cshtml" />
     <Content Include="Views\Invoice_Lineitem\PartialDelete.cshtml" />
+    <Content Include="Views\Payments\Create.cshtml" />
+    <Content Include="Views\Payments\Delete.cshtml" />
+    <Content Include="Views\Payments\Details.cshtml" />
+    <Content Include="Views\Payments\Edit.cshtml" />
+    <Content Include="Views\Payments\Index.cshtml" />
+    <Content Include="Views\Payments\PartialSelectInvoice.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201710061504292_InitialCreate.resx">

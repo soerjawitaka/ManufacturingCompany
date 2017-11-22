@@ -19,6 +19,7 @@ namespace ManufacturingCompany.Models
         public decimal payment_total { get; set; }
         public string payment_type { get; set; }
         public System.DateTime payment_date { get; set; }
+        public string payment_note { get; set; }
     
         public virtual Invoice Invoice { get; set; }
     }

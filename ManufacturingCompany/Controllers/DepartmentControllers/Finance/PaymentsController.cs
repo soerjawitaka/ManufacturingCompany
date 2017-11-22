@@ -8,7 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using ManufacturingCompany.Models;
 
-namespace ManufacturingCompany.Controllers
+namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
 {
     public class PaymentsController : Controller
     {
@@ -44,11 +44,18 @@ namespace ManufacturingCompany.Controllers
         }
 
         // GET: Payments/Create
-        public ActionResult Create()
+        public ActionResult Create(int? invoiceID)
         {
-            ViewBag.invoice_id = new SelectList(db.Invoices, "Id", "employee_id");
+            var newPayment = new Payment();
+            if (invoiceID != null)
+            {
+                var selectedInvoice = db.Invoices.Find(invoiceID);
+                selectedInvoice.CalculateTotal();
+                newPayment.invoice_id = Convert.ToInt32(invoiceID);
+                newPayment.Invoice = selectedInvoice;
+            }
             ViewBag.ActionTitle = "Create ";
-            return View();
+            return View(newPayment);
         }
 
         // POST: Payments/Create
@@ -56,7 +63,7 @@ namespace ManufacturingCompany.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,invoice_id,payment_total,payment_type,payment_date")] Payment payment)
+        public ActionResult Create([Bind(Include = "Id,invoice_id,payment_total,payment_type,payment_date, payment_note")] Payment payment)
         {
             if (ModelState.IsValid)
             {
@@ -64,10 +71,70 @@ namespace ManufacturingCompany.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-            ViewBag.invoice_id = new SelectList(db.Invoices, "Id", "employee_id", payment.invoice_id);
+            
             ViewBag.ActionTitle = "Create ";
             return View(payment);
+        }
+
+        // partial view to select an invoice
+        public PartialViewResult PartialSelectInvoice()
+        {
+            // setting for query options
+            List<string> searchBy = new List<string>();
+            searchBy.Add("Invoice ID");
+            searchBy.Add("Customer Name");
+            ViewBag.ErrorString = "";
+            ViewBag.SearchBy = new SelectList(searchBy);
+
+            var invoices = db.Invoices.OrderByDescending(i => i.Id).Take(10).ToList();
+            foreach (var i in invoices)
+            {
+                i.CalculateTotal();
+            }
+            return PartialView(invoices);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public PartialViewResult PartialSelectInvoice(string SearchBy, string inputForUserSearch)
+        {
+            // setting for query options
+            List<string> searchBy = new List<string>();
+            searchBy.Add("Invoice ID");
+            searchBy.Add("Customer Name");
+            ViewBag.SearchBy = new SelectList(searchBy);
+
+            List<Invoice> invoices = null;
+
+            if (inputForUserSearch != null)
+            {
+                switch (SearchBy)
+                {
+                    case "Invoice ID":
+                        invoices = db.Invoices.Where(i => i.Id.ToString().Contains(inputForUserSearch)).OrderByDescending(i => i.Id).Take(10).ToList();
+                        break;
+                    case "Customer Name":
+                        invoices = db.Invoices.Where(i => i.Customer.customer_company_name.Contains(inputForUserSearch)).OrderByDescending(i => i.Id).Take(10).ToList();
+                        break;
+                    default:
+                        invoices = new List<Invoice>();
+                        break;
+                }
+            }
+            string errorString = "";
+            if (invoices != null)
+            {
+                foreach (var i in invoices)
+                {
+                    i.CalculateTotal();
+                }
+            }
+            else
+            {
+                errorString = "Invoices not found.";
+            }
+            ViewBag.ErrorString = errorString;
+            return PartialView(invoices);
         }
 
         // GET: Payments/Edit/5

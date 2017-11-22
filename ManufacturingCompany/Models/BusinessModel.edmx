@@ -174,6 +174,7 @@
           <Property Name="payment_total" Type="money" Nullable="false" />
           <Property Name="payment_type" Type="nchar" MaxLength="10" Nullable="false" />
           <Property Name="payment_date" Type="datetime" Nullable="false" />
+          <Property Name="payment_note" Type="text" />
         </EntityType>
         <EntityType Name="Payroll">
           <Key>
@@ -933,6 +934,7 @@
           <Property Name="payment_total" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="payment_type" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="payment_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="payment_note" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Invoice" Relationship="Self.fk_payment_invoice" FromRole="Payment" ToRole="Invoice" />
         </EntityType>
         <EntityType Name="Payroll">
@@ -1595,6 +1597,7 @@
                 <ScalarProperty Name="payment_total" ColumnName="payment_total" />
                 <ScalarProperty Name="payment_type" ColumnName="payment_type" />
                 <ScalarProperty Name="payment_date" ColumnName="payment_date" />
+                <ScalarProperty Name="payment_note" ColumnName="payment_note" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

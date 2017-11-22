@@ -4,26 +4,26 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="a342ce0201704794ab92a4a6914f2b8b" Name="Diagram1">
-        <EntityTypeShape EntityType="BusinessModel.AspNetUser" Width="1.5" PointX="0.75" PointY="9.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="BusinessModel.Customer" Width="1.5" PointX="3" PointY="6.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="BusinessModel.Customer_Contact" Width="1.5" PointX="5.25" PointY="21.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="BusinessModel.Delivery_Lineitem" Width="1.5" PointX="8.25" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BusinessModel.Delivery_Schedule" Width="1.5" PointX="3" PointY="11.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="BusinessModel.Equipment" Width="1.5" PointX="3.75" PointY="29.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="BusinessModel.Equipment_Maintenance" Width="1.5" PointX="6" PointY="11.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="BusinessModel.Invoice" Width="1.5" PointX="5.25" PointY="7.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="BusinessModel.Invoice_Lineitem" Width="1.5" PointX="7.5" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BusinessModel.Material" Width="1.5" PointX="1.5" PointY="25.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BusinessModel.Material_Stock" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BusinessModel.Paycheck" Width="1.5" PointX="5.25" PointY="17.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="BusinessModel.Payment" Width="1.5" PointX="7.5" PointY="7.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="BusinessModel.Payroll" Width="1.5" PointX="3" PointY="17.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="BusinessModel.Product" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BusinessModel.Product_Category" Width="1.5" PointX="0.75" PointY="2.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="BusinessModel.Product_Inventory" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="BusinessModel.Purchase" Width="1.5" PointX="3" PointY="21.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="BusinessModel.Timesheet" Width="1.5" PointX="8.25" PointY="13.875" IsExpanded="true" />
+      <Diagram DiagramId="518a13b3f87f489a851cec1f4552bc9b" Name="Diagram1">
+        <EntityTypeShape EntityType="BusinessModel.AspNetUser" Width="1.5" PointX="0.75" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessModel.Customer" Width="1.5" PointX="3" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessModel.Customer_Contact" Width="1.5" PointX="5.25" PointY="22.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessModel.Delivery_Lineitem" Width="1.5" PointX="8.25" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessModel.Delivery_Schedule" Width="1.5" PointX="3" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessModel.Equipment" Width="1.5" PointX="3.75" PointY="26.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessModel.Equipment_Maintenance" Width="1.5" PointX="6" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessModel.Invoice" Width="1.5" PointX="5.25" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessModel.Invoice_Lineitem" Width="1.5" PointX="10.5" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessModel.Material" Width="1.5" PointX="1.5" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessModel.Material_Stock" Width="1.5" PointX="3.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessModel.Paycheck" Width="1.5" PointX="5.25" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessModel.Payment" Width="1.5" PointX="7.5" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessModel.Payroll" Width="1.5" PointX="3" PointY="18.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessModel.Product" Width="1.5" PointX="6" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessModel.Product_Category" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessModel.Product_Inventory" Width="1.5" PointX="8.25" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessModel.Purchase" Width="1.5" PointX="3" PointY="22.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessModel.Timesheet" Width="1.5" PointX="8.25" PointY="14.75" IsExpanded="true" />
         <AssociationConnector Association="BusinessModel.fk_delivery_schedule_driver_aspnetusers" ManuallyRouted="false" />
         <AssociationConnector Association="BusinessModel.fk_delivery_schedule_warehouse_aspnetusers" ManuallyRouted="false" />
         <AssociationConnector Association="BusinessModel.fk_equipment_maintenance_aspnetusers" ManuallyRouted="false" />

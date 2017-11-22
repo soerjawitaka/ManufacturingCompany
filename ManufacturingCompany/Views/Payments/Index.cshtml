@@ -5,22 +5,27 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<h2>Index</h2>
+
 <p>
     @Html.ActionLink("Create New", "Create", null, htmlAttributes: new { @class = "btn btn-default" })
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.payment_total)
+            @Html.DisplayNameFor(model => model.invoice_id)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.payment_type)
+            @Html.DisplayNameFor(model => model.Invoice.Customer.customer_company_name)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.payment_date)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Invoice.employee_id)
+            @Html.DisplayNameFor(model => model.payment_type)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.payment_total)
         </th>
         <th></th>
     </tr>
@@ -28,21 +33,24 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.payment_total)
+            @Html.DisplayFor(modelItem => item.invoice_id)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.payment_type)
+            @Html.DisplayFor(modelItem => item.Invoice.Customer.customer_company_name)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.payment_date)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Invoice.employee_id)
+            @Html.DisplayFor(modelItem => item.payment_type)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.DisplayFor(modelItem => item.payment_total)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-warning" })
+            @Html.ActionLink("Details", "Details", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-default" })
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-danger" })
         </td>
     </tr>
 }
