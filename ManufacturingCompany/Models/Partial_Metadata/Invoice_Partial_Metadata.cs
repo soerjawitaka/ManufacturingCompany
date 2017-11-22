@@ -18,17 +18,17 @@ namespace ManufacturingCompany.Models
         
         [NotMapped]
         [Display(Name = "Subtotal")]
-        [DisplayFormat(ApplyFormatInEditMode = false, DataFormatString = "{0:c}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:c}")]
         public decimal Subtotal { get; private set; }
 
         [NotMapped]
         [Display(Name = "Tax Amount")]
-        [DisplayFormat(ApplyFormatInEditMode = false, DataFormatString = "{0:c}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:c}")]
         public decimal TaxAmount { get; private set; }
 
         [NotMapped]
         [Display(Name = "Total")]
-        [DisplayFormat(ApplyFormatInEditMode = false, DataFormatString = "{0:c}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:c}")]
         public decimal Total { get; private set; }
 
         public void CalculateTotal()

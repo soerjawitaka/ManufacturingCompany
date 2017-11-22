@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using ManufacturingCompany.Models;
 
-namespace ManufacturingCompany.Controllers.QueryControllers
+namespace ManufacturingCompany.Controllers
 {
     public class SelectMaterialController : Controller
     {

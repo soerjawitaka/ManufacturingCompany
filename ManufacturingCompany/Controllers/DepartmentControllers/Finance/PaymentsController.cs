@@ -8,7 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using ManufacturingCompany.Models;
 
-namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
+namespace ManufacturingCompany.Controllers
 {
     public class PaymentsController : Controller
     {

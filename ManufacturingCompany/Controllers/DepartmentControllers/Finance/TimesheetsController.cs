@@ -9,7 +9,7 @@ using System.Web.Mvc;
 using ManufacturingCompany.Models;
 using System.Threading.Tasks;
 
-namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
+namespace ManufacturingCompany.Controllers
 {
     public class TimesheetsController : Controller
     {

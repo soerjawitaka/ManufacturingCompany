@@ -8,7 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using ManufacturingCompany.Models;
 
-namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
+namespace ManufacturingCompany.Controllers
 {
     public class Invoice_LineitemController : Controller
     {
@@ -20,28 +20,60 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
             var invoice_Lineitem = db.Invoice_Lineitem.Include(i => i.Invoice).Include(i => i.Product_Inventory);
             return View(invoice_Lineitem.ToList());
         }
-
-        // GET: Invoice_Lineitem/Details/5
-        public ActionResult Details(int? id)
+        
+        // GET: Invoice_Lineitem/PartialIndex
+        public PartialViewResult PartialIndex(int? invoiceID)
         {
-            if (id == null)
+            if (invoiceID == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return PartialView("_Error");
             }
-            Invoice_Lineitem invoice_Lineitem = db.Invoice_Lineitem.Find(id);
-            if (invoice_Lineitem == null)
-            {
-                return HttpNotFound();
-            }
-            return View(invoice_Lineitem);
+            var invoice_Lineitem = db.Invoice_Lineitem.Where(ili => ili.invoice_id == invoiceID).Include(i => i.Invoice).Include(i => i.Product_Inventory);
+            foreach (var item in invoice_Lineitem) { item.CalculateTotal(item.product_inventory_id); }
+            ViewBag.InvoiceID = Convert.ToInt32(invoiceID);
+            return PartialView(invoice_Lineitem.ToList());
         }
 
+        //// GET: Invoice_Lineitem/Details/5
+        //public ActionResult Details(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Invoice_Lineitem invoice_Lineitem = db.Invoice_Lineitem.Find(id);
+        //    if (invoice_Lineitem == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(invoice_Lineitem);
+        //}
+
         // GET: Invoice_Lineitem/Create
-        public ActionResult Create()
+        public ActionResult Create(int? invoiceID, int? optionalID, int? Quantity)
         {
-            ViewBag.invoice_id = new SelectList(db.Invoices, "Id", "employee_id");
-            ViewBag.product_inventory_id = new SelectList(db.Product_Inventory, "Id", "Id");
-            return View();
+            var invoiceLineitem = new Invoice_Lineitem();
+            if (Session["InvoiceLineitem"] != null) { invoiceLineitem = (Invoice_Lineitem)Session["InvoiceLineitem"]; }
+
+            if (invoiceID != null)
+            {
+                invoiceLineitem.invoice_id = Convert.ToInt32(invoiceID);
+            }
+            else
+            {
+                invoiceID = invoiceLineitem.invoice_id;
+            }
+
+            
+            if (optionalID != null && Quantity != null)
+            {
+                invoiceLineitem.CalculateTotal(Convert.ToInt32(optionalID));
+                invoiceLineitem.lineitem_unit_quantity = Convert.ToInt32(Quantity);
+            }
+
+            Session["InvoiceLineitem"] = invoiceLineitem;
+            ViewBag.InvoiceID = Convert.ToInt32(invoiceID);
+            return View(invoiceLineitem);
         }
 
         // POST: Invoice_Lineitem/Create
@@ -55,7 +87,8 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
             {
                 db.Invoice_Lineitem.Add(invoice_Lineitem);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                Session["InvoiceLineitem"] = null;
+                return RedirectToAction("Edit", "Invoices",  new { id = invoice_Lineitem.invoice_id});
             }
 
             ViewBag.invoice_id = new SelectList(db.Invoices, "Id", "employee_id", invoice_Lineitem.invoice_id);
@@ -64,7 +97,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
         }
 
         // GET: Invoice_Lineitem/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int? id, int? optionalID)
         {
             if (id == null)
             {

@@ -9,7 +9,7 @@ using System.Web.Mvc;
 using ManufacturingCompany.Models;
 using ManufacturingCompany.Classes;
 
-namespace ManufacturingCompany.Controllers.DepartmentControllers.Production
+namespace ManufacturingCompany.Controllers
 {
     public class ProductsController : Controller
     {
