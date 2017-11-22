@@ -634,6 +634,7 @@
     <Content Include="Views\Shared\_Error.cshtml" />
     <Content Include="Views\SelectCustomer\Index.cshtml" />
     <Content Include="Views\PartialSelectProductInventory\Index.cshtml" />
+    <Content Include="Views\Manage\PartialChangePassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201710061504292_InitialCreate.resx">

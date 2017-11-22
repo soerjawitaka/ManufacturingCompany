@@ -69,11 +69,17 @@
     <h4>Change your account settings</h4>
     <hr />
     @Html.ActionLink("Change your password", "ChangePassword", null, htmlAttributes: new { @class = "btn btn-default" })
+    @*@Ajax.ActionLink("Change your password", "PartialChangePassword", "Manage", null, new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "ManageContent", InsertionMode = InsertionMode.Replace }, htmlAttributes: new { @class = "btn btn-default" })*@
 
     <br />
     <br />
 
     @Html.ActionLink("Change your profile", "ChangeProfile", null, htmlAttributes: new { @class = "btn btn-default" })
+
+    <br />
+    <br />
+
+    @*<div id="ManageContent"></div>*@
 
     @*<dl class="dl-horizontal">
         <dt>Password:</dt>
