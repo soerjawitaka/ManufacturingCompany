@@ -5,6 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<div id="SelectInvoice"></div>
 
 @using (Html.BeginForm()) 
 {
@@ -19,7 +20,7 @@
             @Html.LabelFor(model => model.invoice_id, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.invoice_id, new { htmlAttributes = new { @class = "form-control", @disabled = "true", @style = "display:inline-block;" } })
-                @Ajax.ActionLink("Select an invoice", "PartialSelectInvoice", null, new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "SelectInvoice", InsertionMode = InsertionMode.Replace}, htmlAttributes: new { @class = "btn btn-primary", @style = "margin-left:20px" })
+                @Ajax.ActionLink("Select an invoice", "PartialSelectInvoice", new { actionName = "Create" }, new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "SelectInvoice", InsertionMode = InsertionMode.Replace}, htmlAttributes: new { @class = "btn btn-primary", @style = "margin-left:20px" })
             </div>
         </div>
 
@@ -73,8 +74,6 @@
 <div>
     @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "btn btn-default" })
 </div>
-
-<div id="SelectInvoice"></div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

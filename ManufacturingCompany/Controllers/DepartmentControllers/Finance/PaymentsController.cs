@@ -35,6 +35,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Payment payment = db.Payments.Find(id);
+            payment.Invoice.CalculateTotal();
             if (payment == null)
             {
                 return HttpNotFound();
@@ -63,7 +64,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,invoice_id,payment_total,payment_type,payment_date, payment_note")] Payment payment)
+        public ActionResult Create([Bind(Include = "Id,invoice_id,payment_total,payment_type,payment_date,payment_note")] Payment payment)
         {
             if (ModelState.IsValid)
             {
@@ -77,7 +78,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
         }
 
         // partial view to select an invoice
-        public PartialViewResult PartialSelectInvoice()
+        public PartialViewResult PartialSelectInvoice(string actionName, int? optionalID)
         {
             // setting for query options
             List<string> searchBy = new List<string>();
@@ -85,6 +86,8 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
             searchBy.Add("Customer Name");
             ViewBag.ErrorString = "";
             ViewBag.SearchBy = new SelectList(searchBy);
+            ViewBag.ActionName = actionName;
+            ViewBag.OptionalID = optionalID;
 
             var invoices = db.Invoices.OrderByDescending(i => i.Id).Take(10).ToList();
             foreach (var i in invoices)
@@ -96,13 +99,15 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public PartialViewResult PartialSelectInvoice(string SearchBy, string inputForUserSearch)
+        public PartialViewResult PartialSelectInvoice(string actionName, string SearchBy, string inputForUserSearch, int? optionalID)
         {
             // setting for query options
             List<string> searchBy = new List<string>();
             searchBy.Add("Invoice ID");
             searchBy.Add("Customer Name");
             ViewBag.SearchBy = new SelectList(searchBy);
+            ViewBag.ActionName = actionName;
+            ViewBag.OptionalID = optionalID;
 
             List<Invoice> invoices = null;
 
@@ -138,7 +143,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
         }
 
         // GET: Payments/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int? id, int? invoiceID)
         {
             if (id == null)
             {
@@ -149,7 +154,22 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
             {
                 return HttpNotFound();
             }
-            ViewBag.invoice_id = new SelectList(db.Invoices, "Id", "employee_id", payment.invoice_id);
+            Invoice selectedInvoice;
+            if (invoiceID != null)
+            {
+                selectedInvoice = db.Invoices.Find(invoiceID);
+                if (selectedInvoice == null)
+                {
+                    return HttpNotFound();
+                }
+            }
+            else
+            {
+                selectedInvoice = db.Invoices.Find(payment.invoice_id);
+            }
+            selectedInvoice.CalculateTotal();
+            payment.invoice_id = selectedInvoice.Id;
+            payment.Invoice = selectedInvoice;
             ViewBag.ActionTitle = "Edit ";
             return View(payment);
         }
@@ -159,7 +179,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,invoice_id,payment_total,payment_type,payment_date")] Payment payment)
+        public ActionResult Edit([Bind(Include = "Id,invoice_id,payment_total,payment_type,payment_date,payment_note")] Payment payment)
         {
             if (ModelState.IsValid)
             {
@@ -167,7 +187,6 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.invoice_id = new SelectList(db.Invoices, "Id", "employee_id", payment.invoice_id);
             ViewBag.ActionTitle = "Edit ";
             return View(payment);
         }
@@ -180,6 +199,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Payment payment = db.Payments.Find(id);
+            payment.Invoice.CalculateTotal();
             if (payment == null)
             {
                 return HttpNotFound();

@@ -5,26 +5,31 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
-
 <div>
-    <h4>Payment</h4>
-    <hr />
+    <hr class="navbar-inverse" />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.payment_total)
+            @Html.DisplayName("Payment Number")
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.payment_total)
+            @Html.DisplayFor(model => model.Id)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.payment_type)
+            @Html.DisplayName("Invoice Number")
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.payment_type)
+            @Html.DisplayFor(model => model.invoice_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Invoice.Customer.customer_company_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Invoice.Customer.customer_company_name)
         </dd>
 
         <dt>
@@ -36,16 +41,48 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Invoice.employee_id)
+            @Html.DisplayNameFor(model => model.payment_type)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Invoice.employee_id)
+            @Html.DisplayFor(model => model.payment_type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.payment_note)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.payment_note)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Invoice Total")
+        </dt>
+
+        <dd class="text-danger">
+            @Html.DisplayFor(model => model.Invoice.Total)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.payment_total)
+        </dt>
+
+        <dd class="text-success">
+            @Html.DisplayFor(model => model.payment_total)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Amount Due")
+        </dt>
+
+        <dd class="text-info">
+            @((Model.Invoice.Total - Model.payment_total).ToString("c"))
         </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, htmlAttributes: new { @class = "btn btn-warning" })
+    @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "btn btn-default" })
 </p>

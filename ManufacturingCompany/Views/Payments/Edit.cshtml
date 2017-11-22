@@ -5,24 +5,30 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Edit</h2>
-
+<div id="SelectInvoice"></div>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>Payment</h4>
-        <hr />
+        <hr class="navbar-inverse" />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.invoice_id)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.invoice_id, "invoice_id", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.invoice_id, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("invoice_id", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.invoice_id, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.invoice_id, new { htmlAttributes = new { @class = "form-control", @disabled = "true", @style = "display:inline-block;" } })
+                @Ajax.ActionLink("Select a different invoice", "PartialSelectInvoice", new { actionName = "Edit", optionalID = Model.Id }, new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "SelectInvoice", InsertionMode = InsertionMode.Replace }, htmlAttributes: new { @class = "btn btn-primary", @style = "margin-left:20px" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Invoice.Total, "Invoice Total", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Invoice.Total, new { htmlAttributes = new { @class = "form-control", @disabled = "true" } })
             </div>
         </div>
 
@@ -45,23 +51,33 @@
         <div class="form-group">
             @Html.LabelFor(model => model.payment_date, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.payment_date, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.payment_date, new { htmlAttributes = new { @class = "form-control", @type = "date", @Value = Model.payment_date.ToString("yyyy-MM-dd") } })
                 @Html.ValidationMessageFor(model => model.payment_date, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
+            @Html.LabelFor(model => model.payment_note, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.payment_note, htmlAttributes: new { @class = "form-control", @rows = "3" })
+                @Html.ValidationMessageFor(model => model.payment_note, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-success" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "btn btn-default" })
 </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+
+

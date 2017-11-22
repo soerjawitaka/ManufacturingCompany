@@ -26,10 +26,10 @@ namespace ManufacturingCompany.Models
 
         [Required]
         [Display(Name = "Payment Date")]
+        [DisplayFormat(ApplyFormatInEditMode = false, DataFormatString = "{0:MM/dd/yyyy}")]
         public System.DateTime payment_date { get; set; }
 
         [Display(Name = "Payment Notes")]
-        [DisplayFormat(ApplyFormatInEditMode = false, DataFormatString = "{0:MM/dd/yyyy}")]
         public string payment_note { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<ManufacturingCompany.Models.Invoice>
 
-@using (Ajax.BeginForm("PartialSelectInvoice", new AjaxOptions() { HttpMethod = "POST", UpdateTargetId = "SelectInvoice", InsertionMode = InsertionMode.Replace }))
+@using (Ajax.BeginForm("PartialSelectInvoice", new { actionName = (string)ViewBag.ActionName, optionalID = (int?)ViewBag.OptionalID}, new AjaxOptions() { HttpMethod = "POST", UpdateTargetId = "SelectInvoice", InsertionMode = InsertionMode.Replace }))
 {
     @Html.AntiForgeryToken()
     <div class="container">
@@ -23,7 +23,7 @@
 }
 
 <br />
-@if (ViewBag.ErrorString != null || ViewBag.ErrorString != "")
+@if (ViewBag.ErrorString != null && ViewBag.ErrorString != "")
 {
     <div style="text-align:center;">
         @Html.Label((string)ViewBag.ErrorString, htmlAttributes: new { @class = "text-danger" })
@@ -73,7 +73,7 @@
                 @*@Html.ActionLink("Edit", "Edit", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-warning" })
                 @Html.ActionLink("Details", "Details", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-default" })
                 @Html.ActionLink("Delete", "Delete", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-danger" })*@
-                @Html.ActionLink("Select", "Create", "Payments", new { invoiceID = item.Id }, htmlAttributes: new { @class = "btn btn-success" })
+                @Html.ActionLink("Select", (string)ViewBag.ActionName, "Payments", new { id = (int?)ViewBag.OptionalID, invoiceID = item.Id }, htmlAttributes: new { @class = "btn btn-success" })
             </td>
         </tr>
     }

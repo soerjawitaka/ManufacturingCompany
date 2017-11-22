@@ -5,27 +5,32 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Delete</h2>
-
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>Payment</h4>
-    <hr />
+    <hr class="navbar-inverse"/>
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.payment_total)
+            @Html.DisplayName("Payment Number")
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.payment_total)
+            @Html.DisplayFor(model => model.Id)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.payment_type)
+            @Html.DisplayName("Invoice Number")
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.payment_type)
+            @Html.DisplayFor(model => model.invoice_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Invoice.Customer.customer_company_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Invoice.Customer.customer_company_name)
         </dd>
 
         <dt>
@@ -37,11 +42,43 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Invoice.employee_id)
+            @Html.DisplayNameFor(model => model.payment_type)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Invoice.employee_id)
+            @Html.DisplayFor(model => model.payment_type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.payment_note)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.payment_note)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Invoice Total")
+        </dt>
+
+        <dd class="text-danger">
+            @Html.DisplayFor(model => model.Invoice.Total)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.payment_total)
+        </dt>
+
+        <dd class="text-success">
+            @Html.DisplayFor(model => model.payment_total)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Amount Due")
+        </dt>
+
+        <dd class="text-info">
+            @((Model.Invoice.Total - Model.payment_total).ToString("c"))
         </dd>
 
     </dl>
@@ -50,8 +87,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="Delete" class="btn btn-danger" /> 
+            @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "btn btn-default" })
         </div>
     }
 </div>
