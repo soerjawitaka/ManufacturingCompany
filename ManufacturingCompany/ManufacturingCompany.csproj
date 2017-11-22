@@ -211,7 +211,6 @@
     <Compile Include="Classes\RoleViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DepartmentControllers\Finance\Invoice_LineitemController.cs" />
-    <Compile Include="Controllers\PartialViewControllers\InvoiceLineitemsController.cs" />
     <Compile Include="Controllers\DepartmentControllers\Production\EquipmentMaintenanceController.cs" />
     <Compile Include="Controllers\DepartmentControllers\Production\EquipmentsController.cs" />
     <Compile Include="Controllers\DepartmentControllers\Production\MaterialsController.cs" />
@@ -230,7 +229,6 @@
     <Compile Include="Controllers\GeneralEmployeeControllers\EmployeeTimesheetsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\PartialViewControllers\PartialSelectProductInventoryController.cs" />
     <Compile Include="Controllers\QueryControllers\SelectCustomerController.cs" />
     <Compile Include="Controllers\QueryControllers\SelectEquipmentController.cs" />
     <Compile Include="Controllers\QueryControllers\SelectMaterialController.cs" />
@@ -626,15 +624,11 @@
     <Content Include="Views\Invoice_Lineitem\Index.cshtml" />
     <Content Include="Views\Invoices\SelectItems.cshtml" />
     <Content Include="Views\SelectProductInventory\Index.cshtml" />
-    <Content Include="Views\InvoiceLineitems\Index.cshtml" />
-    <Content Include="Views\InvoiceLineitems\Details.cshtml" />
-    <Content Include="Views\InvoiceLineitems\Create.cshtml" />
-    <Content Include="Views\InvoiceLineitems\Edit.cshtml" />
-    <Content Include="Views\InvoiceLineitems\Delete.cshtml" />
     <Content Include="Views\Shared\_Error.cshtml" />
     <Content Include="Views\SelectCustomer\Index.cshtml" />
-    <Content Include="Views\PartialSelectProductInventory\Index.cshtml" />
     <Content Include="Views\Manage\PartialChangePassword.cshtml" />
+    <Content Include="Views\Invoice_Lineitem\PartialIndex.cshtml" />
+    <Content Include="Views\Invoice_Lineitem\PartialDelete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201710061504292_InitialCreate.resx">

@@ -50,7 +50,7 @@ namespace ManufacturingCompany.Controllers
         //}
 
         // GET: Invoice_Lineitem/Create
-        public ActionResult Create(int? invoiceID, int? optionalID, int? Quantity)
+        public ActionResult Create(int? invoiceID, int? id, int? Quantity)
         {
             var invoiceLineitem = new Invoice_Lineitem();
             if (Session["InvoiceLineitem"] != null) { invoiceLineitem = (Invoice_Lineitem)Session["InvoiceLineitem"]; }
@@ -59,20 +59,14 @@ namespace ManufacturingCompany.Controllers
             {
                 invoiceLineitem.invoice_id = Convert.ToInt32(invoiceID);
             }
-            else
-            {
-                invoiceID = invoiceLineitem.invoice_id;
-            }
-
             
-            if (optionalID != null && Quantity != null)
+            if (id != null && Quantity != null)
             {
-                invoiceLineitem.CalculateTotal(Convert.ToInt32(optionalID));
+                invoiceLineitem.CalculateTotal(Convert.ToInt32(id));
                 invoiceLineitem.lineitem_unit_quantity = Convert.ToInt32(Quantity);
             }
-
+            ViewBag.OptionalID = invoiceID;
             Session["InvoiceLineitem"] = invoiceLineitem;
-            ViewBag.InvoiceID = Convert.ToInt32(invoiceID);
             return View(invoiceLineitem);
         }
 
@@ -81,7 +75,7 @@ namespace ManufacturingCompany.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,product_inventory_id,lineitem_unit_quantity,invoice_id")] Invoice_Lineitem invoice_Lineitem)
+        public ActionResult Create([Bind(Include = "Id,product_inventory_id,lineitem_unit_quantity,invoice_id")] Invoice_Lineitem invoice_Lineitem, int? optionalID)
         {
             if (ModelState.IsValid)
             {
@@ -90,26 +84,30 @@ namespace ManufacturingCompany.Controllers
                 Session["InvoiceLineitem"] = null;
                 return RedirectToAction("Edit", "Invoices",  new { id = invoice_Lineitem.invoice_id});
             }
-
-            ViewBag.invoice_id = new SelectList(db.Invoices, "Id", "employee_id", invoice_Lineitem.invoice_id);
-            ViewBag.product_inventory_id = new SelectList(db.Product_Inventory, "Id", "Id", invoice_Lineitem.product_inventory_id);
+            ViewBag.OptionalID = optionalID;
             return View(invoice_Lineitem);
         }
 
         // GET: Invoice_Lineitem/Edit/5
-        public ActionResult Edit(int? id, int? optionalID)
+        public ActionResult Edit(int? id, int? optionalID, int? productID, int? Quantity)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Invoice_Lineitem invoice_Lineitem = db.Invoice_Lineitem.Find(id);
+            if (productID != null && Quantity != null)
+            {
+                invoice_Lineitem.lineitem_unit_quantity = Convert.ToInt32(Quantity);
+                invoice_Lineitem.product_inventory_id = Convert.ToInt32(productID);
+            }
+            invoice_Lineitem.CalculateTotal(invoice_Lineitem.product_inventory_id);
             if (invoice_Lineitem == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.invoice_id = new SelectList(db.Invoices, "Id", "employee_id", invoice_Lineitem.invoice_id);
-            ViewBag.product_inventory_id = new SelectList(db.Product_Inventory, "Id", "Id", invoice_Lineitem.product_inventory_id);
+            ViewBag.OptionalID = optionalID;
+            ViewBag.LineitemID = id;
             return View(invoice_Lineitem);
         }
 
@@ -118,43 +116,60 @@ namespace ManufacturingCompany.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,product_inventory_id,lineitem_unit_quantity,invoice_id")] Invoice_Lineitem invoice_Lineitem)
+        public ActionResult Edit([Bind(Include = "Id,product_inventory_id,lineitem_unit_quantity,invoice_id")] Invoice_Lineitem invoice_Lineitem, int? optionalID, int? lineitemID)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(invoice_Lineitem).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Edit", "invoices", new { id = optionalID });
             }
-            ViewBag.invoice_id = new SelectList(db.Invoices, "Id", "employee_id", invoice_Lineitem.invoice_id);
-            ViewBag.product_inventory_id = new SelectList(db.Product_Inventory, "Id", "Id", invoice_Lineitem.product_inventory_id);
+            ViewBag.OptionalID = optionalID;
+            ViewBag.LineitemID = lineitemID;
             return View(invoice_Lineitem);
         }
 
+        //// GET: Invoice_Lineitem/Delete/5
+        //public ActionResult Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Invoice_Lineitem invoice_Lineitem = db.Invoice_Lineitem.Find(id);
+        //    if (invoice_Lineitem == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(invoice_Lineitem);
+        //}
+
         // GET: Invoice_Lineitem/Delete/5
-        public ActionResult Delete(int? id)
+        public PartialViewResult PartialDelete(int? id, int? optionalID)
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return PartialView(HttpStatusCode.BadRequest);
             }
             Invoice_Lineitem invoice_Lineitem = db.Invoice_Lineitem.Find(id);
+            invoice_Lineitem.CalculateTotal(invoice_Lineitem.product_inventory_id);
             if (invoice_Lineitem == null)
             {
-                return HttpNotFound();
+                return PartialView("Error");
             }
-            return View(invoice_Lineitem);
+            ViewBag.OptionalID = optionalID;
+            return PartialView(invoice_Lineitem);
         }
 
         // POST: Invoice_Lineitem/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("PartialDelete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int id, int? optionalID)
         {
             Invoice_Lineitem invoice_Lineitem = db.Invoice_Lineitem.Find(id);
             db.Invoice_Lineitem.Remove(invoice_Lineitem);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Edit", "invoices", new { id = optionalID });
         }
 
         protected override void Dispose(bool disposing)

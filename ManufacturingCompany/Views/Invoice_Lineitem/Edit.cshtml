@@ -19,13 +19,14 @@
         @Html.HiddenFor(model => model.Id)
         @Html.HiddenFor(model => model.product_inventory_id)
         @Html.HiddenFor(model => model.invoice_id)
+        @Html.Hidden("optionalID", (int?)ViewBag.OptionalID)
+        @Html.Hidden("lineitemID", (int?)ViewBag.LineitemID)
 
         <div class="form-group">
             @Html.LabelFor(model => model.ProductInventory.Product.product_name, "Product Name", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.ProductInventory.Product.product_name, new { htmlAttributes = new { @class = "form-control", @disabled = "true", @style = "display:inline-block;" } })
-                @*@Html.ActionLink("Edit Employee", "Index", "SelectUser", new { actionName = "Edit", controllerName = "Invoices", optionalID = Model.Id }, htmlAttributes: new { @class = "btn btn-primary", @style = "margin-left:20px;" })*@
-                @Html.ActionLink("Edit Product", "Index", "SelectProductInventory", new { actionName = "Create", controllerName = "Invoice_Lineitem", optionalID = (int)ViewBag.InvoiceID }, htmlAttributes: new { @class = "btn btn-primary", @style = "margin-left:20px;" })
+                @Html.ActionLink("Edit Product", "Index", "SelectProductInventory", new { actionName = "Edit", controllerName = "Invoice_Lineitem", optionalID = (int?)ViewBag.OptionalID, lineitemID = (int?)ViewBag.LineitemID }, htmlAttributes: new { @class = "btn btn-primary", @style = "margin-left:20px;" })
             </div>
         </div>
 
@@ -46,7 +47,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Edit", "Invoices", new { id = (int?)ViewBag.OptionalID }, htmlAttributes: new { @class = "btn btn-default" })
 </div>
 
 @section Scripts {

@@ -1,0 +1,67 @@
+﻿@model ManufacturingCompany.Models.Invoice_Lineitem
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.lineitem_unit_quantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.lineitem_unit_quantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductInventory.Product.product_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductInventory.Product.product_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductInventory.Product.product_unit_measure)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductInventory.Product.product_unit_measure)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductInventory.unit_per_package)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductInventory.unit_per_package)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductInventory.per_package_price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductInventory.per_package_price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LineitemTotal)
+        </dt>
+
+        <dd class="text-info">
+            @Html.DisplayFor(model => model.LineitemTotal)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.Hidden("optionalID", (int?)ViewBag.OptionalID)
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-danger" /> 
+            @Html.ActionLink("Back to List", "Edit", "Invoices", new { id = (int?)ViewBag.OptionalID }, htmlAttributes: new { @class = "btn btn-default" })
+        </div>
+    }
+</div>
+
