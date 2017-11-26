@@ -630,6 +630,7 @@
     <Content Include="Views\Payments\Edit.cshtml" />
     <Content Include="Views\Payments\Index.cshtml" />
     <Content Include="Views\Payments\PartialSelectInvoice.cshtml" />
+    <Content Include="Views\Manage\PartialChangeProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201710061504292_InitialCreate.resx">

@@ -243,7 +243,7 @@ namespace ManufacturingCompany.Controllers
 
         //
         // POST: /Manage/ChangePassword
-        [HttpPost]
+        [HttpPost, ActionName("PartialChangePassword")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ChangePassword(ChangePasswordViewModel model)
         {
@@ -273,30 +273,6 @@ namespace ManufacturingCompany.Controllers
         }
 
         //
-        // POST: /Manage/ChangePassword
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<ActionResult> ChangePassword(ChangePasswordViewModel model)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return View(model);
-        //    }
-        //    var result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
-        //    if (result.Succeeded)
-        //    {
-        //        var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-        //        if (user != null)
-        //        {
-        //            await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-        //        }
-        //        return RedirectToAction("Index", new { Message = ManageMessageId.ChangePasswordSuccess });
-        //    }
-        //    AddErrors(result);
-        //    return View(model);
-        //}
-
-        //
         // GET: /Manage/ChangeProfile
         public ActionResult ChangeProfile()
         {
@@ -306,7 +282,7 @@ namespace ManufacturingCompany.Controllers
 
         //
         // POST: /Manage/ChangeProfile
-        [HttpPost]
+        [HttpPost, ActionName("PartialChangeProfile")]
         [ValidateAntiForgeryToken]
         public ActionResult ChangeProfile([Bind(Include = "UserName, Email, FirstName, LastName, Address, City, State, ZipCode, PhoneNumber")]ApplicationUser user)
         {
@@ -334,6 +310,14 @@ namespace ManufacturingCompany.Controllers
                 return View(user);
             }
             return RedirectToAction("Index");
+        }
+
+        //
+        // GET: /Manage/ChangeProfile
+        public PartialViewResult PartialChangeProfile()
+        {
+            ViewBag.StateList = new SelectList(XmlHelper.GetStates(Server, Url), "Value", "Text");
+            return PartialView((ApplicationUser)(UserManager.FindById(User.Identity.GetUserId())));
         }
 
         //
