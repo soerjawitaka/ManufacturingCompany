@@ -104,11 +104,25 @@
                 <td>
                     @if (ViewBag.OptionalID != null)
                     {
-                        @Html.ActionLink("Select", (string)ViewBag.ActionName, (string)ViewBag.ControllerName, new { userID = item.Id, id = (int)ViewBag.OptionalID }, htmlAttributes: new { @class = "btn btn-outline-success" })
+                        if (ViewBag.OptionalDirection != null)
+                        {
+                            @Html.ActionLink("Select", (string)ViewBag.ActionName, (string)ViewBag.ControllerName, new { userID = item.Id, id = (int)ViewBag.OptionalID, optionalDirection = (string)ViewBag.OptionalDirection }, htmlAttributes: new { @class = "btn btn-outline-success" })
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Select", (string)ViewBag.ActionName, (string)ViewBag.ControllerName, new { userID = item.Id, id = (int)ViewBag.OptionalID }, htmlAttributes: new { @class = "btn btn-outline-success" })
+                        }
                     }
                     else
                     {
-                        @Html.ActionLink("Select", (string)ViewBag.ActionName, (string)ViewBag.ControllerName, new { userID = item.Id }, htmlAttributes: new { @class = "btn btn-outline-success" })
+                        if (ViewBag.OptionalDirection != null)
+                        {
+                            @Html.ActionLink("Select", (string)ViewBag.ActionName, (string)ViewBag.ControllerName, new { userID = item.Id, optionalDirection = (string)ViewBag.OptionalDirection }, htmlAttributes: new { @class = "btn btn-outline-success" })
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Select", (string)ViewBag.ActionName, (string)ViewBag.ControllerName, new { userID = item.Id }, htmlAttributes: new { @class = "btn btn-outline-success" })
+                        }
                     }                    
                 </td>
             </tr>

@@ -52,6 +52,9 @@ namespace ManufacturingCompany.Models
 
     public class Invoice_Partial_Metadata
     {
+        [Display(Name = "Invoice Number")]
+        public int Id { get; set; }
+
         [Required]
         [Display(Name ="Invoice Date")]
         [DisplayFormat(ApplyFormatInEditMode = false, DataFormatString = "{0:MM/dd/yyyy}")]

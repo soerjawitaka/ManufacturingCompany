@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewBag.Title = "Distribution";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row jumbotron jumbotron-bckimg">
+    <div class="col-md-4" style="opacity:.8;">
+        <div class="card border-success">
+            <h2>Delivery Schedule</h2>
+            <p>@Html.ActionLink("Manage >>", "Index", "Delivery_Schedule", null, htmlAttributes: new { @class = "btn btn-outline-success", @style = "width:100%" })</p>
+        </div>
+        <div class="card border-success">
+            <h2>Delivery Expenses</h2>
+            <p>@Html.ActionLink("Manage >>", "Index", "Payrolls", null, htmlAttributes: new { @class = "btn btn-outline-success", @style = "width:100%" })</p>
+        </div>
+    </div>
+    <div class="col-md-4" style="opacity:.8;">
+        
+    </div>
+    <div class="col-md-4">
+
+    </div>
+</div>
+
+<div style="clear:both">&nbsp;<br /></div>

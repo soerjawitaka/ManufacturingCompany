@@ -1,0 +1,73 @@
+﻿@model ManufacturingCompany.Models.Delivery_Schedule
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Delivery_Schedule</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.delivery_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.delivery_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.delivery_cost)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.delivery_cost)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.is_delivered)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.is_delivered)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AspNetUser.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AspNetUser.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AspNetUser1.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AspNetUser1.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Invoice.employee_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Invoice.employee_id)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
