@@ -43,7 +43,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Distribution
         }
 
         // GET: Delivery_Schedule/Create
-        public ActionResult Create(string userID, string optionalDirection)
+        public ActionResult Create(string userID, string optionalDirection, int? invoiceID)
         {
             var deliverySchedule = new Delivery_Schedule();
             if (Session["DeliverySchedule"] != null) { deliverySchedule = (Delivery_Schedule)Session["DeliverySchedule"]; }
@@ -61,6 +61,10 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Distribution
                         break;
                 }
             }
+            if (invoiceID != null)
+            {
+                deliverySchedule.invoice_id = Convert.ToInt32(invoiceID);
+            }
             Session["DeliverySchedule"] = deliverySchedule;
             return View(deliverySchedule);
         }
@@ -76,6 +80,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Distribution
             {
                 db.Delivery_Schedule.Add(delivery_Schedule);
                 db.SaveChanges();
+                Session["DeliverySchedule"] = null;
                 return RedirectToAction("Index");
             }
             
@@ -83,7 +88,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Distribution
         }
 
         // GET: Delivery_Schedule/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int? id, string userID, string optionalDirection, int? invoiceID)
         {
             if (id == null)
             {
@@ -94,9 +99,29 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Distribution
             {
                 return HttpNotFound();
             }
-            ViewBag.driver_employee_id = new SelectList(db.AspNetUsers, "Id", "Email", delivery_Schedule.driver_employee_id);
-            ViewBag.warehouse_employee_id = new SelectList(db.AspNetUsers, "Id", "Email", delivery_Schedule.warehouse_employee_id);
-            ViewBag.invoice_id = new SelectList(db.Invoices, "Id", "employee_id", delivery_Schedule.invoice_id);
+            if (Session["DeliverySchedule"] != null)
+            {
+                delivery_Schedule = (Delivery_Schedule)Session["DeliverySchedule"];
+            }
+            if (userID != null)
+            {
+                switch (optionalDirection)
+                {
+                    case "Warehouse":
+                        delivery_Schedule.warehouse_employee_id = userID;
+                        delivery_Schedule.AspNetUser = db.AspNetUsers.Find(userID);
+                        break;
+                    case "Driver":
+                        delivery_Schedule.driver_employee_id = userID;
+                        delivery_Schedule.AspNetUser1 = db.AspNetUsers.Find(userID);
+                        break;
+                }
+            }
+            if (invoiceID != null)
+            {
+                delivery_Schedule.invoice_id = Convert.ToInt32(invoiceID);
+            }
+            Session["DeliverySchedule"] = delivery_Schedule;
             return View(delivery_Schedule);
         }
 
@@ -111,11 +136,9 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Distribution
             {
                 db.Entry(delivery_Schedule).State = EntityState.Modified;
                 db.SaveChanges();
+                Session["DeliverySchedule"] = null;
                 return RedirectToAction("Index");
             }
-            ViewBag.driver_employee_id = new SelectList(db.AspNetUsers, "Id", "Email", delivery_Schedule.driver_employee_id);
-            ViewBag.warehouse_employee_id = new SelectList(db.AspNetUsers, "Id", "Email", delivery_Schedule.warehouse_employee_id);
-            ViewBag.invoice_id = new SelectList(db.Invoices, "Id", "employee_id", delivery_Schedule.invoice_id);
             return View(delivery_Schedule);
         }
 

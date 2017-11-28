@@ -9,7 +9,6 @@
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>Delivery_Schedule</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -37,27 +36,27 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.AspNetUser.Email)
+            @Html.DisplayName("Warehouse Employee")
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.AspNetUser.Email)
+            @Html.DisplayFor(model => model.AspNetUser.UserName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.AspNetUser1.Email)
+            @Html.DisplayName("Driver")
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.AspNetUser1.Email)
+            @Html.DisplayFor(model => model.AspNetUser1.UserName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Invoice.employee_id)
+            @Html.DisplayNameFor(model => model.invoice_id)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Invoice.employee_id)
+            @Html.DisplayFor(model => model.invoice_id)
         </dd>
 
     </dl>
@@ -66,8 +65,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="Delete" class="btn btn-danger" /> 
+            @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "btn bn-default" })
         </div>
     }
 </div>

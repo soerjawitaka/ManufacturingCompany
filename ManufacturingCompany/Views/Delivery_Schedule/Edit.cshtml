@@ -5,39 +5,38 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Edit</h2>
-
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Delivery_Schedule</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.warehouse_employee_id)
+        @Html.HiddenFor(model => model.driver_employee_id)
+        @Html.HiddenFor(model => model.invoice_id)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.warehouse_employee_id, "warehouse_employee_id", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.AspNetUser.UserName, "Warehouse Employee", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("warehouse_employee_id", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.warehouse_employee_id, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.AspNetUser.UserName, new { htmlAttributes = new { @class = "form-control", @disabled = "true", @style = "display:inline-block;" } })
+                @Html.ActionLink("Select a Warehouse Employee", "Index", "SelectUser", new { actionName = "Edit", controllerName = "Delivery_Schedule", optionalDirection = "Warehouse", optionalID = Model.Id }, htmlAttributes: new { @class = "btn btn-primary", @style = "margin-left:20px;" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.driver_employee_id, "driver_employee_id", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.AspNetUser1.UserName, "Driver", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("driver_employee_id", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.driver_employee_id, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.AspNetUser1.UserName, new { htmlAttributes = new { @class = "form-control", @disabled = "true", @style = "display:inline-block;" } })
+                @Html.ActionLink("Select a Driver", "Index", "SelectUser", new { actionName = "Edit", controllerName = "Delivery_Schedule", optionalDirection = "Driver", optionalID = Model.Id }, htmlAttributes: new { @class = "btn btn-primary", @style = "margin-left:20px;" })
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.delivery_date, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.delivery_date, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.delivery_date, new { htmlAttributes = new { @class = "form-control", @type = "date", @Value = Model.delivery_date.ToString("yyyy-MM-dd") } })
                 @Html.ValidationMessageFor(model => model.delivery_date, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -61,23 +60,24 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.invoice_id, "invoice_id", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.invoice_id, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("invoice_id", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.invoice_id, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.invoice_id, new { htmlAttributes = new { @class = "form-control", @disabled = "true", @style = "display:inline-block;" } })
+                @Ajax.ActionLink("Select an Invoice", "Index", "PartialSelectInvoice", new { actionName = "Edit", controllerName = "Delivery_Schedule", contentID = "DeliveryScheduleContent", optionalID = Model.Id }, new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "DeliveryScheduleContent", InsertionMode = InsertionMode.Replace }, htmlAttributes: new { @class = "btn btn-primary", @style = "margin-left:20px" })
+
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn btn-success" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "btn btn-default" })
 </div>
 
 @section Scripts {
