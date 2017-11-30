@@ -1,0 +1,42 @@
+﻿@model IEnumerable<ManufacturingCompany.Models.Invoice_Lineitem>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductInventory.Product.product_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductInventory.Product.product_unit_measure)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductInventory.unit_per_package)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.lineitem_unit_quantity)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductInventory.Product.product_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductInventory.Product.product_unit_measure)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductInventory.unit_per_package)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.lineitem_unit_quantity)
+            </td>
+            <td>
+                @Html.ActionLink("Create Delivery Item", "SelectLineitem", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-outline-success" })
+            </td>            
+        </tr>
+    }
+
+</table>

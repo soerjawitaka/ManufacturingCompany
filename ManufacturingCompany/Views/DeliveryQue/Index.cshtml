@@ -1,0 +1,60 @@
+﻿@model IEnumerable<ManufacturingCompany.Models.Delivery_Lineitem>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<p>
+    @Ajax.ActionLink("Create New Delivery Item", "SelectItem", null, new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "deliveryQcontent", InsertionMode = InsertionMode.Replace }, htmlAttributes: new { @class = "btn btn-default" })
+</p>
+
+<div id="deliveryQcontent"></div>
+
+<p class="text-danger">
+    @if(ViewBag.ErrorMessage != null && ViewBag.ErrorMessage != "")
+    {
+        @Html.Display((string)ViewBag.ErrorMessage)
+    }
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductInventory.Product.product_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductInventory.Product.product_unit_measure)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductInventory.unit_per_package)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.lineitem_unit_quantity)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductInventory.Product.product_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductInventory.Product.product_unit_measure)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductInventory.unit_per_package)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.lineitem_unit_quantity)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

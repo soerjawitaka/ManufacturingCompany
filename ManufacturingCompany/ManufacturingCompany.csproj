@@ -211,6 +211,7 @@
     <Compile Include="Classes\RoleViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DepartmentControllers\DistributionController.cs" />
+    <Compile Include="Controllers\DepartmentControllers\Distribution\DeliveryQueController.cs" />
     <Compile Include="Controllers\DepartmentControllers\Distribution\Delivery_ScheduleController.cs" />
     <Compile Include="Controllers\DepartmentControllers\Finance\Invoice_LineitemController.cs" />
     <Compile Include="Controllers\DepartmentControllers\Finance\PaymentsController.cs" />
@@ -605,6 +606,8 @@
     <Content Include="Views\Delivery_Schedule\Edit.cshtml" />
     <Content Include="Views\Delivery_Schedule\Index.cshtml" />
     <Content Include="Views\PartialSelectInvoice\Index.cshtml" />
+    <Content Include="Views\DeliveryQue\Index.cshtml" />
+    <Content Include="Views\DeliveryQue\SelectItem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201710061504292_InitialCreate.resx">
@@ -637,7 +640,9 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Views\CreateDeliveryQue\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
