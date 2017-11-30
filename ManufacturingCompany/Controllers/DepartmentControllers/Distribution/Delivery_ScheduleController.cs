@@ -23,7 +23,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Distribution
         // GET: Delivery_Schedule
         public ActionResult Index()
         {
-            var delivery_Schedule = db.Delivery_Schedule.Include(d => d.AspNetUser).Include(d => d.AspNetUser1).Include(d => d.Invoice);
+            var delivery_Schedule = db.Delivery_Schedule.Include(d => d.AspNetUser).Include(d => d.AspNetUser1);
             return View(delivery_Schedule.ToList());
         }
 
@@ -43,7 +43,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Distribution
         }
 
         // GET: Delivery_Schedule/Create
-        public ActionResult Create(string userID, string optionalDirection, int? invoiceID)
+        public ActionResult Create(string userID, string optionalDirection)
         {
             var deliverySchedule = new Delivery_Schedule();
             if (Session["DeliverySchedule"] != null) { deliverySchedule = (Delivery_Schedule)Session["DeliverySchedule"]; }
@@ -60,10 +60,6 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Distribution
                         deliverySchedule.AspNetUser1 = db.AspNetUsers.Find(userID);
                         break;
                 }
-            }
-            if (invoiceID != null)
-            {
-                deliverySchedule.invoice_id = Convert.ToInt32(invoiceID);
             }
             Session["DeliverySchedule"] = deliverySchedule;
             return View(deliverySchedule);
@@ -88,7 +84,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Distribution
         }
 
         // GET: Delivery_Schedule/Edit/5
-        public ActionResult Edit(int? id, string userID, string optionalDirection, int? invoiceID)
+        public ActionResult Edit(int? id, string userID, string optionalDirection)
         {
             if (id == null)
             {
@@ -116,10 +112,6 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Distribution
                         delivery_Schedule.AspNetUser1 = db.AspNetUsers.Find(userID);
                         break;
                 }
-            }
-            if (invoiceID != null)
-            {
-                delivery_Schedule.invoice_id = Convert.ToInt32(invoiceID);
             }
             Session["DeliverySchedule"] = delivery_Schedule;
             return View(delivery_Schedule);

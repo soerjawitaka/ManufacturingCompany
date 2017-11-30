@@ -17,10 +17,8 @@ namespace ManufacturingCompany.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Invoice()
         {
-            this.Delivery_Schedule = new HashSet<Delivery_Schedule>();
             this.Invoice_Lineitem = new HashSet<Invoice_Lineitem>();
             this.Payments = new HashSet<Payment>();
-            this.Delivery_Schedule1 = new HashSet<Delivery_Schedule>();
         }
     
         public int Id { get; set; }
@@ -31,12 +29,8 @@ namespace ManufacturingCompany.Models
         public virtual AspNetUser AspNetUser { get; set; }
         public virtual Customer Customer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Delivery_Schedule> Delivery_Schedule { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Invoice_Lineitem> Invoice_Lineitem { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Payment> Payments { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Delivery_Schedule> Delivery_Schedule1 { get; set; }
     }
 }

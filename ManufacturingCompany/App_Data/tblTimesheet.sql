@@ -4,7 +4,7 @@
     [punch_in_time]  TIME (7)       NOT NULL,
     [punch_out_time] TIME (7)       NULL,
     [timesheet_date] DATETIME       NOT NULL,
-    [is_in_payroll] BIT NOT NULL DEFAULT 0, 
+    [is_in_payroll]  BIT            DEFAULT ((0)) NOT NULL,
     PRIMARY KEY CLUSTERED ([Id] ASC),
     CONSTRAINT [fk_timesheet_aspnetusers] FOREIGN KEY ([employee_id]) REFERENCES [dbo].[AspNetUsers] ([Id])
 );

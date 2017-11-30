@@ -6,7 +6,7 @@
     [equipment_note]              TEXT          NULL,
     [equipment_cost]              MONEY         NOT NULL,
     [product_id]                  INT           NULL,
-    [in_maintenance] BIT NOT NULL DEFAULT ((0)), 
+    [in_maintenance]              BIT           DEFAULT ((0)) NOT NULL,
     PRIMARY KEY CLUSTERED ([Id] ASC),
     CONSTRAINT [fk_equipment_product] FOREIGN KEY ([product_id]) REFERENCES [dbo].[Product] ([Id])
 );

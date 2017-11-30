@@ -25,8 +25,5 @@ namespace ManufacturingCompany.Models
 
         [Display(Name = "Is Delivered")]
         public bool is_delivered { get; set; }
-
-        [Display(Name = "Invoice Number")]
-        public int invoice_id { get; set; }
     }
 }

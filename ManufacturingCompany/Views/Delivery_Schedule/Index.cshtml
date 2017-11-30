@@ -25,9 +25,6 @@
         <th>
             @Html.DisplayName("Driver")
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Invoice.Id)
-        </th>
         <th></th>
     </tr>
 
@@ -47,9 +44,6 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.AspNetUser1.UserName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Invoice.Id)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }, htmlAttributes: new { @class = "btn btn-warning" }) 

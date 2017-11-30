@@ -262,25 +262,14 @@
     <Compile Include="Migrations\201711062107522_product.Designer.cs">
       <DependentUpon>201711062107522_product.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711301532353_RemoveExtraDBSet.cs" />
+    <Compile Include="Migrations\201711301532353_RemoveExtraDBSet.Designer.cs">
+      <DependentUpon>201711301532353_RemoveExtraDBSet.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AspNetUser.cs">
       <DependentUpon>BusinessModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\AssignmentModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AssignmentModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\AssignmentModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AssignmentModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\AssignmentModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AssignmentModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\BusinessModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -315,13 +304,10 @@
     <Compile Include="Models\Equipment_Maintenance.cs">
       <DependentUpon>BusinessModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Invoice.cs">
       <DependentUpon>BusinessModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Invoice_Deliver_Assignment.cs">
-      <DependentUpon>AssignmentModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Invoice_Lineitem.cs">
       <DependentUpon>BusinessModel.tt</DependentUpon>
     </Compile>
@@ -349,6 +335,8 @@
     <Compile Include="Models\Partial_Metadata\ProductInventory_Partial_Metadata.cs" />
     <Compile Include="Models\Partial_Metadata\Product_Partial_Metadata.cs" />
     <Compile Include="Models\Partial_Metadata\Purchase_Partial_Metadata.cs" />
+    <Compile Include="Models\Partial_Metadata\Timesheet_Partial_Metadata.cs" />
+    <Compile Include="Models\Helper\XmlHelper.cs" />
     <Compile Include="Models\Paycheck.cs">
       <DependentUpon>BusinessModel.tt</DependentUpon>
     </Compile>
@@ -358,11 +346,6 @@
     <Compile Include="Models\Payroll.cs">
       <DependentUpon>BusinessModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Payroll_Timesheet_Assignment.cs">
-      <DependentUpon>AssignmentModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Partial_Metadata\Timesheet_Partial_Metadata.cs" />
-    <Compile Include="Models\Helper\XmlHelper.cs" />
     <Compile Include="Models\Product.cs">
       <DependentUpon>BusinessModel.tt</DependentUpon>
     </Compile>
@@ -371,9 +354,6 @@
     </Compile>
     <Compile Include="Models\Product_Inventory.cs">
       <DependentUpon>BusinessModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Product_Material_Assignment.cs">
-      <DependentUpon>AssignmentModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Purchase.cs">
       <DependentUpon>BusinessModel.tt</DependentUpon>
@@ -428,16 +408,6 @@
     <Content Include="Images\ProductImages\noImage.png" />
     <Content Include="Images\UserImages\noProfileImage.jpg" />
     <Content Include="Images\UserImages\noProfileImage2.jpg" />
-    <Content Include="Models\AssignmentModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>AssignmentModel.edmx</DependentUpon>
-      <LastGenOutput>AssignmentModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\AssignmentModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>AssignmentModel.edmx</DependentUpon>
-      <LastGenOutput>AssignmentModel.cs</LastGenOutput>
-    </Content>
     <Content Include="Models\BusinessModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>BusinessModel.edmx</DependentUpon>
@@ -452,13 +422,6 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <EntityDeploy Include="Models\AssignmentModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>AssignmentModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\AssignmentModel.edmx.diagram">
-      <DependentUpon>AssignmentModel.edmx</DependentUpon>
     </Content>
     <Content Include="App_Data\aspnet-ManufacturingCompany-20171006085739.zip" />
     <EntityDeploy Include="Models\BusinessModel.edmx">
@@ -658,6 +621,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711062107522_product.resx">
       <DependentUpon>201711062107522_product.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711301532353_RemoveExtraDBSet.resx">
+      <DependentUpon>201711301532353_RemoveExtraDBSet.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

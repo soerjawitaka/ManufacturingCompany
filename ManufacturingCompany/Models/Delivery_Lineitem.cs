@@ -15,9 +15,11 @@ namespace ManufacturingCompany.Models
     public partial class Delivery_Lineitem : Lineitem
     {
         public int Id { get; set; }
-        public int delivery_schedule_id { get; set; }
+        public Nullable<int> delivery_schedule_id { get; set; }
+        public int invoice_lineitem_id { get; set; }
     
         public virtual Delivery_Schedule Delivery_Schedule { get; set; }
+        public virtual Invoice_Lineitem Invoice_Lineitem { get; set; }
         public virtual Product_Inventory Product_Inventory { get; set; }
     }
 }

@@ -14,9 +14,17 @@ namespace ManufacturingCompany.Models
     
     public partial class Invoice_Lineitem : Lineitem
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Invoice_Lineitem()
+        {
+            this.Delivery_Lineitem = new HashSet<Delivery_Lineitem>();
+        }
+    
         public int Id { get; set; }
         public int invoice_id { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Delivery_Lineitem> Delivery_Lineitem { get; set; }
         public virtual Invoice Invoice { get; set; }
         public virtual Product_Inventory Product_Inventory { get; set; }
     }
