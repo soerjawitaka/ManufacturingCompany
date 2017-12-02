@@ -146,11 +146,17 @@ namespace ManufacturingCompany.Controllers
                     var li = (List<Lineitem>)Session["InvoiceItems"];
                     foreach (var item in li)
                     {
+                        // create invoice lineitem
                         var invoiceLI = new Invoice_Lineitem() { product_inventory_id = item.product_inventory_id, lineitem_unit_quantity = item.lineitem_unit_quantity};
                         invoiceLI.invoice_id = db.Invoices.Max(i => i.Id);
                         db.Invoice_Lineitem.Add(invoiceLI);
+                        db.SaveChanges();
+                        // create delivery lineitem queue
+                        var deliveryLI = new Delivery_Lineitem() { product_inventory_id = item.product_inventory_id, lineitem_unit_quantity = item.lineitem_unit_quantity };
+                        deliveryLI.invoice_lineitem_id = db.Invoice_Lineitem.Max(i => i.Id);
+                        db.Delivery_Lineitem.Add(deliveryLI);
+                        db.SaveChanges();
                     }
-                    db.SaveChanges();
                 }
                 return RedirectToAction("Index");
             }

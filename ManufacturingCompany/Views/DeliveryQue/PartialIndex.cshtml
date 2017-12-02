@@ -1,0 +1,45 @@
+﻿@model IEnumerable<ManufacturingCompany.Models.Delivery_Lineitem>
+
+<h2 class="card text-white bg-primary">Delivery Queue</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Invoice Number
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Product_Inventory.Product.product_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Product_Inventory.Product.product_unit_measure)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Product_Inventory.unit_per_package)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.lineitem_unit_quantity)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Invoice_Lineitem.invoice_id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product_Inventory.Product.product_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product_Inventory.Product.product_unit_measure)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product_Inventory.unit_per_package)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.lineitem_unit_quantity)
+            </td>
+        </tr>
+    }
+
+</table>

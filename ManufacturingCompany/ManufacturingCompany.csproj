@@ -212,6 +212,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DepartmentControllers\DistributionController.cs" />
     <Compile Include="Controllers\DepartmentControllers\Distribution\DeliveryQueController.cs" />
+    <Compile Include="Controllers\DepartmentControllers\Distribution\Delivery_LineitemController.cs" />
     <Compile Include="Controllers\DepartmentControllers\Distribution\Delivery_ScheduleController.cs" />
     <Compile Include="Controllers\DepartmentControllers\Finance\Invoice_LineitemController.cs" />
     <Compile Include="Controllers\DepartmentControllers\Finance\PaymentsController.cs" />
@@ -608,6 +609,15 @@
     <Content Include="Views\PartialSelectInvoice\Index.cshtml" />
     <Content Include="Views\DeliveryQue\Index.cshtml" />
     <Content Include="Views\DeliveryQue\SelectItem.cshtml" />
+    <Content Include="Views\Delivery_Schedule\DeliveryLineitem.cshtml" />
+    <Content Include="Views\Delivery_Lineitem\Create.cshtml" />
+    <Content Include="Views\Delivery_Lineitem\Delete.cshtml" />
+    <Content Include="Views\Delivery_Lineitem\Details.cshtml" />
+    <Content Include="Views\Delivery_Lineitem\Edit.cshtml" />
+    <Content Include="Views\Delivery_Lineitem\Index.cshtml" />
+    <Content Include="Views\Delivery_Lineitem\PartialIndex.cshtml" />
+    <Content Include="Views\Delivery_Lineitem\SelectItem.cshtml" />
+    <Content Include="Views\DeliveryQue\PartialIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201710061504292_InitialCreate.resx">
@@ -642,6 +652,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\CreateDeliveryQue\" />
+    <Folder Include="Views\SelectDeliverySchedule\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
