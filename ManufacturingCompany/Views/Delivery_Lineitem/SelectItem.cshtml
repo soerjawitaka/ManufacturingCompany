@@ -21,9 +21,6 @@
             Customer Name
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.lineitem_unit_quantity)
-        </th>
-        <th>
             Inventory Number
         </th>
         <th>
@@ -31,6 +28,12 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Product_Inventory.unit_per_package)
+        </th>
+        <th>
+            Invoice Quantity
+        </th>
+        <th>
+            Quantity
         </th>
         <th></th>
     </tr>
@@ -45,9 +48,6 @@
                 @Html.DisplayFor(modelItem => item.Invoice_Lineitem.Invoice.Customer.customer_company_name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.lineitem_unit_quantity)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Product_Inventory.Id)
             </td>
             <td>
@@ -57,12 +57,18 @@
                 @Html.DisplayFor(modelItem => item.ProductInventory.unit_per_package)
             </td>
             <td>
-                @using (Html.BeginForm("SelectItem", "Delivery_Lineitem", new { id = item.Id, deliveryScheduleID = (int)ViewBag.DeliveryScheduleID }, FormMethod.Post))
-                {
-                    @Html.AntiForgeryToken()
-                    <input type="submit" value="Select" class="btn btn-outline-success" />
-                }
+                @Html.DisplayFor(modelItem => item.lineitem_unit_quantity)
             </td>
+            @using (Html.BeginForm("SelectItem", "Delivery_Lineitem", new { id = item.Id, deliveryScheduleID = (int)ViewBag.DeliveryScheduleID }, FormMethod.Post))
+                {
+                @Html.AntiForgeryToken()
+                <td>
+                    @Html.TextBox("Quantity", item.lineitem_unit_quantity, htmlAttributes: new { @class = "form-control", @type = "number" })
+                </td>
+                <td>
+                    <input type="submit" value="Select" class="btn btn-outline-success" />
+                </td>
+            }
         </tr>
     }
 </table>

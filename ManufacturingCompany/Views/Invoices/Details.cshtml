@@ -56,6 +56,14 @@
             @Html.DisplayFor(model => model.Total)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.DeliveryStatus)
+        </dt>
+
+        <dd class="text-info">
+            @Html.DisplayFor(model => model.DeliveryStatus)
+        </dd>
+
     </dl>
 </div>
 
@@ -80,6 +88,58 @@
                 <td class="text-right">@Html.DisplayFor(modelItem => item.LineitemTotal)</td>
             </tr>
         }
+    </table>
+</div>
+
+<div>
+    <h3> Delivered</h3>
+
+    <table class="table">
+        <tr>
+            <th>
+                Invoice Number
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DeliveryItems.Single().Delivery_Schedule.delivery_date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DeliveryItems.Single().Product_Inventory.Product.product_name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DeliveryItems.Single().Product_Inventory.Product.product_unit_measure)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DeliveryItems.Single().Product_Inventory.unit_per_package)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DeliveryItems.Single().lineitem_unit_quantity)
+            </th>
+        </tr>
+
+        @foreach (var item in Model.DeliveryItems)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Invoice_Lineitem.invoice_id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Delivery_Schedule.delivery_date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product_Inventory.Product.product_name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product_Inventory.Product.product_unit_measure)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product_Inventory.unit_per_package)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.lineitem_unit_quantity)
+                </td>
+            </tr>
+        }
+
     </table>
 </div>
 

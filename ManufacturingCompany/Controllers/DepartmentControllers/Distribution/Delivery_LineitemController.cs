@@ -55,24 +55,47 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Distribution
         // POST: Delivery_Lineitem/SelectItem
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SelectItem(int? id, int? deliveryScheduleID)
+        public ActionResult SelectItem(int? id, int? deliveryScheduleID, int? Quantity)
         {
-            if (id != null && deliveryScheduleID != null)
+            var newDeliveryLI = db.Delivery_Lineitem.Find(id);
+
+            if (newDeliveryLI != null)
             {
-                var newDeliveryLI = db.Delivery_Lineitem.Find(id);
-                newDeliveryLI.delivery_schedule_id = Convert.ToInt32(deliveryScheduleID);
-                db.Entry(newDeliveryLI).State = EntityState.Modified;
-                var result = db.SaveChanges();
-                if (result == 0)
+                if (Quantity != null && Quantity > newDeliveryLI.lineitem_unit_quantity)
                 {
-                    return View("Error");
+                    ViewBag.ErrorMessage = "Please enter the quantity as equal or less than linvoice lineitem.";
                 }
-                return RedirectToAction("Edit", "Delivery_Schedule", new { id = deliveryScheduleID });
+                else if (deliveryScheduleID != null && Quantity <= newDeliveryLI.lineitem_unit_quantity)
+                {
+                    newDeliveryLI.delivery_schedule_id = Convert.ToInt32(deliveryScheduleID);
+
+                    // check quantity
+                    if (Quantity < newDeliveryLI.lineitem_unit_quantity)
+                    {
+                        var secondDeliveryLI = new Delivery_Lineitem();
+                        secondDeliveryLI.product_inventory_id = newDeliveryLI.product_inventory_id;
+                        secondDeliveryLI.lineitem_unit_quantity = newDeliveryLI.lineitem_unit_quantity - Convert.ToInt32(Quantity);
+                        secondDeliveryLI.invoice_lineitem_id = newDeliveryLI.invoice_lineitem_id;
+                        db.Delivery_Lineitem.Add(secondDeliveryLI);
+                    }
+                    newDeliveryLI.lineitem_unit_quantity = Convert.ToInt32(Quantity);
+                    db.Entry(newDeliveryLI).State = EntityState.Modified;
+                    var result = db.SaveChanges();
+                    if (result == 0)
+                    {
+                        return View("Error");
+                    }
+                    return RedirectToAction("Edit", "Delivery_Schedule", new { id = deliveryScheduleID });
+                }
+                else
+                {
+                    ViewBag.ErrorMessage = "Something went wrong. Please try again.";
+                }
             }
-            var deliveryQ = db.Delivery_Lineitem.OrderBy(dl => dl.Invoice_Lineitem.invoice_id).ToList();
+            
+            var deliveryQ = db.Delivery_Lineitem.Where(dl => dl.delivery_schedule_id == null).OrderBy(dl => dl.Invoice_Lineitem.invoice_id).ToList();
             foreach (var i in deliveryQ) { i.CalculateTotal(i.product_inventory_id); }
             ViewBag.DeliveryScheduleID = deliveryScheduleID;
-            ViewBag.ErrorMessage = "Something went wrong. Please select the item again.";
             return View(deliveryQ);
         }
 
