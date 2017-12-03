@@ -24,7 +24,10 @@ namespace ManufacturingCompany.Controllers
         // GET: Products
         public ActionResult Index()
         {
-            return View(db.Products.Include(p => p.Product_Category).ToList());
+            var products = db.Products.OrderBy(p => p.product_category_id)
+                                      .OrderBy(p => p.product_name)
+                                      .Include(p => p.Product_Category).ToList();
+            return View(products);
         }
 
         // GET: Products/Details/5
@@ -56,7 +59,7 @@ namespace ManufacturingCompany.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,product_name,product_short_description,product_long_description,product_note,product_unit_measure,product_unit_cost,product_unit_price,product_material_id,product_category_id")] Product product)
+        public ActionResult Create([Bind(Include = "Id,product_name,product_short_description,product_long_description,product_note,product_unit_measure,product_unit_cost,product_unit_price,product_category_id")] Product product)
         {
             if (ModelState.IsValid)
             {
@@ -77,7 +80,7 @@ namespace ManufacturingCompany.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
+            Product product = db.Products.Include(p => p.Product_Category).SingleOrDefault(p => p.Id == id);
             if (product == null)
             {
                 return HttpNotFound();
@@ -92,14 +95,32 @@ namespace ManufacturingCompany.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,product_name,product_short_description,product_long_description,product_note,product_unit_measure,product_unit_cost,product_unit_price,product_material_id,product_category_id")] Product product)
+        public ActionResult Edit([Bind(Include = "Id,product_name,product_short_description,product_long_description,product_note,product_unit_measure,product_unit_cost,product_unit_price,product_category_id,Product_Category")] Product product)
         {
-            if (ModelState.IsValid)
+            //if (ModelState.IsValid)
+            //{
+            //    db.Entry(product).State = EntityState.Modified;
+            //    db.SaveChanges();
+            //    return RedirectToAction("Index");
+            //}
+
+            var newProduct = db.Products.Find(product.Id);
+            newProduct.product_name = product.product_name;
+            newProduct.product_short_description = product.product_short_description;
+            newProduct.product_long_description = product.product_long_description;
+            newProduct.product_note = product.product_note;
+            newProduct.product_unit_measure = product.product_unit_measure;
+            newProduct.product_unit_cost = product.product_unit_cost;
+            newProduct.product_unit_price = product.product_unit_price;
+            newProduct.product_category_id = product.product_category_id;
+
+            db.Entry(newProduct).State = EntityState.Modified;
+            var result = db.SaveChanges();
+            if (result > 0)
             {
-                db.Entry(product).State = EntityState.Modified;
-                db.SaveChanges();
                 return RedirectToAction("Index");
             }
+
             ViewBag.product_category_id = new SelectList(db.Product_Category, "Id", "category_name", product.product_category_id);
             ViewBag.ActionTitle = "Edit ";
             return View(product);

@@ -81,13 +81,18 @@ namespace ManufacturingCompany.Controllers
         }
 
         // GET: Paychecks/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int? id, int? payrollid)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             PaycheckModeModel paycheck = PaycheckModeModel.ToModel(dbBusiness.Paychecks.Find(id));
+            if (payrollid != null)
+            {
+                paycheck.SetPayroll(Convert.ToInt32(payrollid));
+            }
+            
             if (paycheck == null)
             {
                 return HttpNotFound();
@@ -96,18 +101,18 @@ namespace ManufacturingCompany.Controllers
             return View(paycheck);
         }
 
-        // GET: Paychecks/Edit/EditPayroll
-        public ActionResult EditPayroll(int id, int payrollid)
-        {            
-            PaycheckModeModel paycheck = PaycheckModeModel.ToModel(dbBusiness.Paychecks.Find(id));
-            if (paycheck == null)
-            {
-                return HttpNotFound();
-            }
-            paycheck.SetPayroll(payrollid);
-            ViewBag.ActionTitle = "Edit Payroll for ";
-            return View(paycheck);
-        }
+        //// GET: Paychecks/Edit/EditPayroll
+        //public ActionResult EditPayroll(int id, int payrollid)
+        //{            
+        //    PaycheckModeModel paycheck = PaycheckModeModel.ToModel(dbBusiness.Paychecks.Find(id));
+        //    if (paycheck == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    paycheck.SetPayroll(payrollid);
+        //    ViewBag.ActionTitle = "Edit Payroll for ";
+        //    return View(paycheck);
+        //}
 
         // POST: Paychecks/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -116,15 +121,14 @@ namespace ManufacturingCompany.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,ModeOfPaycheck,paycheck_date,payroll_id,payment_type,check_number,direct_deposit_number,payment_amount")] PaycheckModeModel paycheck)
         {
-            //Paycheck modPaycheck = PaycheckViewModel.ToBase(paycheck);
+            // set old paycheck
             paycheck.SetPayroll(paycheck.payroll_id);
             Paycheck oldPaycheck = PaycheckModeModel.ToBase(paycheck);
 
-            // assign fields
+            // assign fields to new paycheck
             var newPaycheck = dbBusiness.Paychecks.Find(oldPaycheck.Id);
             newPaycheck.paycheck_date = oldPaycheck.paycheck_date;
             newPaycheck.payroll_id = oldPaycheck.payroll_id;
-            //newPaycheck.Payroll = dbBusiness.Payrolls.Find(paycheck.payroll_id);
             newPaycheck.payment_type = oldPaycheck.payment_type;
             newPaycheck.check_number = oldPaycheck.check_number;
             newPaycheck.direct_deposit_number = oldPaycheck.direct_deposit_number;

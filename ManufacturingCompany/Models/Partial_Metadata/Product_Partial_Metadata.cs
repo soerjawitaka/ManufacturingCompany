@@ -26,7 +26,6 @@ namespace ManufacturingCompany.Models
         [Display(Name = "Note")]
         public string product_note { get; set; }
 
-        [Required]
         [Display(Name = "Unit Measure")]
         public string product_unit_measure { get; set; }
 

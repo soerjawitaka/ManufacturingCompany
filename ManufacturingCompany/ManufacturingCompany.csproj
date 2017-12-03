@@ -652,7 +652,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\CreateDeliveryQue\" />
-    <Folder Include="Views\SelectDeliverySchedule\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

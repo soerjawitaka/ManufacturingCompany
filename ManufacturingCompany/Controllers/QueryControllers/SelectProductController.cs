@@ -25,7 +25,11 @@ namespace ManufacturingCompany.Controllers
             ViewBag.ActionName = actionName;
             ViewBag.ControllerName = controllerName;
             ViewBag.OptionalID = optionalID;
-            return View(db.Products.ToList());
+
+            var products = db.Products.OrderBy(p => p.product_category_id)
+                                      .OrderBy(p => p.product_name)
+                                      .Include(p => p.Product_Category).ToList();
+            return View(products);
         }
 
         // POST: SelectProduct/Index

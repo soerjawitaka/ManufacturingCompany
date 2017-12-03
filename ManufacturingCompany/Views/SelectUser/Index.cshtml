@@ -7,6 +7,16 @@
 
 <h2 class="card text-white bg-primary">Select a User</h2>
 
+<hr />
+
+@if ((string)ViewBag.ActionName == "ManageEmployee" && (string)ViewBag.ControllerName == "Manage")
+{
+    @Html.ActionLink("Register New Employee", "Register", "Account", routeValues: null, htmlAttributes: new { @class = "btn btn-default" })
+    <hr />
+}
+
+<br />
+
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()

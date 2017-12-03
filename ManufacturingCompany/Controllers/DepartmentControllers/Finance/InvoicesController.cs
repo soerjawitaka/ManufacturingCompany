@@ -158,6 +158,8 @@ namespace ManufacturingCompany.Controllers
                         db.SaveChanges();
                     }
                 }
+                Session["InvoiceItems"] = null;
+                Session["CurrentInvoice"] = null;
                 return RedirectToAction("Index");
             }
 

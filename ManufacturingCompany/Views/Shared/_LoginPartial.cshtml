@@ -13,7 +13,6 @@
             {
                 <li class="nav-item">@Html.ActionLink("Roles", "Roles", "Manage", routeValues: null, htmlAttributes: new { @class = "nav-link" })</li>
             }
-
             <li class="nav-item">@Html.ActionLink("Manage Employee", "Index", "SelectUser", new { actionName = "ManageEmployee", controllerName = "Manage" }, htmlAttributes: new { id = "manageEmployeeLink", @class = "nav-link" })</li>
 
         }
@@ -28,7 +27,6 @@
 else
 {
     <ul class="nav navbar-nav navbar-right">
-        <li class="nav-item">@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "nav-link" })</li>
         <li class="nav-item">@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "nav-link" })</li>
     </ul>
 }

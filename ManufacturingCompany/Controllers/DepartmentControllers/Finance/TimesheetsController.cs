@@ -30,9 +30,12 @@ namespace ManufacturingCompany.Controllers
         // GET: Timesheets
         public ActionResult Index()
         {
-            var timesheets = db.Timesheets.Include(t => t.AspNetUser);
+            var timesheets = db.Timesheets.Where(t => t.is_in_payroll == false)
+                                          .Take(20)
+                                          .Include(t => t.AspNetUser)
+                                          .ToList();
             ViewBag.ErrorString = "";
-            return View(timesheets.Where(t => t.is_in_payroll == false).ToList());
+            return View(timesheets);
         }
 
         [HttpPost]
