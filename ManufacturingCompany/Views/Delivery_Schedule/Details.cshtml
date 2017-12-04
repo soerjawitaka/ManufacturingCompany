@@ -50,7 +50,15 @@
 
     </dl>
 </div>
+
+<h2>Delivery Items</h2>
+
+@Html.Action("PartialIndex", "Delivery_Lineitem", new { deliveryScheduleID = Model.Id })
+
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, htmlAttributes: new { @class = "btn btn-warning" }) 
+    @if (User.IsInRole("SuperUser") || User.IsInRole("Manager") || User.IsInRole("Supervisor"))
+    {
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, htmlAttributes: new { @class = "btn btn-warning" }) 
+    }
     @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "btn btn-default" })
 </p>

@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace ManufacturingCompany.Controllers
 {
+    [Authorize(Roles = "SuperUser, Manager, Supervisor")]
     public class SelectUserController : Controller
     {
         private BusinessEntities db = new BusinessEntities();

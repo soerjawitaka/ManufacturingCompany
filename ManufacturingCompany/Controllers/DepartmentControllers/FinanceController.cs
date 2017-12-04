@@ -6,6 +6,8 @@ using System.Web.Mvc;
 
 namespace ManufacturingCompany.Controllers
 {
+
+    [Authorize(Roles = "SuperUser, Manager, Finance")]
     public class FinanceController : Controller
     {
         public FinanceController()

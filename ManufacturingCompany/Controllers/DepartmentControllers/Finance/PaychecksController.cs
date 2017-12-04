@@ -11,6 +11,7 @@ using ManufacturingCompany.Classes;
 
 namespace ManufacturingCompany.Controllers
 {
+    [Authorize(Roles = "SuperUser, Manager, Finance")]
     public class PaychecksController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -145,6 +146,7 @@ namespace ManufacturingCompany.Controllers
             return View(paycheck);
         }
 
+        [Authorize(Roles = "SuperUser, Manager, Supervisor")]
         // GET: Paychecks/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -161,6 +163,7 @@ namespace ManufacturingCompany.Controllers
             return View(paycheck);
         }
 
+        [Authorize(Roles = "SuperUser, Manager, Supervisor")]
         // POST: Paychecks/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

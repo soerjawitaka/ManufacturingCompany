@@ -322,6 +322,7 @@ namespace ManufacturingCompany.Controllers
 
         //
         // GET: /Manage/ChangeProfile
+        [Authorize(Roles = "SuperUser, Manager")]
         public ActionResult ChangeEmployeeProfile(string userID)
         {
             ViewBag.Username = UserManager.FindById(userID).UserName;
@@ -331,6 +332,7 @@ namespace ManufacturingCompany.Controllers
 
         //
         // POST: /Manage/ChangeProfile
+        [Authorize(Roles = "SuperUser, Manager")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult ChangeEmployeeProfile([Bind(Include = "Id, UserName, Email, FirstName, LastName, Address, City, State, ZipCode, PhoneNumber, ModeOfWage, WageAmount")]ApplicationUser user)

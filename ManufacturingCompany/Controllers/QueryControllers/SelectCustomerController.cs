@@ -11,6 +11,7 @@ using ManufacturingCompany.Classes;
 
 namespace ManufacturingCompany.Controllers
 {
+    [Authorize(Roles = "SuperUser, Manager, Supervisor")]
     public class SelectCustomerController : Controller
     {
         private BusinessEntities db = new BusinessEntities();

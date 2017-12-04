@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace ManufacturingCompany.Controllers
 {
+    [Authorize(Roles = "SuperUser, Manager, Production")]
     public class ProductionController : Controller
     {
         public ProductionController()

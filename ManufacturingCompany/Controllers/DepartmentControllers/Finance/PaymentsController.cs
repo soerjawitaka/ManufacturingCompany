@@ -10,6 +10,7 @@ using ManufacturingCompany.Models;
 
 namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
 {
+    [Authorize(Roles = "SuperUser, Manager, Finance")]
     public class PaymentsController : Controller
     {
         private BusinessEntities db = new BusinessEntities();
@@ -191,6 +192,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
             return View(payment);
         }
 
+        [Authorize(Roles = "SuperUser, Manager, Supervisor")]
         // GET: Payments/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -208,6 +210,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Finance
             return View(payment);
         }
 
+        [Authorize(Roles = "SuperUser, Manager, Supervisor")]
         // POST: Payments/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

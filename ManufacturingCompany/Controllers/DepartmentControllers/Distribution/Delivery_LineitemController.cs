@@ -10,6 +10,7 @@ using ManufacturingCompany.Models;
 
 namespace ManufacturingCompany.Controllers.DepartmentControllers.Distribution
 {
+    [Authorize(Roles = "SuperUser, Manager, Distribution")]
     public class Delivery_LineitemController : Controller
     {
         private BusinessEntities db = new BusinessEntities();
@@ -38,6 +39,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Distribution
             return PartialView(delivery_Lineitem.ToList());
         }
 
+        [Authorize(Roles = "SuperUser, Manager, Supervisor")]
         // GET: Delivery_Lineitem/SelectItem
         public ActionResult SelectItem(int? deliveryScheduleID)
         {
@@ -52,6 +54,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Distribution
             return View(deliveryQ);
         }
 
+        [Authorize(Roles = "SuperUser, Manager, Supervisor")]
         // POST: Delivery_Lineitem/SelectItem
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -99,6 +102,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Distribution
             return View(deliveryQ);
         }
 
+        [Authorize(Roles = "SuperUser, Manager, Supervisor")]
         // GET: Delivery_Lineitem/RemoveItem
         public ActionResult RemoveItem(int? id, int? deliveryScheduleID)
         {

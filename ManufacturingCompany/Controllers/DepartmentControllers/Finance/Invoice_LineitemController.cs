@@ -10,16 +10,17 @@ using ManufacturingCompany.Models;
 
 namespace ManufacturingCompany.Controllers
 {
+    [Authorize(Roles = "SuperUser, Manager, Finance")]
     public class Invoice_LineitemController : Controller
     {
         private BusinessEntities db = new BusinessEntities();
 
-        // GET: Invoice_Lineitem
-        public ActionResult Index()
-        {
-            var invoice_Lineitem = db.Invoice_Lineitem.Include(i => i.Invoice).Include(i => i.Product_Inventory);
-            return View(invoice_Lineitem.ToList());
-        }
+        //// GET: Invoice_Lineitem
+        //public ActionResult Index()
+        //{
+        //    var invoice_Lineitem = db.Invoice_Lineitem.Include(i => i.Invoice).Include(i => i.Product_Inventory);
+        //    return View(invoice_Lineitem.ToList());
+        //}
         
         // GET: Invoice_Lineitem/PartialIndex
         public PartialViewResult PartialIndex(int? invoiceID)

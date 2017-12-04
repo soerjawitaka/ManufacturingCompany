@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace ManufacturingCompany.Controllers.DepartmentControllers
 {
+    [Authorize(Roles ="SuperUser, Manager, Distribution")]
     public class DistributionController : Controller
     {
         public DistributionController()

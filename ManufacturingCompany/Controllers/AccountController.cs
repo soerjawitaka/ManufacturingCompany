@@ -63,7 +63,7 @@ namespace ManufacturingCompany.Controllers
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
-
+        
         //
         // POST: /Account/Login
         [HttpPost]
@@ -185,9 +185,9 @@ namespace ManufacturingCompany.Controllers
             return View(model);
         }
 
-//*************************************************************************************************************
+        //*************************************************************************************************************
         // GET: /Account/RegisterRole
-        [AllowAnonymous]
+        [Authorize(Roles = "SuperUser, Manager")]
         [HttpGet]
         public ActionResult RegisterRole()
         {

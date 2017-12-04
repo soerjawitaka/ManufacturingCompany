@@ -6,7 +6,10 @@
 }
 
 <p>
-    @Html.ActionLink("Create New", "Create", null, htmlAttributes: new { @class = "btn btn-default" })
+    @if (User.IsInRole("SuperUser") || User.IsInRole("Manager") || User.IsInRole("Supervisor"))
+    {
+        @Html.ActionLink("Create New", "Create", null, htmlAttributes: new { @class = "btn btn-default" })
+    }
 </p>
 <table class="table">
     <tr>
@@ -46,9 +49,13 @@
             @Html.DisplayFor(modelItem => item.AspNetUser1.UserName)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }, htmlAttributes: new { @class = "btn btn-warning" }) 
-            @Html.ActionLink("Details", "Details", new { id=item.Id }, htmlAttributes: new { @class = "btn btn-default" }) 
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id }, htmlAttributes: new { @class = "btn btn-danger" })
+            @Html.ActionLink("Details", "Details", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-default" })
+            
+            @if (User.IsInRole("SuperUser") || User.IsInRole("Manager") || User.IsInRole("Supervisor"))
+            { 
+                @Html.ActionLink("Edit", "Edit", new { id=item.Id }, htmlAttributes: new { @class = "btn btn-warning" }) 
+                @Html.ActionLink("Delete", "Delete", new { id=item.Id }, htmlAttributes: new { @class = "btn btn-danger" })
+            }
         </td>
     </tr>
 }

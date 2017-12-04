@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace ManufacturingCompany.Controllers
 {
+    [Authorize(Roles = "SuperUser, Manager, Finance")]
     public class TimesheetsController : Controller
     {
         private BusinessEntities db = new BusinessEntities();
@@ -145,6 +146,7 @@ namespace ManufacturingCompany.Controllers
             return View(timesheet);
         }
 
+        [Authorize(Roles = "SuperUser, Manager, Supervisor")]
         // GET: Timesheets/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -161,6 +163,7 @@ namespace ManufacturingCompany.Controllers
             return View(timesheet);
         }
 
+        [Authorize(Roles = "SuperUser, Manager, Supervisor")]
         // POST: Timesheets/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

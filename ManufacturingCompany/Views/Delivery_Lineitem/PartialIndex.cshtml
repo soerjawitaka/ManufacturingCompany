@@ -1,7 +1,10 @@
 ﻿@model IEnumerable<ManufacturingCompany.Models.Delivery_Lineitem>
 
 <p>
-    @Html.ActionLink("Select item from queue", "SelectItem", new { deliveryScheduleID = (int)ViewBag.DeliveryScheduleID }, htmlAttributes: new { @class = "btn btn-default" })
+    @if (User.IsInRole("SuperUser") || User.IsInRole("Manager") || User.IsInRole("Supervisor"))
+    {
+        @Html.ActionLink("Select item from queue", "SelectItem", new { deliveryScheduleID = (int)ViewBag.DeliveryScheduleID }, htmlAttributes: new { @class = "btn btn-default" })
+    }
 </p>
 <table class="table">
     <tr>
@@ -47,7 +50,10 @@
             @Html.DisplayFor(modelItem => item.ProductInventory.unit_per_package)
         </td>
         <td>
-            @Html.ActionLink("Remove", "RemoveItem", new { id=item.Id, deliveryScheduleID = (int)ViewBag.DeliveryScheduleID }, htmlAttributes: new { @class = "btn btn-danger" })
+            @if (User.IsInRole("SuperUser") || User.IsInRole("Manager") || User.IsInRole("Supervisor"))
+            {
+                @Html.ActionLink("Remove", "RemoveItem", new { id = item.Id, deliveryScheduleID = (int)ViewBag.DeliveryScheduleID }, htmlAttributes: new { @class = "btn btn-danger" })
+            }
         </td>
     </tr>
 }

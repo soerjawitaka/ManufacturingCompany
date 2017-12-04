@@ -10,6 +10,7 @@ using ManufacturingCompany.Models;
 
 namespace ManufacturingCompany.Controllers
 {
+    [Authorize(Roles = "SuperUser, Manager, Production")]
     public class ProductCategoryController : Controller
     {
         private BusinessEntities db = new BusinessEntities();
@@ -83,32 +84,32 @@ namespace ManufacturingCompany.Controllers
             return View(product_Category);
         }
 
-        // GET: ProductCategory/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Product_Category product_Category = db.Product_Category.Find(id);
-            if (product_Category == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.ActionTitle = "Delete ";
-            return View(product_Category);
-        }
+        //// GET: ProductCategory/Delete/5
+        //public ActionResult Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Product_Category product_Category = db.Product_Category.Find(id);
+        //    if (product_Category == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    ViewBag.ActionTitle = "Delete ";
+        //    return View(product_Category);
+        //}
 
-        // POST: ProductCategory/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Product_Category product_Category = db.Product_Category.Find(id);
-            db.Product_Category.Remove(product_Category);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+        //// POST: ProductCategory/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    Product_Category product_Category = db.Product_Category.Find(id);
+        //    db.Product_Category.Remove(product_Category);
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
 
         protected override void Dispose(bool disposing)
         {

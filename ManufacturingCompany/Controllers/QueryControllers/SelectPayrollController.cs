@@ -10,6 +10,7 @@ using ManufacturingCompany.Models;
 
 namespace ManufacturingCompany.Controllers
 {
+    [Authorize(Roles = "SuperUser, Manager, Supervisor")]
     public class SelectPayrollController : Controller
     {
         private BusinessEntities db = new BusinessEntities();

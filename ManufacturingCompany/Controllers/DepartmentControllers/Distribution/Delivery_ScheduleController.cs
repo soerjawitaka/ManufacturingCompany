@@ -10,6 +10,7 @@ using ManufacturingCompany.Models;
 
 namespace ManufacturingCompany.Controllers.DepartmentControllers.Distribution
 {
+    [Authorize(Roles = "SuperUser, Manager, Distribution")]
     public class Delivery_ScheduleController : Controller
     {
         public Delivery_ScheduleController()
@@ -26,7 +27,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Distribution
             var delivery_Schedule = db.Delivery_Schedule.Include(d => d.AspNetUser).Include(d => d.AspNetUser1);
             return View(delivery_Schedule.ToList());
         }
-
+        
         // GET: Delivery_Schedule/Details/5
         public ActionResult Details(int? id)
         {
@@ -42,6 +43,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Distribution
             return View(delivery_Schedule);
         }
 
+        [Authorize(Roles = "SuperUser, Manager, Supervisor")]
         // GET: Delivery_Schedule/Create
         public ActionResult Create(string userID, string optionalDirection)
         {
@@ -65,6 +67,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Distribution
             return View(deliverySchedule);
         }
 
+        [Authorize(Roles = "SuperUser, Manager, Supervisor")]
         // POST: Delivery_Schedule/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -83,6 +86,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Distribution
             return View(delivery_Schedule);
         }
 
+        [Authorize(Roles = "SuperUser, Manager, Supervisor")]
         // GET: Delivery_Schedule/Edit/5
         public ActionResult Edit(int? id, string userID, string optionalDirection)
         {
@@ -117,6 +121,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Distribution
             return View(delivery_Schedule);
         }
 
+        [Authorize(Roles = "SuperUser, Manager, Supervisor")]
         // POST: Delivery_Schedule/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -134,6 +139,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Distribution
             return View(delivery_Schedule);
         }
 
+        [Authorize(Roles = "SuperUser, Manager, Supervisor")]
         // GET: Delivery_Schedule/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -149,6 +155,7 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Distribution
             return View(delivery_Schedule);
         }
 
+        [Authorize(Roles = "SuperUser, Manager, Supervisor")]
         // POST: Delivery_Schedule/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

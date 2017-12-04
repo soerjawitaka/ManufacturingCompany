@@ -36,10 +36,10 @@
     </header>
 
     <div class="container navbar">
-        @*@if (User.IsInRole("SuperUser") || User.IsInRole("Manager"))
-        {*@
+        @if (User.IsInRole("SuperUser") || User.IsInRole("Manager"))
+        {
             @Html.Partial("_ManagerMenu")
-        @*}*@
+        }
         
     </div>
 

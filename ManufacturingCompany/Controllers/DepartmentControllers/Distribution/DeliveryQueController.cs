@@ -8,6 +8,7 @@ using System.Net;
 
 namespace ManufacturingCompany.Controllers.DepartmentControllers.Distribution
 {
+    [Authorize(Roles = "SuperUser, Manager, Distribution")]
     public class DeliveryQueController : Controller
     {
         private BusinessEntities db;
@@ -19,13 +20,13 @@ namespace ManufacturingCompany.Controllers.DepartmentControllers.Distribution
             ViewBag.ItemTitle = "Delivery Queue";
         }
 
-        // GET: DeliveryQue
-        public ActionResult Index()
-        {
-            var deliveryQ = db.Delivery_Lineitem.Where(dl => dl.delivery_schedule_id == null).OrderBy(dl => dl.Invoice_Lineitem.invoice_id).ToList();
-            foreach (var i in deliveryQ) { i.CalculateTotal(i.product_inventory_id); }
-            return View(deliveryQ);
-        }
+        //// GET: DeliveryQue
+        //public ActionResult Index()
+        //{
+        //    var deliveryQ = db.Delivery_Lineitem.Where(dl => dl.delivery_schedule_id == null).OrderBy(dl => dl.Invoice_Lineitem.invoice_id).ToList();
+        //    foreach (var i in deliveryQ) { i.CalculateTotal(i.product_inventory_id); }
+        //    return View(deliveryQ);
+        //}
 
         // GET: DeliveryQue
         public PartialViewResult PartialIndex()
