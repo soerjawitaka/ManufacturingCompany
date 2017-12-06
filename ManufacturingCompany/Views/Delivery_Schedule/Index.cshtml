@@ -13,22 +13,22 @@
 </p>
 <table class="table">
     <tr>
-        <th>
+        <th class="text-info">
             @Html.DisplayNameFor(model => model.delivery_date)
         </th>
-        <th>
+        <th class="text-info">
             @Html.DisplayNameFor(model => model.delivery_cost)
         </th>
-        <th>
+        <th class="text-center text-info">
             @Html.DisplayNameFor(model => model.is_delivered)
         </th>
-        <th>
+        <th class="text-info">
             @Html.DisplayName("Warehouse Employee")
         </th>
-        <th>
+        <th class="text-info">
             @Html.DisplayName("Driver")
         </th>
-        <th></th>
+        <th class="text-info"></th>
     </tr>
 
 @foreach (var item in Model) {
@@ -39,7 +39,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.delivery_cost)
         </td>
-        <td>
+        <td class="text-center">
             @Html.DisplayFor(modelItem => item.is_delivered)
         </td>
         <td>

@@ -10,19 +10,19 @@
 @Html.ActionLink("Create New", "Index", "SelectMaterial", new { actionName = "Create", controllerName = "MaterialStock" }, htmlAttributes: new { @class = "btn btn-default" })
 <table class="table">
     <tr>
-        <th>
+        <th class="text-info">
             @Html.DisplayNameFor(model => model.Material.material_name)
         </th>
-        <th>
+        <th class="text-info">
             @Html.DisplayNameFor(model => model.material_unit_measure)
         </th>
-        <th>
+        <th class="text-info">
             @Html.DisplayNameFor(model => model.material_unit_quantity)
         </th>
-        <th>
+        <th class="text-info">
             @Html.DisplayNameFor(model => model.material_unit_cost)
         </th>
-        <th></th>
+        <th class="text-info"></th>
     </tr>
 
 @foreach (var item in Model) {

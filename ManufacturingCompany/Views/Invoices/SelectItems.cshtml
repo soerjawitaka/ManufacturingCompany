@@ -11,28 +11,28 @@
 
 <table class="table">
     <tr>
-        <th>
+        <th class="text-info">
             @Html.DisplayNameFor(model => model.Single().ProductInventory.Product.product_name)
         </th>
-        <th>
+        <th class="text-info">
             @Html.DisplayNameFor(model => model.Single().ProductInventory.Product.product_unit_measure)
         </th>
-        <th>
+        <th class="text-info">
             @Html.DisplayNameFor(model => model.Single().ProductInventory.unit_per_package)
         </th>
-        <th>
+        <th class="text-info">
             @Html.DisplayNameFor(model => model.Single().ProductInventory.per_package_price)
         </th>
-        <th>
+        <th class="text-info">
             @Html.DisplayNameFor(model => model.Single().lineitem_unit_quantity)
         </th>
-        <th>
+        <th class="text-info">
             @Html.DisplayNameFor(model => model.Single().PackageQuantity)
         </th>
-        <th>
+        <th class="text-info">
             @Html.DisplayNameFor(model => model.Single().LineitemTotal)
         </th>
-        <th></th>
+        <th class="text-info"></th>
     </tr>
     @foreach (var item in Model)
     {

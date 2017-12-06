@@ -12,22 +12,22 @@
 </p>
 <table class="table">
     <tr>
-        <th>
+        <th class="text-info">
             @Html.DisplayNameFor(model => model.AspNetUser.UserName)
         </th>
-        <th>
+        <th class="text-info">
             @Html.DisplayNameFor(model => model.Equipment.equipment_name)
         </th>
-        <th>
+        <th class="text-info">
             @Html.DisplayNameFor(model => model.maintenance_date)
         </th>
-        <th>
+        <th class="text-info">
             @Html.DisplayNameFor(model => model.completion_eta)
         </th>
-        <th>
+        <th class=" text-right text-info">
             @Html.DisplayNameFor(model => model.maintenance_cost)
         </th>
-        <th></th>
+        <th class="text-info"></th>
     </tr>
 
 @foreach (var item in Model) {
@@ -44,7 +44,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.completion_eta)
         </td>
-        <td>
+        <td class="text-right">
             @Html.DisplayFor(modelItem => item.maintenance_cost)
         </td>
         <td>

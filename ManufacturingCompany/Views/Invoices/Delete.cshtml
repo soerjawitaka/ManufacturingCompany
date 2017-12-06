@@ -66,11 +66,11 @@
 
         <table class="table">
             <tr>
-                <th>@Html.DisplayNameFor(model => model.Lineitems.Single().ProductInventory.Product.product_name)</th>
-                <th>@Html.DisplayNameFor(model => model.Lineitems.Single().ProductInventory.Product.product_unit_measure)</th>
-                <th>@Html.DisplayNameFor(model => model.Lineitems.Single().lineitem_unit_quantity)</th>
-                <th class="text-right">@Html.DisplayNameFor(model => model.Lineitems.Single().ProductInventory.per_package_price)</th>
-                <th class="text-right">@Html.DisplayNameFor(model => model.Lineitems.Single().LineitemTotal)</th>
+                <th class="text-info">@Html.DisplayNameFor(model => model.Lineitems.Single().ProductInventory.Product.product_name)</th>
+                <th class="text-info">@Html.DisplayNameFor(model => model.Lineitems.Single().ProductInventory.Product.product_unit_measure)</th>
+                <th class="text-info">@Html.DisplayNameFor(model => model.Lineitems.Single().lineitem_unit_quantity)</th>
+                <th class="text-right text-info">@Html.DisplayNameFor(model => model.Lineitems.Single().ProductInventory.per_package_price)</th>
+                <th class="text-right text-info">@Html.DisplayNameFor(model => model.Lineitems.Single().LineitemTotal)</th>
             </tr>
             @foreach (var item in Model.Lineitems)
             {

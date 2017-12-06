@@ -33,22 +33,22 @@
 
 <table class="table">
     <tr>
-        <th>
+        <th class="text-info">
             Invoice Number
         </th>
-        <th>
+        <th class="text-info">
             @Html.DisplayNameFor(model => model.invoice_date)
         </th>
-        <th>
+        <th class="text-info">
             @Html.DisplayName("Employee Username")
         </th>
-        <th>
+        <th class="text-info">
             @Html.DisplayName("Customer Name")
         </th>
-        <th class="text-right">
+        <th class="text-right text-info">
             @Html.DisplayNameFor(model => model.Total)
         </th>
-        <th></th>
+        <th class="text-info"></th>
     </tr>
 
     @foreach (var item in Model)

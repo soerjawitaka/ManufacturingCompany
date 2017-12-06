@@ -8,25 +8,25 @@
 </p>
 <table class="table">
     <tr>
-        <th>
+        <th class="text-info">
             Invoice Number
         </th>
-        <th>
+        <th class="text-info">
             Customer Name
         </th>
-        <th>
+        <th class="text-info">
             @Html.DisplayNameFor(model => model.lineitem_unit_quantity)
         </th>
-        <th>
+        <th class="text-info">
             Inventory Number
         </th>
-        <th>
+        <th class="text-info">
             @Html.DisplayNameFor(model => model.Product_Inventory.Product.product_name)
         </th>
-        <th>
+        <th class="text-info">
             @Html.DisplayNameFor(model => model.Product_Inventory.unit_per_package)
         </th>
-        <th></th>
+        <th class="text-info"></th>
     </tr>
 
 @foreach (var item in Model) {

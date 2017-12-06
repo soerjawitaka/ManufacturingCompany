@@ -12,25 +12,25 @@
 </p>
 <table class="table">
     <tr>
-        <th>
+        <th class="text-info">
             @Html.DisplayName("Payment Number")
         </th>
-        <th>
+        <th class="text-info">
             @Html.DisplayNameFor(model => model.invoice_id)
         </th>
-        <th>
+        <th class="text-info">
             @Html.DisplayNameFor(model => model.Invoice.Customer.customer_company_name)
         </th>
-        <th>
+        <th class="text-info">
             @Html.DisplayNameFor(model => model.payment_date)
         </th>
-        <th>
+        <th class="text-info">
             @Html.DisplayNameFor(model => model.payment_type)
         </th>
-        <th>
+        <th class="text-info">
             @Html.DisplayNameFor(model => model.payment_total)
         </th>
-        <th></th>
+        <th class="text-info"></th>
     </tr>
 
 @foreach (var item in Model) {

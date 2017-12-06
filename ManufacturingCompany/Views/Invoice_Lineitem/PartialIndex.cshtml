@@ -9,13 +9,13 @@
 </p>
 <table class="table">
     <tr>
-        <th>@Html.DisplayNameFor(model => model.lineitem_unit_quantity)</th>
-        <th>@Html.DisplayNameFor(model => model.ProductInventory.Product.product_name)</th>
-        <th>@Html.DisplayNameFor(model => model.ProductInventory.Product.product_unit_measure)</th>
-        <th>@Html.DisplayNameFor(model => model.ProductInventory.unit_per_package)</th>
-        <th class="text-right">@Html.DisplayNameFor(model => model.ProductInventory.per_package_price)</th>
-        <th class="text-right">@Html.DisplayNameFor(model => model.LineitemTotal)</th>
-        <th></th>
+        <th class="text-info">@Html.DisplayNameFor(model => model.lineitem_unit_quantity)</th>
+        <th class="text-info">@Html.DisplayNameFor(model => model.ProductInventory.Product.product_name)</th>
+        <th class="text-info">@Html.DisplayNameFor(model => model.ProductInventory.Product.product_unit_measure)</th>
+        <th class="text-info">@Html.DisplayNameFor(model => model.ProductInventory.unit_per_package)</th>
+        <th class="text-right text-info">@Html.DisplayNameFor(model => model.ProductInventory.per_package_price)</th>
+        <th class="text-right text-info">@Html.DisplayNameFor(model => model.LineitemTotal)</th>
+        <th class="text-info"></th>
     </tr>
 
     @foreach (var item in Model)

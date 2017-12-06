@@ -10,22 +10,22 @@
 </p>
 <table class="table">
     <tr>
-        <th>
+        <th class="text-info">
             @Html.DisplayNameFor(model => model.product_name)
         </th>
-        <th>
+        <th class="text-info">
             @Html.DisplayNameFor(model => model.product_short_description)
         </th>
-        <th>
+        <th class="text-info">
             @Html.DisplayNameFor(model => model.product_unit_measure)
         </th>
-        <th>
+        <th class="text-info">
             @Html.DisplayNameFor(model => model.product_unit_price)
         </th>
-        <th>
+        <th class="text-info">
             @Html.DisplayNameFor(model => model.Product_Category.category_name)
         </th>
-        <th></th>
+        <th class="text-info"></th>
     </tr>
 
 @foreach (var item in Model) {
@@ -36,9 +36,9 @@
         <td>
             @Html.DisplayFor(modelItem => item.product_short_description)
         </td>
-        <th>
+        <td>
             @Html.DisplayFor(modelItem => item.product_unit_measure)
-        </th>
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.product_unit_price)
         </td>
