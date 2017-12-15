@@ -30,16 +30,21 @@
 }
 
 <br />
-@if (ViewBag.ErrorString != null || ViewBag.ErrorString != "")
+@if (ViewBag.ErrorString != null && ViewBag.ErrorString != "")
 {
-    <div style="text-align:center;">
-        @Html.Label((string)ViewBag.ErrorString, htmlAttributes: new { @class = "text-danger" })
+    <hr />
+    <div class="text-danger" style="text-align:center;">
+        @ViewBag.ErrorString
     </div>
+    <hr />
 }
 <br />
 
 <table class="table">
     <tr>
+        <th class="text-info">
+            @Html.DisplayName("Inventory Number")
+        </th>
         <th class="text-info">
             @Html.DisplayNameFor(model => model.Product.product_name)
         </th>
@@ -59,6 +64,9 @@
 @foreach (var item in Model) {
     <tr>
         <td>
+            @Html.DisplayFor(modelItem => item.Id)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.Product.product_name)
         </td>
         <td>
@@ -75,7 +83,7 @@
             using (Html.BeginForm((string)ViewBag.ActionName, (string)ViewBag.ControllerName, new { id = item.Id }, FormMethod.Get))
             {
                 <td>
-                    @Html.TextBox("Quantity", item.unit_quantity, htmlAttributes: new { @class = "form-control", @type = "number" })
+                    @Html.TextBox("Quantity", item.unit_quantity, htmlAttributes: new { @class = "form-control", @type = "number", @max = item.unit_quantity })
                 </td>
                 <td>
                     <input type="submit" value="Select" class="btn btn-outline-success" />
@@ -89,7 +97,7 @@
                 <td>
                     @Html.Hidden("optionalID", (int?)ViewBag.OptionalID)
                     @Html.Hidden("productID", item.Id)
-                    @Html.TextBox("Quantity", item.unit_quantity, htmlAttributes: new { @class = "form-control", @type = "number" })
+                    @Html.TextBox("Quantity", item.unit_quantity, htmlAttributes: new { @class = "form-control", @type = "number", @max = item.unit_quantity })
                 </td>
                 <td>
                     <input type="submit" value="Select" class="btn btn-outline-success" />

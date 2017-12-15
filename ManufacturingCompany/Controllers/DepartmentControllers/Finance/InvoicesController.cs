@@ -57,10 +57,14 @@ namespace ManufacturingCompany.Controllers
             {
                 if (invoiceItems.SingleOrDefault(ii => ii.product_inventory_id == id) == null)
                 {
+                    if (Quantity > db.Product_Inventory.Find(id).unit_quantity)
+                    {
+                        return RedirectToAction("Index", "SelectProductInventory", new { actionName = "SelectItems", controllerName = "Invoices", message = "Quantity requested is not available." });
+                    }
                     var li = new Lineitem();
                     li.lineitem_unit_quantity = Convert.ToInt32(Quantity);
-                    li.CalculateTotal(Convert.ToInt32(id));
-                    li.ProductInventory.Product = db.Products.Find(li.ProductInventory.product_id);
+                    li.CalculateTotal(Convert.ToInt32(id)); // assign product id and calculate total
+                    li.ProductInventory.Product = db.Products.Find(li.ProductInventory.product_id); // assign product
                     invoiceItems.Add(li);
                 }
                 else
@@ -68,6 +72,10 @@ namespace ManufacturingCompany.Controllers
                     var li = invoiceItems.SingleOrDefault(ii => ii.product_inventory_id == id);
                     if (li != null)
                     {
+                        if ((Quantity + li.lineitem_unit_quantity) > db.Product_Inventory.Find(id).unit_quantity)
+                        {
+                            return RedirectToAction("Index", "SelectProductInventory", new { actionName = "SelectItems", controllerName = "Invoices", message = "Quantity requested is not available." });
+                        }
                         li.lineitem_unit_quantity += Convert.ToInt32(Quantity);
                         li.CalculateTotal(Convert.ToInt32(id));
                         li.ProductInventory.Product = db.Products.Find(li.ProductInventory.product_id);
@@ -156,6 +164,11 @@ namespace ManufacturingCompany.Controllers
                         var deliveryLI = new Delivery_Lineitem() { product_inventory_id = item.product_inventory_id, lineitem_unit_quantity = item.lineitem_unit_quantity };
                         deliveryLI.invoice_lineitem_id = db.Invoice_Lineitem.Max(i => i.Id);
                         db.Delivery_Lineitem.Add(deliveryLI);
+                        db.SaveChanges();
+                        // update product inventory quantity
+                        var productInventory = db.Product_Inventory.Find(item.product_inventory_id);
+                        productInventory.unit_quantity -= item.lineitem_unit_quantity;
+                        db.Entry(productInventory).State = EntityState.Modified;
                         db.SaveChanges();
                     }
                 }

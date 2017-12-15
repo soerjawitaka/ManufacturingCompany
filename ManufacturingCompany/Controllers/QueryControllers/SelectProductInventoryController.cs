@@ -13,7 +13,7 @@ namespace ManufacturingCompany.Controllers
         private BusinessEntities db = new BusinessEntities();
 
         // GET: SelectProductInventory
-        public ActionResult Index(string actionName, string controllerName, int? optionalID, int? lineitemID)
+        public ActionResult Index(string actionName, string controllerName, int? optionalID, int? lineitemID, string message)
         {
             List<string> searchBy = new List<string>();
             searchBy.Add("Name");
@@ -24,6 +24,7 @@ namespace ManufacturingCompany.Controllers
             ViewBag.ControllerName = controllerName;
             ViewBag.OptionalID = optionalID;
             ViewBag.LineitemID = lineitemID;
+            if (message != null) { ViewBag.ErrorString = message; }
             return View(db.Product_Inventory.ToList());
         }
 
