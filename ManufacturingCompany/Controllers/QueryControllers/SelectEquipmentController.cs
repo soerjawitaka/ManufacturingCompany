@@ -7,7 +7,7 @@ using ManufacturingCompany.Models;
 
 namespace ManufacturingCompany.Controllers
 {
-    [Authorize(Roles = "SuperUser, Manager, Supervisor")]
+    [Authorize]
     public class SelectEquipmentController : Controller
     {
         private BusinessEntities db = new BusinessEntities();

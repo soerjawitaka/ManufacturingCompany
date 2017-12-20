@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace ManufacturingCompany.Controllers
 {
-    [Authorize(Roles = "SuperUser, Manager, Supervisor")]
+    [Authorize]
     public class SelectUserController : Controller
     {
         private BusinessEntities db = new BusinessEntities();
@@ -112,7 +112,17 @@ namespace ManufacturingCompany.Controllers
                     foreach (var u in users) { duplicates.Add(u); }
                     foreach (var i in duplicates)
                     {
+                        // remove super users
                         if (await UserManager.IsInRoleAsync(i.Id, "SuperUser"))
+                        {
+                            users.Remove(i);
+                        }
+                        // remove users above own hierarchy
+                        if (!User.IsInRole("Manager") && await UserManager.IsInRoleAsync(i.Id, "Manager"))
+                        {
+                            users.Remove(i);
+                        }
+                        if (!User.IsInRole("Manager") && !User.IsInRole("Supervisor") && await UserManager.IsInRoleAsync(i.Id, "Supervisor"))
                         {
                             users.Remove(i);
                         }

@@ -122,12 +122,22 @@ namespace ManufacturingCompany.Controllers
         {
             var currentInvoice = new Invoice();
             if (Session["CurrentInvoice"] != null) { currentInvoice = (Invoice)Session["CurrentInvoice"]; }
-            if (userID != null)
+
+            // assign employee if employee is not manager or superuser
+            if (!(User.IsInRole("Manager") || User.IsInRole("SuperUser")))
+            {
+                currentInvoice.employee_id = db.AspNetUsers.FirstOrDefault(u => u.UserName == User.Identity.Name).Id;
+            }
+
+            // assigning employee
+            if (userID != null) 
             {
                 currentInvoice.employee_id = userID;
                 currentInvoice.AspNetUser = db.AspNetUsers.Find(userID);
             }
-            if (customerID != null)
+
+            // assigning customer
+            if (customerID != null) 
             {
                 currentInvoice.customer_id = Convert.ToInt32(customerID);
                 currentInvoice.Customer = db.Customers.Find(customerID);
@@ -270,7 +280,21 @@ namespace ManufacturingCompany.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Invoice invoice = db.Invoices.Find(id);
-            db.Invoices.Remove(invoice);
+
+            // delete line items
+            var invoiceLI = db.Invoice_Lineitem.Where(iLI => iLI.invoice_id == id).ToList(); // invoice lineitems
+            foreach (var i in invoiceLI)
+            {
+                var deliveryLI = db.Delivery_Lineitem.Where(dLI => dLI.invoice_lineitem_id == i.Id).ToList();
+                foreach (var di in deliveryLI)
+                {
+                    db.Delivery_Lineitem.Remove(di); // remove delivery lineitem
+                }
+                //db.SaveChanges();
+                db.Invoice_Lineitem.Remove(i); // remove invoice lineitem
+            }
+            //db.SaveChanges();
+            db.Invoices.Remove(invoice); // remove invoice
             db.SaveChanges();
             return RedirectToAction("Index");
         }
