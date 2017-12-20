@@ -15,6 +15,12 @@ namespace ManufacturingCompany.Controllers
     {
         private BusinessEntities db = new BusinessEntities();
 
+        public EquipmentMaintenanceController()
+        {
+            ViewBag.ViewHeaderPartial = "_Production";
+            ViewBag.ItemTitle = "Equipment Maintenance";
+        }
+
         // GET: EquipmentMaintenance
         public ActionResult Index()
         {

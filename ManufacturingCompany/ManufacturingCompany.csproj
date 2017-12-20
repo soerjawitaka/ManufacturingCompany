@@ -218,6 +218,7 @@
     <Compile Include="Controllers\DepartmentControllers\Finance\PaymentsController.cs" />
     <Compile Include="Controllers\DepartmentControllers\Production\EquipmentMaintenanceController.cs" />
     <Compile Include="Controllers\DepartmentControllers\Production\EquipmentsController.cs" />
+    <Compile Include="Controllers\DepartmentControllers\Production\InventoryQuantityController.cs" />
     <Compile Include="Controllers\DepartmentControllers\Production\MaterialsController.cs" />
     <Compile Include="Controllers\DepartmentControllers\Production\MaterialStockController.cs" />
     <Compile Include="Controllers\DepartmentControllers\Production\ProductInventoryController.cs" />
@@ -618,6 +619,8 @@
     <Content Include="Views\Delivery_Lineitem\PartialIndex.cshtml" />
     <Content Include="Views\Delivery_Lineitem\SelectItem.cshtml" />
     <Content Include="Views\DeliveryQue\PartialIndex.cshtml" />
+    <Content Include="Views\InventoryQuantity\Index.cshtml" />
+    <Content Include="Views\InventoryQuantity\Add.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201710061504292_InitialCreate.resx">

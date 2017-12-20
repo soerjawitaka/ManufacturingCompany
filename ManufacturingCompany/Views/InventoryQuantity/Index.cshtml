@@ -1,0 +1,91 @@
+﻿@model IEnumerable<ManufacturingCompany.Models.Product_Inventory>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="container">
+        <div class="col-md-2" style="margin-bottom:10px; display:inline-block;">
+            @Html.Label("Search By : ", htmlAttributes: new { @class = "form-control", @style = "border:none;" })
+        </div>
+
+        <div class="col-md-3" style="margin-bottom:10px; display:inline-block;">
+            @Html.DropDownList("SearchBy", (SelectList)ViewBag.SearchBy, htmlAttributes: new { @class = "form-control" })
+        </div>
+
+        <div class="col-md-3" style="margin-bottom:10px; display:inline-block;">
+            @Html.TextBox("inputForUserSearch", "", new { @class = "form-control" })
+        </div>
+
+        <div class="col-md-3" style="margin-bottom:10px; display:inline-block;">
+            <input type="submit" value="Search" class="btn btn-success" />
+        </div>
+    </div>
+}
+
+<br />
+@if (ViewBag.ErrorString != null && ViewBag.ErrorString != "")
+{
+    <hr />
+    <div class="text-danger" style="text-align:center;">
+        @ViewBag.ErrorString
+    </div>
+    <hr />
+}
+<br />
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.product_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Product.product_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.unit_per_package)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.unit_quantity)
+        </th>
+        <th></th>
+        <th></th>
+    </tr>
+
+@if (Model != null)
+{
+    foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.product_id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.product_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.unit_per_package)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.unit_quantity)
+            </td>
+            @using (Html.BeginForm("Add", "InventoryQuantity", new { id = item.Id }, FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <td>
+                    <input name="Quantity" type="number" class="form-control" min="@item.unit_per_package" step="@item.unit_per_package" />
+                </td>
+                <td>
+                    <input type="submit" value="Add" class="btn btn-success" />
+                </td>
+            }
+
+        </tr>
+    }
+}
+
+</table>
